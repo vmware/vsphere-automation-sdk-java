@@ -9,7 +9,7 @@
  * WARRANTIES OR CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY,
  * NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
  */
-package vmware.samples.common.authentication.sso.soaphandlers;
+package vmware.samples.sso.soaphandlers;
 
 /**
  * Class to capture all the constants used in the authentication classes

@@ -9,7 +9,7 @@
  * WARRANTIES OR CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY,
  * NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
  */
-package vmware.samples.common.authentication.sso.soaphandlers;
+package vmware.samples.sso.soaphandlers;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

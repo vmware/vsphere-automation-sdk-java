@@ -36,10 +36,10 @@ import com.vmware.vapi.saml.SamlToken;
 import com.vmware.vapi.saml.exception.InvalidTokenException;
 
 import vmware.samples.common.SslUtil;
-import vmware.samples.common.authentication.sso.soaphandlers.HeaderHandlerResolver;
-import vmware.samples.common.authentication.sso.soaphandlers.SamlTokenExtractionHandler;
-import vmware.samples.common.authentication.sso.soaphandlers.TimeStampHandler;
-import vmware.samples.common.authentication.sso.soaphandlers.UserCredentialHandler;
+import vmware.samples.sso.soaphandlers.HeaderHandlerResolver;
+import vmware.samples.sso.soaphandlers.SamlTokenExtractionHandler;
+import vmware.samples.sso.soaphandlers.TimeStampHandler;
+import vmware.samples.sso.soaphandlers.UserCredentialHandler;
 
 /**
  * Utility class for acquiring a SAML token from SSO service
