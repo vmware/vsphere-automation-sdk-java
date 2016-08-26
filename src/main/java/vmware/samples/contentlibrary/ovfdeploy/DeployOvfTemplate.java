@@ -29,9 +29,9 @@ import com.vmware.vim25.DynamicProperty;
 import com.vmware.vim25.ManagedObjectReference;
 
 import vmware.samples.common.SamplesAbstractBase;
+import vmware.samples.common.vim.helpers.VimUtil;
+import vmware.samples.common.vim.helpers.VmVappPowerOps;
 import vmware.samples.contentlibrary.client.ClsApiClient;
-import vmware.samples.vim.helpers.VimUtil;
-import vmware.samples.vim.helpers.VmVappPowerOps;
 
 /**
  * Demonstrates the workflow to deploy an OVF library item to a resource pool.

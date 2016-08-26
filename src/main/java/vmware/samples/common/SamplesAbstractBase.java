@@ -23,8 +23,8 @@ import org.apache.commons.configuration.ConfigurationException;
 
 import com.vmware.vapi.bindings.StubConfiguration;
 
-import vmware.samples.authentication.VapiAuthenticationHelper;
-import vmware.samples.authentication.VimAuthenticationHelper;
+import vmware.samples.common.authentication.VapiAuthenticationHelper;
+import vmware.samples.common.authentication.VimAuthenticationHelper;
 
 /**
  * Abstract base class for all samples

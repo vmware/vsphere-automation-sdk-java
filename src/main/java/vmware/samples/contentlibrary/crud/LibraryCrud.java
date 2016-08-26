@@ -23,8 +23,8 @@ import com.vmware.content.library.StorageBacking;
 import com.vmware.vim25.ManagedObjectReference;
 
 import vmware.samples.common.SamplesAbstractBase;
+import vmware.samples.common.vim.helpers.VimUtil;
 import vmware.samples.contentlibrary.client.ClsApiClient;
-import vmware.samples.vim.helpers.VimUtil;
 
 /**
  * Demonstrates the basic operations of a content library. The sample also

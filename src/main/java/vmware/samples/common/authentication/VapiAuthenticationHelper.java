@@ -9,7 +9,7 @@
  * WARRANTIES OR CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY,
  * NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
  */
-package vmware.samples.authentication;
+package vmware.samples.common.authentication;
 
 import java.security.KeyStore;
 

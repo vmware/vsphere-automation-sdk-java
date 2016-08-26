@@ -9,10 +9,9 @@
  * WARRANTIES OR CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY,
  * NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
  */
-package vmware.samples.authentication.sso;
+package vmware.samples.sso;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collections;
 
 import org.apache.commons.cli.Option;
 
@@ -21,16 +20,14 @@ import com.vmware.vapi.saml.SamlToken;
 import com.vmware.vcenter.Datacenter;
 import com.vmware.vcenter.DatacenterTypes;
 
-import vmware.samples.authentication.VapiAuthenticationHelper;
-import vmware.samples.common.LookupServiceHelper;
+import vmware.samples.common.authentication.VapiAuthenticationHelper;
 import vmware.samples.common.SamplesAbstractBase;
 
 /**
  * Demonstrates how to create a SSO connection using a SAML Bearer token when
- * we have a vcenter server and external platform services controller.
+ * we have a vcenter server and embedded platform services controller.
  */
-public class ExternalPscSsoWorkflow extends SamplesAbstractBase {
-    private String lookupServiceUrl;
+public class EmbeddedPscSsoWorkflow extends SamplesAbstractBase {
     private Datacenter datacenterService;
     public static final String SSO_PATH = "/sts/STSService";
 
@@ -43,53 +40,42 @@ public class ExternalPscSsoWorkflow extends SamplesAbstractBase {
     @Override
     public void parseArgs(String[] args) {
         // Parse the command line options or config file
-        Option lookupServiceUrlOption = Option.builder()
-            .longOpt("lookupserviceurl")
-            .desc("url of the lookup service")
-            .argName("LOOKUP SERVICE URL")
-            .required(true)
-            .hasArg()
-            .build();
-        List<Option> optionList = Arrays.asList(lookupServiceUrlOption);
-        super.parseArgs(optionList, args);
-        this.lookupServiceUrl = (String) parsedOptions.get("lookupserviceurl");
+        super.parseArgs(Collections.<Option>emptyList(), args);
     }
 
     @Override
     protected void setup() throws Exception {
         // No setup required for the sample
+
     }
 
     @Override
     public void run() throws Exception {
+
         System.out.println("\n\n#### Example: Login to vCenter server with "
-                           + "external platform services controller.");
+                           + "embedded platform services controller");
 
         this.vapiAuthHelper = new VapiAuthenticationHelper();
 
-        System.out.println("\nStep 1: Connect to the lookup service on the "
-                           + "Platform Services Controller Node.");
-        LookupServiceHelper lookupServiceHelper = new LookupServiceHelper(
-            this.lookupServiceUrl);
+        /*
+         * Since the platform services controller is embedded, the sso server
+         * is the same as the vcenter server.
+         */
+        String ssoUrl = "https://" + this.server + SSO_PATH;
 
-        System.out.println("\nStep 2: Discover the Single Sign-On service URL"
-                           + " from lookup service.");
-        String ssoUrl = lookupServiceHelper.findSsoUrl();
-
-        System.out.println("\nStep 3: Connect to the Single Sign-On URL and "
+        System.out.println("\nStep 1: Connect to the Single Sign-On URL and "
                            + "retrieve the SAML bearer token.");
         SamlToken samlBearerToken = SsoHelper.getSamlBearerToken(ssoUrl,
             username,
             password);
 
-        System.out.println("\nStep 4. Login to vAPI services using the "
-                + "SAML bearer token.");
-
+        System.out.println("\nStep 2. Login to vAPI services using the "
+                           + "SAML bearer token.");
         StubConfiguration sessionStubConfig =
                 this.vapiAuthHelper.loginBySamlBearerToken(this.server,
                     samlBearerToken);
 
-        System.out.println("\nStep 5: Perform certain tasks using the vAPI "
+        System.out.println("\nStep 3: Perform certain tasks using the vAPI "
                            + "services.");
         this.datacenterService = this.vapiAuthHelper.getStubFactory()
             .createStub(Datacenter.class, sessionStubConfig);
@@ -101,17 +87,17 @@ public class ExternalPscSsoWorkflow extends SamplesAbstractBase {
 
     @Override
     protected void cleanup() throws Exception {
-        // No cleanup required
+        // No cleanup required for the sample
     }
 
     public static void main(String[] args) throws Exception {
-        ExternalPscSsoWorkflow externalPscSsoWorkflow = null;
-        externalPscSsoWorkflow = new ExternalPscSsoWorkflow();
+        EmbeddedPscSsoWorkflow embeddedPscSsoWorkflow = null;
+        embeddedPscSsoWorkflow = new EmbeddedPscSsoWorkflow();
 
         // Parse the command line arguments or the configuration file
-        externalPscSsoWorkflow.parseArgs(args);
+        embeddedPscSsoWorkflow.parseArgs(args);
 
         // Execute the sample
-        externalPscSsoWorkflow.run();
+        embeddedPscSsoWorkflow.run();
     }
 }

@@ -1,4 +1,4 @@
-package vmware.samples.vim.helpers;
+package vmware.samples.common.vim.helpers;
 
 import com.vmware.vim25.ManagedObjectReference;
 import com.vmware.vim25.ServiceContent;

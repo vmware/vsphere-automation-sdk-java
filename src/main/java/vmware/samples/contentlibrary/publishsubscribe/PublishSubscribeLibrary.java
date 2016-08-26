@@ -31,10 +31,10 @@ import com.vmware.content.library.SubscriptionInfo;
 import com.vmware.vim25.ManagedObjectReference;
 
 import vmware.samples.common.SamplesAbstractBase;
+import vmware.samples.common.vim.helpers.VimUtil;
 import vmware.samples.contentlibrary.client.ClsApiClient;
 import vmware.samples.contentlibrary.helpers.ClsApiHelper;
 import vmware.samples.contentlibrary.helpers.ItemUploadHelper;
-import vmware.samples.vim.helpers.VimUtil;
 
 /**
  * Demonstrates the workflow to publish and subscribe content libraries.

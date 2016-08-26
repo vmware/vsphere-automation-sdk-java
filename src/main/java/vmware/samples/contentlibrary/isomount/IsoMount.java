@@ -22,7 +22,7 @@ import com.vmware.vapi.bindings.StubConfiguration;
 import com.vmware.vcenter.VM;
 import com.vmware.vcenter.VMTypes;
 
-import vmware.samples.authentication.VapiAuthenticationHelper;
+import vmware.samples.common.authentication.VapiAuthenticationHelper;
 import vmware.samples.common.SamplesAbstractBase;
 import vmware.samples.contentlibrary.client.ClsApiClient;
 

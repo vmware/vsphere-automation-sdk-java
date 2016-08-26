@@ -9,7 +9,7 @@
  * WARRANTIES OR CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY,
  * NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
  */
-package vmware.samples.authentication.sso;
+package vmware.samples.sso;
 
 import java.util.GregorianCalendar;
 import java.util.Map;
@@ -35,11 +35,11 @@ import com.vmware.vapi.saml.DefaultTokenFactory;
 import com.vmware.vapi.saml.SamlToken;
 import com.vmware.vapi.saml.exception.InvalidTokenException;
 
-import vmware.samples.authentication.sso.soaphandlers.HeaderHandlerResolver;
-import vmware.samples.authentication.sso.soaphandlers.SamlTokenExtractionHandler;
-import vmware.samples.authentication.sso.soaphandlers.TimeStampHandler;
-import vmware.samples.authentication.sso.soaphandlers.UserCredentialHandler;
 import vmware.samples.common.SslUtil;
+import vmware.samples.common.authentication.sso.soaphandlers.HeaderHandlerResolver;
+import vmware.samples.common.authentication.sso.soaphandlers.SamlTokenExtractionHandler;
+import vmware.samples.common.authentication.sso.soaphandlers.TimeStampHandler;
+import vmware.samples.common.authentication.sso.soaphandlers.UserCredentialHandler;
 
 /**
  * Utility class for acquiring a SAML token from SSO service

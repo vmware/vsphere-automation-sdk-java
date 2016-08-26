@@ -9,7 +9,7 @@
  * WARRANTIES OR CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY,
  * NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
  */
-package vmware.samples.authentication.sso.soaphandlers;
+package vmware.samples.common.authentication.sso.soaphandlers;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.soap.SOAPException;

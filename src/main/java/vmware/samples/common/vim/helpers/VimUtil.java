@@ -10,7 +10,7 @@
  * NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-package vmware.samples.vim.helpers;
+package vmware.samples.common.vim.helpers;
 
 import java.util.ArrayList;
 import java.util.Arrays;

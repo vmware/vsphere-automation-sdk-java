@@ -153,50 +153,23 @@
           </execution>
         </executions>
       </plugin>
-     <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>appassembler-maven-plugin</artifactId>
-        <version>1.10</version>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
         <executions>
           <execution>
-            <id>generate-scripts</id>
             <phase>package</phase>
             <goals>
-              <goal>assemble</goal>
+              <goal>single</goal>
             </goals>
           </execution>
         </executions>
         <configuration>
-          <platforms>
-            <platform>windows</platform>
-            <platform>unix</platform>
-          </platforms>
-          <binFileExtensions>
-            <unix>.sh</unix>
-          </binFileExtensions>
-          <programs>
-            <program>
-              <mainClass>vmware.samples.tagging.workflow.TaggingWorkflow</mainClass>
-              <id>tagging_workflow</id>
-            </program>
-          </programs>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
         </configuration>
       </plugin>
    </plugins>
-   <resources>
-     <resource>
-       <directory>src/main/java/vmware/samples</directory>
-       <includes>
-         <include>**/*.properties</include>
-       </includes>
-     </resource>
-     <resource>
-       <directory>src/main/resources</directory>
-       <includes>
-         <include>**/*.*</include>
-       </includes>
-     </resource>
-   </resources>
  </build>
 <dependencies>
   <dependency>

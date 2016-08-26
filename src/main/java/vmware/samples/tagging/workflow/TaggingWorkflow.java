@@ -31,7 +31,7 @@ import com.vmware.vapi.std.DynamicID;
 import com.vmware.vim25.ManagedObjectReference;
 
 import vmware.samples.common.SamplesAbstractBase;
-import vmware.samples.vim.helpers.VimUtil;
+import vmware.samples.common.vim.helpers.VimUtil;
 
 /**
  * Demonstrates tagging Create, Read, Update, Delete operations.
