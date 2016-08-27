@@ -1,23 +1,23 @@
 # VMware vSphere Automation SDK for Java
 ## Table of Contents
-* [Abstract](https://github.com/vmware/vmware-automation-sdk-java-samples#abstract)
-* [Table of Contents](https://github.com/vmware/vmware-automation-sdk-java-samples#table-of-contents)
-* [Getting Started](https://github.com/vmware/vmware-automation-sdk-java-samples#getting-started)
-  * [Downloading the Repository for Local Access](https://github.com/vmware/vmware-automation-sdk-java-samples#downloading-the-repository-for-local-access)
-  * [Prerequisites](https://github.com/vmware/vmware-automation-sdk-java-samples#prerequisites)
-  * [Building the Samples](https://github.com/vmware/vmware-automation-sdk-java-samples#building-the-samples)
-  * [Running the Samples](https://github.com/vmware/vmware-automation-sdk-java-samples#running-the-samples)
-* [Meta Information](https://github.com/vmware/vmware-automation-sdk-java-samples#meta-information)
-  * [Required Information](https://github.com/vmware/vmware-automation-sdk-java-samples#required-information)
-  * [Suggested Information](https://github.com/vmware/vmware-automation-sdk-java-samples#suggested-information)
-* [Resource Maintenance](https://github.com/vmware/vmware-automation-sdk-java-samples#resource-maintenance)
-  * [Maintenance Ownership](https://github.com/vmware/vmware-automation-sdk-java-samples#maintenance-ownership)
-  * [Filing issues](https://github.com/vmware/vmware-automation-sdk-java-samples#filing-isssues)
-  * [Resolving issues](https://github.com/vmware/vmware-automation-sdk-java-samples#resolving-issues)
-* [Additional Resources](https://github.com/vmware/vmware-automation-sdk-java-samples#additional-resources)
-  * [Discussions](https://github.com/vmware/vmware-automation-sdk-java-samples#discussions)
-  * [VMware Sample Exchange](https://github.com/vmware/vmware-automation-sdk-java-samples#vmware-sample-exchange)
-* [LICENSE AGREEMENT](https://github.com/vmware/vmware-automation-sdk-java-samples#vmware-technology-preview-license-agreement)
+* [Abstract](#abstract)
+* [Table of Contents](https://github.com/vmware/vsphere-automation-sdk-java-samples#table-of-contents)
+* [Getting Started](https://github.com/vmware/vsphere-automation-sdk-java-samples#getting-started)
+  * [Downloading the Repository for Local Access](https://github.com/vmware/vsphere-automation-sdk-java-samples#downloading-the-repository-for-local-access)
+  * [Prerequisites](https://github.com/vmware/vsphere-automation-sdk-java-samples#prerequisites)
+  * [Building the Samples](https://github.com/vmware/vsphere-automation-sdk-java-samples#building-the-samples)
+  * [Running the Samples](https://github.com/vmware/vsphere-automation-sdk-java-samples#running-the-samples)
+* [Meta Information](https://github.com/vmware/vsphere-automation-sdk-java-samples#meta-information)
+  * [Required Information](https://github.com/vmware/vsphere-automation-sdk-java-samples#required-information)
+  * [Suggested Information](https://github.com/vmware/vsphere-automation-sdk-java-samples#suggested-information)
+* [Resource Maintenance](https://github.com/vmware/vsphere-automation-sdk-java-samples#resource-maintenance)
+  * [Maintenance Ownership](https://github.com/vmware/vsphere-automation-sdk-java-samples#maintenance-ownership)
+  * [Filing issues](https://github.com/vmware/vsphere-automation-sdk-java-samples#filing-isssues)
+  * [Resolving issues](https://github.com/vmware/vsphere-automation-sdk-java-samples#resolving-issues)
+* [Additional Resources](https://github.com/vmware/vsphere-automation-sdk-java-samples#additional-resources)
+  * [Discussions](https://github.com/vmware/vsphere-automation-sdk-java-samples#discussions)
+  * [VMware Sample Exchange](https://github.com/vmware/vsphere-automation-sdk-java-samples#vmware-sample-exchange)
+* [LICENSE AGREEMENT](https://github.com/vmware/vsphere-automation-sdk-java-samples#license-agreement)
 
 ## Abstract
 This document describes how to build and run the samples in this SDK samples repository as well as how to contribute new samples.
@@ -81,7 +81,7 @@ The following information must be included in the README.md for each submitted s
   * What does the sample do
 * vSphere version against which the sample was developed/tested
 * SDK version against which the sample was developed/tested
-* Java version against which the script was developed/tested
+* Java version against which the sample was developed/tested
 * OS platform version against which the sample was tested/developed
 * Any KNOWN limitations or dependencies
   * vSphere version, required modules, etc.  
