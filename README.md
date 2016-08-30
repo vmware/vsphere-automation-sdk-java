@@ -54,11 +54,11 @@ For example:
 ```` bash
 $java -cp target/vsphere-automation-java-samples-6.5.0-jar-with-dependencies.jar vmware.samples.tagging.workflow.TaggingWorkflow
 
-usage: ./<SampleName>.sh --config-file <ABSOLUTE PATH TO THE CONFIGURATION FILE>
+usage: java -cp target/vsphere-automation-java-samples-6.5.0-jar-with-dependencies.jar <fully_qualified_sample_name> --config-file <ABSOLUTE PATH TO THE CONFIGURATION FILE>
 OR
-usage: ./<SampleName>.sh --server <SERVER> --username <USERNAME> --password <PASSWORD> --cleardata <true | false> --cluster <CLUSTER>
+usage: java -cp vsphere-automation-java-samples-6.5.0-jar-with-dependencies.jar <fully_qualified_sample_name> --server <SERVER> --username <USERNAME> --password <PASSWORD> --cleardata <true | false> --cluster <CLUSTER>
 
-Options to be specified on command line or configuration file:
+Options to be specified on command-line or configuration file:
     --server <SERVER>            hostname of management node
     --username <USERNAME>        username to login to the management node
     --password <PASSWORD>        password to login to the management node

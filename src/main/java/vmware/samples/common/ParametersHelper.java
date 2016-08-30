@@ -138,9 +138,9 @@ public class ParametersHelper {
             }
 
         });
-        System.out.println("\nusage: ./<SampleName>.sh --config-file <ABSOLUTE PATH TO THE CONFIGURATION FILE>\nOR");
+        System.out.println("\nusage: java -cp target/vsphere-automation-java-samples-6.5.0-jar-with-dependencies.jar <fully_qualified_sample_name> --config-file <ABSOLUTE PATH TO THE CONFIGURATION FILE>\nOR");
         formatter.printHelp(300,
-            "./<SampleName>.sh",
+            "java -cp vsphere-automation-java-samples-6.5.0-jar-with-dependencies.jar <fully_qualified_sample_name>",
             "\nOptions to be specified on command line or configuration file: ",
             options,
             "",
