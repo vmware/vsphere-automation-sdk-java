@@ -82,7 +82,6 @@ The following information must be included in the README.md for each submitted s
 * vSphere version against which the sample was developed/tested
 * SDK version against which the sample was developed/tested
 * Java version against which the sample was developed/tested
-* OS platform version against which the sample was tested/developed
 * Any KNOWN limitations or dependencies
   * vSphere version, required modules, etc.  
 
