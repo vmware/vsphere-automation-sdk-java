@@ -1,0 +1,3 @@
+PRODUCT=vsphereautomationsdkjava
+BRANCH=main
+BUILD NUMBER=7737073
