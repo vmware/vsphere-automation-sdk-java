@@ -186,7 +186,7 @@ public class ParametersHelper {
 
         });
         formatter.printHelp(150,
-            "\njava -cp target/vsphere-automation-java-samples-6.5.0-jar-with-dependencies.jar packagename.SampleClassName",
+            "\njava -cp target/samples-6.5.0-jar-with-dependencies.jar packagename.SampleClassName",
             "\nSample Options:",
             getOptions(new ArrayList<Option>(this.optionMap.keySet())),
             "",
