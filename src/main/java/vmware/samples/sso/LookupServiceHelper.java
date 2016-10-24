@@ -10,7 +10,7 @@
  * NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-package vmware.samples.common;
+package vmware.samples.sso;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -33,6 +33,8 @@ import com.vmware.vsphereautomation.lookup.LsPortType;
 import com.vmware.vsphereautomation.lookup.LsService;
 import com.vmware.vsphereautomation.lookup.ManagedObjectReference;
 import com.vmware.vsphereautomation.lookup.RuntimeFaultFaultMsg;
+
+import vmware.samples.common.SslUtil;
 
 /**
  * Lookup service helper class. Finds nodes and service end point URLs based on

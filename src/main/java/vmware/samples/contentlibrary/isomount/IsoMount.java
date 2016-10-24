@@ -22,8 +22,8 @@ import com.vmware.vapi.bindings.StubConfiguration;
 import com.vmware.vcenter.VM;
 import com.vmware.vcenter.VMTypes;
 
-import vmware.samples.common.authentication.VapiAuthenticationHelper;
 import vmware.samples.common.SamplesAbstractBase;
+import vmware.samples.common.authentication.VapiAuthenticationHelper;
 import vmware.samples.contentlibrary.client.ClsApiClient;
 
 /**
@@ -64,7 +64,7 @@ public class IsoMount extends SamplesAbstractBase {
         /**
          * For the sample code that creates as iso library item, please
          *
-         * @see LibraryItemContentUpdate
+         * @see ContentUpdate
          */
         Option itemNameOption = Option.builder()
             .longOpt("isoitemnametomount")
@@ -84,11 +84,9 @@ public class IsoMount extends SamplesAbstractBase {
         this.client = new ClsApiClient(vapiAuthHelper.getStubFactory(),
                 sessionStubConfig);
 
-        this.clearData = "false";
-
         this.itemId = getItemId();
         this.vmId = getVmId(vapiAuthHelper, sessionStubConfig);
-        System.out.println("Mounting iso item " + this.itemName + " ("
+        System.out.println("Mounting ISO item " + this.itemName + " ("
                            + this.itemId + ") on VM " + this.vmName + " ("
                            + this.vmId + ")");
    }

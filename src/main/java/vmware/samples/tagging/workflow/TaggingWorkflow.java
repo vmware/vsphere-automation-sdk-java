@@ -96,6 +96,14 @@ public class TaggingWorkflow extends SamplesAbstractBase {
                 this.vapiAuthHelper.getStubFactory()
                     .createStub(TagAssociation.class,
                                 sessionStubConfig);
+
+        // retrieve the Cluster's MoRef
+        this.clusterMoRef =
+                VimUtil.getCluster(this.vimAuthHelper.getVimPort(),
+                                   this.vimAuthHelper.getServiceContent(),
+                                   this.clusterName);
+        assert this.clusterMoRef != null;
+        System.out.println("Cluster MoRef: " + this.clusterMoRef.getValue());
     }
 
     public void run() throws Exception {
@@ -126,14 +134,6 @@ public class TaggingWorkflow extends SamplesAbstractBase {
         String date = sdf.format(dt); // formats to 09/23/2009 13:53:28.238
         updateTag(this.serverTagId, "Server Tag updated at " + date);
         System.out.println("Tag updated; Id: " + this.serverTagId);
-
-        // retrieve the Cluster's MoRef
-        this.clusterMoRef =
-                VimUtil.getCluster(this.vimAuthHelper.getVimPort(),
-                                   this.vimAuthHelper.getServiceContent(),
-                                   this.clusterName);
-        assert this.clusterMoRef != null;
-        System.out.println("Cluster MoRef: " + this.clusterMoRef.getValue());
 
         // convert the MoRef to vAPI DyanmicID
         this.clusterDynamicId =

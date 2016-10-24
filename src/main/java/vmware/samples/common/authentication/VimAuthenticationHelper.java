@@ -20,8 +20,6 @@ import com.vmware.vim25.ServiceContent;
 import com.vmware.vim25.VimPortType;
 import com.vmware.vim25.VimService;
 
-import vmware.samples.common.SslUtil;
-
 /**
  * Vim api helper class which provides methods for login/logout using
  * username, password authentication.
@@ -53,12 +51,6 @@ public class VimAuthenticationHelper {
     }
     /**
      * Creates a session with the server using username and password
-     * <p>
-     * Note: This method uses https for communication but doesn't verify
-     * the certificate from the server. Circumventing SSL is unsafe and should
-     * not be used with production code. This is ONLY FOR THE PURPOSE OF
-     * DEVELOPMENT ENVIRONMENT.
-     * </p>
      *
      * @param server hostname or ip address of the server to log in to
      * @param username username for login
@@ -68,12 +60,6 @@ public class VimAuthenticationHelper {
         String server, String username, String password) {
         try {
             String vimSdkUrl = "https://" + server + VIM_PATH;
-
-            /*
-             * Trust all certificates for the https connection (USE FOR
-             * DEVELOPMENT MODE ONLY)
-             */
-            SslUtil.trustAllHttpsCertificates();
 
             /*
              * Create a VimService object to obtain a VimPort binding provider.

@@ -42,7 +42,7 @@ import vmware.samples.contentlibrary.helpers.ItemUploadHelper;
  * Note: The sample needs an existing VC datastore with available storage
  *
  */
-public class PublishSubscribeLibrary extends SamplesAbstractBase {
+public class LibraryPublishSubscribe extends SamplesAbstractBase {
 
     private static final String VCSP_USERNAME = "vcsp";
     private static final char[] DEMO_PASSWORD = "Password!23".toCharArray();
@@ -139,11 +139,13 @@ public class PublishSubscribeLibrary extends SamplesAbstractBase {
                 this.client.subscribedLibraryService().get(this.subLibId);
         System.out.println("Subscribed library created : " + this.subLibId);
 
+        boolean syncSuccess;
         // Wait for the initial synchronization to finish
-        assert this.clsHelper.waitForLibrarySync(this.pubLibId,
+        syncSuccess = this.clsHelper.waitForLibrarySync(this.pubLibId,
             this.subLibId,
             SYNC_TIMEOUT_SEC,
             TimeUnit.SECONDS);
+        assert syncSuccess : "Timed out while waiting for sync success";
         subLib = this.client.subscribedLibraryService().get(this.subLibId);
         System.out.println("Subscribed library synced : "
                            + subLib.getLastSyncTime().getTime());
@@ -156,10 +158,11 @@ public class PublishSubscribeLibrary extends SamplesAbstractBase {
         // Manually synchronize the subscribed library to get the latest changes
         // immediately.
         this.client.subscribedLibraryService().sync(this.subLibId);
-        assert this.clsHelper.waitForLibrarySync(this.pubLibId,
+        syncSuccess =  this.clsHelper.waitForLibrarySync(this.pubLibId,
             this.subLibId,
             SYNC_TIMEOUT_SEC,
             TimeUnit.SECONDS);
+        assert syncSuccess : "Timed out while waiting for sync success";
         subLib = this.client.subscribedLibraryService().get(this.subLibId);
         System.out.println("Subscribed library synced : "
                            + subLib.getLastSyncTime().getTime());
@@ -186,9 +189,10 @@ public class PublishSubscribeLibrary extends SamplesAbstractBase {
         // Force synchronize the subscribed library item to fetch and cache the
         // content
         this.client.subscribedItemService().sync(subItemId, true);
-        assert this.clsHelper.waitForItemSync(subItemId,
+        syncSuccess = this.clsHelper.waitForItemSync(subItemId,
             SYNC_TIMEOUT_SEC,
             TimeUnit.SECONDS);
+        assert syncSuccess : "Timed out while waiting for sync success";
         subItem = this.client.itemService().get(subItemId);
         System.out.println("Subscribed item force synced : " + subItem);
         assert subItem.getCached() : "Subscribed item is cached";
@@ -254,20 +258,17 @@ public class PublishSubscribeLibrary extends SamplesAbstractBase {
 
         // Create a temporary file
         Path path = Files.createTempFile(itemName, ".txt");
-        try {
-            // Write default content to the file
-            String content = "Contents of " + itemName;
-            Files.write(path, content.getBytes());
+        path.toFile().deleteOnExit();
+        // Write default content to the file
+        String content = "Contents of " + itemName;
+        Files.write(path, content.getBytes());
 
-            // Upload file to the library item
-            ItemUploadHelper.performUpload(this.client.updateSession(),
+        // Upload file to the library item
+        ItemUploadHelper.performUpload(this.client.updateSession(),
                 this.client.updateSessionFileService(),
                 this.client.itemService(),
                 libItemId,
                 Arrays.asList(path.toString()));
-        } finally {
-            Files.delete(path);
-        }
 
         System.out.println("Library item created : " + libItemId);
         return libItemId;
@@ -284,6 +285,6 @@ public class PublishSubscribeLibrary extends SamplesAbstractBase {
          * 5. Cleanup any data created by the sample run, if cleanup=true
          * 6. Logout of the server
          */
-        new PublishSubscribeLibrary().execute(args);
+        new LibraryPublishSubscribe().execute(args);
     }
 }

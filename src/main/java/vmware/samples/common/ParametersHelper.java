@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.ConversionException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
 /**
@@ -34,7 +36,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
  * config file
  */
 public class ParametersHelper {
-    private List<Option> optionList;
+    private Map<Option, Boolean> optionMap;
 
     /**
      * Adds the common and sample-specific options to the list of options to
@@ -43,14 +45,21 @@ public class ParametersHelper {
      * @param optionList
      */
     public ParametersHelper(List<Option> optionList) {
-        this.optionList = optionList;
+        this.optionMap = new LinkedHashMap<Option, Boolean>();
+        Iterator<Option> optionIter = optionList.iterator();
+        while(optionIter.hasNext()) {
+            Option option = optionIter.next();
+            this.optionMap.put(option, option.isRequired());
+        }
     }
 
     /**
      * Parses the command line arguments and returns a map which has the values
-     * for each of the command line option required by the sample. If options
-     * are not specified by command line, then the config file under the is read
-     * and resources folder is read and options are parsed.
+     * for each of the command line option required by the sample. If a
+     * config-file parameter is specified, then the method reads all the
+     * parameters from the configuration file first. If any sample parameters
+     * are specified on the command line too, these parameters will override
+     * the values specified in the configuration file.
      *
      * @param args array of String arguments passed to the sample
      * @return map of arguments and their values
@@ -60,63 +69,69 @@ public class ParametersHelper {
      *         properties file
      */
     public Map<String, Object> parse(String[] args)
-        throws ParseException, ConfigurationException {
+            throws ParseException, ConfigurationException {
         Map<String, Object> parsedOptions = new HashMap<String, Object>();
-
-        Option configFileOption = Option.builder()
-                .required(true)
-                .hasArg()
-                .argName("CONFIGURATION FILE")
-                .longOpt("config-file")
-                .desc("Path to the configuration file for the sample")
-                .build();
-        
         if (args.length == 0) {
             printUsage();
-        } else {
-            Iterator<Option> optionsIter = getRequiredSampleOptions()
-                    .getOptions().iterator();
-            if (args.length == 2) {
-                // Check if configuration file is being used
-                CommandLineParser parser = new DefaultParser();
-                CommandLine cmd = parser.parse(new Options().addOption(
-                    configFileOption), args, true);
-                
-                if(!cmd.hasOption(configFileOption.getLongOpt())) {
-                    printUsage();
-                }
-                
-                // Read from configuration file first
-                Configuration config = new PropertiesConfiguration(cmd
-                    .getOptionValue("config-file"));
-                List<String> missingOptions = new ArrayList<>();
-                while (optionsIter.hasNext()) {
-                    Option option = optionsIter.next();
-                    String optionValue = config.getString(option.getLongOpt());
-                    if (optionValue == null || optionValue.isEmpty()) {
-                        missingOptions.add(option.getLongOpt());
-                    } else {
-                        parsedOptions.put(option.getLongOpt(), optionValue);
-                    }
-                }
-                if (!missingOptions.isEmpty())
-                    throw new ConfigurationException("Missing required options:"
-                                                     + " " + missingOptions);
-            } else {
-                while (optionsIter.hasNext()) {
-                    CommandLineParser parser = new DefaultParser();
-                    CommandLine cmd = parser.parse(getRequiredSampleOptions(), args, true);
-                    Option option = optionsIter.next();
-                    Object optionValue = cmd.getOptionValue(option
-                        .getLongOpt());
+        }
+        List<Option> optionsToParseFromCmdLine = new ArrayList<>();
+
+        /*
+         * Mark all options as optional when reading from the config file
+         * to avoid parse exception while parsing the arguments.
+         */
+        List<Option> optionsToParseFromConfig = new ArrayList<Option>();
+        Iterator<Option> optionIter = this.optionMap.keySet().iterator();
+        while(optionIter.hasNext()) {
+            Option option = (Option)optionIter.next().clone();
+            option.setRequired(false);
+            optionsToParseFromConfig.add(option);
+        }
+
+        CommandLineParser parser = new DefaultParser();
+        CommandLine cmd = parser.parse(
+            getOptions(optionsToParseFromConfig), args);
+
+        Iterator<Option> optionsIter = optionsToParseFromConfig.iterator();
+        if (cmd.hasOption("config-file")) {
+            // Read from configuration file first
+            Configuration config = new PropertiesConfiguration(args[1]);
+            while (optionsIter.hasNext()) {
+                Option option = optionsIter.next();
+                Object optionValue =
+                        getOptionValueFromConfig(
+                            option, config);
+                if (optionValue == null ||
+                        optionValue.toString().isEmpty()) {
+                    option.setRequired(this.optionMap.get(option));
+                    optionsToParseFromCmdLine.add(option);
+                } else {
+                    option.setRequired(false);
+                    optionsToParseFromCmdLine.add(option);
                     parsedOptions.put(option.getLongOpt(), optionValue);
                 }
             }
+        } else {
+            optionsToParseFromCmdLine =
+                    new ArrayList<Option>(this.optionMap.keySet());
         }
-        return parsedOptions;
+
+        optionsIter = optionsToParseFromCmdLine.iterator();
+        CommandLine cmdOverrideArgs = parser.parse(
+            getOptions(optionsToParseFromCmdLine), args);
+        while (optionsIter.hasNext()) {
+            Option option = optionsIter.next();
+            Object optionValue =
+                    getOptionValueFromCmdLine(option, cmdOverrideArgs);
+            if (optionValue != null && !optionValue.toString().isEmpty()) {
+                parsedOptions.put(option.getLongOpt(), optionValue);
+            }
+        }
+
+    return parsedOptions;
     }
 
-    private Options getRequiredSampleOptions() {
+    private Options getOptions(List<Option> optionList) {
         Iterator<Option> optionIter = optionList.iterator();
         Options options = new Options();
         while (optionIter.hasNext()) {
@@ -124,12 +139,44 @@ public class ParametersHelper {
         }
         return options;
     }
-    
+
+    private Object getOptionValueFromConfig(
+        Option option, Configuration config) {
+        Object optionValue = null;
+        try {
+            if (option.getType().equals(Boolean.class)) {
+                optionValue = config.getString(option.getLongOpt());
+                if (optionValue != null) {
+                    optionValue = config.getBoolean(option.getLongOpt());
+                }
+
+            } else {
+                optionValue = config.getString(option.getLongOpt());
+            }
+        } catch (ConversionException cex) {
+            optionValue = null;
+        }
+        return optionValue;
+    }
+
+    private Object getOptionValueFromCmdLine(Option option, CommandLine cmd) {
+        Object optionValue = null;
+        if(!option.hasArg()) {
+            if(cmd.hasOption(option.getLongOpt())) {
+                optionValue = true;
+            }
+        }
+        else {
+            optionValue = cmd.getOptionValue(option.getLongOpt());
+        }
+
+        return optionValue;
+    }
+
     /**
      * Prints the usage information for running the sample
      */
     public void printUsage() {
-        Options options = getRequiredSampleOptions();
         HelpFormatter formatter = new HelpFormatter();
         formatter.setOptionComparator(new Comparator<Option>() {
             @Override
@@ -138,11 +185,10 @@ public class ParametersHelper {
             }
 
         });
-        System.out.println("\nusage: java -cp target/vsphere-automation-java-samples-6.5.0-jar-with-dependencies.jar <fully_qualified_sample_name> --config-file <ABSOLUTE PATH TO THE CONFIGURATION FILE>\nOR");
-        formatter.printHelp(300,
-            "java -cp vsphere-automation-java-samples-6.5.0-jar-with-dependencies.jar <fully_qualified_sample_name>",
-            "\nOptions to be specified on command line or configuration file: ",
-            options,
+        formatter.printHelp(150,
+            "\njava -cp target/vsphere-automation-java-samples-6.5.0-jar-with-dependencies.jar packagename.SampleClassName",
+            "\nSample Options:",
+            getOptions(new ArrayList<Option>(this.optionMap.keySet())),
             "",
             true);
         System.exit(0);

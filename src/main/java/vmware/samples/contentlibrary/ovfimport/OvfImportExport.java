@@ -32,7 +32,7 @@ import vmware.samples.contentlibrary.helpers.ItemUploadHelper;
  *
  * Note: The sample needs an existing content library to place the library item.
  */
-public class UploadDownloadOvfTemplate extends SamplesAbstractBase {
+public class OvfImportExport extends SamplesAbstractBase {
 
     private String libName;
     private String libItemName = "simpleVmTemplate";
@@ -57,20 +57,10 @@ public class UploadDownloadOvfTemplate extends SamplesAbstractBase {
             .argName("CONTENT LIBRARY")
             .build();
 
-        Option libItemNameOption = Option.builder()
-            .longOpt("libitemname")
-            .desc("The name of the library item " + "to create. Defaults to "
-                  + "simpleVmTemplate, if not specified")
-            .required(true)
-            .hasArg()
-            .argName("LIBRARY ITEM")
-            .build();
-
         List<Option> optionList =
-                Arrays.asList(libNameOption, libItemNameOption);
+                Arrays.asList(libNameOption);
         super.parseArgs(optionList, args);
         this.libName = (String) parsedOptions.get("contentlibraryname");
-        this.libItemName = (String) parsedOptions.get("libitemname");
     }
 
     /**
@@ -163,6 +153,6 @@ public class UploadDownloadOvfTemplate extends SamplesAbstractBase {
          * 5. Cleanup any data created by the sample run, if cleanup=true
          * 6. Logout of the server
          */
-        new UploadDownloadOvfTemplate().execute(args);
+        new OvfImportExport().execute(args);
     }
 }

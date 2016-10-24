@@ -13,6 +13,7 @@ package vmware.samples.contentlibrary.contentupdate;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,7 @@ import vmware.samples.contentlibrary.helpers.ItemUploadHelper;
  * Note: This sample needs an existing content library to create and update
  * library item.
  */
-public class LibraryItemContentUpdate extends SamplesAbstractBase {
+public class ContentUpdate extends SamplesAbstractBase {
 
     private static final String OVF_ITEM_TYPE = "ovf";
     private static final String ISO_ITEM_TYPE = "iso";
@@ -77,30 +78,9 @@ public class LibraryItemContentUpdate extends SamplesAbstractBase {
 
             .build();
 
-        Option libItemNameOption = Option.builder()
-            .longOpt("libitemname")
-            .desc("The name of the ovf library item to create. "
-                  + "Defaults to simpleVmTemplate, if not specified")
-            .required(true)
-            .hasArg()
-            .argName("LIBRARY ITEM")
-            .build();
-        Option isoItemNameOption = Option.builder()
-            .longOpt("isoitemname")
-            .desc("The name of the ISO library item. Defaults to "
-                  + "smalIso, if not specified.")
-            .required(true)
-            .hasArg()
-            .argName("ISO LIBRARY ITEM")
-            .build();
-
-        List<Option> optionList = Arrays.asList(libNameOption,
-            libItemNameOption,
-            isoItemNameOption);
+        List<Option> optionList = Collections.singletonList(libNameOption);
         super.parseArgs(optionList, args);
         this.libName = (String) parsedOptions.get("contentlibraryname");
-        this.ovfItemName = (String) parsedOptions.get("libitemname");
-        this.isoItemName = (String) parsedOptions.get("isoitemname");
     }
 
     protected void setup() throws Exception {
@@ -381,6 +361,6 @@ public class LibraryItemContentUpdate extends SamplesAbstractBase {
          * 5. Cleanup any data created by the sample run, if cleanup=true
          * 6. Logout of the server
          */
-        new LibraryItemContentUpdate().execute(args);
+        new ContentUpdate().execute(args);
     }
 }

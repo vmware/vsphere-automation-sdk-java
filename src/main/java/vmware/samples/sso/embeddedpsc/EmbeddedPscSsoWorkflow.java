@@ -9,8 +9,9 @@
  * WARRANTIES OR CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY,
  * NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
  */
-package vmware.samples.sso;
+package vmware.samples.sso.embeddedpsc;
 
+import java.security.KeyStore;
 import java.util.Collections;
 
 import org.apache.commons.cli.Option;
@@ -20,12 +21,13 @@ import com.vmware.vapi.saml.SamlToken;
 import com.vmware.vcenter.Datacenter;
 import com.vmware.vcenter.DatacenterTypes;
 
-import vmware.samples.common.authentication.VapiAuthenticationHelper;
 import vmware.samples.common.SamplesAbstractBase;
+import vmware.samples.common.authentication.VapiAuthenticationHelper;
+import vmware.samples.sso.SsoHelper;
 
 /**
  * Demonstrates how to create a SSO connection using a SAML Bearer token when
- * we have a vcenter server and embedded platform services controller.
+ * we have a vcenter server and embedded Platform Services Controller.
  */
 public class EmbeddedPscSsoWorkflow extends SamplesAbstractBase {
     private Datacenter datacenterService;
@@ -53,7 +55,7 @@ public class EmbeddedPscSsoWorkflow extends SamplesAbstractBase {
     public void run() throws Exception {
 
         System.out.println("\n\n#### Example: Login to vCenter server with "
-                           + "embedded platform services controller");
+                           + "embedded Platform Services Controller");
 
         this.vapiAuthHelper = new VapiAuthenticationHelper();
 
@@ -62,6 +64,8 @@ public class EmbeddedPscSsoWorkflow extends SamplesAbstractBase {
          * is the same as the vcenter server.
          */
         String ssoUrl = "https://" + this.server + SSO_PATH;
+
+        KeyStore trustStore = setupSslTrustForServer();
 
         System.out.println("\nStep 1: Connect to the Single Sign-On URL and "
                            + "retrieve the SAML bearer token.");
@@ -73,7 +77,7 @@ public class EmbeddedPscSsoWorkflow extends SamplesAbstractBase {
                            + "SAML bearer token.");
         StubConfiguration sessionStubConfig =
                 this.vapiAuthHelper.loginBySamlBearerToken(this.server,
-                    samlBearerToken);
+                    samlBearerToken, trustStore);
 
         System.out.println("\nStep 3: Perform certain tasks using the vAPI "
                            + "services.");

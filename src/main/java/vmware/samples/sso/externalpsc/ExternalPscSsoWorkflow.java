@@ -9,8 +9,9 @@
  * WARRANTIES OR CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY,
  * NON-INFRINGEMENT AND FITNESS FOR A PARTICULAR PURPOSE.
  */
-package vmware.samples.sso;
+package vmware.samples.sso.externalpsc;
 
+import java.security.KeyStore;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,13 +22,14 @@ import com.vmware.vapi.saml.SamlToken;
 import com.vmware.vcenter.Datacenter;
 import com.vmware.vcenter.DatacenterTypes;
 
-import vmware.samples.common.authentication.VapiAuthenticationHelper;
-import vmware.samples.common.LookupServiceHelper;
 import vmware.samples.common.SamplesAbstractBase;
+import vmware.samples.common.authentication.VapiAuthenticationHelper;
+import vmware.samples.sso.LookupServiceHelper;
+import vmware.samples.sso.SsoHelper;
 
 /**
  * Demonstrates how to create a SSO connection using a SAML Bearer token when
- * we have a vcenter server and external platform services controller.
+ * we have a vcenter server and external Platform Services Controller.
  */
 public class ExternalPscSsoWorkflow extends SamplesAbstractBase {
     private String lookupServiceUrl;
@@ -63,12 +65,14 @@ public class ExternalPscSsoWorkflow extends SamplesAbstractBase {
     @Override
     public void run() throws Exception {
         System.out.println("\n\n#### Example: Login to vCenter server with "
-                           + "external platform services controller.");
+                           + "external Platform Services Controller.");
 
         this.vapiAuthHelper = new VapiAuthenticationHelper();
 
+        KeyStore trustStore = setupSslTrustForServer();
+
         System.out.println("\nStep 1: Connect to the lookup service on the "
-                           + "Platform Services Controller Node.");
+                           + "Platform Services Controller node.");
         LookupServiceHelper lookupServiceHelper = new LookupServiceHelper(
             this.lookupServiceUrl);
 
@@ -87,7 +91,7 @@ public class ExternalPscSsoWorkflow extends SamplesAbstractBase {
 
         StubConfiguration sessionStubConfig =
                 this.vapiAuthHelper.loginBySamlBearerToken(this.server,
-                    samlBearerToken);
+                    samlBearerToken, trustStore);
 
         System.out.println("\nStep 5: Perform certain tasks using the vAPI "
                            + "services.");

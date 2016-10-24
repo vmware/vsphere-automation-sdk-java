@@ -13,7 +13,9 @@
 package vmware.samples.common;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -174,4 +176,25 @@ public class SslUtil {
         return (X509Certificate) cf.generateCertificate(bis);
     }
 
+    /**
+     * Loads the truststore containing the trusted server certificates.
+     *
+     * @param filePath path to the truststore file
+     * @param password password for the truststore.
+     * @return an instance of KeyStore object containing the trusted server
+     *         certificates
+     * @throws Exception
+     */
+    public static KeyStore loadTrustStore(String filePath, String password)
+            throws Exception {
+      KeyStore trustStore = KeyStore.getInstance("JKS");
+      InputStream truststoreStream =
+            new FileInputStream(filePath);
+        try {
+            trustStore.load(truststoreStream, password.toCharArray());
+            return trustStore;
+        } finally {
+            truststoreStream.close();
+        }
+    }
 }

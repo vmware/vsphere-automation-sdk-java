@@ -47,15 +47,6 @@ public class LibraryCrud extends SamplesAbstractBase {
      */
     protected void parseArgs(String[] args) {
         // Parse the command line options or use config file
-        Option libNameOption = Option.builder()
-            .required(true)
-            .hasArg()
-            .argName("CONTENT LIBRARY")
-            .longOpt("contentlibraryname")
-            .desc("The name of the local library to "
-                  + "create. Defaults to demo-local-lib, if not "
-                  + "specified.")
-            .build();
 
         Option dsNameOption = Option.builder()
             .required(true)
@@ -67,10 +58,8 @@ public class LibraryCrud extends SamplesAbstractBase {
             .build();
 
         List<Option> optionList = new ArrayList<Option>();
-        optionList.add(libNameOption);
         optionList.add(dsNameOption);
         super.parseArgs(optionList, args);
-        this.libName = (String) parsedOptions.get("contentlibraryname");
         this.dsName = (String) parsedOptions.get("datastore");
     }
 
