@@ -96,9 +96,9 @@ $java -cp target/samples-6.5.0-jar-with-dependencies.jar vmware.samples.tagging.
 ````
 
 ### API Documentation and Programming Guide
-The API documentation for the samples can be found here : <link_to_api_documentation>
+The API documentation for the samples can be found here : 
 
-The programming guide for vSphere Automation SDK for Java can be found here: <link_to_programming_guide>/  
+The programming guide for vSphere Automation SDK for Java can be found here:  
 
 ## Submitting samples
 The following information must be included in the README.md for each submitted sample.
