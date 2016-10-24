@@ -7,7 +7,7 @@
   * [Prerequisites](https://github.com/vmware/vsphere-automation-sdk-java-samples#prerequisites)
   * [Building the Samples](https://github.com/vmware/vsphere-automation-sdk-java-samples#building-the-samples)
   * [Running the Samples](https://github.com/vmware/vsphere-automation-sdk-java-samples#running-the-samples)
-* [Meta Information](https://github.com/vmware/vsphere-automation-sdk-java-samples#meta-information)
+* [Submitting Samples](https://github.com/vmware/vsphere-automation-sdk-java-samples#submitting-samples)
   * [Required Information](https://github.com/vmware/vsphere-automation-sdk-java-samples#required-information)
   * [Suggested Information](https://github.com/vmware/vsphere-automation-sdk-java-samples#suggested-information)
 * [Resource Maintenance](https://github.com/vmware/vsphere-automation-sdk-java-samples#resource-maintenance)
@@ -96,7 +96,7 @@ $java -cp target/samples-6.5.0-jar-with-dependencies.jar vmware.samples.tagging.
 ````
 
 ### API Documentation and Programming Guide
-The API documentation for the samples can be found here : 
+The API documentation for the samples can be found here :
 
 The programming guide for vSphere Automation SDK for Java can be found here:  
 
@@ -122,7 +122,7 @@ Any bugs or other issues should be filed within GitHub by way of the repositoryâ
 Any community member can resolve issues within the repository, however only the board member can approve the update. Once approved, assuming the resolution involves a pull request, only a board member will be able to merge and close the request.
 
 ### VMware Sample Exchange
-It is highly recommended to add any and all submitted resources to the VMware Sample Exchange:  <https://developercenter.vmware.com/samples>
+It is highly recommended to add any and all submitted samples to the VMware Sample Exchange:  <https://developercenter.vmware.com/samples>
 
 Sample Exchange can be allowed to access your GitHub resources, by way of a linking process, where they can be indexed and searched by the community. There are VMware social media accounts which will advertise resources posted to the site and there's no additional accounts needed, as the VMware Sample Exchange uses MyVMware credentials.     
 
