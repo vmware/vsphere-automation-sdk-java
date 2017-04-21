@@ -45,8 +45,12 @@ Before you can run the SDK samples we'll need to walk you through the following 
 ### Setting up maven
 The SDK requires maven to build the samples. 
 1. Download the latest maven from <https://maven.apache.org/download.cgi> and extract it to your machine.
-2. Update PATH environment variable to include the maven "bin" directory.
-SET PATH=%PATH%;[path to the maven "bin" directory]
+2. Install JDK8 and set JAVA_HOME to the directory where JDK is installed.
+
+   export JAVA_HOME=\<jdk-install-dir\>
+3. Update PATH environment variable to include the maven and jdk "bin" directories.
+
+    export PATH=\<maven-bin-dir\>:$JAVA_HOME/bin:$PATH
 
 ### Setting up a vSphere Test Environment
 **NOTE:** The samples are intended to be run against a freshly installed **non-Production** vSphere setup as the scripts may make changes to the test environment and in some cases can destroy items when needed.
@@ -127,8 +131,9 @@ Once generated, follow below steps to import the project to eclipse:
 4. Click Finish
 
 ## API Documentation
-The API documentation can be downloaded from [here](doc/client.zip)
-Online version of the API documentation can be found [here](https://code.vmware.com/web/dp/doc/preview?id=4642)
+The API documentation can be downloaded from [here](doc/client.zip).
+
+Online version of the API documentation can be found [here](https://code.vmware.com/web/dp/doc/preview?id=4642).
 
 ## Submitting samples
 
