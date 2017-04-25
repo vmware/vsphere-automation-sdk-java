@@ -12,16 +12,19 @@
  */
 package vmware.samples.vcenter.vm.list;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.cli.Option;
 
 import com.vmware.vcenter.VM;
-import com.vmware.vcenter.VMTypes;
 import com.vmware.vcenter.VMTypes.Summary;
-
+import com.vmware.vcenter.VMTypes.FilterSpec.Builder;
 import vmware.samples.common.SamplesAbstractBase;
+import vmware.samples.vcenter.helpers.ClusterHelper;
+import vmware.samples.vcenter.helpers.DatacenterHelper;
+import vmware.samples.vcenter.helpers.FolderHelper;
 
 /**
  * Description: Demonstrates getting list of VMs present in vCenter
@@ -31,6 +34,9 @@ import vmware.samples.common.SamplesAbstractBase;
  */
 public class ListVMs extends SamplesAbstractBase {
     private VM vmService;
+    private String vmFolderName;
+    private String datacenterName;
+    private String clusterName;
 
     /**
      * Define the options specific to this sample and configure the sample using
@@ -39,26 +45,74 @@ public class ListVMs extends SamplesAbstractBase {
      * @param args command line arguments passed to the sample
      */
     protected void parseArgs(String[] args) {
-        super.parseArgs(Collections.<Option>emptyList(), args);
+        Option datacenterOption = Option.builder()
+                .longOpt("datacenter")
+                .desc("OPTIONAL: Specify the name of the Datacenter"
+                        + " to list the Vms available in it.")
+                .argName("DATACENTER")
+                .required(false)
+                .hasArg()
+                .build();
+        Option vmFolderOption = Option.builder()
+                .longOpt("vmfolder")
+                .desc("OPTIONAL: Specify the name of the VM Folder to list the"
+                        + " to list the Vms contained in it.")
+                .argName("VM FOLDER")
+                .required(false)
+                .hasArg()
+                .build();
+        Option clusterOption = Option.builder()
+                .longOpt("cluster")
+                .desc("OPTIONAL: Specify the name of the Cluster to list the"
+                        + " Vms which are part of it.")
+                .argName("CLUSTER")
+                .required(false)
+                .hasArg()
+                .build();
+        List<Option> optionList = Arrays.asList(vmFolderOption,
+                datacenterOption, clusterOption);
+
+        super.parseArgs(optionList, args);
+        this.vmFolderName = (String) parsedOptions.get("vmfolder");
+        this.datacenterName = (String) parsedOptions.get("datacenter");
+        this.clusterName = (String) parsedOptions.get("cluster");
     }
 
     protected void setup() throws Exception {
-        this.vmService = vapiAuthHelper.getStubFactory().createStub(VM.class, sessionStubConfig);
+        this.vmService = vapiAuthHelper.getStubFactory().createStub(VM.class,
+                sessionStubConfig);
     }
 
     protected void run() throws Exception {
-        List<Summary> vmList = this.vmService.list(new VMTypes.FilterSpec.Builder().build());
+        Builder bldr = new Builder();
+        if(null != this.datacenterName && !this.datacenterName.isEmpty()){
+            bldr.setDatacenters(Collections.singleton(DatacenterHelper.
+                  getDatacenter(this.vapiAuthHelper.getStubFactory(),
+                          this.sessionStubConfig, this.datacenterName)));
+        }
+        if(null != this.clusterName && !this.clusterName.isEmpty()) {
+            bldr.setClusters(Collections.singleton(ClusterHelper.getCluster(
+                  this.vapiAuthHelper.getStubFactory(), sessionStubConfig,
+                  this.clusterName)));
+        }      
+        if(null != this.vmFolderName && !this.vmFolderName.isEmpty())
+        {
+            bldr.setFolders(Collections.singleton(FolderHelper.getFolder(
+                  this.vapiAuthHelper.getStubFactory(), sessionStubConfig,
+                  this.vmFolderName)));
+        }
+        List<Summary> vmList = this.vmService.list(bldr.build());
         System.out.println("----------------------------------------");
         System.out.println("List of VMs");
         for (Summary vmSummary : vmList) {
-        	System.out.println(vmSummary);
+            System.out.println(vmSummary);
         }
         System.out.println("----------------------------------------");
     }
     protected void cleanup() throws Exception {
-    	// No cleanup required
+        // No cleanup required
     }
-    
+
     public static void main(String[] args) throws Exception {
         /*
          * Execute the sample using the command line arguments or parameters

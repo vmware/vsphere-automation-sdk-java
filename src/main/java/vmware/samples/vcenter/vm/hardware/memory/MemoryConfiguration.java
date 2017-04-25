@@ -24,8 +24,8 @@ import vmware.samples.common.SamplesAbstractBase;
 import vmware.samples.vcenter.helpers.VmHelper;
 
 /**
- * Description: Demonstrates how to configure the memory related settings of a virtual
- * machine.
+ * Description: Demonstrates how to configure the memory related settings of a 
+ * virtual machine.
  *
  * Author: VMware, Inc.
  * Sample Prerequisites: This sample needs an existing VM.

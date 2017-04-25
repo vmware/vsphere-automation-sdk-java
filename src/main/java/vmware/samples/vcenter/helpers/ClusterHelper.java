@@ -38,24 +38,28 @@ public class ClusterHelper {
     public static String getCluster(
         StubFactory stubFactory, StubConfiguration sessionStubConfig,
         String datacenterName, String clusterName) {
-
-        // Get the datacenter
-        Set<String> datacenters = Collections.singleton(DatacenterHelper
-            .getDatacenter(stubFactory, sessionStubConfig, datacenterName));
-
-        // Get the cluster
         Cluster clusterService = stubFactory.createStub(Cluster.class,
             sessionStubConfig);
         Set<String> clusters = Collections.singleton(clusterName);
-        ClusterTypes.FilterSpec clusterFilterSpec =
-                new ClusterTypes.FilterSpec.Builder().setNames(clusters)
-                    .setDatacenters(datacenters)
-                    .build();
-        List<ClusterTypes.Summary> clusterSummaries = clusterService.list(
-            clusterFilterSpec);
+        ClusterTypes.FilterSpec.Builder clusterFilterBuilder = 
+                new ClusterTypes.FilterSpec.Builder().setNames(clusters);
+        if (null != datacenterName) {
+            // Get the datacenter
+            Set<String> datacenters = Collections.singleton(
+                    DatacenterHelper.getDatacenter(stubFactory,
+                            sessionStubConfig, datacenterName));
+            clusterFilterBuilder.setDatacenters(datacenters);
+        }
+        List<ClusterTypes.Summary> clusterSummaries =
+                clusterService.list(clusterFilterBuilder.build());
         assert clusterSummaries.size() > 0 : "Cluster " + clusterName
                                              + "not found in datacenter: "
                                              + datacenterName;
         return clusterSummaries.get(0).getCluster();
+    }
+
+    public static String getCluster(StubFactory stubFactory, StubConfiguration
+            sessionStubConfig, String clusterName) {
+        return getCluster(stubFactory, sessionStubConfig, null, clusterName);
     }
 }

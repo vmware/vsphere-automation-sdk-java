@@ -32,8 +32,8 @@ import vmware.samples.vcenter.helpers.NetworkHelper;
 import vmware.samples.vcenter.helpers.PlacementHelper;
 
 /**
- * Description: Demonstrates how to create a basic VM with following configuration:
- * Basic VM (2 disks, 1 nic)
+ * Description: Demonstrates how to create a basic VM with following 
+ * configuration: Basic VM (2 disks, 1 nic)
  *
  * Author: VMware, Inc.
  * Sample Prerequisites:
@@ -45,6 +45,7 @@ import vmware.samples.vcenter.helpers.PlacementHelper;
  */
 public class CreateBasicVM extends SamplesAbstractBase {
     private String vmFolderName;
+    private String vmName;
     private String datastoreName;
     private String datacenterName;
     private String clusterName;
@@ -63,28 +64,35 @@ public class CreateBasicVM extends SamplesAbstractBase {
     protected void parseArgs(String[] args) {
         Option datacenterOption = Option.builder()
             .longOpt("datacenter")
-            .desc("The name of the datacenter on which to create the vm.")
+            .desc("The name of the datacenter in which to create the vm.")
             .argName("DATACENTER")
             .required(true)
             .hasArg()
             .build();
         Option vmFolderOption = Option.builder()
             .longOpt("vmfolder")
-            .desc("The name of the vm folder on which to create the vm.")
+            .desc("The name of the vm folder in which to create the vm.")
             .argName("VM FOLDER")
             .required(true)
             .hasArg()
             .build();
+        Option vmNameOption = Option.builder()
+                .longOpt("vmname")
+                .desc("OPTIONAL: The name of the vm to be created.")
+                .argName("VMNAME")
+                .required(false)
+                .hasArg()
+                .build();
         Option datastoreOption = Option.builder()
             .longOpt("datastore")
-            .desc("The name of the datastore on which to create the vm")
+            .desc("The name of the datastore in which to create the vm")
             .required(true)
             .argName("DATASTORE")
             .hasArg()
             .build();
         Option clusterOption = Option.builder()
             .longOpt("cluster")
-            .desc("The name of the cluster on which to create the vm.")
+            .desc("The name of the cluster in which to create the vm.")
             .argName("CLUSTER")
             .required(true)
             .hasArg()
@@ -97,7 +105,8 @@ public class CreateBasicVM extends SamplesAbstractBase {
             .hasArg()
             .build();
 
-        List<Option> optionList = Arrays.asList(vmFolderOption,
+        List<Option> optionList = Arrays.asList(vmNameOption,
+            vmFolderOption,
             datastoreOption,
             datacenterOption,
             clusterOption,
@@ -105,6 +114,7 @@ public class CreateBasicVM extends SamplesAbstractBase {
 
         super.parseArgs(optionList, args);
         this.vmFolderName = (String) parsedOptions.get("vmfolder");
+        this.vmName = (String) parsedOptions.get("vmname");
         this.datastoreName = (String) parsedOptions.get("datastore");
         this.datacenterName = (String) parsedOptions.get("datacenter");
         this.clusterName = (String) parsedOptions.get("cluster");
@@ -182,9 +192,11 @@ public class CreateBasicVM extends SamplesAbstractBase {
                 .build(),
             new DeviceTypes.EntryCreateSpec.Builder(DeviceTypes.Type.DISK)
                 .build());
-
+        //Use the VM name provided by the user else use the default VM name
+        String vmName = (null == this.vmName || this.vmName.isEmpty())?
+        				BASIC_VM_NAME :this.vmName;
         VMTypes.CreateSpec vmCreateSpec = new VMTypes.CreateSpec.Builder(
-            this.vmGuestOS).setName(BASIC_VM_NAME)
+            this.vmGuestOS).setName(vmName)
                 .setBootDevices(bootDevices)
                 .setPlacement(vmPlacementSpec)
                 .setNics(nics)
