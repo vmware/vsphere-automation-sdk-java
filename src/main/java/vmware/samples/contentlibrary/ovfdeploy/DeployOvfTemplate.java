@@ -35,11 +35,12 @@ import vmware.samples.common.vim.helpers.VmVappPowerOps;
 import vmware.samples.contentlibrary.client.ClsApiClient;
 
 /**
- * Description: Demonstrates the workflow to deploy an OVF library item to a resource pool.
+ * Description: Demonstrates the workflow to deploy an OVF library item to a
+ * resource pool.
  *
  * Author: VMware, Inc.
- * Sample Prerequisites: The sample needs an existing OVF library item and an existing cluster
- * with resources for creating the VM."
+ * Sample Prerequisites: The sample needs an existing OVF
+ * library item and an existing cluster with resources for creating the VM."
  *
  */
 public class DeployOvfTemplate extends SamplesAbstractBase {

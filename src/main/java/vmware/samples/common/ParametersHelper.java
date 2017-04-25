@@ -129,7 +129,7 @@ public class ParametersHelper {
             }
         }
 
-    return parsedOptions;
+        return parsedOptions;
     }
 
     private Options getOptions(List<Option> optionList) {

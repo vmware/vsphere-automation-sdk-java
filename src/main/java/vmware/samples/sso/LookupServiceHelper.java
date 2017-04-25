@@ -372,8 +372,8 @@ public class LookupServiceHelper {
         Map<String, String> retVal = new HashMap<String, String>();
         List<LookupServiceRegistrationInfo> results = lsPort.list(
             serviceRegistration, filterCriteria);
-        for (LookupServiceRegistrationInfo
-                lookupServiceRegistrationInfo : results) {
+        for (LookupServiceRegistrationInfo lookupServiceRegistrationInfo
+               : results) {
             LookupServiceRegistrationEndpoint
                 lookupServiceRegistrationEndpoint =
                     lookupServiceRegistrationInfo.getServiceEndpoints().get(0);

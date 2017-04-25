@@ -33,10 +33,12 @@ import vmware.samples.common.vim.helpers.VimUtil;
 import vmware.samples.contentlibrary.client.ClsApiClient;
 
 /**
- * Description: Demonstrates the workflow to capture vm to content library as vm template.
+ * Description: Demonstrates the workflow to capture vm to content library as
+ * vm template.
  *
  * Author: VMware, Inc.
- * Sample Prerequisites: The sample needs an existing VM to capture and a datastore to create the
+ * Sample Prerequisites: The sample needs an existing VM to capture and a
+ * datastore to create the
  * content library.
  *
  */
@@ -60,15 +62,26 @@ public class VmTemplateCapture extends SamplesAbstractBase {
     protected void parseArgs(String[] args) {
         // Parse the command line options or use config file
         Option dataStoreNameOption =
-                Option.builder().longOpt("datastore")
-                        .desc("The name of the datastore for content library backing (of type vmfs)")
-                        .required(true).hasArg().argName("DATASTORE").build();
+                Option.builder()
+                .longOpt("datastore")
+                .desc("The name of the datastore for content library backing "
+                        + "(of type vmfs)")
+                .required(true)
+                .hasArg()
+                .argName("DATASTORE")
+                .build();
 
         Option vmNameOption =
-                Option.builder().longOpt("vmname").desc("The Name of the vm to be captured").required(true).hasArg()
-                        .argName("VM NAME").build();
+                Option.builder()
+                .longOpt("vmname")
+                .desc("The Name of the vm to be captured")
+                .required(true)
+                .hasArg()
+                .argName("VM NAME")
+                .build();
 
-        List<Option> optionList = Arrays.asList(dataStoreNameOption, vmNameOption);
+        List<Option> optionList = Arrays.asList(dataStoreNameOption,
+                vmNameOption);
         super.parseArgs(optionList, args);
         this.dataStoreName = (String) parsedOptions.get("datastore");
         this.vmName = (String) parsedOptions.get("vmname");
@@ -77,30 +90,37 @@ public class VmTemplateCapture extends SamplesAbstractBase {
     }
 
     protected void setup() throws Exception {
-        this.client = new ClsApiClient(this.vapiAuthHelper.getStubFactory(), sessionStubConfig);
+        this.client = new ClsApiClient(this.vapiAuthHelper.getStubFactory(),
+                sessionStubConfig);
     }
 
     protected void run() throws Exception {
         // Retrieve the MoRef of a VC datastore using VIM APIs
-        ManagedObjectReference dsMoref =
-                VimUtil.getEntityByName(this.vimAuthHelper.getVimPort(), this.vimAuthHelper.getServiceContent(),
-                        this.dataStoreName, "Datastore");
+        ManagedObjectReference dsMoref = VimUtil.getEntityByName(
+                this.vimAuthHelper.getVimPort(),
+                this.vimAuthHelper.getServiceContent(), this.dataStoreName,
+                "Datastore");
         assert dsMoref != null;
-        System.out.println("Datastore MoRef : " + dsMoref.getType() + " : " + dsMoref.getValue());
+        System.out.println("Datastore MoRef : " + dsMoref.getType() + " : "
+                + dsMoref.getValue());
         // Create content library.
         this.libraryId = createLocalLib(dsMoref);
 
         // Capture the vm to content library.
         captureVM(this.libraryId);
 
-        // Find the library item by name and verify capture vm created new vm template.
+        // Find the library item by name and verify capture vm created new vm
+        // template.
         FindSpec findSpec = new FindSpec();
         findSpec.setName(this.libItemName);
         List<String> itemIds = this.client.itemService().find(findSpec);
-        assert !itemIds.isEmpty() : "Unable to find captured library item with name: " + this.libItemName;
+        assert !itemIds
+                .isEmpty() : "Unable to find captured library item with name: "
+                        + this.libItemName;
         String itemId = itemIds.get(0);
-        System.out.println("The VM : " + this.vmName + " is captured as library item  : " + itemId
-                + " of type vm-template.");
+        System.out.println(
+                "The VM : " + this.vmName + " is captured as library item  : "
+                        + itemId + " of type vm-template.");
     }
 
     /**
@@ -110,9 +130,10 @@ public class VmTemplateCapture extends SamplesAbstractBase {
      *            identifier of the library on which vm will be captured
      */
     private void captureVM(String libraryId) throws Exception {
-        String entityType = "VirtualMachine"; // Substitute 'VirtualApp' for vApp
-        ManagedObjectReference entityId =
-                VimUtil.getVM(this.vimAuthHelper.getVimPort(),
+        String entityType = "VirtualMachine"; // Substitute 'VirtualApp' for
+                                              // vApp
+        ManagedObjectReference entityId = VimUtil.getVM(
+                this.vimAuthHelper.getVimPort(),
                 this.vimAuthHelper.getServiceContent(), this.vmName);
         DeployableIdentity deployable = new DeployableIdentity();
         deployable.setType(entityType);
@@ -125,7 +146,8 @@ public class VmTemplateCapture extends SamplesAbstractBase {
         spec.setDescription("VM template created from a VM capture");
 
         // Create OVF library item
-        CreateResult result = client.ovfLibraryItemService().create(null, deployable, target, spec);
+        CreateResult result = client.ovfLibraryItemService().create(null,
+                deployable, target, spec);
         if (result.getSucceeded()) {
             System.out.println("The vm capture to content library succeeded");
         } else {
@@ -155,7 +177,8 @@ public class VmTemplateCapture extends SamplesAbstractBase {
 
         // Create a local content library backed the VC datastore using vAPIs
         String clientToken = UUID.randomUUID().toString();
-        String libraryId = this.client.localLibraryService().create(clientToken, createSpec);
+        String libraryId = this.client.localLibraryService().create(clientToken,
+                createSpec);
         System.out.println("Local library created : " + libraryId);
         return libraryId;
     }

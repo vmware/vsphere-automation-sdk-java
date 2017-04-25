@@ -70,27 +70,34 @@ public class HttpClient {
                 }
 
                 @Override
-                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                public void checkServerTrusted(X509Certificate[] chain,
+                        String authType) throws CertificateException {
                 }
 
                 @Override
-                public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
+                public void checkClientTrusted(X509Certificate[] arg0,
+                        String arg1) throws CertificateException {
                 }
             } }, new SecureRandom());
 
-            // Create a registry of custom connection socket factories for supported protocol schemes
-            Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory>create()
-                    .register("https", new SSLConnectionSocketFactory(sslContext))
+            // Create a registry of custom connection socket factories for
+            // supported protocol schemes
+            Registry<ConnectionSocketFactory> socketFactoryRegistry =
+                    RegistryBuilder.<ConnectionSocketFactory>create()
+                    .register("https", new SSLConnectionSocketFactory(
+                            sslContext))
                     .build();
 
-            connectionManager = new PoolingHttpClientConnectionManager(socketFactoryRegistry);
+            connectionManager = new PoolingHttpClientConnectionManager(
+                    socketFactoryRegistry);
             connectionManager.setDefaultMaxPerRoute(500);
             connectionManager.setMaxTotal(600);
 
             RequestConfig config = RequestConfig.custom()
                     .setConnectTimeout(5 * 1000)
                     .setConnectionRequestTimeout(5 * 1000)
-                    .setSocketTimeout(infiniteSocketTimeout ? -1 : 60 * 1000).build();
+                    .setSocketTimeout(infiniteSocketTimeout ? -1 : 60 * 1000)
+                    .build();
 
             HttpClientBuilder clientBuilder = HttpClientBuilder.create();
             clientBuilder.setConnectionManager(connectionManager);
@@ -107,18 +114,23 @@ public class HttpClient {
         upload(file, 0, file.length(), url, null);
     }
 
-    public void upload(File file, long startByte, long endByte, String url, Header header) {
+    public void upload(File file, long startByte, long endByte, String url,
+            Header header) {
         HttpPut httpPut = new HttpPut(url);
         try {
-            BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(
+                    new FileInputStream(file));
             long fileSize = file.length();
 
-            InputStreamEntity inputStreamRequestEntity = new InputStreamEntity(bufferedInputStream, fileSize);
+            InputStreamEntity inputStreamRequestEntity = new InputStreamEntity(
+                    bufferedInputStream, fileSize);
 
             if (startByte != 0 || endByte != file.length()) {
-                inputStreamRequestEntity = new InputStreamEntity(bufferedInputStream, endByte - startByte + 1);
+                inputStreamRequestEntity = new InputStreamEntity(
+                        bufferedInputStream, endByte - startByte + 1);
                 httpPut.setHeader("Content-Range",
-                        "bytes" + Long.toString(startByte) + "-" + Long.toString(endByte) + "/"
+                        "bytes" + Long.toString(startByte) + "-"
+                                + Long.toString(endByte) + "/"
                                 + Long.toString(fileSize));
                 inputStreamRequestEntity.setChunked(true);
             }
@@ -128,9 +140,11 @@ public class HttpClient {
             HttpResponse httpResponse = executeRequest(httpPut);
             validateResponse(httpResponse, HttpStatus.SC_OK);
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("FileNotFoundException for file" + file.getName(), e);
+            throw new RuntimeException(
+                    "FileNotFoundException for file" + file.getName(), e);
         } catch (IOException e) {
-            throw new RuntimeException("Failed to upload due to IOException!" + file.getName(), e);
+            throw new RuntimeException(
+                    "Failed to upload due to IOException!" + file.getName(), e);
         } catch (RuntimeException e) {
             httpPut.abort();
             throw e;
@@ -200,9 +214,11 @@ public class HttpClient {
 
     }
 
-    private static void createFile(String outfile, String content) throws IOException {
+    private static void createFile(String outfile, String content)
+            throws IOException {
         FileOutputStream fileoutputstream = new FileOutputStream(outfile);
-        DataOutputStream dataoutputstream = new DataOutputStream(fileoutputstream);
+        DataOutputStream dataoutputstream = new DataOutputStream(
+                fileoutputstream);
         dataoutputstream.writeBytes(content);
         dataoutputstream.flush();
         dataoutputstream.close();
@@ -266,8 +282,8 @@ public class HttpClient {
         if (actualStatusCode == statusCode) {
             return;
         }
-        String errorMessage =
-                "Invalid return code! Expected: " + statusCode + " Actual: " + actualStatusCode + "; ";
+        String errorMessage = "Invalid return code! Expected: " + statusCode
+                + " Actual: " + actualStatusCode + "; ";
         RuntimeException restEx = new RuntimeException(errorMessage);
         if (response.getEntity() != null) {
             if (response.getEntity().getContentLength() != 0) {
@@ -277,5 +293,4 @@ public class HttpClient {
 
         throw new RuntimeException(errorMessage, restEx);
     }
-
 }

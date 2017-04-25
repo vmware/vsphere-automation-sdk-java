@@ -28,9 +28,10 @@ import vmware.samples.common.vim.helpers.VimUtil;
 import vmware.samples.contentlibrary.client.ClsApiClient;
 
 /**
- * Description: Demonstrates the basic operations of a content library. The sample also
- * demonstrates the interoperability of the VIM and vAPI. Note: The sample needs
- * an existing VC datastore with available storage.
+ * Description: Demonstrates the basic operations of a content library. The
+ * sample also demonstrates the interoperability of the VIM and vAPI.
+ * 
+ * Note: The sample needs an existing VC datastore with available storage.
  *
  * Author: VMware, Inc.
  */
@@ -49,7 +50,6 @@ public class LibraryCrud extends SamplesAbstractBase {
      */
     protected void parseArgs(String[] args) {
         // Parse the command line options or use config file
-
         Option dsNameOption = Option.builder()
             .required(true)
             .hasArg()

@@ -24,7 +24,8 @@ import vmware.samples.common.SamplesAbstractBase;
 import vmware.samples.vcenter.helpers.VmHelper;
 
 /**
- * Description: Demonstrates how to configure virtual SCSI adapters of a virtual machine.
+ * Description: Demonstrates how to configure virtual SCSI adapters of a 
+ * virtual machine.
  *
  * Author: VMware, Inc.
  * Sample Prerequisites: The sample needs an existing VM.
@@ -89,7 +90,7 @@ public class ScsiAdapterConfiguration extends SamplesAbstractBase {
         ScsiTypes.CreateSpec scsiCreateSpec = new ScsiTypes.CreateSpec();
         String scsiId = this.scsiService.create(this.vmId, scsiCreateSpec);
         System.out.println(scsiCreateSpec);
-        ScsiTypes.Info scsiInfo = this.scsiService.get(this.vmId,scsiId);
+        ScsiTypes.Info scsiInfo = this.scsiService.get(this.vmId, scsiId);
         System.out.println("VM ID=" + this.vmId);
         System.out.println("SCSI Adapter ID=" + scsiId);
         System.out.println(scsiInfo);
@@ -103,7 +104,7 @@ public class ScsiAdapterConfiguration extends SamplesAbstractBase {
                 .build();
         scsiId = this.scsiService.create(this.vmId, scsiCreateSpec);
         System.out.println(scsiCreateSpec);
-        scsiInfo = this.scsiService.get(this.vmId,scsiId);
+        scsiInfo = this.scsiService.get(this.vmId, scsiId);
         System.out.println("VM ID=" + this.vmId);
         System.out.println("SCSI Adapter ID=" + scsiId);
         System.out.println(scsiInfo);
@@ -115,7 +116,7 @@ public class ScsiAdapterConfiguration extends SamplesAbstractBase {
             .setSharing(ScsiTypes.Sharing.NONE).build();
         this.scsiService.update(this.vmId, scsiId, scsiUpdateSpec);
         System.out.println(scsiUpdateSpec);
-        scsiInfo = this.scsiService.get(this.vmId,scsiId);
+        scsiInfo = this.scsiService.get(this.vmId, scsiId);
         System.out.println("VM ID=" + this.vmId);
         System.out.println("SCSI Adapter ID=" + scsiId);
         System.out.println(scsiInfo);

@@ -32,8 +32,8 @@ import vmware.samples.common.SamplesAbstractBase;
 import vmware.samples.vcenter.helpers.VmHelper;
 
 /**
- * Description: Demonstrates how to modify the boot devices used by a virtual machine, and in
- * what order they are tried.
+ * Description: Demonstrates how to modify the boot devices used by a virtual 
+ * machine, and in what order they are tried.
  *
  * Author: VMware, Inc.
  * Sample Prerequisites:

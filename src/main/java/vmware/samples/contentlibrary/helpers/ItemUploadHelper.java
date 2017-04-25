@@ -31,6 +31,7 @@ import com.vmware.content.library.item.updatesession.File;
 import com.vmware.content.library.item.updatesession.FileTypes.AddSpec;
 import com.vmware.content.library.item.updatesession.FileTypes.Info;
 import com.vmware.content.library.item.updatesession.FileTypes.SourceType;
+import com.vmware.content.library.item.updatesession.FileTypes.ValidationError;
 
 import vmware.samples.common.HttpClient;
 
@@ -45,8 +46,9 @@ public class ItemUploadHelper {
      * @param libItemId
      * @param fileLocations
      */
-    public static void performUpload(UpdateSession uploadService, File uploadFileService,
-            Item libItemService, String libItemId, List<String> fileLocations) {
+    public static void performUpload(UpdateSession uploadService,
+            File uploadFileService, Item libItemService, String libItemId,
+            List<String> fileLocations) {
 
         // get the file names from the local file locations.
         List<String> fileNames = new ArrayList<String>();
@@ -56,25 +58,30 @@ public class ItemUploadHelper {
         }
 
         // create a new upload session for uploading the files
-        String sessionId = createUploadSession(uploadService, libItemService, libItemId);
+        String sessionId = createUploadSession(uploadService, libItemService,
+                libItemId);
 
         // add the files to the item and PUT the file to the transfer URL
         uploadFiles(uploadFileService, sessionId, fileNames, fileLocations);
 
         // check if there were any invalid or missing files
-        List<com.vmware.content.library.item.updatesession.FileTypes.ValidationError> invalidFiles =
+        List<ValidationError> invalidFiles =
                 uploadFileService.validate(sessionId).getInvalidFiles();
-        Set<String> missingFiles = uploadFileService.validate(sessionId).getMissingFiles();
-        System.out.println("UploadSession Info : " + uploadService.get(sessionId));
+        Set<String> missingFiles = uploadFileService.validate(sessionId)
+                .getMissingFiles();
+        System.out.println(
+                "UploadSession Info : " + uploadService.get(sessionId));
         System.out.println("Invalid Files : " + invalidFiles);
         System.out.println("Missing Files : " + missingFiles);
         if (missingFiles.size() == 0 && invalidFiles.size() == 0) {
             uploadService.complete(sessionId);
-            // Delete the update session once the upload is done to free up the session.
+            // Delete the update session once the upload is done to free up the
+            // session.
             uploadService.delete(sessionId);
         }
         if (invalidFiles.size() != 0) {
-            uploadService.fail(sessionId, invalidFiles.get(0).getErrorMessage().toString());
+            uploadService.fail(sessionId,
+                    invalidFiles.get(0).getErrorMessage().toString());
             uploadService.delete(sessionId);
             System.out.println("Invalid files : " + invalidFiles);
             throw new RuntimeException(invalidFiles.toString());
@@ -82,7 +89,8 @@ public class ItemUploadHelper {
         if (missingFiles.size() != 0) {
             uploadService.cancel(sessionId);
             System.out.println("Following files are missing : " + missingFiles);
-            throw new RuntimeException("Missing the required files : " + missingFiles);
+            throw new RuntimeException(
+                    "Missing the required files : " + missingFiles);
         }
 
         // verify that the content version number has incremented after the
@@ -99,14 +107,16 @@ public class ItemUploadHelper {
      * @param libraryItemId
      * @return
      */
-    private static String createUploadSession(UpdateSession uploadService, Item libItemService,
-            String libraryItemId) {
+    private static String createUploadSession(UpdateSession uploadService,
+            Item libItemService, String libraryItemId) {
         // Create a session for upload.
-        String currentVersion = libItemService.get(libraryItemId).getContentVersion();
+        String currentVersion = libItemService.get(libraryItemId)
+                .getContentVersion();
         UpdateSessionModel createSpec = new UpdateSessionModel();
         createSpec.setLibraryItemId(libraryItemId);
         createSpec.setLibraryItemContentVersion(currentVersion);
-        String sessionId = uploadService.create(UUID.randomUUID().toString(), createSpec);
+        String sessionId = uploadService.create(UUID.randomUUID().toString(),
+                createSpec);
         return sessionId;
     }
 
@@ -119,10 +129,12 @@ public class ItemUploadHelper {
      * @param fileLocations
      * @return
      */
-    private static void uploadFiles(File uploadFileService, String sessionId, List<String> fileNames, List<String> fileLocations) {
+    private static void uploadFiles(File uploadFileService, String sessionId,
+            List<String> fileNames, List<String> fileLocations) {
         assert fileNames.size() == fileLocations.size();
         for (int i = 0; i < fileNames.size(); i++) {
-            uploadFile(uploadFileService, sessionId, fileNames.get(i), fileLocations.get(i));
+            uploadFile(uploadFileService, sessionId, fileNames.get(i),
+                    fileLocations.get(i));
         }
     }
 
@@ -135,7 +147,7 @@ public class ItemUploadHelper {
      * @return info of the update session file
      */
     public static Info uploadFile(File uploadFileService, String sessionId,
-                                  String fileName, String fileLocation) {
+            String fileName, String fileLocation) {
         HttpClient httpClient = new HttpClient(true);
         // add the file spec to the upload file service
         AddSpec addSpec = new AddSpec();
@@ -144,7 +156,8 @@ public class ItemUploadHelper {
         uploadFileService.add(sessionId, addSpec);
 
         // Do a get on the file, verify the information is the same
-        com.vmware.content.library.item.updatesession.FileTypes.Info fileInfo = uploadFileService.get(sessionId, fileName);
+        com.vmware.content.library.item.updatesession.FileTypes.Info fileInfo =
+                uploadFileService.get(sessionId, fileName);
 
         // Get the transfer uri.
         URI transferUri = fileInfo.getUploadEndpoint().getUri();
@@ -158,7 +171,8 @@ public class ItemUploadHelper {
             httpClient.upload(file1, transferUrl);
 
         } catch (MalformedURLException e) {
-            throw new RuntimeException("Failed to upload due to IOException!", e);
+            throw new RuntimeException("Failed to upload due to IOException!",
+                    e);
         }
 
         // Verify that the file has been received
@@ -166,13 +180,13 @@ public class ItemUploadHelper {
         return fileInfo;
     }
 
-
     /**
      * Creating a local temp dir with the given prefix.
      *
      * @param prefix
      * @return the File handle for the created directory
-     * @throws IOException when an I/O error occurs
+     * @throws IOException
+     *             when an I/O error occurs
      */
     public static java.io.File createTempDir(String prefix) throws IOException {
         java.io.File temp;
@@ -186,15 +200,18 @@ public class ItemUploadHelper {
     /**
      * Copies the resource into a temporary file.
      *
-     * @param resourceName the resource name to copy
-     * @param dir the directory where the file will be created
-     * @param filename the name of the file to create
+     * @param resourceName
+     *            the resource name to copy
+     * @param dir
+     *            the directory where the file will be created
+     * @param filename
+     *            the name of the file to create
      * @return the absolute path to the file
-     * @throws IOException when an I/O error occurs
+     * @throws IOException
+     *             when an I/O error occurs
      */
     public static String copyResourceToFile(String resourceName,
-                                            java.io.File dir, String filename)
-            throws IOException {
+            java.io.File dir, String filename) throws IOException {
         // Create a temporary file in the directory
         java.io.File tempFile = new java.io.File(dir, filename);
         tempFile.deleteOnExit();
@@ -202,7 +219,7 @@ public class ItemUploadHelper {
         // Copy the resource to the temporary file
         ClassLoader classLoader = ItemUploadHelper.class.getClassLoader();
         try (InputStream in = classLoader.getResourceAsStream(resourceName);
-             OutputStream out = new FileOutputStream(tempFile)) {
+                OutputStream out = new FileOutputStream(tempFile)) {
 
             byte[] buffer = new byte[4096];
             int n;

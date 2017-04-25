@@ -26,20 +26,21 @@ import com.vmware.cis.tagging.TagTypes.UpdateSpec;
  * Helper class to create specs for various Tagging vAPIs.
  */
 public class TaggingHelper {
-    public static CreateSpec createTagCategorySpec(String name, String description,
-            Cardinality cardinality) {
+    public static CreateSpec createTagCategorySpec(String name,
+            String description, Cardinality cardinality) {
         CategoryTypes.CreateSpec createSpec = new CategoryTypes.CreateSpec();
         createSpec.setName(name);
         createSpec.setDescription(description);
         createSpec.setCardinality(cardinality);
 
         Set<String> associableTypes = new HashSet<String>();
-        createSpec.setAssociableTypes(associableTypes); // empty set of associableTypes
+        createSpec.setAssociableTypes(associableTypes); // empty set of
+                                                        // associableTypes
         return createSpec;
     }
 
-    public static com.vmware.cis.tagging.TagTypes.CreateSpec createTagSpec(String name,
-            String description, String categoryId) {
+    public static com.vmware.cis.tagging.TagTypes.CreateSpec createTagSpec(
+            String name, String description, String categoryId) {
         TagTypes.CreateSpec createSpec = new TagTypes.CreateSpec();
         createSpec.setName(name);
         createSpec.setDescription(description);

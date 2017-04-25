@@ -24,7 +24,8 @@ import vmware.samples.common.SamplesAbstractBase;
 import vmware.samples.vcenter.helpers.VmHelper;
 
 /**
- * Description: Demonstrates how to configure virtual SATA adapters of a virtual machine.
+ * Description: Demonstrates how to configure virtual SATA adapters of a
+ * virtual machine.
  *
  * Author: VMware, Inc.
  * Sample Prerequisites: The sample needs an existing VM.
@@ -90,7 +91,7 @@ public class SataAdapterConfiguration extends SamplesAbstractBase {
         SataTypes.CreateSpec sataCreateSpec = new SataTypes.CreateSpec();
         String sataId = this.sataService.create(this.vmId, sataCreateSpec);
         System.out.println(sataCreateSpec);
-        SataTypes.Info sataInfo = this.sataService.get(this.vmId,sataId);
+        SataTypes.Info sataInfo = this.sataService.get(this.vmId, sataId);
         System.out.println("VM ID=" + this.vmId);
         System.out.println("SATA Adapter ID=" + sataId);
         System.out.println(sataInfo);
@@ -100,7 +101,7 @@ public class SataAdapterConfiguration extends SamplesAbstractBase {
         sataCreateSpec = new SataTypes.CreateSpec.Builder().setBus(2l).build();
         System.out.println(sataCreateSpec);
         sataId = this.sataService.create(this.vmId, sataCreateSpec);
-        sataInfo = this.sataService.get(this.vmId,sataId);
+        sataInfo = this.sataService.get(this.vmId, sataId);
         System.out.println("VM ID=" + this.vmId);
         System.out.println("SATA Adapter ID=" + sataId);
         System.out.println(sataInfo);

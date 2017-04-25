@@ -58,8 +58,8 @@ public class VimUtil {
     }
 
     /**
-     * Retrieves the cluster managed object reference for the specified cluster name using the vim
-     * port type.
+     * Retrieves the cluster managed object reference for the specified cluster
+     * name using the vim port type.
      *
      * @param vimPortType
      *
@@ -73,8 +73,9 @@ public class VimUtil {
      * @throws NotFoundFaultMsg
      */
     public static ManagedObjectReference getCluster(VimPortType vimPortType,
-            ServiceContent serviceContent, String clusterName) throws InvalidPropertyFaultMsg,
-            RuntimeFaultFaultMsg, NotFoundFaultMsg {
+            ServiceContent serviceContent, String clusterName)
+            throws InvalidPropertyFaultMsg, RuntimeFaultFaultMsg,
+            NotFoundFaultMsg {
 
         // Spec to allow recursion on the Folder to Folder traversal
         SelectionSpec folderToFolderSelection = new SelectionSpec();
@@ -97,58 +98,69 @@ public class VimUtil {
         folderToFolderTraversal.setName("folderToFolder");
         folderToFolderTraversal.setPath("childEntity");
         folderToFolderTraversal.setType("Folder");
-        folderToFolderTraversal.getSelectSet().addAll(
-                Arrays.asList(new SelectionSpec[] { folderToFolderSelection,
-                        dcToHostFolderSelection }));
+        folderToFolderTraversal.getSelectSet()
+                .addAll(Arrays.asList(new SelectionSpec[] {
+                    folderToFolderSelection, dcToHostFolderSelection }));
         folderToFolderTraversal.setSkip(false);
 
         PropertySpec propertySpec = new PropertySpec();
-        propertySpec.getPathSet().addAll(Arrays.asList(new String[] { "name" }));
+        propertySpec.getPathSet()
+                .addAll(Arrays.asList(new String[] { "name" }));
         propertySpec.setType("ClusterComputeResource");
 
         ObjectSpec objectSpec = new ObjectSpec();
         objectSpec.setObj(serviceContent.getRootFolder());
-        objectSpec.getSelectSet().addAll(
-                Arrays.asList(new SelectionSpec[] { folderToFolderTraversal,
-                        dcToHostFolderTraversal }));
+        objectSpec.getSelectSet().addAll(Arrays.asList(new SelectionSpec[] {
+            folderToFolderTraversal, dcToHostFolderTraversal }));
         objectSpec.setSkip(false);
 
         // Create PropertyFilterSpec using the PropertySpec and ObjectPec
         PropertyFilterSpec propertyFilterSpec = new PropertyFilterSpec();
-        propertyFilterSpec.getPropSet().addAll(Arrays.asList(new PropertySpec[] { propertySpec }));
-        propertyFilterSpec.getObjectSet().addAll(Arrays.asList(new ObjectSpec[] { objectSpec }));
+        propertyFilterSpec.getPropSet()
+                .addAll(Arrays.asList(new PropertySpec[] { propertySpec }));
+        propertyFilterSpec.getObjectSet()
+                .addAll(Arrays.asList(new ObjectSpec[] { objectSpec }));
 
-        ManagedObjectReference morPropertyCollector = serviceContent.getPropertyCollector();
-        List<ObjectContent> objectContents =
-                vimPortType.retrieveProperties(morPropertyCollector, Arrays
-                        .asList(new PropertyFilterSpec[] { propertyFilterSpec }));
+        ManagedObjectReference morPropertyCollector = serviceContent
+                .getPropertyCollector();
+        List<ObjectContent> objectContents = vimPortType.retrieveProperties(
+                morPropertyCollector,
+                Arrays.asList(new PropertyFilterSpec[] { propertyFilterSpec }));
 
         for (ObjectContent objectContent : objectContents) {
-            ManagedObjectReference clusterManagedObjectReference = objectContent.getObj();
-            List<DynamicProperty> dynamicProperties = objectContent.getPropSet();
+            ManagedObjectReference clusterManagedObjectReference = objectContent
+                    .getObj();
+            List<DynamicProperty> dynamicProperties = objectContent
+                    .getPropSet();
             for (DynamicProperty dynamicProperty : dynamicProperties) {
                 if (dynamicProperty.getName().equalsIgnoreCase("name")) {
-                    if (dynamicProperty.getVal().toString().equalsIgnoreCase(clusterName)) {
+                    if (dynamicProperty.getVal().toString()
+                            .equalsIgnoreCase(clusterName)) {
                         return clusterManagedObjectReference;
                     }
                 }
             }
         }
-        throw new NotFoundFaultMsg("Cluster Not Found - " + clusterName, new NotFound());
+        throw new NotFoundFaultMsg("Cluster Not Found - " + clusterName,
+                new NotFound());
     }
 
     /**
      * Retrieves the list of hosts of the given cluster.
      *
-     * @param vimPort vimPort
-     * @param serviceContent serviceContent
-     * @param cluster cluster
+     * @param vimPort
+     *            vimPort
+     * @param serviceContent
+     *            serviceContent
+     * @param cluster
+     *            cluster
      * @return the list of hosts of the clusters
      * @throws InvalidPropertyFaultMsg
      * @throws RuntimeFaultFaultMsg
      */
-    public static List<ManagedObjectReference> getHosts(VimPortType vimPort, ServiceContent serviceContent,
-                                                        ManagedObjectReference cluster) throws InvalidPropertyFaultMsg, RuntimeFaultFaultMsg {
+    public static List<ManagedObjectReference> getHosts(VimPortType vimPort,
+            ServiceContent serviceContent, ManagedObjectReference cluster)
+            throws InvalidPropertyFaultMsg, RuntimeFaultFaultMsg {
         PropertySpec hostPropSpec = new PropertySpec();
         hostPropSpec.setType("HostSystem");
         hostPropSpec.setAll(false);
@@ -177,8 +189,9 @@ public class VimUtil {
 
         List<PropertyFilterSpec> listpfs = new ArrayList<>(1);
         listpfs.add(propertyFilterSpec);
-        List<ObjectContent> listObjContent =
-                VimUtil.retrievePropertiesAllObjects(vimPort, serviceContent.getPropertyCollector(), listpfs);
+        List<ObjectContent> listObjContent = VimUtil
+                .retrievePropertiesAllObjects(vimPort,
+                        serviceContent.getPropertyCollector(), listpfs);
 
         List<ManagedObjectReference> hosts = new ArrayList<>();
 
@@ -191,8 +204,8 @@ public class VimUtil {
     }
 
     /**
-     * Retrieves the vm managed object reference for the specified vm name using the vim
-     * port type.
+     * Retrieves the vm managed object reference for the specified vm name using
+     * the vim port type.
      *
      * @param vimPortType
      * @param serviceContent
@@ -202,9 +215,12 @@ public class VimUtil {
      * @throws RuntimeFaultFaultMsg
      * @throws InvalidPropertyFaultMsg
      */
-    public static ManagedObjectReference getVM(VimPortType vimPortType, ServiceContent serviceContent, String vmname)
-            throws NotFoundFaultMsg, InvalidPropertyFaultMsg, RuntimeFaultFaultMsg {
-        ManagedObjectReference propCollectorRef = serviceContent.getPropertyCollector();
+    public static ManagedObjectReference getVM(VimPortType vimPortType,
+            ServiceContent serviceContent, String vmname)
+            throws NotFoundFaultMsg, InvalidPropertyFaultMsg,
+            RuntimeFaultFaultMsg {
+        ManagedObjectReference propCollectorRef = serviceContent
+                .getPropertyCollector();
         ManagedObjectReference rootFolderRef = serviceContent.getRootFolder();
 
         ManagedObjectReference retVmRef = null;
@@ -226,7 +242,8 @@ public class VimUtil {
 
         List<PropertyFilterSpec> listpfs = new ArrayList<PropertyFilterSpec>(1);
         listpfs.add(propertyFilterSpec);
-        List<ObjectContent> listobjcont = retrievePropertiesAllObjects(vimPortType, propCollectorRef, listpfs);
+        List<ObjectContent> listobjcont = retrievePropertiesAllObjects(
+                vimPortType, propCollectorRef, listpfs);
 
         if (listobjcont != null) {
             for (ObjectContent oc : listobjcont) {
@@ -245,7 +262,8 @@ public class VimUtil {
             }
         }
         if (retVmRef == null) {
-            throw new NotFoundFaultMsg("VM Not Found - " + vmname, new NotFound());
+            throw new NotFoundFaultMsg("VM Not Found - " + vmname,
+                    new NotFound());
         }
         return retVmRef;
     }
@@ -312,13 +330,14 @@ public class VimUtil {
     public static List<ObjectContent> retrievePropertiesAllObjects(
             VimPortType vimPort, ManagedObjectReference propCollectorRef,
             List<PropertyFilterSpec> listpfs)
-                    throws InvalidPropertyFaultMsg, RuntimeFaultFaultMsg {
+            throws InvalidPropertyFaultMsg, RuntimeFaultFaultMsg {
         RetrieveOptions propObjectRetrieveOpts = new RetrieveOptions();
         List<ObjectContent> listobjcontent = new ArrayList<ObjectContent>();
 
-        RetrieveResult rslts =
-                vimPort.retrievePropertiesEx(propCollectorRef, listpfs, propObjectRetrieveOpts);
-        if (rslts != null && rslts.getObjects() != null && !rslts.getObjects().isEmpty()) {
+        RetrieveResult rslts = vimPort.retrievePropertiesEx(propCollectorRef,
+                listpfs, propObjectRetrieveOpts);
+        if (rslts != null && rslts.getObjects() != null
+                && !rslts.getObjects().isEmpty()) {
             listobjcontent.addAll(rslts.getObjects());
         }
         String token = null;
@@ -326,11 +345,13 @@ public class VimUtil {
             token = rslts.getToken();
         }
         while (token != null && !token.isEmpty()) {
-            rslts = vimPort.continueRetrievePropertiesEx(propCollectorRef, token);
+            rslts = vimPort.continueRetrievePropertiesEx(propCollectorRef,
+                    token);
             token = null;
             if (rslts != null) {
                 token = rslts.getToken();
-                if (rslts.getObjects() != null && !rslts.getObjects().isEmpty()) {
+                if (rslts.getObjects() != null
+                        && !rslts.getObjects().isEmpty()) {
                     listobjcontent.addAll(rslts.getObjects());
                 }
             }
@@ -342,9 +363,11 @@ public class VimUtil {
     /**
      * Getting the MOREF of the entity.
      */
-    public static ManagedObjectReference getEntityByName(VimPortType vimPortType, ServiceContent serviceContent,
+    public static ManagedObjectReference getEntityByName(
+            VimPortType vimPortType, ServiceContent serviceContent,
             String entityName, String entityType) {
-        ManagedObjectReference propCollectorRef = serviceContent.getPropertyCollector();
+        ManagedObjectReference propCollectorRef = serviceContent
+                .getPropertyCollector();
         ManagedObjectReference rootFolderRef = serviceContent.getRootFolder();
         ManagedObjectReference retVal = null;
 
@@ -361,14 +384,17 @@ public class VimUtil {
             objectSpec.setSkip(Boolean.TRUE);
             objectSpec.getSelectSet().addAll(Arrays.asList(buildTraversal()));
 
-            // Create PropertyFilterSpec using the PropertySpec and ObjectPec created above.
+            // Create PropertyFilterSpec using the PropertySpec and ObjectPec
+            // created above.
             PropertyFilterSpec propertyFilterSpec = new PropertyFilterSpec();
             propertyFilterSpec.getPropSet().add(propertySpec);
             propertyFilterSpec.getObjectSet().add(objectSpec);
 
-            List<PropertyFilterSpec> listpfs = new ArrayList<PropertyFilterSpec>(1);
+            List<PropertyFilterSpec> listpfs =
+                    new ArrayList<PropertyFilterSpec>(1);
             listpfs.add(propertyFilterSpec);
-            List<ObjectContent> listobjcont = retrievePropertiesAllObjects(vimPortType, propCollectorRef, listpfs);
+            List<ObjectContent> listobjcont = retrievePropertiesAllObjects(
+                    vimPortType, propCollectorRef, listpfs);
             if (listobjcont != null) {
                 for (ObjectContent oc : listobjcont) {
                     if (oc.getPropSet().get(0).getVal().equals(entityName)) {
@@ -396,8 +422,9 @@ public class VimUtil {
      * @throws InvalidPropertyFaultMsg
      */
     public static List<DynamicProperty> getProperties(VimPortType vimPort,
-            ServiceContent serviceContent, ManagedObjectReference moRef, String type,
-            List<String> properties) throws RuntimeFaultFaultMsg, InvalidPropertyFaultMsg {
+            ServiceContent serviceContent, ManagedObjectReference moRef,
+            String type, List<String> properties)
+            throws RuntimeFaultFaultMsg, InvalidPropertyFaultMsg {
         // Create Property Spec
         PropertySpec propertySpec = new PropertySpec();
         propertySpec.setAll(false);
@@ -409,15 +436,17 @@ public class VimUtil {
         objectSpec.setObj(moRef);
         objectSpec.setSkip(false);
 
-        // Create PropertyFilterSpec using the PropertySpec and ObjectPec created above.
+        // Create PropertyFilterSpec using the PropertySpec and ObjectPec
+        // created above.
         PropertyFilterSpec propertyFilterSpec = new PropertyFilterSpec();
         propertyFilterSpec.getPropSet().add(propertySpec);
         propertyFilterSpec.getObjectSet().add(objectSpec);
 
         List<PropertyFilterSpec> listpfs = new ArrayList<PropertyFilterSpec>(1);
         listpfs.add(propertyFilterSpec);
-        List<ObjectContent> listobjcontent =
-                VimUtil.retrievePropertiesAllObjects(vimPort, serviceContent.getPropertyCollector(), listpfs);
+        List<ObjectContent> listobjcontent = VimUtil
+                .retrievePropertiesAllObjects(vimPort,
+                        serviceContent.getPropertyCollector(), listpfs);
         assert listobjcontent != null && listobjcontent.size() > 0;
         ObjectContent contentObj = listobjcontent.get(0);
         List<DynamicProperty> objList = contentObj.getPropSet();
@@ -459,30 +488,31 @@ public class VimUtil {
         sspecarrvf.add(sspecvfolders);
 
         visitFolders.getSelectSet().addAll(sspecarrvf);
-        return new SelectionSpec[]{visitFolders};
+        return new SelectionSpec[] { visitFolders };
     }
 
     /**
      * Deletes a managed object and waits for the delete operation to complete
+     * 
      * @param vimPort
      * @param serviceContent
      * @param mor
      */
-    public static boolean deleteManagedEntity(VimPortType vimPort, ServiceContent serviceContent,
-            ManagedObjectReference mor) {
-        WaitForValues waitForValues = new WaitForValues(vimPort, serviceContent);
+    public static boolean deleteManagedEntity(VimPortType vimPort,
+            ServiceContent serviceContent, ManagedObjectReference mor) {
+        WaitForValues waitForValues = new WaitForValues(vimPort,
+                serviceContent);
         System.out.println("Deleting : [" + mor.getValue() + "]");
         try {
             ManagedObjectReference taskmor = vimPort.destroyTask(mor);
             if (waitForValues.getTaskResultAfterDone(taskmor)) {
                 System.out.println("Successful delete of Managed Entity - ["
-                                   + mor.getValue() + "]"
-                                   + " and Entity Type - [" + mor.getType()
-                                   + "]");
+                        + mor.getValue() + "]" + " and Entity Type - ["
+                        + mor.getType() + "]");
                 return true;
             } else {
-                System.out.println("Unable to delete : [" + mor.getValue()
-                                   + "]");
+                System.out
+                        .println("Unable to delete : [" + mor.getValue() + "]");
                 return false;
             }
         } catch (Exception e) {
@@ -492,24 +522,27 @@ public class VimUtil {
         }
     }
 
-    public static boolean createSnapshot(VimPortType vimPort, ServiceContent serviceContent,
-            ManagedObjectReference vmMor, String snapshotname, String description) {
-        WaitForValues waitForValues = new WaitForValues(vimPort, serviceContent);
+    public static boolean createSnapshot(VimPortType vimPort,
+            ServiceContent serviceContent, ManagedObjectReference vmMor,
+            String snapshotname, String description) {
+        WaitForValues waitForValues = new WaitForValues(vimPort,
+                serviceContent);
         System.out.println("Taking snapshot : [" + snapshotname + "]");
         try {
-            ManagedObjectReference taskMor = vimPort.createSnapshotTask(vmMor, snapshotname, description, false, false);
+            ManagedObjectReference taskMor = vimPort.createSnapshotTask(vmMor,
+                    snapshotname, description, false, false);
             if (waitForValues.getTaskResultAfterDone(taskMor)) {
                 System.out.println("Snapshot - [" + snapshotname
-                                   + "] Creation Successful");
+                        + "] Creation Successful");
                 return true;
             } else {
-                System.out.println("Snapshot - [" + snapshotname
-                                   + "] Creation Failed");
+                System.out.println(
+                        "Snapshot - [" + snapshotname + "] Creation Failed");
                 return false;
             }
         } catch (Exception e) {
-            System.out.println("Snapshot - [" + snapshotname
-                               + "] Creation Failed");
+            System.out.println(
+                    "Snapshot - [" + snapshotname + "] Creation Failed");
             System.out.println("Reason :" + e.getLocalizedMessage());
             return false;
         }

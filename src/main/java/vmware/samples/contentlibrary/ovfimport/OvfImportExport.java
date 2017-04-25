@@ -29,10 +29,12 @@ import vmware.samples.contentlibrary.helpers.ItemDownloadHelper;
 import vmware.samples.contentlibrary.helpers.ItemUploadHelper;
 
 /**
- * Description: Demonstrates the workflow to import an OVF package into the content library.
+ * Description: Demonstrates the workflow to import an OVF package into the 
+ * content library.
  *
  * Author: VMware, Inc.
- * Sample Prerequisites: The sample needs an existing content library to place the library item.
+ * Sample Prerequisites: The sample needs an existing content library to place
+ * the library item.
  */
 public class OvfImportExport extends SamplesAbstractBase {
 
@@ -140,7 +142,8 @@ public class OvfImportExport extends SamplesAbstractBase {
         if (this.libItem != null) {
             // Delete the library item
             this.client.itemService().delete(this.libItem.getId());
-            System.out.println("Deleted library item : " + this.libItem.getId());
+            System.out.println("Deleted library item : "
+                + this.libItem.getId());
         }
     }
 

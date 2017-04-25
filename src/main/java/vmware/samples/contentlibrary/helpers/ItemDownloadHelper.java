@@ -45,14 +45,17 @@ public class ItemDownloadHelper {
      * @return
      */
     public static void performDownload(DownloadSession downloadService,
-            File downloadFileService, Item libItemService, String libraryItemId, java.io.File dir) {
-        System.out.println("Download start for Library Item : " + libraryItemId + " Name : "
-                + libItemService.get(libraryItemId).getName());
+            File downloadFileService, Item libItemService, String libraryItemId,
+            java.io.File dir) {
+        System.out.println("Download start for Library Item : " + libraryItemId
+                + " Name : " + libItemService.get(libraryItemId).getName());
         String downloadSessionId = null;
         try {
             // create download session
-            downloadSessionId = createDownloadSession(downloadService, libraryItemId, UUID.randomUUID().toString());
-            downloadFiles(downloadService, downloadFileService, downloadSessionId, dir);
+            downloadSessionId = createDownloadSession(downloadService,
+                    libraryItemId, UUID.randomUUID().toString());
+            downloadFiles(downloadService, downloadFileService,
+                    downloadSessionId, dir);
             // delete the download session.
         } finally {
             downloadService.delete(downloadSessionId);
@@ -68,30 +71,37 @@ public class ItemDownloadHelper {
      * @param dir
      * @return
      */
-    private static void downloadFiles(DownloadSession downloadService, File downloadFileService,
-            String sessionId, java.io.File dir) {
+    private static void downloadFiles(DownloadSession downloadService,
+            File downloadFileService, String sessionId, java.io.File dir) {
         HttpClient httpClient = new HttpClient(true);
-        List<FileTypes.Info> downloadFileInfos =
-                downloadFileService.list(sessionId);
+        List<FileTypes.Info> downloadFileInfos = downloadFileService
+                .list(sessionId);
         for (FileTypes.Info downloadFileInfo : downloadFileInfos) {
-            prepareForDownload(downloadService, downloadFileService, sessionId, downloadFileInfo);
+            prepareForDownload(downloadService, downloadFileService, sessionId,
+                    downloadFileInfo);
             // Do a get after file is prepared for download.
-            downloadFileInfo = downloadFileService.get(sessionId, downloadFileInfo.getName());
+            downloadFileInfo = downloadFileService.get(sessionId,
+                    downloadFileInfo.getName());
             // Download the file
             System.out.println("Download File Info : " + downloadFileInfo);
             try {
-                URI downloadUri = downloadFileInfo.getDownloadEndpoint().getUri();
+                URI downloadUri = downloadFileInfo.getDownloadEndpoint()
+                        .getUri();
                 String downloadUrl = downloadUri.toURL().toString();
                 System.out.println("Download from URL : " + downloadUrl);
                 InputStream inputStream = httpClient.downloadFile(downloadUrl);
                 String fileName = downloadFileInfo.getName();
-                downloadFile(inputStream, dir.getAbsolutePath() + System.getProperty("file.separator") + fileName);
+                downloadFile(inputStream, dir.getAbsolutePath()
+                        + System.getProperty("file.separator") + fileName);
             } catch (MalformedURLException e) {
-                System.out.println("Failed to download due to IOException!" + e);
-                throw new RuntimeException("Failed to download due to IOException!", e);
+                System.out
+                        .println("Failed to download due to IOException!" + e);
+                throw new RuntimeException(
+                        "Failed to download due to IOException!", e);
             } catch (IOException e) {
                 System.out.println("IO exception during download" + e);
-                throw new RuntimeException("Failed to download due to IOException!", e);
+                throw new RuntimeException(
+                        "Failed to download due to IOException!", e);
             }
         }
     }
@@ -104,13 +114,20 @@ public class ItemDownloadHelper {
      * @param sessionId
      * @param downloadFileInfo
      */
-    private static void prepareForDownload(DownloadSession downloadService, File downloadFileService,
-            String sessionId, FileTypes.Info downloadFileInfo) {
-        System.out.println("Download File name : " + downloadFileInfo.getName());
-        System.out.println("Download File Prepare Status : " + downloadFileInfo.getStatus());
-        downloadFileService.prepare(sessionId, downloadFileInfo.getName(), EndpointType.HTTPS);
-        waitForDownloadFileReady(downloadService, downloadFileService, sessionId, downloadFileInfo.getName(),
-                com.vmware.content.library.item.downloadsession.File.PrepareStatus.PREPARED, SESSION_FILE_TIMEOUT);
+    private static void prepareForDownload(DownloadSession downloadService,
+            File downloadFileService, String sessionId,
+            FileTypes.Info downloadFileInfo) {
+        System.out
+                .println("Download File name : " + downloadFileInfo.getName());
+        System.out.println("Download File Prepare Status : "
+                + downloadFileInfo.getStatus());
+        downloadFileService.prepare(sessionId, downloadFileInfo.getName(),
+                EndpointType.HTTPS);
+        waitForDownloadFileReady(downloadService, downloadFileService,
+                sessionId, downloadFileInfo.getName(),
+                com.vmware.content.library.item.downloadsession.File
+                .PrepareStatus.PREPARED,
+                SESSION_FILE_TIMEOUT);
     }
 
     private static final long SESSION_FILE_TIMEOUT = 360;
@@ -125,8 +142,9 @@ public class ItemDownloadHelper {
      * @param timeOut
      * @param expectedStatus
      */
-    private static void waitForDownloadFileReady(DownloadSession downloadService,
-            File downloadFileService, String sessionId, String fileName,
+    private static void waitForDownloadFileReady(
+            DownloadSession downloadService, File downloadFileService,
+            String sessionId, String fileName,
             FileTypes.PrepareStatus expectedStatus, long timeOut) {
         Long endTime = System.currentTimeMillis() + timeOut * 1000;
         try {
@@ -145,18 +163,23 @@ public class ItemDownloadHelper {
                 System.out.println("Current Status : " + currentStatus);
                 if (currentStatus == expectedStatus) {
                     return;
-                } else if (currentStatus == com.vmware.content.library.item.downloadsession.File.PrepareStatus.ERROR) {
-                    System.out.println("DownloadSession Info : " +
-                            downloadService.get(sessionId));
-                    System.out.println("list on the downloadSessionFile : " +
-                            downloadFileService.list(sessionId));
+                } else if (
+                        currentStatus ==
+                        com.vmware.content.library.item.downloadsession.File
+                            .PrepareStatus.ERROR) {
+                    System.out.println("DownloadSession Info : "
+                            + downloadService.get(sessionId));
+                    System.out.println("list on the downloadSessionFile : "
+                            + downloadFileService.list(sessionId));
                     throw new RuntimeException(
-                            "Error while waiting for download file status to be PREPARED...");
+                            "Error while waiting for download file status to "
+                            + "be PREPARED...");
                 }
             }
         }
-        throw new RuntimeException("Timeout waiting for download file status to be PREPARED," +
-                "  status : " + currentStatus.toString());
+        throw new RuntimeException(
+                "Timeout waiting for download file status to be PREPARED,"
+                        + "  status : " + currentStatus.toString());
     }
 
     /**
@@ -167,8 +190,8 @@ public class ItemDownloadHelper {
      * @param clientToken
      * @return
      */
-    private static String createDownloadSession(DownloadSession downloadService, String libraryItemId,
-            String clientToken) {
+    private static String createDownloadSession(DownloadSession downloadService,
+            String libraryItemId, String clientToken) {
         DownloadSessionModel downloadSpec = new DownloadSessionModel();
         downloadSpec.setLibraryItemId(libraryItemId);
         String sessionId = downloadService.create(clientToken, downloadSpec);
@@ -183,7 +206,9 @@ public class ItemDownloadHelper {
      * @return
      * @throws IOException
      */
-    private static void downloadFile(InputStream inputStream, String fullPath) throws IOException {
-        Files.copy(inputStream, Paths.get(fullPath), StandardCopyOption.REPLACE_EXISTING);
+    private static void downloadFile(InputStream inputStream, String fullPath)
+            throws IOException {
+        Files.copy(inputStream, Paths.get(fullPath),
+                StandardCopyOption.REPLACE_EXISTING);
     }
 }

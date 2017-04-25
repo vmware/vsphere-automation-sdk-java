@@ -32,8 +32,8 @@ import vmware.samples.vcenter.helpers.NetworkHelper;
 import vmware.samples.vcenter.helpers.PlacementHelper;
 
 /**
- * Description: Demonstrates how to create a basic VM with following configuration:
- * Basic VM (2 disks, 1 nic)
+ * Description: Demonstrates how to create a basic VM with following 
+ * configuration: Basic VM (2 disks, 1 nic)
  *
  * Author: VMware, Inc.
  * Sample Prerequisites:

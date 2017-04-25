@@ -29,7 +29,8 @@ import vmware.samples.vcenter.helpers.NetworkHelper;
 import vmware.samples.vcenter.helpers.VmHelper;
 
 /**
- * Description: Demonstrates how to configure virtual ethernet adapters of a virtual machine.
+ * Description: Demonstrates how to configure virtual ethernet adapters of a 
+ * virtual machine.
  *
  * Author: VMware, Inc.
  * Sample Prerequisites: The sample needs an existing VM.

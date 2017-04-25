@@ -43,15 +43,18 @@ public class ListVMs extends SamplesAbstractBase {
     }
 
     protected void setup() throws Exception {
-        this.vmService = vapiAuthHelper.getStubFactory().createStub(VM.class, sessionStubConfig);
+        this.vmService =
+                vapiAuthHelper.getStubFactory()
+                    .createStub(VM.class, sessionStubConfig);
     }
 
     protected void run() throws Exception {
-        List<Summary> vmList = this.vmService.list(new VMTypes.FilterSpec.Builder().build());
+        List<Summary> vmList =
+                this.vmService.list(new VMTypes.FilterSpec.Builder().build());
         System.out.println("----------------------------------------");
         System.out.println("List of VMs");
         for (Summary vmSummary : vmList) {
-        	System.out.println(vmSummary);
+            System.out.println(vmSummary);
         }
         System.out.println("----------------------------------------");
     }

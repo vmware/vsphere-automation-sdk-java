@@ -17,6 +17,7 @@ import javax.xml.soap.SOAPException;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 
 import org.oasis_open.docs.wss._2004._01.oasis_200401_wss_wssecurity_secext_1_0.AttributedString;
+import org.oasis_open.docs.wss._2004._01.oasis_200401_wss_wssecurity_secext_1_0.ObjectFactory;
 import org.oasis_open.docs.wss._2004._01.oasis_200401_wss_wssecurity_secext_1_0.PasswordString;
 import org.oasis_open.docs.wss._2004._01.oasis_200401_wss_wssecurity_secext_1_0.UsernameTokenType;
 import org.w3c.dom.DOMException;
@@ -47,8 +48,7 @@ public class UserCredentialHandler extends SSOHeaderHandler {
      * @return UsernameToken
      */
     private final JAXBElement<UsernameTokenType> createUsernameToken() {
-        org.oasis_open.docs.wss._2004._01.oasis_200401_wss_wssecurity_secext_1_0.ObjectFactory objFactory =
-                new org.oasis_open.docs.wss._2004._01.oasis_200401_wss_wssecurity_secext_1_0.ObjectFactory();
+        ObjectFactory objFactory = new ObjectFactory();
 
         UsernameTokenType userNameToken = objFactory.createUsernameTokenType();
         AttributedString user = objFactory.createAttributedString();

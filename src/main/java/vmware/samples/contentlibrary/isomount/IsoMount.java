@@ -28,16 +28,13 @@ import vmware.samples.common.authentication.VapiAuthenticationHelper;
 import vmware.samples.contentlibrary.client.ClsApiClient;
 
 /**
- * Description: Demonstrates the content library ISO item mount and
- * unmount workflow via the mount and unmount APIs from the
- * ISO service.
+ * Description: Demonstrates the content library ISO item mount and unmount
+ * workflow via the mount and unmount APIs from the ISO service.
  *
  * Author: VMware, Inc.
- * Sample Prerequisites: Running this sample requires creation of a VM as well as a library
- * item of type ISO
+ * Sample Prerequisites: Running this sample requires
+ * creation of a VM as well as a library item of type ISO
  */
-
-
 public class IsoMount extends SamplesAbstractBase {
     public static String ISO_TYPE = "iso";
     private String vmName;
@@ -91,7 +88,7 @@ public class IsoMount extends SamplesAbstractBase {
         System.out.println("Mounting ISO item " + this.itemName + " ("
                            + this.itemId + ") on VM " + this.vmName + " ("
                            + this.vmId + ")");
-   }
+    }
 
     private String getVmId(VapiAuthenticationHelper vapiAuthHelper,
                            StubConfiguration sessionStubConfig) {

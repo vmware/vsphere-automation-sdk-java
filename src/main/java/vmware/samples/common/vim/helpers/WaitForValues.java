@@ -49,7 +49,8 @@ public class WaitForValues {
      * This method returns a boolean value specifying whether the Task is
      * succeeded or failed.
      *
-     * @param task ManagedObjectReference representing the Task.
+     * @param task
+     *            ManagedObjectReference representing the Task.
      * @return boolean value representing the Task result.
      * @throws InvalidCollectorVersionFaultMsg
      *
@@ -57,15 +58,16 @@ public class WaitForValues {
      * @throws InvalidPropertyFaultMsg
      */
     public boolean getTaskResultAfterDone(ManagedObjectReference task)
-            throws InvalidPropertyFaultMsg, RuntimeFaultFaultMsg, InvalidCollectorVersionFaultMsg {
+            throws InvalidPropertyFaultMsg, RuntimeFaultFaultMsg,
+            InvalidCollectorVersionFaultMsg {
 
         boolean retVal = false;
 
         // info has a property - state for state of the task
-        Object[] result =
-                wait(task, new String[]{"info.state", "info.error"},
-                        new String[]{"state"}, new Object[][]{new Object[]{
-                        TaskInfoState.SUCCESS, TaskInfoState.ERROR}});
+        Object[] result = wait(task,
+                new String[] { "info.state", "info.error" },
+                new String[] { "state" }, new Object[][] { new Object[] {
+                    TaskInfoState.SUCCESS, TaskInfoState.ERROR } });
 
         if (result[0].equals(TaskInfoState.SUCCESS)) {
             retVal = true;
@@ -81,21 +83,25 @@ public class WaitForValues {
      * Handle Updates for a single object. waits till expected values of
      * properties to check are reached Destroys the ObjectFilter when done.
      *
-     * @param objmor       MOR of the Object to wait for</param>
-     * @param filterProps  Properties list to filter
-     * @param endWaitProps Properties list to check for expected values these be properties
-     *                     of a property in the filter properties list
-     * @param expectedVals values for properties to end the wait
+     * @param objmor
+     *            MOR of the Object to wait for</param>
+     * @param filterProps
+     *            Properties list to filter
+     * @param endWaitProps
+     *            Properties list to check for expected values these be
+     *            properties of a property in the filter properties list
+     * @param expectedVals
+     *            values for properties to end the wait
      * @return true indicating expected values were met, and false otherwise
      * @throws RuntimeFaultFaultMsg
      * @throws InvalidPropertyFaultMsg
      * @throws InvalidCollectorVersionFaultMsg
      *
      */
-    public Object[] wait(
-            ManagedObjectReference objmor,
-            String[] filterProps, String[] endWaitProps, Object[][] expectedVals)
-            throws InvalidPropertyFaultMsg, RuntimeFaultFaultMsg, InvalidCollectorVersionFaultMsg {
+    public Object[] wait(ManagedObjectReference objmor, String[] filterProps,
+            String[] endWaitProps, Object[][] expectedVals)
+            throws InvalidPropertyFaultMsg, RuntimeFaultFaultMsg,
+            InvalidCollectorVersionFaultMsg {
 
         // version string is initially null
         String version = "";
@@ -104,9 +110,8 @@ public class WaitForValues {
 
         PropertyFilterSpec spec = propertyFilterSpec(objmor, filterProps);
 
-        ManagedObjectReference filterSpecRef =
-                vimPort.createFilter(serviceContent.getPropertyCollector(), spec,
-                        true);
+        ManagedObjectReference filterSpecRef = vimPort.createFilter(
+                serviceContent.getPropertyCollector(), spec, true);
 
         boolean reached = false;
 
@@ -115,9 +120,9 @@ public class WaitForValues {
         List<ObjectUpdate> objupary = null;
         List<PropertyChange> propchgary = null;
         while (!reached) {
-            updateset =
-                    vimPort.waitForUpdatesEx(serviceContent.getPropertyCollector(),
-                            version, new WaitOptions());
+            updateset = vimPort.waitForUpdatesEx(
+                    serviceContent.getPropertyCollector(), version,
+                    new WaitOptions());
             if (updateset == null || updateset.getFilterSet() == null) {
                 continue;
             }
@@ -147,7 +152,8 @@ public class WaitForValues {
             // if done.
             // Also exit the WaitForUpdates loop if this is the case.
             for (int chgi = 0; chgi < endVals.length && !reached; chgi++) {
-                for (int vali = 0; vali < expectedVals[chgi].length && !reached; vali++) {
+                for (int vali = 0; vali < expectedVals[chgi].length
+                        && !reached; vali++) {
                     expctdval = expectedVals[chgi][vali];
 
                     reached = expctdval.equals(endVals[chgi]) || reached;
@@ -160,7 +166,8 @@ public class WaitForValues {
         return filterVals;
     }
 
-    private PropertyFilterSpec propertyFilterSpec(ManagedObjectReference objmor, String[] filterProps) {
+    private PropertyFilterSpec propertyFilterSpec(ManagedObjectReference objmor,
+            String[] filterProps) {
         PropertyFilterSpec spec = new PropertyFilterSpec();
         ObjectSpec oSpec = new ObjectSpec();
         oSpec.setObj(objmor);
@@ -174,7 +181,8 @@ public class WaitForValues {
         return spec;
     }
 
-    private void updateValues(String[] props, Object[] vals, PropertyChange propchg) {
+    private void updateValues(String[] props, Object[] vals,
+            PropertyChange propchg) {
         for (int findi = 0; findi < props.length; findi++) {
             if (propchg.getName().lastIndexOf(props[findi]) >= 0) {
                 if (propchg.getOp() == PropertyChangeOp.REMOVE) {

@@ -40,7 +40,8 @@ import vmware.samples.vcenter.helpers.NetworkHelper;
 import vmware.samples.vcenter.helpers.PlacementHelper;
 
 /**
- * Description: Demonstrates how to create a exhaustive VM with the below configuration:
+ * Description: Demonstrates how to create a exhaustive VM with the below 
+ * configuration:
  * 3 disks, 2 nics, 2 vcpu, 2 GB, memory, boot=BIOS, 1 cdrom, 1 serial port,
  * 1 parallel port, 1 floppy, boot_device=[CDROM, DISK, ETHERNET])
  *
@@ -322,7 +323,8 @@ public class CreateExhaustiveVM extends SamplesAbstractBase {
                     .setName(EXHAUSTIVE_VM_NAME)
                     .setNics(Arrays.asList(manualEthernetSpec,
                         generatedEthernetSpec))
-                    .setParallelPorts(Collections.singletonList(parallelCreateSpec))
+                    .setParallelPorts(Collections.singletonList(
+                            parallelCreateSpec))
                     .setPlacement(vmPlacementSpec)
                     .setSerialPorts(Collections.singletonList(serialCreateSpec))
                     .build();

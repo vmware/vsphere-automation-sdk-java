@@ -29,8 +29,9 @@ import vmware.samples.sso.LookupServiceHelper;
 import vmware.samples.sso.SsoHelper;
 
 /**
- * Description: Demonstrates how to create a SSO connection using a SAML Bearer token when
- * we have a vcenter server and external Platform Services Controller.
+ * Description: Demonstrates how to create a SSO connection using a SAML Bearer
+ * token when we have a vcenter server and external Platform Services 
+ * Controller.
  * 
  * Author: VMware, Inc.
  */

@@ -23,6 +23,7 @@ import javax.xml.soap.SOAPException;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 
 import org.oasis_open.docs.wss._2004._01.oasis_200401_wss_wssecurity_utility_1_0.AttributedDateTime;
+import org.oasis_open.docs.wss._2004._01.oasis_200401_wss_wssecurity_utility_1_0.ObjectFactory;
 import org.oasis_open.docs.wss._2004._01.oasis_200401_wss_wssecurity_utility_1_0.TimestampType;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
@@ -53,8 +54,7 @@ public class TimeStampHandler extends SSOHeaderHandler {
      *         date = NOW + REQUEST_VALIDITY_IN_MINUTES
      */
     private JAXBElement<TimestampType> createTimestamp() {
-        org.oasis_open.docs.wss._2004._01.oasis_200401_wss_wssecurity_utility_1_0.ObjectFactory wssuObjFactory =
-                new org.oasis_open.docs.wss._2004._01.oasis_200401_wss_wssecurity_utility_1_0.ObjectFactory();
+        ObjectFactory wssuObjFactory = new ObjectFactory();
 
         TimestampType timestamp = wssuObjFactory.createTimestampType();
 

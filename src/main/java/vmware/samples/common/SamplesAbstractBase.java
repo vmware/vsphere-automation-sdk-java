@@ -160,7 +160,8 @@ public abstract class SamplesAbstractBase {
                 skipServerVerificationOption));
 
             paramsHelper = new ParametersHelper(optionList);
-            this.parsedOptions = paramsHelper.parse(args, this.getClass().getName());
+            this.parsedOptions = paramsHelper.parse(args,
+                    this.getClass().getName());
 
             this.server = (String) parsedOptions.get("server");
             this.username = (String) parsedOptions.get("username");
@@ -417,7 +418,7 @@ public abstract class SamplesAbstractBase {
 
             if (clearData) {
                 // Clean up the sample data
-               cleanup();
+                cleanup();
             }
 
         } finally {

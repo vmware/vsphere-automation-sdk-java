@@ -141,25 +141,25 @@ public class WssHelper {
      * @return Document
      */
     public static final <T> Document marshallJaxbElement(
-        JAXBElement<T> jaxbElement) {
+            JAXBElement<T> jaxbElement) {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         dbf.setNamespaceAware(true);
         Document result = null;
         try {
-            JAXBContext jaxbContext = JAXBContext.newInstance(
-                Constants.WS_1_3_TRUST_JAXB_PACKAGE + ":" + Constants.WSSE_JAXB_PACKAGE
-                                                              + ":"
-                                                              + Constants.WSSU_JAXB_PACKAGE);
+            JAXBContext jaxbContext = JAXBContext
+                    .newInstance(Constants.WS_1_3_TRUST_JAXB_PACKAGE + ":"
+                            + Constants.WSSE_JAXB_PACKAGE + ":"
+                            + Constants.WSSU_JAXB_PACKAGE);
             result = dbf.newDocumentBuilder().newDocument();
             jaxbContext.createMarshaller().marshal(jaxbElement, result);
         } catch (JAXBException jaxbException) {
             jaxbException.printStackTrace();
             throw new RuntimeException(Constants.MARSHALL_EXCEPTION_ERR_MSG,
-                jaxbException);
+                    jaxbException);
         } catch (ParserConfigurationException pce) {
             pce.printStackTrace();
             throw new RuntimeException(Constants.MARSHALL_EXCEPTION_ERR_MSG,
-                pce);
+                    pce);
         }
 
         return result;
@@ -196,12 +196,12 @@ public class WssHelper {
     public static void printToken(Element token) {
         if (isSamlToken(token)) {
             System.out.println("Token details:");
-            System.out.println("\tAssertionId = " + WssHelper.getNodeProperty(token,
-                "ID"));
+            System.out.println("\tAssertionId = "
+                + WssHelper.getNodeProperty(token, "ID"));
             System.out.println("\tToken type = " + (isHoKToken(token)
                     ? "Holder-Of-Key" : "Bearer"));
-            System.out.println("\tIssued On = " + WssHelper.getNodeProperty(token,
-                "IssueInstant"));
+            System.out.println("\tIssued On = "
+                    + WssHelper.getNodeProperty(token, "IssueInstant"));
         } else {
             System.out.println("Invalid token");
         }

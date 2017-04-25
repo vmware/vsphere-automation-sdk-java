@@ -33,11 +33,13 @@ import vmware.samples.contentlibrary.client.ClsApiClient;
 import vmware.samples.contentlibrary.helpers.ItemUploadHelper;
 
 /**
- * Description: Demonstrates content library item content updates using UpdateSession API.
+ * Description: Demonstrates content library item content updates using
+ * UpdateSession API.
  *
  * Author: VMware, Inc.
- * Sample Prerequisites: This sample needs an existing content library to create and update
- * library item.
+ * 
+ * Sample Prerequisites: This sample needs an existing
+ * content library to create and update library item.
  */
 public class ContentUpdate extends SamplesAbstractBase {
 

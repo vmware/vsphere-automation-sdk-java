@@ -24,8 +24,8 @@ import vmware.samples.common.SamplesAbstractBase;
 import vmware.samples.vcenter.helpers.VmHelper;
 
 /**
- * Description: Demonstrates how to configure the settings used when booting a virtual
- * machine.
+ * Description: Demonstrates how to configure the settings used when booting a 
+ * virtual machine.
  *
  * Author: VMware, Inc.
  * Sample Prerequisites: The sample needs an existing VM.

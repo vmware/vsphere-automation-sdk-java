@@ -38,10 +38,12 @@ import vmware.samples.contentlibrary.helpers.ClsApiHelper;
 import vmware.samples.contentlibrary.helpers.ItemUploadHelper;
 
 /**
- * Description: Demonstrates the workflow to publish and subscribe content libraries.
+ * Description: Demonstrates the workflow to publish and subscribe content
+ * libraries.
  *
  * Author: VMware, Inc.
- * Sample Prerequisites: The sample needs an existing VC datastore with available storage
+ * Sample Prerequisites: The sample needs an existing VC datastore with
+ * available storage
  *
  */
 public class LibraryPublishSubscribe extends SamplesAbstractBase {
@@ -112,7 +114,8 @@ public class LibraryPublishSubscribe extends SamplesAbstractBase {
         System.out.println("Published library created : " + this.pubLibId);
         LibraryModel pubLib =
                 this.client.localLibraryService().get(this.pubLibId);
-        System.out.println("Publish URL : " + pubLib.getPublishInfo().getPublishUrl());
+        System.out.println("Publish URL : "
+                + pubLib.getPublishInfo().getPublishUrl());
         createLibraryItem(this.pubLibId, "item 1");
 
         // Build the subscription information using the publish URL of the

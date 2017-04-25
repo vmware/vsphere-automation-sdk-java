@@ -188,9 +188,8 @@ public class SslUtil {
      */
     public static KeyStore loadTrustStore(String filePath, String password)
             throws Exception {
-      KeyStore trustStore = KeyStore.getInstance("JKS");
-      InputStream truststoreStream =
-            new FileInputStream(filePath);
+        KeyStore trustStore = KeyStore.getInstance("JKS");
+        InputStream truststoreStream = new FileInputStream(filePath);
         try {
             trustStore.load(truststoreStream, password.toCharArray());
             return trustStore;
