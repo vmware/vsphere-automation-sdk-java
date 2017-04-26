@@ -7,7 +7,7 @@ This contains a dockerfile to deploy the vSphere Automation SDK for Java and be 
 Install a docker client for your chosen OS and run the following command to build the container directly from this repository:
 
 ```console
-docker build https://github.com/vmware/vsphere-automation-sdk-java.git#docker -t vmware/vsphere-automation-sdk-java
+docker build https://github.com/vmware/vsphere-automation-sdk-java.git#:docker -t vmware/vsphere-automation-sdk-java
 ```
 
 ## Run the Container
