@@ -35,27 +35,35 @@ public class FolderHelper {
      * @param folderName name of the folder
      * @return identifier of a folder
      */
-    public static String getFolder(
-        StubFactory stubFactory, StubConfiguration sessionStubConfig,
-        String datacenterName, String folderName) {
+	public static String getFolder(
+			StubFactory stubFactory, StubConfiguration sessionStubConfig,
+			String datacenterName, String folderName) {
 
-        // Get the datacenter
-        Set<String> datacenters = Collections.singleton(DatacenterHelper
-            .getDatacenter(stubFactory, sessionStubConfig, datacenterName));
+		// Get the folder
+		Folder folderService = stubFactory.createStub(Folder.class,
+				sessionStubConfig);
+		Set<String> vmFolders = Collections.singleton(folderName);
+		FolderTypes.FilterSpec.Builder vmFolderFilterSpecBuilder = 
+				new FolderTypes.FilterSpec.Builder().setNames(vmFolders);
 
-        // Get the folder
-        Folder folderService = stubFactory.createStub(Folder.class,
-            sessionStubConfig);
-        Set<String> vmFolders = Collections.singleton(folderName);
-        FolderTypes.FilterSpec vmFolderFilterSpec =
-                new FolderTypes.FilterSpec.Builder().setNames(vmFolders)
-                    .setDatacenters(datacenters)
-                    .build();
-        List<FolderTypes.Summary> folderSummaries = folderService.list(
-            vmFolderFilterSpec);
-        assert folderSummaries.size() > 0 : "Folder " + folderName
-                                            + "not found in datacenter: "
-                                            + datacenterName;
-        return folderSummaries.get(0).getFolder();
-    }
+		if (null != datacenterName) {
+			// Get the datacenter
+			Set<String> datacenters = Collections
+					.singleton(DatacenterHelper.getDatacenter(stubFactory,
+							sessionStubConfig, datacenterName));
+			vmFolderFilterSpecBuilder.setDatacenters(datacenters);
+		}
+		List<FolderTypes.Summary> folderSummaries = folderService.list(
+				vmFolderFilterSpecBuilder.build());
+
+		assert folderSummaries.size() > 0 : "Folder " + folderName
+		+ " not found in datacenter: "
+		+ datacenterName;
+		return folderSummaries.get(0).getFolder();
+	}
+
+	public static String getFolder(StubFactory stubFactory, StubConfiguration
+			sessionStubConfig, String vmFolderName) {
+		return getFolder(stubFactory, sessionStubConfig, null, vmFolderName);
+	}
 }
