@@ -11,7 +11,7 @@ RUN apt-get -y install vim \
     git
 
 # Clone the project
-RUN git clone https://github.com/vinpai/vsphere-automation-sdk-java.git
+RUN git clone https://github.com/vmware/vsphere-automation-sdk-java.git
 
 # Build the samples
 WORKDIR /work/vsphere-automation-sdk-java/
