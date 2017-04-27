@@ -46,11 +46,13 @@ Before you can run the SDK samples we'll need to walk you through the following 
 The SDK requires maven to build the samples. 
 1. Download the latest maven from <https://maven.apache.org/download.cgi> and extract it to your machine.
 2. Install JDK8 and set JAVA_HOME to the directory where JDK is installed.
-
-   export JAVA_HOME=\<jdk-install-dir\>
+   ```` bash
+   export JAVA_HOME=<jdk-install-dir>
+   ````
 3. Update PATH environment variable to include the maven and jdk "bin" directories.
-
-    export PATH=\<maven-bin-dir\>:$JAVA_HOME/bin:$PATH
+   ```` bash
+   export PATH=<maven-bin-dir>:$JAVA_HOME/bin:$PATH
+   ````
 
 ### Setting up a vSphere Test Environment
 **NOTE:** The samples are intended to be run against a freshly installed **non-Production** vSphere setup as the scripts may make changes to the test environment and in some cases can destroy items when needed.
@@ -64,10 +66,11 @@ Apart from the above, each individual sample may require additional setup. Pleas
 
 ### Building the Samples
 In the root directory of your folder after cloning the repository, run the below maven commands -
+```` bash
+mvn initialize
 
-`mvn initialize`
-
-`mvn clean install`
+mvn clean install
+````
 
 ### Running the Samples
 When running the samples, parameters can be provided either on the command line, in a configuration file (using the --config-file parameter), or a combination of both. The parameter values specified on the command line will override those specified in the configuration file. When using a configuration file, each required parameter for the sample must be specified either in the configuration file or as a command line parameter. Each parameter specified in the configuration file should be in the "key=value" format. For example:
@@ -121,8 +124,9 @@ $java -ea -cp target/vsphere-samples-6.5.0.jar vmware.samples.vcenter.vm.list.Li
 
 ### Importing the samples to eclipse
 To generate the eclipse project files for the samples run the below command
-
-`mvn eclipse:clean eclipse:eclipse`
+```` bash
+mvn eclipse:clean eclipse:eclipse
+````
 
 Once generated, follow below steps to import the project to eclipse:
 1. Go to File -> Import.
