@@ -37,6 +37,7 @@ import vmware.samples.vcenter.helpers.PlacementHelper;
  */
 public class CreateDefaultVM extends SamplesAbstractBase {
     private String vmFolderName;
+    private String vmName;
     private String datastoreName;
     private String datacenterName;
     private String clusterName;
@@ -54,40 +55,49 @@ public class CreateDefaultVM extends SamplesAbstractBase {
     protected void parseArgs(String[] args) {
         Option datacenterOption = Option.builder()
             .longOpt("datacenter")
-            .desc("The name of the datacenter on which to create the vm.")
+            .desc("The name of the datacenter in which to create the vm.")
             .argName("DATACENTER")
             .required(true)
             .hasArg()
             .build();
         Option vmFolderOption = Option.builder()
             .longOpt("vmfolder")
-            .desc("The name of the vm folder on which to create the vm.")
+            .desc("The name of the vm folder in which to create the vm.")
             .argName("VM FOLDER")
             .required(true)
             .hasArg()
             .build();
+        Option vmNameOption = Option.builder()
+                .longOpt("vmname")
+                .desc("OPTIONAL: The name of the vm to be created.")
+                .argName("VMNAME")
+                .required(false)
+                .hasArg()
+                .build();
         Option datastoreOption = Option.builder()
             .longOpt("datastore")
-            .desc("The name of the datastore on which to create the vm")
+            .desc("The name of the datastore in which to create the vm")
             .required(true)
             .argName("DATASTORE")
             .hasArg()
             .build();
         Option clusterOption = Option.builder()
             .longOpt("cluster")
-            .desc("The name of the cluster on which to create the vm.")
+            .desc("The name of the cluster in which to create the vm.")
             .argName("CLUSTER")
             .required(true)
             .hasArg()
             .build();
 
-        List<Option> optionList = Arrays.asList(vmFolderOption,
+        List<Option> optionList = Arrays.asList(vmNameOption,
+            vmFolderOption,
             datastoreOption,
             datacenterOption,
             clusterOption);
 
         super.parseArgs(optionList, args);
         this.vmFolderName = (String) parsedOptions.get("vmfolder");
+        this.vmName = (String) parsedOptions.get("vmname");
         this.datastoreName = (String) parsedOptions.get("datastore");
         this.datacenterName = (String) parsedOptions.get("datacenter");
         this.clusterName = (String) parsedOptions.get("cluster");
@@ -118,9 +128,11 @@ public class CreateDefaultVM extends SamplesAbstractBase {
      * uses all the system provided defaults.
      */
     private void createDefaultVM(VMTypes.PlacementSpec vmPlacementSpec) {
+    	String vmName = (null == this.vmName || this.vmName.isEmpty())?
+    					DEFAULT_VM_NAME :this.vmName;
         VMTypes.CreateSpec vmCreateSpec =
                 new VMTypes.CreateSpec.Builder(this.vmGuestOS)
-                    .setName(DEFAULT_VM_NAME)
+                    .setName(vmName)
                     .setPlacement(vmPlacementSpec)
                     .build();
         System.out.println("\n\n#### Example: Creating Default VM with spec:\n"
