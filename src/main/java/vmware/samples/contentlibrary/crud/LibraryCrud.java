@@ -12,7 +12,7 @@
  */
 package vmware.samples.contentlibrary.crud;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
@@ -58,11 +58,21 @@ public class LibraryCrud extends SamplesAbstractBase {
             .desc("The name of the VC datastore to be used for the local "
                   + "library.")
             .build();
+        Option libNameOption = Option.builder()
+                .longOpt("contentlibraryname")
+                .desc("OPTIONAL: The name of the local content library "
+                      + "to be created.")
+                .required(false)
+                .hasArg()
+                .argName("CONTENT LIBRARY")
+                .build();
 
-        List<Option> optionList = new ArrayList<Option>();
-        optionList.add(dsNameOption);
+        List<Option> optionList = Arrays.asList(dsNameOption, libNameOption);
         super.parseArgs(optionList, args);
         this.dsName = (String) parsedOptions.get("datastore");
+        String tmpLibName = (String) parsedOptions.get("contentlibraryname");
+        this.libName = (null == tmpLibName || tmpLibName.isEmpty())
+        		? this.libName:tmpLibName;
     }
 
     protected void setup() throws Exception {
@@ -74,28 +84,16 @@ public class LibraryCrud extends SamplesAbstractBase {
         // List of visible content libraries
         List<String> visibleCls = client.localLibraryService().list();
         System.out.println("All libraries : " + visibleCls);
-
-        // Retrieve the MoRef of a VC datastore using VIM APIs
-        ManagedObjectReference dsMoref = VimUtil.getEntityByName(
-            this.vimAuthHelper.getVimPort(),
-            this.vimAuthHelper.getServiceContent(),
-            this.dsName,
-            "Datastore");
-        assert dsMoref != null;
-        System.out.println("Datastore MoRef : " + dsMoref.getType() + " : "
-                           + dsMoref.getValue());
-
-        // Build the storage backing for the library to be created
-        StorageBacking storage = new StorageBacking();
-        storage.setType(StorageBacking.Type.DATASTORE);
-        storage.setDatastoreId(dsMoref.getValue());
-
+    	//Build the storage backing for the libraries to be created
+        StorageBacking storageBacking = createStorageBacking();
+        
         // Build the specification for the library to be created
         LibraryModel createSpec = new LibraryModel();
         createSpec.setName(this.libName);
         createSpec.setDescription("Local library backed by VC datastore");
         createSpec.setType(LibraryModel.LibraryType.LOCAL);
-        createSpec.setStorageBackings(Collections.singletonList(storage));
+        createSpec.setStorageBackings(Collections.
+                singletonList(storageBacking));
 
         // Create a local content library backed the VC datastore using vAPIs
         String clientToken = UUID.randomUUID().toString();
@@ -113,13 +111,36 @@ public class LibraryCrud extends SamplesAbstractBase {
         this.client.localLibraryService().update(libraryId, updateSpec);
         System.out.println("Updated library description");
     }
+    /**
+     * Creates a datastore storage backing.
+     *
+     * @return the storage backing
+     */
+    private StorageBacking createStorageBacking() {
+    	
+        // Retrieve the MoRef of a VC datastore using VIM APIs
+        ManagedObjectReference dsMoref = VimUtil.getEntityByName(
+            this.vimAuthHelper.getVimPort(),
+            this.vimAuthHelper.getServiceContent(),
+            this.dsName,
+            "Datastore");
+        assert dsMoref != null : "data store '"+this.dsName+"' not found";
+        System.out.println("Datastore MoRef : " + dsMoref.getType() + " : "
+                           + dsMoref.getValue());
 
+        //Build the storage backing with the datastore MoRef
+        StorageBacking storageBacking = new StorageBacking();
+        storageBacking.setType(StorageBacking.Type.DATASTORE);
+        storageBacking.setDatastoreId(dsMoref.getValue());
+        return storageBacking;
+    }
     protected void cleanup() throws Exception {
         if (localLibrary != null) {
             // Delete the content library
-            this.client.localLibraryService().delete(this.localLibrary.getId());
-            System.out.println("Deleted library : " + this.localLibrary
-                .getId());
+            this.client.localLibraryService().
+            		delete(this.localLibrary.getId());
+            System.out.println("Deleted Local Content Library : " 
+                    + this.localLibrary.getId());
         }
     }
 

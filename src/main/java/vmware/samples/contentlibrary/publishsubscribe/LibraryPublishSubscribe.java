@@ -229,7 +229,7 @@ public class LibraryPublishSubscribe extends SamplesAbstractBase {
             this.vimAuthHelper.getServiceContent(),
             this.dsName,
             "Datastore");
-        assert dsMoref != null;
+        assert dsMoref != null : "data store '"+this.dsName+"' not found";
         System.out.println("Datastore MoRef : " + dsMoref.getType() + " : "
                            + dsMoref.getValue());
 
