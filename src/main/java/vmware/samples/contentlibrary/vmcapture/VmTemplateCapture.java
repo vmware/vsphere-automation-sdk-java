@@ -94,17 +94,9 @@ public class VmTemplateCapture extends SamplesAbstractBase {
                 sessionStubConfig);
     }
 
-    protected void run() throws Exception {
-        // Retrieve the MoRef of a VC datastore using VIM APIs
-        ManagedObjectReference dsMoref = VimUtil.getEntityByName(
-                this.vimAuthHelper.getVimPort(),
-                this.vimAuthHelper.getServiceContent(), this.dataStoreName,
-                "Datastore");
-        assert dsMoref != null;
-        System.out.println("Datastore MoRef : " + dsMoref.getType() + " : "
-                + dsMoref.getValue());
+    protected void run() throws Exception {        
         // Create content library.
-        this.libraryId = createLocalLib(dsMoref);
+        this.libraryId = createLocalLib();
 
         // Capture the vm to content library.
         captureVM(this.libraryId);
@@ -154,20 +146,32 @@ public class VmTemplateCapture extends SamplesAbstractBase {
             System.out.println("The vm capture to content library failed");
         }
     }
+    private StorageBacking createStorageBacking() {
+    	// Retrieve the MoRef of a VC datastore using VIM APIs
+        ManagedObjectReference dsMoref = VimUtil.getEntityByName(
+                this.vimAuthHelper.getVimPort(),
+                this.vimAuthHelper.getServiceContent(), this.dataStoreName,
+                "Datastore");
+        assert dsMoref != null : "data store '"
+                +this.dataStoreName+"' not found";
+        System.out.println("Datastore MoRef : " + dsMoref.getType() + " : "
+                           + dsMoref.getValue());
 
+        //Build the storage backing with the datastore MoRef
+        StorageBacking storageBacking = new StorageBacking();
+        storageBacking.setType(StorageBacking.Type.DATASTORE);
+        storageBacking.setDatastoreId(dsMoref.getValue());
+        return storageBacking;
+    }
     /**
      * Create Local Library on the input datastore provided.
      *
-     * @param dsMoref
-     *            managed object reference of the datastore
-     * @return the identifier of the created library
-     */
-    private String createLocalLib(ManagedObjectReference dsMoref) {
+     *
+	 * @return the identifier of the created library
+	 */
+    private String createLocalLib() {
         // Build the storage backing for the library to be created
-        StorageBacking storage = new StorageBacking();
-        storage.setType(StorageBacking.Type.DATASTORE);
-        storage.setDatastoreId(dsMoref.getValue());
-
+        StorageBacking storage = createStorageBacking();
         // Build the specification for the library to be created
         LibraryModel createSpec = new LibraryModel();
         createSpec.setName(this.contentLibraryName);

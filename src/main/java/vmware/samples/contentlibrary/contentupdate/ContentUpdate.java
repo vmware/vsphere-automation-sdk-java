@@ -57,8 +57,8 @@ public class ContentUpdate extends SamplesAbstractBase {
     private static final String ISO_ITEM_TWO_ISO_FILE_NAME = "small.iso";
 
     private String libName;
-    private String ovfItemName = "simpleVmTemplate";
-    private String isoItemName = "smallIso";
+    private String ovfItemName = "descriptorovf";
+    private String isoItemName = "smalliso";
     private ClsApiClient client;
 
     private String ovfItemId;

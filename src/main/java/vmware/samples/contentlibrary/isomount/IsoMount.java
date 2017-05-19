@@ -98,6 +98,8 @@ public class IsoMount extends SamplesAbstractBase {
         VMTypes.FilterSpec vmFilterSpec = new VMTypes.FilterSpec.Builder()
                 .setNames(new HashSet<>(Arrays.asList(vmName))).build();
         List<VMTypes.Summary> vmList = vmService.list(vmFilterSpec);
+        assert vmList.size() > 0 : "VM By Name '" + vmName
+                + "' does not exist";
         String vmId = vmList.get(0).getVm();
         return vmId;
     }
@@ -108,7 +110,7 @@ public class IsoMount extends SamplesAbstractBase {
         itemFindSpec.setName(itemName);
         itemFindSpec.setType(ISO_TYPE);
         List<String> isoItemIds = client.itemService().find(itemFindSpec);
-        assert isoItemIds.size() == 1 : "library item on name " + itemName
+        assert isoItemIds.size() == 1 : "library item by name " + itemName
                 + " and type " + ISO_TYPE + " must exist";
         return isoItemIds.get(0);
     }
