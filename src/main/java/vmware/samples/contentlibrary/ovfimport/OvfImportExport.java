@@ -39,7 +39,9 @@ import vmware.samples.contentlibrary.helpers.ItemUploadHelper;
 public class OvfImportExport extends SamplesAbstractBase {
 
     private String libName;
-    private String libItemName = "simpleVmTemplate";
+    private String libFolderName = "simpleVmTemplate";
+    private String libItemName = "descriptor.ovf";
+    private String libVMDKName = "disk-0.vmdk";
     private ClsApiClient client;
     private ItemModel libItem;
 
@@ -84,11 +86,11 @@ public class OvfImportExport extends SamplesAbstractBase {
      */
     protected void run() throws IOException {
         // Get the template's OVF and VMDK files
-        File tempDir = ItemUploadHelper.createTempDir("simpleVmTemplate");
+        File tempDir = ItemUploadHelper.createTempDir(libFolderName);
         String ovfFile = ItemUploadHelper.copyResourceToFile(
-            "simpleVmTemplate/descriptor.ovf", tempDir, "descriptor.ovf");
+                libFolderName+"/"+libItemName, tempDir, libItemName);
         String vmdkFile = ItemUploadHelper.copyResourceToFile(
-            "simpleVmTemplate/disk-0.vmdk", tempDir, "disk-0.vmdk");
+                libFolderName+"/"+libVMDKName, tempDir, libVMDKName);
         System.out.println("OVF Path : " + ovfFile);
         System.out.println("VMDK Path : " + vmdkFile);
 
@@ -103,7 +105,7 @@ public class OvfImportExport extends SamplesAbstractBase {
 
         // Build the specification for the library item to be created
         ItemModel createSpec = new ItemModel();
-        createSpec.setName(this.libItemName);
+        createSpec.setName(this.libFolderName);
         createSpec.setLibraryId(libraryId);
         createSpec.setType("ovf");
 
@@ -125,7 +127,7 @@ public class OvfImportExport extends SamplesAbstractBase {
             + this.client.storageService().list(this.libItem.getId()));
 
         // Download the template files from the library item into a folder
-        File downloadDir = ItemUploadHelper.createTempDir("simpleVmTemplate");
+        File downloadDir = ItemUploadHelper.createTempDir(libFolderName);
         ItemDownloadHelper.performDownload(
             this.client.downloadSessionService(),
             this.client.downloadSessionFileService(),
