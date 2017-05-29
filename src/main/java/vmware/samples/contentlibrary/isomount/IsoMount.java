@@ -98,6 +98,8 @@ public class IsoMount extends SamplesAbstractBase {
         VMTypes.FilterSpec vmFilterSpec = new VMTypes.FilterSpec.Builder()
                 .setNames(new HashSet<>(Arrays.asList(vmName))).build();
         List<VMTypes.Summary> vmList = vmService.list(vmFilterSpec);
+        assert vmList.size() > 0 : "VM By Name '" + vmName
+                + "' does not exist";
         String vmId = vmList.get(0).getVm();
         return vmId;
     }
