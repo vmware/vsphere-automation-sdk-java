@@ -110,7 +110,7 @@ public class IsoMount extends SamplesAbstractBase {
         itemFindSpec.setName(itemName);
         itemFindSpec.setType(ISO_TYPE);
         List<String> isoItemIds = client.itemService().find(itemFindSpec);
-        assert isoItemIds.size() == 1 : "library item on name " + itemName
+        assert isoItemIds.size() == 1 : "library item by name " + itemName
                 + " and type " + ISO_TYPE + " must exist";
         return isoItemIds.get(0);
     }
