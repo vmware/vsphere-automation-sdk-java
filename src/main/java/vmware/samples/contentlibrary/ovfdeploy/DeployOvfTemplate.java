@@ -60,11 +60,9 @@ public class DeployOvfTemplate extends SamplesAbstractBase {
      */
     protected void parseArgs(String[] args) {
         // Parse the command line options or use config file
-        Option clusterNameOption = Option.builder()
+        Option clusNameOption = Option.builder()
             .longOpt("clustername")
-            .desc("The name of the VM to be created in the cluster. "
-                  + "Defaults to a generated VM name based on the current "
-                  + "date if not specified")
+            .desc("Name of the Cluster in which VM would be created")
             .required(true)
             .hasArg()
             .argName("CLUSTER")
@@ -79,12 +77,23 @@ public class DeployOvfTemplate extends SamplesAbstractBase {
             .hasArg()
             .argName("CONTENT LIBRARY")
             .build();
+        
+        Option vmNameOption = Option.builder()
+                .longOpt("vmname")
+                .desc("OPTIONAL: The name of the VM to be created in "
+                	  + "the cluster. Defaults to a generated VM name "
+                	  + "based on the current date if not specified")
+                .required(false)
+                .hasArg()
+                .argName("VM NAME")
+                .build();
 
-        List<Option> optionList = Arrays.asList(clusterNameOption,
+        List<Option> optionList = Arrays.asList(clusNameOption, vmNameOption,
             libItemNameOption);
         super.parseArgs(optionList, args);
         this.clusterName = (String) parsedOptions.get("clustername");
         this.libItemName = (String) parsedOptions.get("libitemname");
+        this.vmName =  (String) parsedOptions.get("vmname");
     }
 
     protected void setup() throws Exception {
@@ -106,7 +115,8 @@ public class DeployOvfTemplate extends SamplesAbstractBase {
                 VimUtil.getCluster(this.vimAuthHelper.getVimPort(),
                     this.vimAuthHelper.getServiceContent(),
                     this.clusterName);
-        assert clusterMoRef != null;
+        assert clusterMoRef != null : "Cluster by name " + this.clusterName
+                +" must exist";
         System.out.println("Cluster MoRef : " + clusterMoRef.getType() + " : "
                            + clusterMoRef.getValue());
 
