@@ -32,8 +32,9 @@ vSphere Automation and vSphere Web Service APIs. The samples have been developed
 JDK 1.8.
 
 ## Supported vCenter Releases:
-vCenter 6.0 and 6.5. 
-Certain APIs and samples that are introduced in 6.5 release, such as vCenter, Virtual Machine and Appliance Management. Please refer to the notes in each sample for detailed compatibility information. 
+vCenter 6.0, 6.5 and vCenter 6.6.1 for VMware Cloud 1.1.
+
+Please refer to the notes in each sample for detailed compatibility information. 
 
 ## Quick Start Guide
 This document will walk you through getting up and running with the Java SDK Samples. Prior to running the samples you will need to setup a vCenter test environment and install maven, the following steps will take you through this process.
@@ -134,8 +135,16 @@ Once generated, follow below steps to import the project to eclipse:
 3. Select the root directory as the directory where the samples are located.
 4. Click Finish
 
+### Adding a new sample
+Once the eclipse project is imported, follow below steps to add a new sample using the sample template:
+1. Right click on the project and select New -> Package. Specify a package name in the wizard and click Finish.
+2. Right click on the newly created package and click Import -> General -> File System. In the dialog box, click "Browse" and select the "sample-template" folder in the root directory.
+3. Select the "SampleClass" in the dialog box and click finish.
+
+This will import a basic sample class to your package, which you can then customize according to your needs.
+
 ## API Documentation
-The API documentation can be downloaded from [here](doc/client.zip).
+The API documentation can be downloaded from [here](doc/docs.zip).
 
 Online version of the API documentation can be found [here](https://code.vmware.com/web/dp/doc/preview?id=4642).
 
