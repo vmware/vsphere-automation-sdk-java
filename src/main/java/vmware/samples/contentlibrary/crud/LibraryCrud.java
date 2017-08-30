@@ -117,10 +117,8 @@ public class LibraryCrud extends SamplesAbstractBase {
      * @return the storage backing
      */
     private StorageBacking createStorageBacking() {
-  	
     	this.dsId = DatastoreHelper.getDatastore(this.vapiAuthHelper.
-    			getStubFactory(), sessionStubConfig, this.dsName);
-
+            getStubFactory(), sessionStubConfig, this.dsName);
         //Build the storage backing with the datastore MoRef
         StorageBacking storageBacking = new StorageBacking();
         storageBacking.setType(StorageBacking.Type.DATASTORE);

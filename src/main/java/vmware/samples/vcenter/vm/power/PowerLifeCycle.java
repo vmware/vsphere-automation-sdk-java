@@ -36,7 +36,7 @@ public class PowerLifeCycle extends SamplesAbstractBase{
             .build();
         List<Option> optionList = Collections.singletonList(vmNameOption);
         super.parseArgs(optionList, args);
-        this.vmName =  (String) parsedOptions.get("vmname");        
+        this.vmName =  (String) parsedOptions.get("vmname");
     }
 
     @Override
