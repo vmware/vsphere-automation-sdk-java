@@ -41,12 +41,12 @@ public class PowerLifeCycle extends SamplesAbstractBase{
 
     @Override
     protected void setup() throws Exception {
-        vmId = VmHelper.getVM(vapiAuthHelper.getStubFactory(),
+        this.vmId = VmHelper.getVM(vapiAuthHelper.getStubFactory(),
                 sessionStubConfig,
                 vmName);
         System.out.println("Using VM: " + vmName + " (vmId="
             + this.vmId + " ) for Power Operations sample.");
-        vmPowerService = vapiAuthHelper.getStubFactory().createStub(
+        this.vmPowerService = this.vapiAuthHelper.getStubFactory().createStub(
                 Power.class, this.sessionStubConfig); 
     }
 

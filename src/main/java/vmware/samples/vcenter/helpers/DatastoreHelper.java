@@ -38,24 +38,40 @@ public class DatastoreHelper {
     public static String getDatastore(
         StubFactory stubFactory, StubConfiguration sessionStubConfig,
         String datacenterName, String datastoreName) {
-
-        // Get the datacenter
-        Set<String> datacenters = Collections.singleton(DatacenterHelper
-            .getDatacenter(stubFactory, sessionStubConfig, datacenterName));
-
         // Get the datastore
         Datastore datastoreService = stubFactory.createStub(Datastore.class,
             sessionStubConfig);
         Set<String> datastores = Collections.singleton(datastoreName);
-        DatastoreTypes.FilterSpec datastoreFilterSpec =
-                new DatastoreTypes.FilterSpec.Builder().setNames(datastores)
-                    .setDatacenters(datacenters)
-                    .build();
-        List<DatastoreTypes.Summary> datastoreSummaries = datastoreService.list(
-            datastoreFilterSpec);
-        assert datastoreSummaries.size() > 0 : "Datastore " + datastoreName
-                                               + "not found in datacenter : "
-                                               + datacenterName;
+        List<DatastoreTypes.Summary> datastoreSummaries = null;
+        DatastoreTypes.FilterSpec datastoreFilterSpec = null;
+        if(null != datacenterName) {
+            // Get the datacenter
+            Set<String> datacenters = Collections.singleton(DatacenterHelper
+                .getDatacenter(stubFactory, sessionStubConfig, datacenterName));
+            datastoreFilterSpec =
+                  new DatastoreTypes.FilterSpec.Builder().setNames(datastores)
+                      .setDatacenters(datacenters)
+                      .build();
+            datastoreSummaries = datastoreService.list(
+                 datastoreFilterSpec);
+            assert datastoreSummaries.size() > 0 : "Datastore " + datastoreName
+                                                 + "not found in datacenter : "
+                                                 + datacenterName;
+        }else {
+            datastoreFilterSpec =
+               new DatastoreTypes.FilterSpec.Builder().setNames(datastores)
+                        .build();
+            datastoreSummaries = datastoreService.list(datastoreFilterSpec);
+                assert datastoreSummaries.size() > 0 : 
+                       "Datastore " + datastoreName+ "not found";
+        }
         return datastoreSummaries.get(0).getDatastore();
+    }
+
+    public static String getDatastore(
+            StubFactory stubFactory, StubConfiguration sessionStubConfig,
+            String datastoreName) {
+        return getDatastore(stubFactory, sessionStubConfig,
+                       null, datastoreName);
     }
 }

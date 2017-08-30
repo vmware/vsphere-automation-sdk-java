@@ -21,11 +21,10 @@ import org.apache.commons.cli.Option;
 
 import com.vmware.content.LibraryModel;
 import com.vmware.content.library.StorageBacking;
-import com.vmware.vim25.ManagedObjectReference;
 
 import vmware.samples.common.SamplesAbstractBase;
-import vmware.samples.common.vim.helpers.VimUtil;
 import vmware.samples.contentlibrary.client.ClsApiClient;
+import vmware.samples.vcenter.helpers.DatastoreHelper;
 
 /**
  * Description: Demonstrates the basic operations of a content library. The
@@ -38,6 +37,7 @@ import vmware.samples.contentlibrary.client.ClsApiClient;
 public class LibraryCrud extends SamplesAbstractBase {
 
     private String dsName;
+    private String dsId;
     private String libName = "demo-local-lib";
     private ClsApiClient client;
     private LibraryModel localLibrary;
@@ -117,21 +117,14 @@ public class LibraryCrud extends SamplesAbstractBase {
      * @return the storage backing
      */
     private StorageBacking createStorageBacking() {
-    	
-        // Retrieve the MoRef of a VC datastore using VIM APIs
-        ManagedObjectReference dsMoref = VimUtil.getEntityByName(
-            this.vimAuthHelper.getVimPort(),
-            this.vimAuthHelper.getServiceContent(),
-            this.dsName,
-            "Datastore");
-        assert dsMoref != null : "data store '"+this.dsName+"' not found";
-        System.out.println("Datastore MoRef : " + dsMoref.getType() + " : "
-                           + dsMoref.getValue());
+  	
+    	this.dsId = DatastoreHelper.getDatastore(this.vapiAuthHelper.
+    			getStubFactory(), sessionStubConfig, this.dsName);
 
         //Build the storage backing with the datastore MoRef
         StorageBacking storageBacking = new StorageBacking();
         storageBacking.setType(StorageBacking.Type.DATASTORE);
-        storageBacking.setDatastoreId(dsMoref.getValue());
+        storageBacking.setDatastoreId(this.dsId);
         return storageBacking;
     }
     protected void cleanup() throws Exception {
