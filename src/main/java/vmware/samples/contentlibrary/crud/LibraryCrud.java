@@ -37,7 +37,6 @@ import vmware.samples.vcenter.helpers.DatastoreHelper;
 public class LibraryCrud extends SamplesAbstractBase {
 
     private String dsName;
-    private String dsId;
     private String libName = "demo-local-lib";
     private ClsApiClient client;
     private LibraryModel localLibrary;

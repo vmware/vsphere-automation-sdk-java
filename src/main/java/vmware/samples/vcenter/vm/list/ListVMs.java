@@ -48,7 +48,7 @@ public class ListVMs extends SamplesAbstractBase {
         Option datacenterOption = Option.builder()
                 .longOpt("datacenter")
                 .desc("OPTIONAL: Specify the name of the Datacenter"
-                        + " to list the Vms available in it.")
+                        + " to list the Vms in it.")
                 .argName("DATACENTER")
                 .required(false)
                 .hasArg()
@@ -56,7 +56,7 @@ public class ListVMs extends SamplesAbstractBase {
         Option vmFolderOption = Option.builder()
                 .longOpt("vmfolder")
                 .desc("OPTIONAL: Specify the name of the VM Folder to list the"
-                        + " to list the Vms contained in it.")
+                        + " Vms in it.")
                 .argName("VM FOLDER")
                 .required(false)
                 .hasArg()
@@ -64,7 +64,7 @@ public class ListVMs extends SamplesAbstractBase {
         Option clusterOption = Option.builder()
                 .longOpt("cluster")
                 .desc("OPTIONAL: Specify the name of the Cluster to list the"
-                        + " Vms which are part of it.")
+                        + " Vms in it.")
                 .argName("CLUSTER")
                 .required(false)
                 .hasArg()
