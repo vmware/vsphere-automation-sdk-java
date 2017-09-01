@@ -37,7 +37,6 @@ import vmware.samples.vcenter.helpers.DatastoreHelper;
 public class LibraryCrud extends SamplesAbstractBase {
 
     private String dsName;
-    private String dsId;
     private String libName = "demo-local-lib";
     private ClsApiClient client;
     private LibraryModel localLibrary;
@@ -84,9 +83,10 @@ public class LibraryCrud extends SamplesAbstractBase {
         // List of visible content libraries
         List<String> visibleCls = client.localLibraryService().list();
         System.out.println("All libraries : " + visibleCls);
-    	//Build the storage backing for the libraries to be created
-        StorageBacking storageBacking = createStorageBacking();
-        
+        //Build the storage backing for the libraries to be created
+        StorageBacking storageBacking = DatastoreHelper.createStorageBacking(
+                this.vapiAuthHelper, this.sessionStubConfig, this.dsName );
+
         // Build the specification for the library to be created
         LibraryModel createSpec = new LibraryModel();
         createSpec.setName(this.libName);
@@ -110,20 +110,6 @@ public class LibraryCrud extends SamplesAbstractBase {
         updateSpec.setDescription("new description");
         this.client.localLibraryService().update(libraryId, updateSpec);
         System.out.println("Updated library description");
-    }
-    /**
-     * Creates a datastore storage backing.
-     *
-     * @return the storage backing
-     */
-    private StorageBacking createStorageBacking() {
-    	this.dsId = DatastoreHelper.getDatastore(this.vapiAuthHelper.
-            getStubFactory(), sessionStubConfig, this.dsName);
-        //Build the storage backing with the datastore MoRef
-        StorageBacking storageBacking = new StorageBacking();
-        storageBacking.setType(StorageBacking.Type.DATASTORE);
-        storageBacking.setDatastoreId(this.dsId);
-        return storageBacking;
     }
     protected void cleanup() throws Exception {
         if (localLibrary != null) {

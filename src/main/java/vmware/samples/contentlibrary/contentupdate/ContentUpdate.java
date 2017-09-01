@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -23,8 +24,10 @@ import java.util.UUID;
 import org.apache.commons.cli.Option;
 import org.apache.commons.lang.StringUtils;
 
+import com.vmware.content.LibraryModel;
 import com.vmware.content.LibraryTypes;
 import com.vmware.content.library.ItemModel;
+import com.vmware.content.library.StorageBacking;
 import com.vmware.content.library.item.UpdateSessionModel;
 import com.vmware.content.library.item.updatesession.FileTypes;
 
@@ -79,7 +82,6 @@ public class ContentUpdate extends SamplesAbstractBase {
             .required(true)
             .hasArg()
             .argName("CONTENT LIBRARY")
-
             .build();
 
         List<Option> optionList = Collections.singletonList(libNameOption);
@@ -105,7 +107,16 @@ public class ContentUpdate extends SamplesAbstractBase {
                                        + this.libName;
         String libraryId = libraryIds.get(0);
         System.out.println("Found library : " + libraryId);
-
+        LibraryModel localLibrary = this.client.localLibraryService().
+              get(libraryId);
+        for (Iterator<StorageBacking> iterator = 
+            localLibrary.getStorageBackings().iterator(); iterator
+                .hasNext();) {
+            StorageBacking sbackingtmp = (StorageBacking) iterator.next();
+            System.out.println("The DataStore ID of the"+
+                    " Content Librarby::"
+                    + sbackingtmp.getDatastoreId());
+        }
         // Content update scenario 1:
         // Update OVF library item by creating an update session for the
         // OVF item, removing all existing files in the session, then

@@ -10,17 +10,16 @@ import org.apache.commons.lang.StringUtils;
 import com.vmware.content.LibraryModel;
 import com.vmware.content.LibraryTypes;
 import com.vmware.content.library.StorageBacking;
-import com.vmware.vim25.ManagedObjectReference;
 
 import vmware.samples.common.SamplesAbstractBase;
-import vmware.samples.common.vim.helpers.VimUtil;
 import vmware.samples.contentlibrary.client.ClsApiClient;
+import vmware.samples.vcenter.helpers.DatastoreHelper;
 
 public class ContentLibraryDelete extends SamplesAbstractBase {
 	
     private String dsName;
     private String libName;
-    private ClsApiClient client;    
+    private ClsApiClient client;
     private StorageBacking sbacking;
     
     /**
@@ -61,7 +60,9 @@ public class ContentLibraryDelete extends SamplesAbstractBase {
     	//Get the Storage Backing on the Data Store
     	//Compare it with the Content Library's to Identify
     	//if it that can be deleted. 
-        this.sbacking = getStorageBacking();
+        this.sbacking = DatastoreHelper.createStorageBacking(
+                this.vapiAuthHelper, this.sessionStubConfig,
+                this.dsName );
     }
 
     @Override
@@ -114,37 +115,16 @@ public class ContentLibraryDelete extends SamplesAbstractBase {
         {
             this.client.localLibraryService().delete(libraryId);
             System.out.println("Deleted Content Library : "+libraryId);
+        }else {
+            System.out.println("Can not delete Content Library : "+libraryId);
         }
     }
+
     @Override
-	protected void cleanup() throws Exception {   
+    protected void cleanup() throws Exception {
 
     }
-    
-    /**
-     * Creates a datastore storage backing.
-     *
-     * @return the storage backing
-     */
-    private StorageBacking getStorageBacking() {
 
-        // Retrieve the MoRef of a VC datastore using VIM APIs
-        ManagedObjectReference dsMoref = VimUtil.getEntityByName(
-            this.vimAuthHelper.getVimPort(),
-            this.vimAuthHelper.getServiceContent(),
-            this.dsName,
-            "Datastore");
-        assert dsMoref != null : "data store '"+this.dsName+"' not found";
-        System.out.println("Datastore MoRef : " + dsMoref.getType() + " : "
-                           + dsMoref.getValue());
-
-        //Build the storage backing with the datastore MoRef
-        StorageBacking storageBacking = new StorageBacking();
-        storageBacking.setType(StorageBacking.Type.DATASTORE);
-        storageBacking.setDatastoreId(dsMoref.getValue());
-        return storageBacking;
-    }
-    
     public static void main(String[] args) throws Exception {
         /*
 	     * Execute the sample using the command line arguments or parameters

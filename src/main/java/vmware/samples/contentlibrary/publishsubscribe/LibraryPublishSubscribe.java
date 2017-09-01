@@ -29,13 +29,12 @@ import com.vmware.content.library.ItemModel;
 import com.vmware.content.library.PublishInfo;
 import com.vmware.content.library.StorageBacking;
 import com.vmware.content.library.SubscriptionInfo;
-import com.vmware.vim25.ManagedObjectReference;
 
 import vmware.samples.common.SamplesAbstractBase;
-import vmware.samples.common.vim.helpers.VimUtil;
 import vmware.samples.contentlibrary.client.ClsApiClient;
 import vmware.samples.contentlibrary.helpers.ClsApiHelper;
 import vmware.samples.contentlibrary.helpers.ItemUploadHelper;
+import vmware.samples.vcenter.helpers.DatastoreHelper;
 
 /**
  * Description: Demonstrates the workflow to publish and subscribe content
@@ -60,6 +59,7 @@ public class LibraryPublishSubscribe extends SamplesAbstractBase {
     private ClsApiHelper clsHelper;
     private String pubLibId;
     private String subLibId;
+    private String dsId;
 
     /**
      * Define the options specific to this sample and configure the sample using
@@ -91,7 +91,8 @@ public class LibraryPublishSubscribe extends SamplesAbstractBase {
 
     protected void run() throws Exception {
         // Build the storage backing for the libraries to be created
-        StorageBacking storageBacking = createStorageBacking();
+        StorageBacking storageBacking = DatastoreHelper.createStorageBacking(
+                this.vapiAuthHelper, this.sessionStubConfig, this.dsName );
 
         // Build the authenticated publish information.
         // The username defaults to "vcsp".
@@ -215,29 +216,6 @@ public class LibraryPublishSubscribe extends SamplesAbstractBase {
             this.client.localLibraryService().delete(this.pubLibId);
             System.out.println("Deleted published library : " + this.pubLibId);
         }
-    }
-
-    /**
-     * Creates a datastore storage backing.
-     *
-     * @return the storage backing
-     */
-    private StorageBacking createStorageBacking() {
-        // Retrieve the MoRef of a VC datastore using VIM APIs
-        ManagedObjectReference dsMoref = VimUtil.getEntityByName(
-            this.vimAuthHelper.getVimPort(),
-            this.vimAuthHelper.getServiceContent(),
-            this.dsName,
-            "Datastore");
-        assert dsMoref != null : "data store '"+this.dsName+"' not found";
-        System.out.println("Datastore MoRef : " + dsMoref.getType() + " : "
-                           + dsMoref.getValue());
-
-        // Build the storage backing with the datastore MoRef
-        StorageBacking storageBacking = new StorageBacking();
-        storageBacking.setType(StorageBacking.Type.DATASTORE);
-        storageBacking.setDatastoreId(dsMoref.getValue());
-        return storageBacking;
     }
 
     /**
