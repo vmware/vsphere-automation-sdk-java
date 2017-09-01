@@ -16,10 +16,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import com.vmware.content.library.StorageBacking;
 import com.vmware.vapi.bindings.StubConfiguration;
 import com.vmware.vapi.bindings.StubFactory;
 import com.vmware.vcenter.Datastore;
 import com.vmware.vcenter.DatastoreTypes;
+
+import vmware.samples.common.authentication.VapiAuthenticationHelper;
 
 public class DatastoreHelper {
 
@@ -63,9 +66,11 @@ public class DatastoreHelper {
                         .build();
             datastoreSummaries = datastoreService.list(datastoreFilterSpec);
                 assert datastoreSummaries.size() > 0 : 
-                       "Datastore " + datastoreName+ "not found";
+                       "Datastore " + datastoreName+ " not found";
         }
-        return datastoreSummaries.get(0).getDatastore();
+        return datastoreSummaries.get(
+                datastoreSummaries.size()-1).getDatastore();
+
     }
 
     public static String getDatastore(
@@ -74,4 +79,23 @@ public class DatastoreHelper {
         return getDatastore(stubFactory, sessionStubConfig,
                        null, datastoreName);
     }
+
+    /**
+     * Creates a datastore storage backing.
+     *
+     * @return the storage backing
+     */
+    public static StorageBacking createStorageBacking(
+            VapiAuthenticationHelper vapiAuthHelper,
+            StubConfiguration sessionStubConfig, String dsName ) {
+        String dsId = getDatastore(vapiAuthHelper.getStubFactory(),
+               sessionStubConfig, dsName);
+
+        //Build the storage backing with the datastore Id
+        StorageBacking storageBacking = new StorageBacking();
+        storageBacking.setType(StorageBacking.Type.DATASTORE);
+        storageBacking.setDatastoreId(dsId);
+        return storageBacking;
+    }
+
 }

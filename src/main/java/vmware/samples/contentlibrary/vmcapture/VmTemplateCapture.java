@@ -31,6 +31,7 @@ import com.vmware.vim25.ManagedObjectReference;
 import vmware.samples.common.SamplesAbstractBase;
 import vmware.samples.common.vim.helpers.VimUtil;
 import vmware.samples.contentlibrary.client.ClsApiClient;
+import vmware.samples.vcenter.helpers.DatastoreHelper;
 
 /**
  * Description: Demonstrates the workflow to capture vm to content library as
@@ -146,23 +147,7 @@ public class VmTemplateCapture extends SamplesAbstractBase {
             System.out.println("The vm capture to content library failed");
         }
     }
-    private StorageBacking createStorageBacking() {
-    	// Retrieve the MoRef of a VC datastore using VIM APIs
-        ManagedObjectReference dsMoref = VimUtil.getEntityByName(
-                this.vimAuthHelper.getVimPort(),
-                this.vimAuthHelper.getServiceContent(), this.dataStoreName,
-                "Datastore");
-        assert dsMoref != null : "data store '"
-                +this.dataStoreName+"' not found";
-        System.out.println("Datastore MoRef : " + dsMoref.getType() + " : "
-                           + dsMoref.getValue());
 
-        //Build the storage backing with the datastore MoRef
-        StorageBacking storageBacking = new StorageBacking();
-        storageBacking.setType(StorageBacking.Type.DATASTORE);
-        storageBacking.setDatastoreId(dsMoref.getValue());
-        return storageBacking;
-    }
     /**
      * Create Local Library on the input datastore provided.
      *
@@ -171,7 +156,9 @@ public class VmTemplateCapture extends SamplesAbstractBase {
 	 */
     private String createLocalLib() {
         // Build the storage backing for the library to be created
-        StorageBacking storage = createStorageBacking();
+        StorageBacking storage = DatastoreHelper.createStorageBacking(
+                this.vapiAuthHelper, this.sessionStubConfig,
+                this.dataStoreName);
         // Build the specification for the library to be created
         LibraryModel createSpec = new LibraryModel();
         createSpec.setName(this.contentLibraryName);
