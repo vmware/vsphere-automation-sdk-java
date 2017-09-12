@@ -12,13 +12,13 @@
  */
 package vmware.samples.sso.externalpsc;
 
-import java.security.KeyStore;
 import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.cli.Option;
 
 import com.vmware.vapi.bindings.StubConfiguration;
+import com.vmware.vapi.protocol.HttpConfiguration;
 import com.vmware.vapi.saml.SamlToken;
 import com.vmware.vcenter.Datacenter;
 import com.vmware.vcenter.DatacenterTypes;
@@ -73,7 +73,7 @@ public class ExternalPscSsoWorkflow extends SamplesAbstractBase {
 
         this.vapiAuthHelper = new VapiAuthenticationHelper();
 
-        KeyStore trustStore = setupSslTrustForServer();
+        HttpConfiguration httpConfig = buildHttpConfiguration();
 
         System.out.println("\nStep 1: Connect to the lookup service on the "
                            + "Platform Services Controller node.");
@@ -95,7 +95,7 @@ public class ExternalPscSsoWorkflow extends SamplesAbstractBase {
 
         StubConfiguration sessionStubConfig =
                 this.vapiAuthHelper.loginBySamlBearerToken(this.server,
-                    samlBearerToken, trustStore);
+                    samlBearerToken, httpConfig);
 
         System.out.println("\nStep 5: Perform certain tasks using the vAPI "
                            + "services.");

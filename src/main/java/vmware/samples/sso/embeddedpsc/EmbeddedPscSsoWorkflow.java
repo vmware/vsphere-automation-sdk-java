@@ -12,12 +12,12 @@
  */
 package vmware.samples.sso.embeddedpsc;
 
-import java.security.KeyStore;
 import java.util.Collections;
 
 import org.apache.commons.cli.Option;
 
 import com.vmware.vapi.bindings.StubConfiguration;
+import com.vmware.vapi.protocol.HttpConfiguration;
 import com.vmware.vapi.saml.SamlToken;
 import com.vmware.vcenter.Datacenter;
 import com.vmware.vcenter.DatacenterTypes;
@@ -69,7 +69,7 @@ public class EmbeddedPscSsoWorkflow extends SamplesAbstractBase {
          */
         String ssoUrl = "https://" + this.server + SSO_PATH;
 
-        KeyStore trustStore = setupSslTrustForServer();
+        HttpConfiguration httpConfig = buildHttpConfiguration();
 
         System.out.println("\nStep 1: Connect to the Single Sign-On URL and "
                            + "retrieve the SAML bearer token.");
@@ -81,7 +81,7 @@ public class EmbeddedPscSsoWorkflow extends SamplesAbstractBase {
                            + "SAML bearer token.");
         StubConfiguration sessionStubConfig =
                 this.vapiAuthHelper.loginBySamlBearerToken(this.server,
-                    samlBearerToken, trustStore);
+                    samlBearerToken, httpConfig);
 
         System.out.println("\nStep 3: Perform certain tasks using the vAPI "
                            + "services.");
