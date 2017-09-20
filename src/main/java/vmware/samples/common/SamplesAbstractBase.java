@@ -25,6 +25,7 @@ import org.apache.commons.configuration.ConfigurationException;
 
 import com.vmware.vapi.bindings.StubConfiguration;
 import com.vmware.vapi.protocol.HttpConfiguration;
+import com.vmware.vapi.protocol.HttpConfiguration.KeyStoreConfig;
 import com.vmware.vapi.protocol.HttpConfiguration.SslConfiguration;
 
 import vmware.samples.common.authentication.VapiAuthenticationHelper;
@@ -386,13 +387,15 @@ public abstract class SamplesAbstractBase {
              * the truststorePath
              */
             System.setProperty("javax.net.ssl.trustStore", this.truststorePath);
-
             KeyStore trustStore =
                 SslUtil.loadTrustStore(this.truststorePath,
                 		this.truststorePassword);
+            KeyStoreConfig keyStoreConfig =
+            		new KeyStoreConfig("", this.truststorePassword);
             sslConfig =
             		new SslConfiguration.Builder()
             		.setKeyStore(trustStore)
+            		.setKeyStoreConfig(keyStoreConfig)
             		.getConfig();
         }
 
