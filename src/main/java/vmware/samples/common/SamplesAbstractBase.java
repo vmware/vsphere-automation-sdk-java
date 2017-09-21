@@ -24,6 +24,9 @@ import org.apache.commons.cli.ParseException;
 import org.apache.commons.configuration.ConfigurationException;
 
 import com.vmware.vapi.bindings.StubConfiguration;
+import com.vmware.vapi.protocol.HttpConfiguration;
+import com.vmware.vapi.protocol.HttpConfiguration.KeyStoreConfig;
+import com.vmware.vapi.protocol.HttpConfiguration.SslConfiguration;
 
 import vmware.samples.common.authentication.VapiAuthenticationHelper;
 import vmware.samples.common.authentication.VimAuthenticationHelper;
@@ -301,17 +304,32 @@ public abstract class SamplesAbstractBase {
     protected void login() throws Exception {
         this.vapiAuthHelper = new VapiAuthenticationHelper();
         this.vimAuthHelper = new VimAuthenticationHelper();
-        KeyStore trustStore = setupSslTrustForServer();
+        HttpConfiguration httpConfig = buildHttpConfiguration();
         this.sessionStubConfig =
                 vapiAuthHelper.loginByUsernameAndPassword(
-                    this.server, this.username, this.password, trustStore);
+                    this.server, this.username, this.password, httpConfig);
         this.vimAuthHelper.loginByUsernameAndPassword(
                     this.server, this.username, this.password);
     }
 
     /**
-     * Returns an instance of the trustStore containing the trusted server
-     * certificates.
+     * Builds the Http settings to be applied for the connection to the server.
+     * @return http configuration
+     * @throws Exception 
+     */
+    protected HttpConfiguration buildHttpConfiguration() throws Exception {
+        HttpConfiguration httpConfig =
+            new HttpConfiguration.Builder()
+            .setSslConfiguration(buildSslConfiguration())
+            .getConfig();
+        
+        return httpConfig;
+	}
+
+	/**
+     * Builds the SSL configuration to be applied for the connection to the
+     * server
+     * 
      * For vApi connections:
      * If "skip-server-verification" is specified, then the server certificate
      * verification is skipped. The method retrieves the certificate
@@ -334,12 +352,11 @@ public abstract class SamplesAbstractBase {
      * in production software. It is ONLY FOR THE PURPOSE OF DEVELOPMENT
      * ENVIRONMENTS.
      *<b></p>
-     * @return an instance of the trustStore containing the trusted server
-     *         certificates.
+     * @return SSL configuration
      * @throws Exception
      */
-    protected KeyStore setupSslTrustForServer() throws Exception {
-        KeyStore trustStore;
+    protected SslConfiguration buildSslConfiguration() throws Exception {
+        SslConfiguration sslConfig;
 
         if(this.skipServerVerification) {
             /*
@@ -354,30 +371,35 @@ public abstract class SamplesAbstractBase {
 
             /*
              * Below code enables all vAPI connections to the server
-             * without validating the server certificates. It retrieves
-             * the SSL certificate chain of the server and stores the
-             * root certificate into an in-memory trust store.
+             * without validating the server certificates..
              *
              * Note: Below code is to be used ONLY IN DEVELOPMENT ENVIRONMENTS.
              * Circumventing SSL trust is unsafe and should not be used in
              * production software.
              */
-            trustStore =
-                    SslUtil.createTrustStoreForServer("https://" + this.server);
+            sslConfig = new SslConfiguration.Builder()
+            		.disableCertificateValidation()
+            		.disableHostnameVerification()
+            		.getConfig();
         } else {
-            // Load the truststore
-            trustStore =
-                    SslUtil.loadTrustStore(this.truststorePath,
-                        this.truststorePassword);
-
             /*
              * Set the system property "javax.net.ssl.trustStore" to
              * the truststorePath
              */
             System.setProperty("javax.net.ssl.trustStore", this.truststorePath);
+            KeyStore trustStore =
+                SslUtil.loadTrustStore(this.truststorePath,
+                		this.truststorePassword);
+            KeyStoreConfig keyStoreConfig =
+            		new KeyStoreConfig("", this.truststorePassword);
+            sslConfig =
+            		new SslConfiguration.Builder()
+            		.setKeyStore(trustStore)
+            		.setKeyStoreConfig(keyStoreConfig)
+            		.getConfig();
         }
 
-        return trustStore;
+        return sslConfig;
     }
 
     /**

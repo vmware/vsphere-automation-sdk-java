@@ -12,8 +12,6 @@
  */
 package vmware.samples.common.authentication;
 
-import java.security.KeyStore;
-
 import com.vmware.cis.Session;
 import com.vmware.vapi.bindings.StubConfiguration;
 import com.vmware.vapi.bindings.StubFactory;
@@ -21,6 +19,7 @@ import com.vmware.vapi.cis.authn.ProtocolFactory;
 import com.vmware.vapi.cis.authn.SecurityContextFactory;
 import com.vmware.vapi.core.ApiProvider;
 import com.vmware.vapi.core.ExecutionContext.SecurityContext;
+import com.vmware.vapi.protocol.HttpConfiguration;
 import com.vmware.vapi.protocol.ProtocolConnection;
 import com.vmware.vapi.saml.SamlToken;
 import com.vmware.vapi.security.SessionSecurityContext;
@@ -41,18 +40,21 @@ public class VapiAuthenticationHelper {
      * @param server hostname or ip address of the server to log in to
      * @param username username for login
      * @param password password for login
+     * @param httpConfig HTTP configuration settings to be applied
+     * for the connection to the server.
      *
      * @return the stub configuration configured with an authenticated session
      * @throws Exception if there is an existing session
      */
     public StubConfiguration loginByUsernameAndPassword(
-        String server, String username, String password, KeyStore trustStore)
+        String server, String username, String password,
+        HttpConfiguration httpConfig)
             throws Exception {
         if(this.sessionSvc != null) {
             throw new Exception("Session already created");
         }
 
-        this.stubFactory = createApiStubFactory(server, trustStore);
+        this.stubFactory = createApiStubFactory(server, httpConfig);
 
         // Create a security context for username/password authentication
         SecurityContext securityContext =
@@ -91,18 +93,20 @@ public class VapiAuthenticationHelper {
      *
      * @param server hostname or ip address of the server to log in to
      * @param samlBearerToken a SAML bearer token
+     * @param httpConfig HTTP configuration settings to be applied
+     * for the connection to the server.
      *
      * @return the stub configuration configured with an authenticated session
      * @throws Exception
      */
     public StubConfiguration loginBySamlBearerToken(
-        String server, SamlToken samlBearerToken, KeyStore trustStore)
+        String server, SamlToken samlBearerToken, HttpConfiguration httpConfig)
             throws Exception {
         if(this.sessionSvc != null) {
             throw new Exception("Session already created");
         }
 
-        this.stubFactory = createApiStubFactory(server, trustStore);
+        this.stubFactory = createApiStubFactory(server, httpConfig);
 
         // Create a SAML security context using SAML bearer token
         SecurityContext samlSecurityContext =
@@ -147,24 +151,26 @@ public class VapiAuthenticationHelper {
         }
     }
 
-    /*
+    /**
      * Connects to the server using https protocol and returns the factory
      * instance that can be used for creating the client side stubs.
      *
      * @param server hostname or ip address of the server
+     * @param httpConfig HTTP configuration settings to be applied
+     * for the connection to the server.
+     *
      * @return factory for the client side stubs
      */
     private StubFactory createApiStubFactory(String server,
-        KeyStore trustStore)
+        HttpConfiguration httpConfig)
             throws Exception {
         // Create a https connection with the vapi url
         ProtocolFactory pf = new ProtocolFactory();
         String apiUrl = "https://" + server + VAPI_PATH;
 
         // Get a connection to the vapi url
-        ProtocolConnection connection = pf.getConnection("http",
-                                                         apiUrl,
-                                                         trustStore);
+        ProtocolConnection connection =
+            pf.getHttpConnection(apiUrl, null, httpConfig);
 
         // Initialize the stub factory with the api provider
         ApiProvider provider = connection.getApiProvider();
