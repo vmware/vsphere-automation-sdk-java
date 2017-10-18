@@ -1,24 +1,12 @@
-This directory contains samples for Appliance Management APIs:
+# Client Samples
 
-### Appliance Health APIs
-Sample                                                                      | Description
-----------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------
-vmware.samples.appliance.health.HealthMessages.java                         | Get the health messages for various appliance health items
+The following table shows the sample sub-directories and their contents.
 
-### Appliance Networking APIs
-Sample                                                                      | Description
-----------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------
-vmware.samples.appliance.networking.NetworkingInfo.java                     | Get the network information of the appliance
-vmware.samples.appliance.networking.EnableIPv6.java                         | Enable/Disable IPv6 on the appliance
-vmware.samples.appliance.networking.ResetNetwork.java                       | Refresh the networking configuration of the appliance
-vmware.samples.appliance.networking.dns.DnsDomainWorkflow.java              | Add/Set/List the DNS domains for the appliance
-vmware.samples.appliance.networking.dns.DnsServersWorkflow.java             | Add/Set/List the DNS servers for the appliance
-vmware.samples.appliance.networking.dns.HostnameWorkflow.java               | Get/Set the hostname for the appliance
-vmware.samples.appliance.networking.interfaces.InterfacesWorkflow.java      | List/Get the interfaces information for the appliance
-vmware.samples.appliance.networking.interfaces.IPv4Workflow.java            | Set/Get the IPv4 configuration of a specific interface in the appliance
-vmware.samples.appliance.networking.interfaces.IPv6Workflow.java            | Set/Get the IPv6 configuration of a specific interface in the appliance
-vmware.samples.appliance.networking.proxy.ProxyWorkflow.java                | List/Set/Get the proxy information for the appliance
-vmware.samples.appliance.networking.proxy.NoProxyWorkflow.java              | Get/Set the servers with No proxy configuration in the appliance
-
-### Testbed Requirement:
-    - 1 vCenter Server
+Directory       | Description
+----------------| -------------
+appliance       | Samples for Appliance Management APIs
+common          | Samples common helper classes and abstractions; This package does NOT contain any sample
+contentlibrary  | Samples for Content Library APIs
+tagging         | Samples for Tagging APIs
+vcenter	        | Samples for managing vSphere infrastructure and virtual machines
+sso             | Samples for Platform Service Controller(PSC), SSO and Lookup Service APIs
