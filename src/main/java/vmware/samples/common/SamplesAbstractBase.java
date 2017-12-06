@@ -32,7 +32,7 @@ import vmware.samples.common.authentication.VapiAuthenticationHelper;
 import vmware.samples.common.authentication.VimAuthenticationHelper;
 
 /**
- * Abstract base class for all samples
+ * Abstract base class for vSphere samples
  *
  */
 public abstract class SamplesAbstractBase {

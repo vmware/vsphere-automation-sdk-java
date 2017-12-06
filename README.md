@@ -32,9 +32,12 @@ vSphere Automation and vSphere Web Service APIs. The samples have been developed
 JDK 1.8.
 
 ## Supported vCenter Releases:
-vCenter 6.0, 6.5 and vCenter 6.6.1 for VMware Cloud 1.1.
+vCenter 6.0, 6.5 and vCenter 6.6.2 for VMware Cloud on AWS 1.2.
 
 Please refer to the notes in each sample for detailed compatibility information. 
+
+## VMware Cloud on AWS Support:
+The VMware Cloud on AWS API and samples are currently available as a preview and are subject to change in the future.
 
 ## Quick Start Guide
 This document will walk you through getting up and running with the Java SDK Samples. Prior to running the samples you will need to setup a vCenter test environment and install maven, the following steps will take you through this process.

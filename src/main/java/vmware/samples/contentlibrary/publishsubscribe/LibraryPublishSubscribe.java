@@ -59,7 +59,6 @@ public class LibraryPublishSubscribe extends SamplesAbstractBase {
     private ClsApiHelper clsHelper;
     private String pubLibId;
     private String subLibId;
-    private String dsId;
 
     /**
      * Define the options specific to this sample and configure the sample using

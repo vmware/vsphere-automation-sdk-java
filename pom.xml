@@ -4,7 +4,7 @@
 
   <groupId>com.vmware</groupId>
   <artifactId>vsphere-samples-nodeps</artifactId>
-  <version>6.6.1</version>
+  <version>6.6.2</version>
   <packaging>jar</packaging>
 
   <name>samples</name>
@@ -12,7 +12,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <vapi.version>2.7.0</vapi.version>
+    <vapi.version>2.7.1</vapi.version>
     <slf4j.version>1.7.12</slf4j.version>
     <httpclient.version>4.5.1</httpclient.version>
     <httpasyncclient.version>4.1</httpasyncclient.version>
@@ -22,6 +22,10 @@
     <commons-configuration.version>1.10</commons-configuration.version>
     <commons-cli.version>1.3.1</commons-cli.version>
     <commons-beanutils.version>1.9.3</commons-beanutils.version>
+	<lookupservice.version>1.0.0</lookupservice.version>
+	<vspherewssdk.version>6.6.2</vspherewssdk.version>
+	<vmc.version>1.0.0</vmc.version>
+	<vsphereautomationsdk.version>1.0.0</vsphereautomationsdk.version>
   </properties>
   <build>
     <plugins>
@@ -56,7 +60,7 @@
               <version>${vapi.version}</version>
               <file>./lib/vapi-runtime-${vapi.version}.jar</file>
             </configuration>
-          </execution>
+          </execution>		  
           <execution>
             <id>install-vapi-authentication</id>
             <phase>initialize</phase>
@@ -84,7 +88,7 @@
               <version>${vapi.version}</version>
               <file>./lib/vapi-samltoken-${vapi.version}.jar</file>
             </configuration>
-          </execution>
+          </execution>      
           <execution>
             <id>install-vim25</id>
             <phase>initialize</phase>
@@ -95,7 +99,7 @@
               <packaging>jar</packaging>
               <groupId>com.vmware.vim25</groupId>
               <artifactId>vim25</artifactId>
-              <version>${project.version}</version>
+              <version>${vspherewssdk.version}</version>
               <file>./lib/vim25.jar</file>
             </configuration>
           </execution>
@@ -109,7 +113,7 @@
               <packaging>jar</packaging>
               <groupId>com.vmware.sso</groupId>
               <artifactId>ssoclient</artifactId>
-              <version>${project.version}</version>
+              <version>${vspherewssdk.version}</version>
               <file>./lib/ssoclient.jar</file>
             </configuration>
           </execution>
@@ -123,12 +127,12 @@
               <packaging>jar</packaging>
               <groupId>com.vmware.vsphereautomation.lookup</groupId>
               <artifactId>vsphereautomation-lookupservice</artifactId>
-              <version>${project.version}</version>
-              <file>./lib/vsphereautomation-lookupservice-${project.version}.jar</file>
+              <version>${lookupservice.version}</version>
+              <file>./lib/vsphereautomation-lookupservice-${lookupservice.version}.jar</file>
             </configuration>
           </execution>
           <execution>
-            <id>install-vsphereautomation-sdk</id>
+            <id>install-vsphere-bindings</id>
             <phase>initialize</phase>
             <goals>
               <goal>install-file</goal>
@@ -137,10 +141,38 @@
               <packaging>jar</packaging>
               <groupId>com.vmware</groupId>
               <artifactId>vsphereautomation-client-sdk</artifactId>
-              <version>${project.version}</version>
-              <file>./lib/vsphereautomation-client-sdk-${project.version}.jar</file>
+              <version>${vsphereautomationsdk.version}</version>
+              <file>./lib/vsphereautomation-client-sdk-${vsphereautomationsdk.version}.jar</file>
             </configuration>
           </execution>
+          <execution>
+            <id>install-vmc-bindings</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.vmc</groupId>
+              <artifactId>vmc-bindings</artifactId>
+              <version>${vmc.version}</version>
+              <file>./lib/vmc-bindings-${vmc.version}.jar</file>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-vmc-sdk-common</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.vmc</groupId>
+              <artifactId>vmc-sdk-common</artifactId>
+              <version>${vmc.version}</version>
+              <file>./lib/vmc-sdk-common-${vmc.version}.jar</file>
+            </configuration>
+          </execution>		  
         </executions>
       </plugin>
       <plugin>
@@ -203,22 +235,32 @@
 <dependency>
   <groupId>com.vmware</groupId>
   <artifactId>vsphereautomation-client-sdk</artifactId>
-  <version>${project.version}</version>
+  <version>${vsphereautomationsdk.version}</version>
+</dependency>
+<dependency>
+  <groupId>com.vmware.vmc</groupId>
+  <artifactId>vmc-bindings</artifactId>
+  <version>${vmc.version}</version>
+</dependency>
+<dependency>
+  <groupId>com.vmware.vmc</groupId>
+  <artifactId>vmc-sdk-common</artifactId>
+  <version>${vmc.version}</version>
 </dependency>
 <dependency>
   <groupId>com.vmware.vim25</groupId>
   <artifactId>vim25</artifactId>
-  <version>${project.version}</version>
+  <version>${vspherewssdk.version}</version>
 </dependency>
 <dependency>
   <groupId>com.vmware.sso</groupId>
   <artifactId>ssoclient</artifactId>
-  <version>${project.version}</version>
+  <version>${vspherewssdk.version}</version>
 </dependency>
 <dependency>
   <groupId>com.vmware.vsphereautomation.lookup</groupId>
   <artifactId>vsphereautomation-lookupservice</artifactId>
-  <version>${project.version}</version>
+  <version>${lookupservice.version}</version>
 </dependency>
 <dependency>
   <groupId>com.fasterxml.jackson.core</groupId>
