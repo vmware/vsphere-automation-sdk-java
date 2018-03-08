@@ -9,4 +9,4 @@ contentlibrary  | Samples for Content Library APIs
 tagging         | Samples for Tagging APIs
 vcenter	        | Samples for managing vSphere infrastructure and virtual machines
 sso             | Samples for Platform Service Controller(PSC), SSO and Lookup Service APIs
-vmc             | Samples for VMware Cloud Services
+vmc             | Samples for VMware Cloud on AWS Services (preview)
