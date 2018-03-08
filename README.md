@@ -32,7 +32,7 @@ vSphere Automation and vSphere Web Service APIs. The samples have been developed
 JDK 1.8.
 
 ## Supported vCenter Releases:
-vCenter 6.0, 6.5 and vCenter 6.6.3 for VMware Cloud on AWS 1.2.
+vCenter 6.0, 6.5 and vCenter 6.6.3 for VMware Cloud on AWS 1.3.
 
 Please refer to the notes in each sample for detailed compatibility information. 
 
