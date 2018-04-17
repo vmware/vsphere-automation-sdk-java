@@ -32,41 +32,46 @@ import vmware.samples.common.authentication.VmcAuthenticationHelper;
  * Sample Prerequisites: VMC Server
  */
 public class OrganizationOperations extends VmcSamplesAbstractBase {
-	private Orgs orgsStub;
+    private Orgs orgsStub;
 
-	/**
+    /**
      * Define the options specific to this sample and configure the sample using
      * command-line arguments or a config file
      *
      * @param args command line arguments passed to the sample
      */
+    @Override
     protected void parseArgs(String[] args) {
-    	List<Option> optionList = Collections.<Option>emptyList();
+        List<Option> optionList = Collections.<Option>emptyList();
         super.parseArgs(optionList, args);
     }
 
+    @Override
+    @SuppressWarnings(value = { "deprecation" })
     protected void setup() throws Exception {
-    	this.vmcAuthHelper = new VmcAuthenticationHelper();
-    	ApiClient apiClient =
-    			this.vmcAuthHelper.newVmcClient(this.vmcServer,
-    					this.cspServer, this.refreshToken);
-    	
-    	orgsStub = apiClient.createStub(Orgs.class);
+        this.vmcAuthHelper = new VmcAuthenticationHelper();
+        ApiClient apiClient =
+                this.vmcAuthHelper.newVmcClient(this.vmcServer,
+                        this.cspServer, this.refreshToken);
+
+        orgsStub = apiClient.createStub(Orgs.class);
     }
 
+    @Override
     protected void run() throws Exception {
         List<Organization> currentUserOrgs = orgsStub.list();
         for (Organization org : currentUserOrgs) {
-        	System.out.printf("\nPrinting details for ORG (ORG ID=%s, ORG NAME=%s)\n",
-			    org.getId(), org.getDisplayName());
+            System.out.printf("\nPrinting details for ORG (ORG ID=%s, ORG NAME=%s)\n",
+                org.getId(), org.getDisplayName());
             System.out.println(currentUserOrgs);
         }
     }
 
+    @Override
     protected void cleanup() throws Exception {
-    	// No cleanup required
+        // No cleanup required
     }
-    
+
     public static void main(String[] args) throws Exception {
         /*
          * Execute the sample using the command line arguments or parameters

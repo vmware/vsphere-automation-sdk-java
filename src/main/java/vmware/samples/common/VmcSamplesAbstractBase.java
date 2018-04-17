@@ -67,12 +67,12 @@ public abstract class VmcSamplesAbstractBase {
                                         .build();
             
             Option refreshTokenOption = Option.builder()
-					                    .required(true)
-					                    .hasArg()
-					                    .argName("REFRESH TOKEN")
-					                    .longOpt("refreshtoken")
-					                    .desc("refresh token for getting an access token")
-					                    .build();
+                                        .required(true)
+                                        .hasArg()
+                                        .argName("REFRESH TOKEN")
+                                        .longOpt("refreshtoken")
+                                        .desc("refresh token for getting an access token")
+                                        .build();
 
             Option cleardataOption = Option.builder()
                                            .required(false)
@@ -213,7 +213,7 @@ public abstract class VmcSamplesAbstractBase {
             new HttpConfiguration.Builder().getConfig();
         
         return httpConfig;
-	}
+    }
 
     /**
      * Logs out of the server

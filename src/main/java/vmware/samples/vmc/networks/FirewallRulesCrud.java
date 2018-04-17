@@ -62,7 +62,7 @@ public class FirewallRulesCrud extends VmcSamplesAbstractBase {
      * @param args command line arguments passed to the sample
      */
     @Override
-	protected void parseArgs(String[] args) {
+    protected void parseArgs(String[] args) {
         Option orgOption = Option.builder()
                 .longOpt("org_id")
                 .desc("Specify the organization id")
@@ -110,7 +110,7 @@ public class FirewallRulesCrud extends VmcSamplesAbstractBase {
     }
 
     @Override
-	protected void setup() throws Exception {
+    protected void setup() throws Exception {
         this.vmcAuthHelper = new VmcAuthenticationHelper();
         ApiClient vmcClient =
                 this.vmcAuthHelper.newVmcClient(this.vmcServer,
@@ -122,7 +122,7 @@ public class FirewallRulesCrud extends VmcSamplesAbstractBase {
     }
 
     @Override
-	protected void run() throws Exception {
+    protected void run() throws Exception {
         createFirewallRule();
         getFirewallRule();
         updateFirewallRule();
@@ -136,9 +136,9 @@ public class FirewallRulesCrud extends VmcSamplesAbstractBase {
         System.out.printf("Management Gateway ID: %s\n", edgeList.get(0).getId());
         System.out.printf("Compute Gateway ID: %s\n", edgeList.get(1).getId());
 
-		this.edgeId = useComputeGateway ? edgeList.get(1).getId() : edgeList.get(0).getId();
+        this.edgeId = useComputeGateway ? edgeList.get(1).getId() : edgeList.get(0).getId();
 
-		System.out.printf("Using edge \"%s\" to create new firewall rule\n", this.edgeId);
+        System.out.printf("Using edge \"%s\" to create new firewall rule\n", this.edgeId);
         Sddc sddc = this.sddcs.get(this.orgId, this.sddcId);
         List<String> destIpAddresses =
                 Arrays.asList(sddc.getResourceConfig().getVcPublicIp(), sddc.getResourceConfig().getVcManagementIp());
@@ -181,7 +181,7 @@ public class FirewallRulesCrud extends VmcSamplesAbstractBase {
         FirewallRules rules = firewallConfig.get(this.orgId, this.sddcId, this.edgeId).getFirewallRules();
         List<Nsxfirewallrule> nsxFirewallRulesList = rules.getFirewallRules();
         for(Nsxfirewallrule rule : nsxFirewallRulesList) {
-        	System.out.printf("\nName: %s, Description: %s", rule.getName(), rule.getDescription());
+            System.out.printf("\nName: %s, Description: %s", rule.getName(), rule.getDescription());
         }
 
         System.out.println("\n\n#### Example: Find the firewall rule that was created");
@@ -210,7 +210,7 @@ public class FirewallRulesCrud extends VmcSamplesAbstractBase {
         rules.update(this.orgId, this.sddcId, this.edgeId, this.ruleId, this.firewallRule);
 
         System.out.printf("\nFirewall rule has been updated. Specs of the updated rule is:\n",
-		    this.firewallRule.getName());
+            this.firewallRule.getName());
         Nsxfirewallrule updatedRule = this.rules.get(this.orgId, this.sddcId, this.edgeId, this.ruleId);
         System.out.println(updatedRule);
     }
@@ -221,7 +221,7 @@ public class FirewallRulesCrud extends VmcSamplesAbstractBase {
     }
 
     @Override
-	protected void cleanup() throws Exception {
+    protected void cleanup() throws Exception {
         if(this.ruleId !=0) {
             System.out.println("\n#### Example: Delete a firewall rule");
             deleteFirewallRule();

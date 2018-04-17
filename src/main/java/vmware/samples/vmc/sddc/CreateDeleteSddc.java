@@ -34,13 +34,13 @@ import vmware.samples.vmc.helpers.VmcTaskHelper;
  * Sample Prerequisites: An existing organization, VMC Server
  */
 public class CreateDeleteSddc extends VmcSamplesAbstractBase {
-	private Sddcs sddcsStub;	
-	private ApiClient apiClient;	
-	private String orgId, sddcName, sddcId;
-	public static final int TASK_POLLING_DELAY_IN_MILLISECONDS = 500;
-	public static final String SDDC_REGION = "US_WEST_2";
-	public static final String SDDC_PROVIDER = "AWS";
-	public static final int NUM_HOSTS = 4;
+    private Sddcs sddcsStub;    
+    private ApiClient apiClient;    
+    private String orgId, sddcName, sddcId;
+    public static final int TASK_POLLING_DELAY_IN_MILLISECONDS = 500;
+    public static final String SDDC_REGION = "US_WEST_2";
+    public static final String SDDC_PROVIDER = "AWS";
+    public static final int NUM_HOSTS = 4;
 
     /**
      * Define the options specific to this sample and configure the sample using
@@ -71,34 +71,34 @@ public class CreateDeleteSddc extends VmcSamplesAbstractBase {
     }
 
     protected void setup() throws Exception {
-    	this.vmcAuthHelper = new VmcAuthenticationHelper();
-    	this.apiClient = this.vmcAuthHelper.newVmcClient(this.vmcServer, this.cspServer, this.refreshToken);
+        this.vmcAuthHelper = new VmcAuthenticationHelper();
+        this.apiClient = this.vmcAuthHelper.newVmcClient(this.vmcServer, this.cspServer, this.refreshToken);
         this.sddcsStub = apiClient.createStub(Sddcs.class);
     }
 
     protected void run() throws Exception {
-    	System.out.printf("Example: Create a SDDC %s in org %s", this.sddcName, this.orgId);
-    	
-    	// Set the provider (for testing only)
-    	String provider = System.getProperty("VMC_PROVIDER", SDDC_PROVIDER);
+        System.out.printf("Example: Create a SDDC %s in org %s", this.sddcName, this.orgId);
+        
+        // Set the provider (for testing only)
+        String provider = System.getProperty("VMC_PROVIDER", SDDC_PROVIDER);
         AwsSddcConfig sddcConfig =
-        		new AwsSddcConfig.Builder(SDDC_REGION, this.sddcName, provider, NUM_HOSTS)
-        		.build();
+                new AwsSddcConfig.Builder(SDDC_REGION, this.sddcName, provider, NUM_HOSTS)
+                .build();
         Task createSddcTask = this.sddcsStub.create(this.orgId, sddcConfig);
         String taskId = createSddcTask.getId();
         System.out.printf("\nPoll the CREATE SDDC task (taskId = %s) :", taskId);
         boolean taskCompleted = VmcTaskHelper.pollTask(apiClient, orgId, taskId, TASK_POLLING_DELAY_IN_MILLISECONDS);
         if(!taskCompleted) {
-        	System.out.println("CREATE SDDC task was either canceled or it failed. Exiting.");
-        	System.exit(1);
+            System.out.println("CREATE SDDC task was either canceled or it failed. Exiting.");
+            System.exit(1);
         }
         
         List<Sddc> sddcList = this.sddcsStub.list(this.orgId);
         for (Sddc sddc : sddcList) {
-        	if(sddc.getName().equals(this.sddcName)) {
-        		this.sddcId = sddc.getId();
-        		break;
-        	}
+            if(sddc.getName().equals(this.sddcName)) {
+                this.sddcId = sddc.getId();
+                break;
+            }
         }
     }
     
@@ -109,8 +109,8 @@ public class CreateDeleteSddc extends VmcSamplesAbstractBase {
         System.out.printf("\nPoll the DELETE SDDC task (taskId = %s) :", taskId);
         boolean taskCompleted = VmcTaskHelper.pollTask(apiClient, orgId, taskId, TASK_POLLING_DELAY_IN_MILLISECONDS);
         if(!taskCompleted) {
-        	System.out.println("DELETE SDDC task was either canceled or it failed. Exiting.");
-        	System.exit(1);
+            System.out.println("DELETE SDDC task was either canceled or it failed. Exiting.");
+            System.exit(1);
         }
     }
     

@@ -33,12 +33,12 @@ import vmware.samples.vmc.helpers.VmcTaskHelper;
  * Sample Prerequisites: An existing organization and SDDC, VMC Server
  */
 public class AddRemoveHost extends VmcSamplesAbstractBase {
-	private Esxs esxsStub;
-	private ApiClient apiClient;	
-	private String orgId, sddcId, numHosts;
-	public static final String ADD_HOST_ACTION = "add";
-	public static final String REMOVE_HOST_ACTION = "remove";
-	public static final int TASK_POLLING_DELAY_IN_MILLISECONDS = 1000;
+    private Esxs esxsStub;
+    private ApiClient apiClient;    
+    private String orgId, sddcId, numHosts;
+    public static final String ADD_HOST_ACTION = "add";
+    public static final String REMOVE_HOST_ACTION = "remove";
+    public static final int TASK_POLLING_DELAY_IN_MILLISECONDS = 1000;
 
     /**
      * Define the options specific to this sample and configure the sample using
@@ -77,16 +77,16 @@ public class AddRemoveHost extends VmcSamplesAbstractBase {
     }
 
     protected void setup() throws Exception {
-    	this.vmcAuthHelper = new VmcAuthenticationHelper();
-    	this.apiClient =
-    			this.vmcAuthHelper.newVmcClient(this.vmcServer,
-    					this.cspServer, this.refreshToken);
-    	
+        this.vmcAuthHelper = new VmcAuthenticationHelper();
+        this.apiClient =
+                this.vmcAuthHelper.newVmcClient(this.vmcServer,
+                        this.cspServer, this.refreshToken);
+        
         this.esxsStub = apiClient.createStub(Esxs.class);
     }
 
     protected void run() throws Exception {
-    	int num_of_hosts = this.numHosts.isEmpty() ? 1 : Integer.parseInt(numHosts);
+        int num_of_hosts = this.numHosts.isEmpty() ? 1 : Integer.parseInt(numHosts);
         EsxConfig esxConfig = new EsxConfig.Builder(num_of_hosts).build();
 
         // Add a host
@@ -97,13 +97,13 @@ public class AddRemoveHost extends VmcSamplesAbstractBase {
         System.out.printf("\nPoll the ADD HOST task (taskId = %s) :", taskId);
         boolean taskCompleted = VmcTaskHelper.pollTask(apiClient, orgId, taskId, TASK_POLLING_DELAY_IN_MILLISECONDS);
         if(!taskCompleted) {
-        	System.out.println("Add task was either canceled or it failed. Exiting.");
-        	System.exit(1);
+            System.out.println("Add task was either canceled or it failed. Exiting.");
+            System.exit(1);
         }
     }
     
     protected void cleanup() throws Exception {
-    	int num_of_hosts = this.numHosts.isEmpty() ? 1 : Integer.parseInt(numHosts);
+        int num_of_hosts = this.numHosts.isEmpty() ? 1 : Integer.parseInt(numHosts);
         EsxConfig esxConfig = new EsxConfig.Builder(num_of_hosts).build();
 
         // Remove a host

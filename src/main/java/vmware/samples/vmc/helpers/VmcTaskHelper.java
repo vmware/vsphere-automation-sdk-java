@@ -34,7 +34,7 @@ public class VmcTaskHelper {
      * @throws InterruptedException 
      */
     public static boolean pollTask(ApiClient apiClient, String orgId, String taskId, int x)
-    		throws InterruptedException {
+            throws InterruptedException {
         Tasks tasksStub = apiClient.createStub(Tasks.class);
         System.out.println();
         do {
@@ -42,15 +42,15 @@ public class VmcTaskHelper {
             Task task = tasksStub.get(orgId, taskId);
             String taskStatus = "Task Status = " + task.getStatus();
             String taskPhaseInProgress =
-			    task.getPhaseInProgress() != "" ? ", Task Phase = " + task.getPhaseInProgress() : "";
+                task.getPhaseInProgress() != "" ? ", Task Phase = " + task.getPhaseInProgress() : "";
             System.out.println(taskStatus + taskPhaseInProgress);
             switch(task.getStatus()) {
-	            case Task.STATUS_CANCELED :
-	            	return false;
-	            case Task.STATUS_FAILED :
-	            	return false;
-	            case Task.STATUS_FINISHED :
-	            	return true;
+                case Task.STATUS_CANCELED :
+                    return false;
+                case Task.STATUS_FAILED :
+                    return false;
+                case Task.STATUS_FINISHED :
+                    return true;
             }
         } while (true);
     }

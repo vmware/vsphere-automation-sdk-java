@@ -32,13 +32,13 @@ public class VmcAuthenticationHelper {
      * @return
      */
     public ApiClient newVmcClient(String vmcServer, String cspServer,
-    		String refreshToken) {
+            String refreshToken) {
         String cspUrl = "https://" + cspServer + CSP_AUTHORIZATION_URL;
         String vmcUrl = "https://" + vmcServer;
         return VmcClients.custom()
-        		.setBaseUrl(vmcUrl)
-        		.setAuthorizationUrl(cspUrl)
-        		.setRefreshToken(refreshToken.toCharArray())
-        		.build();
+                .setBaseUrl(vmcUrl)
+                .setAuthorizationUrl(cspUrl)
+                .setRefreshToken(refreshToken.toCharArray())
+                .build();
     }
 }

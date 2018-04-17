@@ -88,7 +88,7 @@ public class LogicalNetworkCrud extends VmcSamplesAbstractBase {
                 .hasArg()
                 .build();
         List<Option> optionList =
-		    Arrays.asList(orgOption, sddcOption, networkNameOption, subnetOption, dhcpRangeOption);
+            Arrays.asList(orgOption, sddcOption, networkNameOption, subnetOption, dhcpRangeOption);
 
         super.parseArgs(optionList, args);
         this.orgId = (String) parsedOptions.get("org_id");

@@ -17,11 +17,10 @@ import java.util.List;
 
 import org.apache.commons.cli.Option;
 
+import com.vmware.cis.tagging.Tag;
 import com.vmware.vapi.bindings.StubConfiguration;
 import com.vmware.vapi.protocol.HttpConfiguration;
 import com.vmware.vapi.saml.SamlToken;
-import com.vmware.vcenter.Datacenter;
-import com.vmware.vcenter.DatacenterTypes;
 
 import vmware.samples.common.SamplesAbstractBase;
 import vmware.samples.common.authentication.VapiAuthenticationHelper;
@@ -37,7 +36,7 @@ import vmware.samples.sso.SsoHelper;
  */
 public class ExternalPscSsoWorkflow extends SamplesAbstractBase {
     private String lookupServiceUrl;
-    private Datacenter datacenterService;
+    private Tag taggingService;
     public static final String SSO_PATH = "/sts/STSService";
 
     /**
@@ -99,11 +98,19 @@ public class ExternalPscSsoWorkflow extends SamplesAbstractBase {
 
         System.out.println("\nStep 5: Perform certain tasks using the vAPI "
                            + "services.");
-        this.datacenterService = this.vapiAuthHelper.getStubFactory()
-            .createStub(Datacenter.class, sessionStubConfig);
-        System.out.println("\nList of datacenters on the vcenter server:\n"
-                           + this.datacenterService.list(
-                               new DatacenterTypes.FilterSpec()));
+        this.taggingService = this.vapiAuthHelper.getStubFactory()
+            .createStub(Tag.class, sessionStubConfig);
+        System.out.println("\nListing all tags on the vcenter server..");
+        List<String> tagList = this.taggingService.list();
+        if(tagList.isEmpty()) {
+            System.out.println("\nNo tags found !");
+        } else {
+            System.out.println("\nTag Name\tTag Description");
+            for(String tagId : tagList) {
+                System.out.println(this.taggingService.get(tagId).getName()
+                        + "\t" + this.taggingService.get(tagId).getDescription());
+            }
+        }
         vapiAuthHelper.logout();
     }
 
