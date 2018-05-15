@@ -31,7 +31,7 @@ java client library. Additionally, some of the samples demonstrate the combined 
 vSphere Automation and vSphere Web Service APIs. The samples have been developed to work with
 JDK 1.8.
 
-## Supported vCenter Releases:
+## Supported OnPrem vCenter Releases:
 vCenter 6.0, 6.5, 6.7
 
 Please refer to the notes in each sample for detailed compatibility information. 
