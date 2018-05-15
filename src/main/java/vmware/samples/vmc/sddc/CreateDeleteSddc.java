@@ -82,7 +82,7 @@ public class CreateDeleteSddc extends VmcSamplesAbstractBase {
         // Set the provider (for testing only)
         String provider = System.getProperty("VMC_PROVIDER", SDDC_PROVIDER);
         AwsSddcConfig sddcConfig =
-                new AwsSddcConfig.Builder(SDDC_REGION, this.sddcName, provider, NUM_HOSTS)
+                new AwsSddcConfig.Builder(SDDC_REGION, this.sddcName, NUM_HOSTS, provider)
                 .build();
         Task createSddcTask = this.sddcsStub.create(this.orgId, sddcConfig);
         String taskId = createSddcTask.getId();
@@ -104,7 +104,7 @@ public class CreateDeleteSddc extends VmcSamplesAbstractBase {
     
     protected void cleanup() throws Exception {        
         System.out.printf("\n\nExample: Delete a SDDC %s in org %s", this.sddcName, this.orgId);
-        Task deleteSddcTask = this.sddcsStub.delete(this.orgId, sddcId);
+        Task deleteSddcTask = this.sddcsStub.delete(this.orgId, sddcId, "false", null);
         String taskId = deleteSddcTask.getId();
         System.out.printf("\nPoll the DELETE SDDC task (taskId = %s) :", taskId);
         boolean taskCompleted = VmcTaskHelper.pollTask(apiClient, orgId, taskId, TASK_POLLING_DELAY_IN_MILLISECONDS);

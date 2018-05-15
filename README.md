@@ -32,7 +32,7 @@ vSphere Automation and vSphere Web Service APIs. The samples have been developed
 JDK 1.8.
 
 ## Supported vCenter Releases:
-vCenter 6.0, 6.5, 6.7 and vCenter 6.6.3 for VMware Cloud on AWS 1.3.
+vCenter 6.0, 6.5, 6.7
 
 Please refer to the notes in each sample for detailed compatibility information. 
 
@@ -87,9 +87,9 @@ When running the samples, parameters can be provided either on the command line,
 
 Use a command like the following to display usage information for a particular sample.
 ```` bash
-$java -ea -cp target/vsphere-samples-6.7.0.jar vmware.samples.vcenter.vm.list.ListVMs
+$java -ea -cp target/vsphere-samples-6.8.0.jar vmware.samples.vcenter.vm.list.ListVMs
 
-java -cp target/vsphere-samples-6.7.0.jar vmware.samples.vcenter.vm.list.ListVMs [--config-file <CONFIGURATION FILE>]
+java -cp target/vsphere-samples-6.8.0.jar vmware.samples.vcenter.vm.list.ListVMs [--config-file <CONFIGURATION FILE>]
        --server <SERVER> --username <USERNAME> --password <PASSWORD> --cluster <CLUSTER> [--truststorepath <ABSOLUTE PATH OF JAVA TRUSTSTORE FILE>]
        [--truststorepassword <JAVA TRUSTSTORE PASSWORD>] [--cleardata] [--skip-server-verification]
 
@@ -113,17 +113,17 @@ Sample Options:
 
 Use a command like the following to run a sample using only command line parameters:
 ```` bash
-$java -ea -cp target/vsphere-samples-6.7.0.jar vmware.samples.vcenter.vm.list.ListVMs --server servername --username administrator@vsphere.local --password password --skip-server-verification
+$java -ea -cp target/vsphere-samples-6.8.0.jar vmware.samples.vcenter.vm.list.ListVMs --server servername --username administrator@vsphere.local --password password --skip-server-verification
 ````
 
 Use a command like the following to run a sample using only a configuration file:
 ```` bash
-$java -ea -cp target/vsphere-samples-6.7.0.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties
+$java -ea -cp target/vsphere-samples-6.8.0.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties
 ````
 
 Use the following command to run the sample using a combination of configuration file and command line parameters:
 ```` bash
-$java -ea -cp target/vsphere-samples-6.7.0.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties --server servername
+$java -ea -cp target/vsphere-samples-6.8.0.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties --server servername
 ````
 
 ### Importing the samples to eclipse
@@ -152,6 +152,10 @@ The API documentation can be downloaded from below links:
 [vSphere APIs](doc/vsphere-javadoc.zip).
 
 [VMware Cloud on AWS APIs](doc/vmc-javadoc.zip).
+
+[VMware NSX-T APIs](doc/nsx-policy-java-sdk-2.2.0.0.0.15184434-javadoc.zip).
+
+[VMware NSX-T VMC app APIs](doc/vmc-app-java-sdk-2.2.0.0.0.15184434-javadoc.zip).
 
 Online version of the API documentation can be found [here](https://code.vmware.com/web/dp/doc/preview?id=4642).
 
