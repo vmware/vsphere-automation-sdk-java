@@ -15,6 +15,8 @@ about: Template for reporting issues.
 - [ ] This API is compatible with my vCenter version (You can get this info from the API documentation )
 - [ ] I have searched [existing issues](https://github.com/vmware/vsphere-automation-sdk-java/issues?utf8=%E2%9C%93&q=is%3Aissue)
 
+## Description
+
 ## Environment
 - SDK version: 
 <!-- Required. -->
