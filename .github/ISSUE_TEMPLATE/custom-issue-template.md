@@ -1,9 +1,3 @@
----
-name: Custom issue template
-about: Describe this issue template's purpose here.
-
----
-
 <!--
   We use GitHub Issues to track bugs or feature requests for vSphere Automation Java SDK
   For questions and discussions, Please visit forum: https://code.vmware.com/forums/7507/vsphere-automation-sdk-for-java
@@ -12,7 +6,7 @@ about: Describe this issue template's purpose here.
 <!-- Provide the following information so we can help you better -->
 
 - [ ] I am using the [latest SDK version](https://github.com/vmware/vsphere-automation-sdk-java/releases)
-- [ ] This API is compatible with my vCenter version (You can get the info from the "Sample Prerequisites" comment mentioned in the sample )
+- [ ] This API is compatible with my vCenter version (You can get this info from the API documentation )
 - [ ] I have searched [existing issues](https://github.com/vmware/vsphere-automation-sdk-java/issues?utf8=%E2%9C%93&q=is%3Aissue)
 
 ## Environment
