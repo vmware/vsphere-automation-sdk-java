@@ -224,5 +224,5 @@ Items added to the repository, including items from the Board members, require 2
 * [vSphere Automation SDK Overview](http://pubs.vmware.com/vsphere-65/index.jsp#com.vmware.vapi.progguide.doc/GUID-AF73991C-FC1C-47DF-8362-184B6544CFDE.html)
 * [VMware Code](https://code.vmware.com/home)
 * [VMware Developer Community](https://communities.vmware.com/community/vmtn/developer)
-* VMware vSphere [REST API Reference documentation](https://code.vmware.com/web/dp/doc/preview?id=4645).
+* VMware vSphere [Java API Reference documentation](https://code.vmware.com/docs/6790/vsphere-automation-java-api-reference).
 * [VMware Java forum](https://code.vmware.com/forums/7508/vsphere-automation-sdk-for-java)
