@@ -293,6 +293,16 @@
     <version>${lookupservice.version}</version>
   </dependency>
   <dependency>
+    <groupId>com.vmware.nsx</groupId>
+    <artifactId>nsx-policy-java-sdk</artifactId>
+    <version>${nsxpolicysdk.version}</version>
+  </dependency>
+  <dependency>
+    <groupId>com.vmware.nsx</groupId>
+    <artifactId>vmc-app-java-sdk</artifactId>
+    <version>${vmcappsdk.version}</version>
+  </dependency>
+  <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-core</artifactId>
     <version>${jackson2.version}</version>
