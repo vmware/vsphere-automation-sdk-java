@@ -38,6 +38,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
  */
 public class ParametersHelper {
     private Map<Option, Boolean> optionMap;
+    private static final String CONFIG_FILE = "config-file";
 
     /**
      * Adds the common and sample-specific options to the list of options to
@@ -94,9 +95,9 @@ public class ParametersHelper {
             getOptions(optionsToParseFromConfig), args);
 
         Iterator<Option> optionsIter = optionsToParseFromConfig.iterator();
-        if (cmd.hasOption("config-file")) {
+        if (cmd.hasOption(CONFIG_FILE)) {
             // Read from configuration file first
-            Configuration config = new PropertiesConfiguration(args[1]);
+        	Configuration config = new PropertiesConfiguration(cmd.getOptionValue(CONFIG_FILE));
             while (optionsIter.hasNext()) {
                 Option option = optionsIter.next();
                 Object optionValue =
