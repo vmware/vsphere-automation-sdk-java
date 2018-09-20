@@ -21,6 +21,7 @@ import com.vmware.vapi.client.ApiClient;
 import com.vmware.vmc.model.AwsSddcConfig;
 import com.vmware.vmc.model.Task;
 import com.vmware.vmc.orgs.Sddcs;
+import com.vmware.vmc.model.Sddc;
 
 import vmware.samples.common.VmcSamplesAbstractBase;
 import vmware.samples.common.authentication.VmcAuthenticationHelper;
@@ -90,6 +91,14 @@ public class CreateDeleteSddc extends VmcSamplesAbstractBase {
         if(!taskCompleted) {
             System.out.println("CREATE SDDC task was either canceled or it failed. Exiting.");
             System.exit(1);
+        }
+        
+        List<Sddc> sddcList = this.sddcsStub.list(this.orgId);
+        for (Sddc sddc : sddcList) {
+            if(sddc.getName().equals(this.sddcName)) {
+                this.sddcId = sddc.getId();
+                break;
+            }
         }
     }
     
