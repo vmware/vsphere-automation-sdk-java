@@ -19,7 +19,6 @@ import org.apache.commons.cli.Option;
 
 import com.vmware.vapi.client.ApiClient;
 import com.vmware.vmc.model.AwsSddcConfig;
-import com.vmware.vmc.model.Sddc;
 import com.vmware.vmc.model.Task;
 import com.vmware.vmc.orgs.Sddcs;
 
@@ -92,19 +91,11 @@ public class CreateDeleteSddc extends VmcSamplesAbstractBase {
             System.out.println("CREATE SDDC task was either canceled or it failed. Exiting.");
             System.exit(1);
         }
-        
-        List<Sddc> sddcList = this.sddcsStub.list(this.orgId);
-        for (Sddc sddc : sddcList) {
-            if(sddc.getName().equals(this.sddcName)) {
-                this.sddcId = sddc.getId();
-                break;
-            }
-        }
     }
     
     protected void cleanup() throws Exception {        
         System.out.printf("\n\nExample: Delete a SDDC %s in org %s", this.sddcName, this.orgId);
-        Task deleteSddcTask = this.sddcsStub.delete(this.orgId, sddcId, "false", null);
+        Task deleteSddcTask = this.sddcsStub.delete(this.orgId, sddcId, false, null, null);
         String taskId = deleteSddcTask.getId();
         System.out.printf("\nPoll the DELETE SDDC task (taskId = %s) :", taskId);
         boolean taskCompleted = VmcTaskHelper.pollTask(apiClient, orgId, taskId, TASK_POLLING_DELAY_IN_MILLISECONDS);

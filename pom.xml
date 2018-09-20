@@ -4,7 +4,7 @@
 
   <groupId>com.vmware</groupId>
   <artifactId>vsphere-samples-nodeps</artifactId>
-  <version>6.8.0</version>
+  <version>6.8.1</version>
   <packaging>jar</packaging>
 
   <name>samples</name>
@@ -16,7 +16,7 @@
     <slf4j.version>1.7.12</slf4j.version>
     <httpclient.version>4.5.1</httpclient.version>
     <httpasyncclient.version>4.1</httpasyncclient.version>
-    <jackson2.version>2.8.7</jackson2.version>
+    <jackson2.version>2.9.5</jackson2.version>
     <log4j.version>1.2.17</log4j.version>
     <commons-lang.version>2.6</commons-lang.version>
     <commons-configuration.version>1.10</commons-configuration.version>
@@ -24,8 +24,8 @@
     <commons-beanutils.version>1.9.3</commons-beanutils.version>
     <lookupservice.version>1.0.0</lookupservice.version>
     <vspherewssdk.version>6.7.0</vspherewssdk.version>
-    <vmc.version>1.2.0</vmc.version>  
-    <vsphereautomationsdk.version>1.3.0</vsphereautomationsdk.version>
+    <vmc.version>1.3.0</vmc.version>
+    <vsphereautomationsdk.version>1.4.0</vsphereautomationsdk.version>
     <nsxpolicysdk.version>2.2.0.0.0.15184434</nsxpolicysdk.version>
     <vmcappsdk.version>2.2.0.0.0.15184434</vmcappsdk.version>
   </properties>
@@ -237,8 +237,8 @@
           </execution>
         </executions>
         <configuration>
-		<appendAssemblyId>false</appendAssemblyId>
-		<finalName>vsphere-samples-${project.version}</finalName>
+        <appendAssemblyId>false</appendAssemblyId>
+        <finalName>vsphere-samples-${project.version}</finalName>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
@@ -277,6 +277,16 @@
     <artifactId>vmc-sdk-common</artifactId>
     <version>${vmc.version}</version>
   </dependency>
+  <dependency>
+   <groupId>com.vmware.nsx</groupId>
+   <artifactId>nsx-policy-java-sdk</artifactId>
+   <version>${nsxpolicysdk.version}</version>
+ </dependency>
+ <dependency>
+   <groupId>com.vmware.nsx</groupId>
+   <artifactId>vmc-app-java-sdk</artifactId>
+   <version>${vmcappsdk.version}</version>
+ </dependency>
   <dependency>
     <groupId>com.vmware.vim25</groupId>
     <artifactId>vim25</artifactId>
