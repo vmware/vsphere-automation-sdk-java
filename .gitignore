@@ -1,7 +1,0 @@
-/target/
-*.classpath
-*.project
-*.prefs
-lib/*sources*.jar
-.gradle/
-build/
