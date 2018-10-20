@@ -12,6 +12,7 @@
  */
 package vmware.samples.appliance.services;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,7 @@ public class ServicesWorkflow extends SamplesAbstractBase {
     private Services applianceServicesApiStub;
     private String serviceName;
     private Map<String, Info> svcList;
-    private Info svcInfo;
+    private Boolean listServices;
 
     protected void setup() throws Exception {
         this.applianceServicesApiStub = vapiAuthHelper.getStubFactory()
@@ -49,46 +50,53 @@ public class ServicesWorkflow extends SamplesAbstractBase {
         System.out.println("Service: " + serviceName);
         System.out.println("Description: " + info.getDescription());
         System.out.println("State: " + info.getState());
-        System.out.println("\n");
+        System.out.println("----------");
     }
 
     protected void run() throws Exception {
-        // List all appliance services using services api
-        System.out.println("#### Example: List Appliance Services:");
-        // get the list of services
-        svcList = applianceServicesApiStub.list();
-        // fomatting the list api output
-        for (Map.Entry<String, Info> svc : svcList.entrySet()) {
-            formattedOutputDisplay(svc.getValue(), svc.getKey());
+
+        if(this.listServices)
+        {
+            //List all appliance services using services api
+            System.out.println("#### Example: List Appliance Services:");
+            //get the list of services
+            svcList = applianceServicesApiStub.list();
+            //fomatting the list api output
+            for (Map.Entry<String, Info> svc : svcList.entrySet()) {
+                formattedOutputDisplay(svc.getValue(), svc.getKey());
+            }
         }
-        // Stop a service using services api
-        System.out.println("#### Example:  Stopping service " + serviceName
-                           + "\n");
-        applianceServicesApiStub.stop(serviceName);
-        // Get details of the service stopped in previous step using services
-        // api
-        formattedOutputDisplay(applianceServicesApiStub.get(serviceName),
-            serviceName);
-        // Start a stopped service using services api
-        System.out.println("#### Example: Starting service " + serviceName
-                           + "\n");
-        applianceServicesApiStub.start(serviceName);
+        if(null != this.serviceName)
+        {
+            // Stop a service using services api
+            System.out.println("#### Example:  Stopping service " + serviceName
+                               + "\n");
+            applianceServicesApiStub.stop(serviceName);
+            // Get details of the service stopped in previous step using services
+            // api
+            formattedOutputDisplay(applianceServicesApiStub.get(serviceName),
+                serviceName);
+            // Start a stopped service using services api
+            System.out.println("#### Example: Starting service " + serviceName
+                               + "\n");
+            applianceServicesApiStub.start(serviceName);
 
-        // Get details of the service started in previous step using services
-        // api
-        formattedOutputDisplay(applianceServicesApiStub.get(serviceName),
-            serviceName);
-        // Restart a service using services api
-        System.out.println("#### Example: Restarting service " + serviceName
-                           + "\n");
-        applianceServicesApiStub.restart(serviceName);
+            // Get details of the service started in previous step using services
+            // api
+            formattedOutputDisplay(applianceServicesApiStub.get(serviceName),
+                serviceName);
+            // Restart a service using services api
+            System.out.println("#### Example: Restarting service " + serviceName
+                               + "\n");
+            applianceServicesApiStub.restart(serviceName);
 
-        // Get details of the service restarted in previous step using services
-        // api
-        System.out.println("#### Example: Getting service details for "
-                           + serviceName + "\n");
-        formattedOutputDisplay(applianceServicesApiStub.get(serviceName),
-            serviceName);
+            // Get details of the service restarted in previous step using services
+            // api
+            System.out.println("#### Example: Getting service details for "
+                               + serviceName + "\n");
+            formattedOutputDisplay(applianceServicesApiStub.get(serviceName),
+                serviceName);
+        }
     }
 
     protected void cleanup() throws Exception {
@@ -112,15 +120,28 @@ public class ServicesWorkflow extends SamplesAbstractBase {
     protected void parseArgs(String[] args) {
         Option serviceName = Option.builder()
             .longOpt("svc_name")
-            .desc(
-                "REQUIRED: Specify servicename for all operations except list operation")
+            .desc("OPTIONAL: Specify servicename for all operations")
             .argName("SERVICE_NAME")
-            .required(true)
-            .hasArg()
+            .required(false)
+            .hasArg(true)
+            .build();
+        Option listServices = Option.builder()
+            .longOpt("list")
+            .desc("OPTIONAL: Lists all the Operations")
+            .argName("LIST_OPERATION")
+            .required(false)
+            .hasArg(false)
             .build();
 
-        List<Option> optionList = Arrays.asList(serviceName);
+        List<Option> optionList = new ArrayList<Option>();
+        optionList.addAll(Arrays.asList( listServices, serviceName));
         super.parseArgs(optionList, args);
         this.serviceName = (String) parsedOptions.get("svc_name");
+        Object lstSVC = parsedOptions.get("list");
+        this.listServices = ( null == lstSVC )? false:true;
+        if(null == this.serviceName && !this.listServices) {
+            System.out.println("\n ERROR: Either of svc_name or list option must be provided");
+            System.exit(0);
+        }
     }
 }
