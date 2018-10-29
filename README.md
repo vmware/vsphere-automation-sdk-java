@@ -147,17 +147,15 @@ Once the eclipse project is imported, follow below steps to add a new sample usi
 This will import a basic sample class to your package, which you can then customize according to your needs.
 
 ## API Documentation
-The API documentation can be downloaded from below links: 
+The API documentation can be accessed from here: 
 
-[vSphere APIs](doc/vsphere-javadoc.zip).
+[vSphere APIs](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/6.7.1/vsphereautomation-client-sdk/index.html).
 
-[VMware Cloud on AWS APIs](doc/vmc-javadoc.zip).
+[VMware Cloud on AWS APIs](https://vmware.github.io/vsphere-automation-sdk-java/vmc/index.html).
 
-[VMware NSX-T APIs](doc/nsx-policy-java-sdk-2.2.0.0.0.15184434-javadoc.zip).
+[VMware NSX-T APIs](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx-policy/index.html).
 
-[VMware NSX-T VMC app APIs](doc/vmc-app-java-sdk-2.2.0.0.0.15184434-javadoc.zip).
-
-Online version of the API documentation can be found [here](https://code.vmware.com/web/dp/doc/preview?id=4642).
+[VMware NSX-T VMC app APIs](https://vmware.github.io/vsphere-automation-sdk-java/nsx/vmc-app/index.html).
 
 ## Submitting samples
 
@@ -224,5 +222,5 @@ Items added to the repository, including items from the Board members, require 2
 * [vSphere Automation SDK Overview](http://pubs.vmware.com/vsphere-65/index.jsp#com.vmware.vapi.progguide.doc/GUID-AF73991C-FC1C-47DF-8362-184B6544CFDE.html)
 * [VMware Code](https://code.vmware.com/home)
 * [VMware Developer Community](https://communities.vmware.com/community/vmtn/developer)
-* VMware vSphere [Java API Reference documentation](https://code.vmware.com/docs/6790/vsphere-automation-java-api-reference).
+* VMware vSphere [Java API Reference documentation](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/6.7.1/vsphereautomation-client-sdk/index.html).
 * [VMware Java forum](https://code.vmware.com/forums/7508/vsphere-automation-sdk-for-java)
