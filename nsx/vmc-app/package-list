@@ -1,5 +1,8 @@
 com.vmware.nsx_vmc_app
-com.vmware.nsx_vmc_app.linked_vpcs
+com.vmware.nsx_vmc_app.infra
+com.vmware.nsx_vmc_app.infra.direct_connect
+com.vmware.nsx_vmc_app.infra.direct_connect.routes
+com.vmware.nsx_vmc_app.infra.linked_vpcs
 com.vmware.nsx_vmc_app.model
 com.vmware.nsx_vmc_app.util
 com.vmware.vapi
