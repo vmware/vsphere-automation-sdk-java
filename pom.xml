@@ -26,8 +26,8 @@
     <vspherewssdk.version>6.7.1</vspherewssdk.version>
     <vmc.version>1.3.0</vmc.version>  
     <vsphereautomationsdk.version>1.5.0</vsphereautomationsdk.version>
-    <nsxpolicysdk.version>2.2.0.0.0.15184434</nsxpolicysdk.version>
-    <vmcappsdk.version>2.2.0.0.0.15184434</vmcappsdk.version>
+    <nsxpolicysdk.version>2.3.0.0.1.10604709</nsxpolicysdk.version>
+    <vmcappsdk.version>2.3.0.0.1.10604709</vmcappsdk.version>
   </properties>
   <build>
     <plugins>
