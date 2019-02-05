@@ -113,4 +113,41 @@ public class NetworkHelper {
 
         return networkSummaries.get(0).getNetwork();
     }
+    
+    /**
+     * Returns the identifier of a Opaque network
+     *
+     * Note: The method assumes that there is only one Opaque portgroup
+     * with the mentioned name.
+     *
+     * @param stubFactory stub factory of the API endpoint
+     * @param sessionStubConfig stub configuration for the session
+     * network exists
+     * @param opaquePortgroup name of the opaque portgroup
+     * @return identifier of the opaque network
+     */
+    public static String getOpaqueNetworkBacking(
+        StubFactory stubFactory, StubConfiguration sessionStubConfig,
+        String opaquePortgroup) {
+
+        Network networkService = stubFactory.createStub(Network.class,
+            sessionStubConfig);
+
+        // Get the network id
+        Set<String> networkNames = Collections.singleton(opaquePortgroup);
+        Set<NetworkTypes.Type> networkTypes = new HashSet<>(Collections
+            .singletonList(NetworkTypes.Type.OPAQUE_NETWORK));
+        NetworkTypes.FilterSpec networkFilterSpec =
+                new NetworkTypes.FilterSpec.Builder()
+                    .setNames(networkNames)
+                    .setTypes(networkTypes)
+                    .build();
+        List<NetworkTypes.Summary> networkSummaries = networkService.list(
+            networkFilterSpec);
+        assert networkSummaries.size() > 0 : "Opaque Portgroup with name "
+                                             + opaquePortgroup
+                                             + " not found ";
+
+        return networkSummaries.get(0).getNetwork();
+    }
 }
