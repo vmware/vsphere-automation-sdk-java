@@ -188,7 +188,7 @@ public class ParametersHelper {
 
         });
         formatter.printHelp(150,
-            "\njava -cp target/vsphere-samples-6.5.0.jar " + sampleName,
+            "\njava -cp target/vsphere-samples-6.7.1.jar " + sampleName,
             "\nSample Options:",
             getOptions(new ArrayList<Option>(this.optionMap.keySet())),
             "",
