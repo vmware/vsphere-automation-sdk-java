@@ -12,7 +12,12 @@
  */
 package vmware.samples.vcenter.vcha;
 
-import com.vmware.vcenter.vcha.*;
+import com.vmware.vcenter.vcha.NetworkType;
+import com.vmware.vcenter.vcha.CredentialsSpec;
+import com.vmware.vcenter.vcha.Cluster;
+import com.vmware.vcenter.vcha.ClusterTypes;
+import com.vmware.vcenter.vcha.IpSpec;
+import com.vmware.vcenter.vcha.PlacementSpec;
 import org.apache.commons.cli.Option;
 import vmware.samples.common.SamplesAbstractBase;
 import vmware.samples.vcenter.vcha.helpers.SpecHelper;
@@ -21,7 +26,7 @@ import vmware.samples.vcenter.vcha.helpers.TaskHelper;
 import java.util.Arrays;
 import java.util.List;
 
-import static vmware.samples.vcenter.vcha.helpers.ArgumentsHelper.*;
+import vmware.samples.vcenter.vcha.helpers.ArgumentsHelper;
 
 /**
  * Description: Demonstrates vCenter HA Cluster Deploy, Undeploy operations for a given vCenter server
@@ -93,7 +98,7 @@ public class VchaClusterOps extends SamplesAbstractBase {
     protected void parseArgs(String[] args) {
         // Management vCenter Connection Spec Options
         Option vcSpecActiveLocationHostnameOption = Option.builder()
-                .longOpt(VC_SPEC_ACTIVE_LOCATION_HOSTNAME)
+                .longOpt(ArgumentsHelper.VC_SPEC_ACTIVE_LOCATION_HOSTNAME)
                 .desc("OPTIONAL: hostname of the Management vCenter Server. " +
                         "Leave blank if it's a self-managed VC")
                 .argName("MGMT VC HOST")
@@ -101,7 +106,7 @@ public class VchaClusterOps extends SamplesAbstractBase {
                 .hasArg()
                 .build();
         Option vcSpecActiveLocationUsernameOption = Option.builder()
-                .longOpt(VC_SPEC_ACTIVE_LOCATION_USERNAME)
+                .longOpt(ArgumentsHelper.VC_SPEC_ACTIVE_LOCATION_USERNAME)
                 .desc("OPTIONAL: username to login to the Management vCenter Server. " +
                         "Leave blank if it's a self-managed VC")
                 .argName("MGMT VC USERNAME")
@@ -109,7 +114,7 @@ public class VchaClusterOps extends SamplesAbstractBase {
                 .hasArg()
                 .build();
         Option vcSpecActiveLocationPasswordOption = Option.builder()
-                .longOpt(VC_SPEC_ACTIVE_LOCATION_PASSWORD)
+                .longOpt(ArgumentsHelper.VC_SPEC_ACTIVE_LOCATION_PASSWORD)
                 .desc("OPTIONAL: password to login to the Management vCenter Server. " +
                         "Leave blank if it's a self-managed VC")
                 .argName("MGMT VC PASSWORD")
@@ -117,7 +122,7 @@ public class VchaClusterOps extends SamplesAbstractBase {
                 .hasArg()
                 .build();
         Option vcSpecActiveLocationSSLThumbprintOption = Option.builder()
-                .longOpt(VC_SPEC_ACTIVE_LOCATION_SSL_THUMBPRINT)
+                .longOpt(ArgumentsHelper.VC_SPEC_ACTIVE_LOCATION_SSL_THUMBPRINT)
                 .desc("SSL Thumbprint of Management vCenter Server. " +
                         "Leave blank if it's a self-managed VC")
                 .argName("MGMT VC SSL THUMBPRINT")
@@ -126,42 +131,42 @@ public class VchaClusterOps extends SamplesAbstractBase {
                 .build();
         // Active HA Network Spec Options
         Option activeHaIpDefaultGatewayOption = Option.builder()
-                .longOpt(ACTIVE_HA_IP_DEFAULT_GATEWAY)
+                .longOpt(ArgumentsHelper.ACTIVE_HA_IP_DEFAULT_GATEWAY)
                 .desc("OPTIONAL: IP address of the gateway for this interface")
                 .argName("ACTIVE HA IP DEFAULT GATEWAY")
                 .required(false)
                 .hasArg()
                 .build();
         Option activeHaIpDnsServersOption = Option.builder()
-                .longOpt(ACTIVE_HA_IP_DNS_SERVERS)
+                .longOpt(ArgumentsHelper.ACTIVE_HA_IP_DNS_SERVERS)
                 .desc("List of IP addresses of the DNS servers to configure the interface")
                 .argName("ACTIVE HA IP DNS SERVERS")
                 .required(true)
                 .hasArg()
                 .build();
         Option activeHaIpIpv4AddressOption = Option.builder()
-                .longOpt(ACTIVE_HA_IP_IPV4_ADDRESS)
+                .longOpt(ArgumentsHelper.ACTIVE_HA_IP_IPV4_ADDRESS)
                 .desc("IP address to be used to configure the interface")
                 .argName("ACTIVE HA IP IPV4 ADDRESS")
                 .required(true)
                 .hasArg()
                 .build();
         Option activeHaIpIpv4SubnetMaskOption = Option.builder()
-                .longOpt(ACTIVE_HA_IP_IPV4_SUBNET_MASK)
+                .longOpt(ArgumentsHelper.ACTIVE_HA_IP_IPV4_SUBNET_MASK)
                 .desc("Subnet mask of the interface")
                 .argName("ACTIVE HA IP IPV4 SUBNET MASK")
                 .required(true)
                 .hasArg()
                 .build();
         Option activeHaIpIpv4PrefixOption = Option.builder()
-                .longOpt(ACTIVE_HA_IP_IPV4_PREFIX)
+                .longOpt(ArgumentsHelper.ACTIVE_HA_IP_IPV4_PREFIX)
                 .desc("OPTIONAL: CIDR Prefix for the interface")
                 .argName("ACTIVE HA IP IPV4 PREFIX")
                 .required(false)
                 .hasArg()
                 .build();
         Option activeHaNetworkOption = Option.builder()
-                .longOpt(ACTIVE_HA_NETWORK)
+                .longOpt(ArgumentsHelper.ACTIVE_HA_NETWORK)
                 .desc("OPTIONAL: The identifier of the network object to be used for the HA network. " +
                         "Leave blank if Active node is already configured with HA network")
                 .argName("ACTIVE HA NETWORK")
@@ -169,7 +174,7 @@ public class VchaClusterOps extends SamplesAbstractBase {
                 .hasArg()
                 .build();
         Option activeHaNetworkTypeOption = Option.builder()
-                .longOpt(ACTIVE_HA_NETWORK_TYPE)
+                .longOpt(ArgumentsHelper.ACTIVE_HA_NETWORK_TYPE)
                 .desc("OPTIONAL: The type of the network object to be used by the HA network. " +
                         "Leave blank if Active node is already configured with HA network")
                 .argName("ACTIVE HA NETWORK TYPE")
@@ -178,35 +183,35 @@ public class VchaClusterOps extends SamplesAbstractBase {
                 .build();
         // Passive Failover Network Spec Options
         Option passiveFailoverIpDefaultGatewayOption = Option.builder()
-                .longOpt(PASSIVE_FAILOVER_IP_DEFAULT_GATEWAY)
+                .longOpt(ArgumentsHelper.PASSIVE_FAILOVER_IP_DEFAULT_GATEWAY)
                 .desc("OPTIONAL: IP address of the gateway for this interface")
                 .argName("PASSIVE FAILOVER IP DEFAULT GATEWAY")
                 .required(false)
                 .hasArg()
                 .build();
         Option passiveFailoverIpDnsServersOption = Option.builder()
-                .longOpt(PASSIVE_FAILOVER_IP_DNS_SERVERS)
+                .longOpt(ArgumentsHelper.PASSIVE_FAILOVER_IP_DNS_SERVERS)
                 .desc("OPTIONAL: List of IP addresses of the DNS servers to configure the interface")
                 .argName("PASSIVE FAILOVER IP DNS SERVERS")
                 .required(false)
                 .hasArg()
                 .build();
         Option passiveFailoverIpIpv4AddressOption = Option.builder()
-                .longOpt(PASSIVE_FAILOVER_IP_IPV4_ADDRESS)
+                .longOpt(ArgumentsHelper.PASSIVE_FAILOVER_IP_IPV4_ADDRESS)
                 .desc("OPTIONAL: IP address to be used to configure the interface")
                 .argName("PASSIVE FAILOVER IP IPV4 ADDRESS")
                 .required(false)
                 .hasArg()
                 .build();
         Option passiveFailoverIpIpv4SubnetMaskOption = Option.builder()
-                .longOpt(PASSIVE_FAILOVER_IP_IPV4_SUBNET_MASK)
+                .longOpt(ArgumentsHelper.PASSIVE_FAILOVER_IP_IPV4_SUBNET_MASK)
                 .desc("OPTIONAL: Subnet mask of the interface")
                 .argName("PASSIVE FAILOVER IP IPV4 SUBNET MASK")
                 .required(false)
                 .hasArg()
                 .build();
         Option passiveFailoverIpIpv4PrefixOption = Option.builder()
-                .longOpt(PASSIVE_FAILOVER_IP_IPV4_PREFIX)
+                .longOpt(ArgumentsHelper.PASSIVE_FAILOVER_IP_IPV4_PREFIX)
                 .desc("OPTIONAL: CIDR Prefix for the interface")
                 .argName("PASSIVE FAILOVER IP IPV4 PREFIX")
                 .required(false)
@@ -214,35 +219,35 @@ public class VchaClusterOps extends SamplesAbstractBase {
                 .build();
         // Passive HA Network Spec Options
         Option passiveHaIpDefaultGatewayOption = Option.builder()
-                .longOpt(PASSIVE_HA_IP_DEFAULT_GATEWAY)
+                .longOpt(ArgumentsHelper.PASSIVE_HA_IP_DEFAULT_GATEWAY)
                 .desc("OPTIONAL: IP address of the gateway for this interface")
                 .argName("PASSIVE HA IP DEFAULT GATEWAY")
                 .required(false)
                 .hasArg()
                 .build();
         Option passiveHaIpDnsServersOption = Option.builder()
-                .longOpt(PASSIVE_HA_IP_DNS_SERVERS)
+                .longOpt(ArgumentsHelper.PASSIVE_HA_IP_DNS_SERVERS)
                 .desc("List of IP addresses of the DNS servers to configure the interface")
                 .argName("PASSIVE HA IP DNS SERVERS")
                 .required(true)
                 .hasArg()
                 .build();
         Option passiveHaIpIpv4AddressOption = Option.builder()
-                .longOpt(PASSIVE_HA_IP_IPV4_ADDRESS)
+                .longOpt(ArgumentsHelper.PASSIVE_HA_IP_IPV4_ADDRESS)
                 .desc("IP address to be used to configure the interface")
                 .argName("PASSIVE HA IP IPV4 ADDRESS")
                 .required(true)
                 .hasArg()
                 .build();
         Option passiveHaIpIpv4SubnetMaskOption = Option.builder()
-                .longOpt(PASSIVE_HA_IP_IPV4_SUBNET_MASK)
+                .longOpt(ArgumentsHelper.PASSIVE_HA_IP_IPV4_SUBNET_MASK)
                 .desc("Subnet mask of the interface")
                 .argName("PASSIVE HA IP IPV4 SUBNET MASK")
                 .required(true)
                 .hasArg()
                 .build();
         Option passiveHaIpIpv4PrefixOption = Option.builder()
-                .longOpt(PASSIVE_HA_IP_IPV4_PREFIX)
+                .longOpt(ArgumentsHelper.PASSIVE_HA_IP_IPV4_PREFIX)
                 .desc("OPTIONAL: CIDR Prefix for the interface")
                 .argName("PASSIVE HA IP IPV4 PREFIX")
                 .required(false)
@@ -250,63 +255,63 @@ public class VchaClusterOps extends SamplesAbstractBase {
                 .build();
         // Passive Placement Spec Options
         Option passivePlacementNameOption = Option.builder()
-                .longOpt(PASSIVE_PLACEMENT_NAME)
+                .longOpt(ArgumentsHelper.PASSIVE_PLACEMENT_NAME)
                 .desc("The name of the vCenter HA node to be used for the VM name")
                 .argName("PASSIVE PLACEMENT NAME")
                 .required(true)
                 .hasArg()
                 .build();
         Option passivePlacementFolderOption = Option.builder()
-                .longOpt(PASSIVE_PLACEMENT_FOLDER)
+                .longOpt(ArgumentsHelper.PASSIVE_PLACEMENT_FOLDER)
                 .desc("The identifier of the folder to deploy the vCenter HA node to")
                 .argName("PASSIVE PLACEMENT FOLDER")
                 .required(true)
                 .hasArg()
                 .build();
         Option passivePlacementHaNetworkOption = Option.builder()
-                .longOpt(PASSIVE_PLACEMENT_HA_NETWORK)
+                .longOpt(ArgumentsHelper.PASSIVE_PLACEMENT_HA_NETWORK)
                 .desc("OPTIONAL: The identifier of the network object to be used for the HA network")
                 .argName("PASSIVE PLACEMENT HA NETWORK")
                 .required(false)
                 .hasArg()
                 .build();
         Option passivePlacementHaNetworkTypeOption = Option.builder()
-                .longOpt(PASSIVE_PLACEMENT_HA_NETWORK_TYPE)
+                .longOpt(ArgumentsHelper.PASSIVE_PLACEMENT_HA_NETWORK_TYPE)
                 .desc("OPTIONAL: The type of the network object to be used by the HA network")
                 .argName("PASSIVE PLACEMENT HA NETWORK TYPE")
                 .required(false)
                 .hasArg()
                 .build();
         Option passivePlacementHostOption = Option.builder()
-                .longOpt(PASSIVE_PLACEMENT_HOST)
+                .longOpt(ArgumentsHelper.PASSIVE_PLACEMENT_HOST)
                 .desc("The identifier of the host to deploy the vCenter HA node to")
                 .argName("PASSIVE PLACEMENT HOST")
                 .required(true)
                 .hasArg()
                 .build();
         Option passivePlacementResourcePoolOption = Option.builder()
-                .longOpt(PASSIVE_PLACEMENT_RESOURCE_POOL)
+                .longOpt(ArgumentsHelper.PASSIVE_PLACEMENT_RESOURCE_POOL)
                 .desc("OPTIONAL: The identifier of the resource pool to deploy the vCenter HA node to")
                 .argName("PASSIVE PLACEMENT RESOURCE POOL")
                 .required(false)
                 .hasArg()
                 .build();
         Option passivePlacementStorageDatastoreOption = Option.builder()
-                .longOpt(PASSIVE_PLACEMENT_STORAGE_DATASTORE)
+                .longOpt(ArgumentsHelper.PASSIVE_PLACEMENT_STORAGE_DATASTORE)
                 .desc("The identifier of the datastore to put all the virtual disks on")
                 .argName("PASSIVE PLACEMENT STORAGE DATASTORE")
                 .required(true)
                 .hasArg()
                 .build();
         Option passivePlacementManagementNetworkOption = Option.builder()
-                .longOpt(PASSIVE_PLACEMENT_MANAGEMENT_NETWORK)
+                .longOpt(ArgumentsHelper.PASSIVE_PLACEMENT_MANAGEMENT_NETWORK)
                 .desc("The identifier of the network object to be used for the Management network")
                 .argName("PASSIVE PLACEMENT MANAGEMENT NETWORK")
                 .required(true)
                 .hasArg()
                 .build();
         Option passivePlacementManagementNetworkTypeOption = Option.builder()
-                .longOpt(PASSIVE_PLACEMENT_MANAGEMENT_NETWORK_TYPE)
+                .longOpt(ArgumentsHelper.PASSIVE_PLACEMENT_MANAGEMENT_NETWORK_TYPE)
                 .desc("The type of the network object to be used by the Management network")
                 .argName("PASSIVE PLACEMENT MANAGEMENT NETWORK TYPE")
                 .required(true)
@@ -314,35 +319,35 @@ public class VchaClusterOps extends SamplesAbstractBase {
                 .build();
         // Witness HA Network Spec Options
         Option witnessHaIpDefaultGatewayOption = Option.builder()
-                .longOpt(WITNESS_HA_IP_DEFAULT_GATEWAY)
+                .longOpt(ArgumentsHelper.WITNESS_HA_IP_DEFAULT_GATEWAY)
                 .desc("OPTIONAL: IP address of the gateway for this interface")
                 .argName("WITNESS HA IP DEFAULT GATEWAY")
                 .required(false)
                 .hasArg()
                 .build();
         Option witnessHaIpDnsServersOption = Option.builder()
-                .longOpt(WITNESS_HA_IP_DNS_SERVERS)
+                .longOpt(ArgumentsHelper.WITNESS_HA_IP_DNS_SERVERS)
                 .desc("List of IP addresses of the DNS servers to configure the interface")
                 .argName("WITNESS HA IP DNS SERVERS")
                 .required(true)
                 .hasArg()
                 .build();
         Option witnessHaIpIpv4AddressOption = Option.builder()
-                .longOpt(WITNESS_HA_IP_IPV4_ADDRESS)
+                .longOpt(ArgumentsHelper.WITNESS_HA_IP_IPV4_ADDRESS)
                 .desc("IP address to be used to configure the interface")
                 .argName("WITNESS HA IP IPV4 ADDRESS")
                 .required(true)
                 .hasArg()
                 .build();
         Option witnessHaIpIpv4SubnetMaskOption = Option.builder()
-                .longOpt(WITNESS_HA_IP_IPV4_SUBNET_MASK)
+                .longOpt(ArgumentsHelper.WITNESS_HA_IP_IPV4_SUBNET_MASK)
                 .desc("Subnet mask of the interface")
                 .argName("WITNESS HA IP IPV4 SUBNET MASK")
                 .required(true)
                 .hasArg()
                 .build();
         Option witnessHaIpIpv4PrefixOption = Option.builder()
-                .longOpt(WITNESS_HA_IP_IPV4_PREFIX)
+                .longOpt(ArgumentsHelper.WITNESS_HA_IP_IPV4_PREFIX)
                 .desc("OPTIONAL: CIDR Prefix for the interface")
                 .argName("WITNESS HA IP IPV4 PREFIX")
                 .required(false)
@@ -350,63 +355,63 @@ public class VchaClusterOps extends SamplesAbstractBase {
                 .build();
         // Witness Placement Spec Options
         Option witnessPlacementNameOption = Option.builder()
-                .longOpt(WITNESS_PLACEMENT_NAME)
+                .longOpt(ArgumentsHelper.WITNESS_PLACEMENT_NAME)
                 .desc("The name of the vCenter HA node to be used for the VM name")
                 .argName("WITNESS PLACEMENT NAME")
                 .required(true)
                 .hasArg()
                 .build();
         Option witnessPlacementFolderOption = Option.builder()
-                .longOpt(WITNESS_PLACEMENT_FOLDER)
+                .longOpt(ArgumentsHelper.WITNESS_PLACEMENT_FOLDER)
                 .desc("The identifier of the folder to deploy the vCenter HA node to")
                 .argName("WITNESS PLACEMENT FOLDER")
                 .required(true)
                 .hasArg()
                 .build();
         Option witnessPlacementHaNetworkOption = Option.builder()
-                .longOpt(WITNESS_PLACEMENT_HA_NETWORK)
+                .longOpt(ArgumentsHelper.WITNESS_PLACEMENT_HA_NETWORK)
                 .desc("OPTIONAL: The identifier of the network object to be used for the HA network")
                 .argName("WITNESS PLACEMENT HA NETWORK")
                 .required(false)
                 .hasArg()
                 .build();
         Option witnessPlacementHaNetworkTypeOption = Option.builder()
-                .longOpt(WITNESS_PLACEMENT_HA_NETWORK_TYPE)
+                .longOpt(ArgumentsHelper.WITNESS_PLACEMENT_HA_NETWORK_TYPE)
                 .desc("OPTIONAL: The type of the network object to be used by the HA network")
                 .argName("WITNESS PLACEMENT HA NETWORK TYPE")
                 .required(false)
                 .hasArg()
                 .build();
         Option witnessPlacementHostOption = Option.builder()
-                .longOpt(WITNESS_PLACEMENT_HOST)
+                .longOpt(ArgumentsHelper.WITNESS_PLACEMENT_HOST)
                 .desc("The identifier of the host to deploy the vCenter HA node to")
                 .argName("WITNESS PLACEMENT HOST")
                 .required(true)
                 .hasArg()
                 .build();
         Option witnessPlacementResourcePoolOption = Option.builder()
-                .longOpt(WITNESS_PLACEMENT_RESOURCE_POOL)
+                .longOpt(ArgumentsHelper.WITNESS_PLACEMENT_RESOURCE_POOL)
                 .desc("OPTIONAL: The identifier of the resource pool to deploy the vCenter HA node to")
                 .argName("WITNESS PLACEMENT RESOURCE POOL")
                 .required(false)
                 .hasArg()
                 .build();
         Option witnessPlacementStorageDatastoreOption = Option.builder()
-                .longOpt(WITNESS_PLACEMENT_STORAGE_DATASTORE)
+                .longOpt(ArgumentsHelper.WITNESS_PLACEMENT_STORAGE_DATASTORE)
                 .desc("The identifier of the datastore to put all the virtual disks on")
                 .argName("WITNESS PLACEMENT STORAGE DATASTORE")
                 .required(true)
                 .hasArg()
                 .build();
         Option witnessPlacementManagementNetworkOption = Option.builder()
-                .longOpt(WITNESS_PLACEMENT_MANAGEMENT_NETWORK)
+                .longOpt(ArgumentsHelper.WITNESS_PLACEMENT_MANAGEMENT_NETWORK)
                 .desc("The identifier of the network object to be used for the Management network")
                 .argName("WITNESS PLACEMENT MANAGEMENT NETWORK")
                 .required(true)
                 .hasArg()
                 .build();
         Option witnessPlacementManagementNetworkTypeOption = Option.builder()
-                .longOpt(WITNESS_PLACEMENT_MANAGEMENT_NETWORK_TYPE)
+                .longOpt(ArgumentsHelper.WITNESS_PLACEMENT_MANAGEMENT_NETWORK_TYPE)
                 .desc("The type of the network object to be used by the Management network")
                 .argName("WITNESS PLACEMENT MANAGEMENT NETWORK TYPE")
                 .required(true)
@@ -458,58 +463,100 @@ public class VchaClusterOps extends SamplesAbstractBase {
                 witnessPlacementManagementNetworkTypeOption
         );
         super.parseArgs(optionList, args);
-        this.vcSpecActiveLocationHostname = getStringArg(parsedOptions, VC_SPEC_ACTIVE_LOCATION_HOSTNAME);
+        this.vcSpecActiveLocationHostname = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.VC_SPEC_ACTIVE_LOCATION_HOSTNAME);
         if(this.vcSpecActiveLocationHostname == null)
             this.vcSpecActiveLocationHostname = this.getServer();
-        this.vcSpecActiveLocationUsername = getStringArg(parsedOptions, VC_SPEC_ACTIVE_LOCATION_USERNAME);
+        this.vcSpecActiveLocationUsername = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.VC_SPEC_ACTIVE_LOCATION_USERNAME);
         if(this.vcSpecActiveLocationUsername == null)
             this.vcSpecActiveLocationUsername = this.getUsername();
-        this.vcSpecActiveLocationPassword = getStringArg(parsedOptions, VC_SPEC_ACTIVE_LOCATION_PASSWORD);
+        this.vcSpecActiveLocationPassword = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.VC_SPEC_ACTIVE_LOCATION_PASSWORD);
         if(this.vcSpecActiveLocationPassword == null)
             this.vcSpecActiveLocationPassword = this.getPassword();
-        this.vcSpecActiveLocationSSLThumbprint = getStringArg(parsedOptions, VC_SPEC_ACTIVE_LOCATION_SSL_THUMBPRINT);
-        this.activeHaIpDefaultGateway = getStringArg(parsedOptions, ACTIVE_HA_IP_DEFAULT_GATEWAY);
-        this.activeHaIpDnsServers = getStringListArg(parsedOptions, ACTIVE_HA_IP_DNS_SERVERS);
-        this.activeHaIpIpv4Address = getStringArg(parsedOptions, ACTIVE_HA_IP_IPV4_ADDRESS);
-        this.activeHaIpIpv4SubnetMask = getStringArg(parsedOptions, ACTIVE_HA_IP_IPV4_SUBNET_MASK);
-        this.activeHaIpIpv4Prefix = getLongArg(parsedOptions, ACTIVE_HA_IP_IPV4_PREFIX);
-        this.activeHaNetwork = getStringArg(parsedOptions, ACTIVE_HA_NETWORK);
-        this.activeHaNetworkType = getNetworkTypeArg(parsedOptions, ACTIVE_HA_NETWORK_TYPE);
-        this.passiveFailoverIpDefaultGateway = getStringArg(parsedOptions, PASSIVE_FAILOVER_IP_DEFAULT_GATEWAY);
-        this.passiveFailoverIpDnsServers = getStringListArg(parsedOptions, PASSIVE_FAILOVER_IP_DNS_SERVERS);
-        this.passiveFailoverIpIpv4Address = getStringArg(parsedOptions, PASSIVE_FAILOVER_IP_IPV4_ADDRESS);
-        this.passiveFailoverIpIpv4SubnetMask = getStringArg(parsedOptions, PASSIVE_FAILOVER_IP_IPV4_SUBNET_MASK);
-        this.passiveFailoverIpIpv4Prefix = getLongArg(parsedOptions, PASSIVE_FAILOVER_IP_IPV4_PREFIX);
-        this.passiveHaIpDefaultGateway = getStringArg(parsedOptions, PASSIVE_HA_IP_DEFAULT_GATEWAY);
-        this.passiveHaIpDnsServers = getStringListArg(parsedOptions, PASSIVE_HA_IP_DNS_SERVERS);
-        this.passiveHaIpIpv4Address = getStringArg(parsedOptions, PASSIVE_HA_IP_IPV4_ADDRESS);
-        this.passiveHaIpIpv4SubnetMask = getStringArg(parsedOptions, PASSIVE_HA_IP_IPV4_SUBNET_MASK);
-        this.passiveHaIpIpv4Prefix = getLongArg(parsedOptions, PASSIVE_HA_IP_IPV4_PREFIX);
-        this.passivePlacementName = getStringArg(parsedOptions, PASSIVE_PLACEMENT_NAME);
-        this.passivePlacementFolder = getStringArg(parsedOptions, PASSIVE_PLACEMENT_FOLDER);
-        this.passivePlacementHaNetwork = getStringArg(parsedOptions, PASSIVE_PLACEMENT_HA_NETWORK);
-        this.passivePlacementHaNetworkType = getNetworkTypeArg(parsedOptions, PASSIVE_PLACEMENT_HA_NETWORK_TYPE);
-        this.passivePlacementHost = getStringArg(parsedOptions, PASSIVE_PLACEMENT_HOST);
-        this.passivePlacementResourcePool = getStringArg(parsedOptions, PASSIVE_PLACEMENT_RESOURCE_POOL);
-        this.passivePlacementStorageDatastore = getStringArg(parsedOptions, PASSIVE_PLACEMENT_STORAGE_DATASTORE);
-        this.passivePlacementManagementNetwork = getStringArg(parsedOptions, PASSIVE_PLACEMENT_MANAGEMENT_NETWORK);
-        this.passivePlacementManagementNetworkType = getNetworkTypeArg(parsedOptions,
-                                                                       PASSIVE_PLACEMENT_MANAGEMENT_NETWORK_TYPE);
-        this.witnessHaIpDefaultGateway = getStringArg(parsedOptions, WITNESS_HA_IP_DEFAULT_GATEWAY);
-        this.witnessHaIpDnsServers = getStringListArg(parsedOptions, WITNESS_HA_IP_DNS_SERVERS);
-        this.witnessHaIpIpv4Address = getStringArg(parsedOptions, WITNESS_HA_IP_IPV4_ADDRESS);
-        this.witnessHaIpIpv4SubnetMask = getStringArg(parsedOptions, WITNESS_HA_IP_IPV4_SUBNET_MASK);
-        this.witnessHaIpIpv4Prefix = getLongArg(parsedOptions, WITNESS_HA_IP_IPV4_PREFIX);
-        this.witnessPlacementName = getStringArg(parsedOptions, WITNESS_PLACEMENT_NAME);
-        this.witnessPlacementFolder = getStringArg(parsedOptions, WITNESS_PLACEMENT_FOLDER);
-        this.witnessPlacementHaNetwork = getStringArg(parsedOptions, WITNESS_PLACEMENT_HA_NETWORK);
-        this.witnessPlacementHaNetworkType = getNetworkTypeArg(parsedOptions, WITNESS_PLACEMENT_HA_NETWORK_TYPE);
-        this.witnessPlacementHost = getStringArg(parsedOptions, WITNESS_PLACEMENT_HOST);
-        this.witnessPlacementResourcePool = getStringArg(parsedOptions, WITNESS_PLACEMENT_RESOURCE_POOL);
-        this.witnessPlacementStorageDatastore = getStringArg(parsedOptions, WITNESS_PLACEMENT_STORAGE_DATASTORE);
-        this.witnessPlacementManagementNetwork = getStringArg(parsedOptions, WITNESS_PLACEMENT_MANAGEMENT_NETWORK);
-        this.witnessPlacementManagementNetworkType = getNetworkTypeArg(parsedOptions,
-                                                                       WITNESS_PLACEMENT_MANAGEMENT_NETWORK_TYPE);
+        this.vcSpecActiveLocationSSLThumbprint = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.VC_SPEC_ACTIVE_LOCATION_SSL_THUMBPRINT);
+        this.activeHaIpDefaultGateway = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.ACTIVE_HA_IP_DEFAULT_GATEWAY);
+        this.activeHaIpDnsServers = ArgumentsHelper.getStringListArg(parsedOptions,
+        		ArgumentsHelper.ACTIVE_HA_IP_DNS_SERVERS);
+        this.activeHaIpIpv4Address = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.ACTIVE_HA_IP_IPV4_ADDRESS);
+        this.activeHaIpIpv4SubnetMask = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.ACTIVE_HA_IP_IPV4_SUBNET_MASK);
+        this.activeHaIpIpv4Prefix = ArgumentsHelper.getLongArg(parsedOptions,
+        		ArgumentsHelper.ACTIVE_HA_IP_IPV4_PREFIX);
+        this.activeHaNetwork = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.ACTIVE_HA_NETWORK);
+        this.activeHaNetworkType = ArgumentsHelper.getNetworkTypeArg(parsedOptions,
+        		ArgumentsHelper.ACTIVE_HA_NETWORK_TYPE);
+        this.passiveFailoverIpDefaultGateway = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_FAILOVER_IP_DEFAULT_GATEWAY);
+        this.passiveFailoverIpDnsServers = ArgumentsHelper.getStringListArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_FAILOVER_IP_DNS_SERVERS);
+        this.passiveFailoverIpIpv4Address = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_FAILOVER_IP_IPV4_ADDRESS);
+        this.passiveFailoverIpIpv4SubnetMask = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_FAILOVER_IP_IPV4_SUBNET_MASK);
+        this.passiveFailoverIpIpv4Prefix = ArgumentsHelper.getLongArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_FAILOVER_IP_IPV4_PREFIX);
+        this.passiveHaIpDefaultGateway = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_HA_IP_DEFAULT_GATEWAY);
+        this.passiveHaIpDnsServers = ArgumentsHelper.getStringListArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_HA_IP_DNS_SERVERS);
+        this.passiveHaIpIpv4Address = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_HA_IP_IPV4_ADDRESS);
+        this.passiveHaIpIpv4SubnetMask = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_HA_IP_IPV4_SUBNET_MASK);
+        this.passiveHaIpIpv4Prefix = ArgumentsHelper.getLongArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_HA_IP_IPV4_PREFIX);
+        this.passivePlacementName = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_PLACEMENT_NAME);
+        this.passivePlacementFolder = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_PLACEMENT_FOLDER);
+        this.passivePlacementHaNetwork = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_PLACEMENT_HA_NETWORK);
+        this.passivePlacementHaNetworkType = ArgumentsHelper.getNetworkTypeArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_PLACEMENT_HA_NETWORK_TYPE);
+        this.passivePlacementHost = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_PLACEMENT_HOST);
+        this.passivePlacementResourcePool = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_PLACEMENT_RESOURCE_POOL);
+        this.passivePlacementStorageDatastore = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_PLACEMENT_STORAGE_DATASTORE);
+        this.passivePlacementManagementNetwork = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_PLACEMENT_MANAGEMENT_NETWORK);
+        this.passivePlacementManagementNetworkType = ArgumentsHelper.getNetworkTypeArg(parsedOptions,
+        		ArgumentsHelper.PASSIVE_PLACEMENT_MANAGEMENT_NETWORK_TYPE);
+        this.witnessHaIpDefaultGateway = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.WITNESS_HA_IP_DEFAULT_GATEWAY);
+        this.witnessHaIpDnsServers = ArgumentsHelper.getStringListArg(parsedOptions,
+        		ArgumentsHelper.WITNESS_HA_IP_DNS_SERVERS);
+        this.witnessHaIpIpv4Address = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.WITNESS_HA_IP_IPV4_ADDRESS);
+        this.witnessHaIpIpv4SubnetMask = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.WITNESS_HA_IP_IPV4_SUBNET_MASK);
+        this.witnessHaIpIpv4Prefix = ArgumentsHelper.getLongArg(parsedOptions,
+        		ArgumentsHelper.WITNESS_HA_IP_IPV4_PREFIX);
+        this.witnessPlacementName = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.WITNESS_PLACEMENT_NAME);
+        this.witnessPlacementFolder = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.WITNESS_PLACEMENT_FOLDER);
+        this.witnessPlacementHaNetwork = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.WITNESS_PLACEMENT_HA_NETWORK);
+        this.witnessPlacementHaNetworkType = ArgumentsHelper.getNetworkTypeArg(parsedOptions,
+        		ArgumentsHelper.WITNESS_PLACEMENT_HA_NETWORK_TYPE);
+        this.witnessPlacementHost = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.WITNESS_PLACEMENT_HOST);
+        this.witnessPlacementResourcePool = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.WITNESS_PLACEMENT_RESOURCE_POOL);
+        this.witnessPlacementStorageDatastore = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.WITNESS_PLACEMENT_STORAGE_DATASTORE);
+        this.witnessPlacementManagementNetwork = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.WITNESS_PLACEMENT_MANAGEMENT_NETWORK);
+        this.witnessPlacementManagementNetworkType = ArgumentsHelper.getNetworkTypeArg(parsedOptions,
+        		ArgumentsHelper.WITNESS_PLACEMENT_MANAGEMENT_NETWORK_TYPE);
     }
 
     protected void setup() throws Exception {

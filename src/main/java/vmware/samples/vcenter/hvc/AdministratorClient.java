@@ -35,8 +35,8 @@ import java.util.Set;
  * The user invoking the API should have the HLM.Manage privilege.
  */
 public class AdministratorClient extends SamplesAbstractBase {
-    private String _groupName = null;
-    private Administrators _administratorProvider = null;
+    private String _groupName;
+    private Administrators _administratorProvider;
 
     /**
      * Define the options specific to this sample and configure the sample using

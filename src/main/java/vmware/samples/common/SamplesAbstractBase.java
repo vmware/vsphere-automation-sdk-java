@@ -47,7 +47,7 @@ public abstract class SamplesAbstractBase {
     protected VimAuthenticationHelper vimAuthHelper;
     protected VapiAuthenticationHelper vapiAuthHelper;
     protected StubConfiguration sessionStubConfig;
-    protected Map<String, Object> parsedOptions = null;
+    protected Map<String, Object> parsedOptions;
 
     /**
      * Parses the command line arguments / config file and creates a map of
@@ -204,7 +204,7 @@ public abstract class SamplesAbstractBase {
                                 "config-file") : null;
 
             // Check if truststorePath and truststorePassword are specified
-            if(this.skipServerVerification == false && (
+            if(!this.skipServerVerification && (
                     this.truststorePath == null ||
                     this.truststorePassword == null)) {
                 throw new ConfigurationException(

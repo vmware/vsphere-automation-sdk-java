@@ -36,7 +36,7 @@ public class NetworkingWorkflow extends SamplesAbstractBase {
     private Networking networkingService;
     private boolean enableIPv6;
     private boolean reset;
-    private boolean initialIPv6Config = false;
+    private boolean initialIPv6Config;
 
     protected void setup() throws Exception {
         this.networkingService = vapiAuthHelper.getStubFactory().createStub(

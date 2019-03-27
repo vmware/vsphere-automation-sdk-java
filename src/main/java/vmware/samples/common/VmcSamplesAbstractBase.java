@@ -37,7 +37,7 @@ public abstract class VmcSamplesAbstractBase {
     protected String configFile;
     protected VmcAuthenticationHelper vmcAuthHelper;
     protected StubConfiguration sessionStubConfig;
-    protected Map<String, Object> parsedOptions = null;
+    protected Map<String, Object> parsedOptions;
     
     /**
      * Parses the command line arguments / config file and creates a map of

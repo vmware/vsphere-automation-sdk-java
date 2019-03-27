@@ -38,8 +38,8 @@ public class LinksClient extends SamplesAbstractBase {
     private String _foreignPassword;
     private String _foreignDomain;
     private String _foreignPort;
-    private Links _linkProvider = null;
-    private String linkId = null;
+    private Links _linkProvider;
+    private String linkId;
 
     /**
      * Define the options specific to this sample and configure the sample using
