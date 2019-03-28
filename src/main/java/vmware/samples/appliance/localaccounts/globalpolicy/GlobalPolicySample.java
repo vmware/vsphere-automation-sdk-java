@@ -28,6 +28,9 @@ public class GlobalPolicySample extends SamplesAbstractBase {
     private Policy localAccountsPolicy;
     private Info policyParamInfo;
     private long maxDays, minDays, warnDays;
+    final private String MAX_DAYS_TOKEN = "maxDays";
+    final private String MIN_DAYS_TOKEN = "minDays";
+    final private String WARN_DAYS_TOKEN = "warnDays";
 
     protected void parseArgs(String[] args) {
 
@@ -36,7 +39,7 @@ public class GlobalPolicySample extends SamplesAbstractBase {
             .required(false)
             .hasArg()
             .argName("MAX_DAYS")
-            .longOpt("maxDays")
+            .longOpt(MAX_DAYS_TOKEN)
             .desc("OPTIONAL:max days to be set to localaccounts globalpolicy")
             .build();
 
@@ -45,7 +48,7 @@ public class GlobalPolicySample extends SamplesAbstractBase {
             .required(false)
             .hasArg()
             .argName("MIN_DAYS")
-            .longOpt("minDays")
+            .longOpt(MIN_DAYS_TOKEN)
             .desc("OPTIONAL:min days to be set to localaccounts globalpolicy")
             .build();
 
@@ -54,34 +57,34 @@ public class GlobalPolicySample extends SamplesAbstractBase {
             .required(false)
             .hasArg()
             .argName("WARN_DAYS")
-            .longOpt("warnDays")
+            .longOpt(WARN_DAYS_TOKEN)
             .desc("OPTIONAL:warn days to be set to localaccounts globalpolicy")
             .build();
         List<Option> optionList = Arrays.asList(max_days, min_days, warn_days);
         super.parseArgs(optionList, args);
-        if (parsedOptions.containsKey("maxDays")) {
-            if (parsedOptions.get("maxDays") == null) {
+        if (parsedOptions.containsKey(MAX_DAYS_TOKEN)) {
+            if (parsedOptions.get(MAX_DAYS_TOKEN) == null) {
                 System.out.println("Provide value for option maxDays:");
                 System.exit(0);
             } else {
-                maxDays = Long.parseLong((String) parsedOptions.get("maxDays"));
+                maxDays = Long.parseLong((String) parsedOptions.get(MAX_DAYS_TOKEN));
             }
         }
-        if (parsedOptions.containsKey("minDays")) {
-            if (parsedOptions.get("minDays") == null) {
+        if (parsedOptions.containsKey(MIN_DAYS_TOKEN)) {
+            if (parsedOptions.get(MIN_DAYS_TOKEN) == null) {
                 System.out.println("Provide value for option minDays:");
                 System.exit(0);
             } else {
-                minDays = Long.parseLong((String) parsedOptions.get("minDays"));
+                minDays = Long.parseLong((String) parsedOptions.get(MIN_DAYS_TOKEN));
             }
         }
-        if (parsedOptions.containsKey("warnDays")) {
-            if (parsedOptions.get("warnDays") == null) {
+        if (parsedOptions.containsKey(WARN_DAYS_TOKEN)) {
+            if (parsedOptions.get(WARN_DAYS_TOKEN) == null) {
                 System.out.println("Provide value for option warnDays:");
                 System.exit(0);
             } else {
                 warnDays = Long.parseLong((String) parsedOptions.get(
-                    "warnDays"));
+                    WARN_DAYS_TOKEN));
             }
         }
     }
