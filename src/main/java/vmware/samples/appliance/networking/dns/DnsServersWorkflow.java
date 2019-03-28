@@ -156,9 +156,9 @@ public class DnsServersWorkflow extends SamplesAbstractBase {
             mode = DNSServerMode.dhcp;
         } else {
             String dnsMode = (String) parsedOptions.get("dnsMode");
-            if (dnsMode.equalsIgnoreCase("dhcp")) {
+            if ("dhcp".equalsIgnoreCase(dnsMode)) {
                 mode = DNSServerMode.dhcp;
-            } else if (dnsMode.equalsIgnoreCase("static")) {
+            } else if ("static".equalsIgnoreCase(dnsMode)) {
                 mode = DNSServerMode.is_static;
             } else {
                 System.out.println("Unsupported DNS mode : " + dnsMode);

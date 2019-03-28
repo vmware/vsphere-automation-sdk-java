@@ -40,9 +40,9 @@ public class ProxyWorkflow extends SamplesAbstractBase {
     private String proxyServer;
     private long port;
     private boolean enabled;
-    private String proxyUsername = null;
-    private String proxyPassword = null;
-    private String testHost = null;
+    private String proxyUsername;
+    private String proxyPassword;
+    private String testHost;
 
     protected void setup() throws Exception {
         this.proxyService = vapiAuthHelper.getStubFactory().createStub(
