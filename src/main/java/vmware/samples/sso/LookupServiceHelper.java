@@ -35,8 +35,6 @@ import com.vmware.vsphereautomation.lookup.LsService;
 import com.vmware.vsphereautomation.lookup.ManagedObjectReference;
 import com.vmware.vsphereautomation.lookup.RuntimeFaultFaultMsg;
 
-import vmware.samples.common.SslUtil;
-
 /**
  * Lookup service helper class. Finds nodes and service end point URLs based on
  * certain filters.
@@ -45,7 +43,6 @@ import vmware.samples.common.SslUtil;
 public class LookupServiceHelper {
     private final String lookupServiceUrl;
     private final LsPortType lsPort;
-
     //Managed object reference of ServiceInstance
     private final ManagedObjectReference serviceInstanceRef;
     private final LookupServiceContent lookupServiceContent;
@@ -88,15 +85,6 @@ public class LookupServiceHelper {
         }
 
         this.lookupServiceUrl = lookupServiceUrl;
-
-        /*
-         * Note: This method uses https for communication but doesn't verify
-         * the certificate from the server. Circumventing SSL is unsafe and
-         * should not be used with production code. This is ONLY FOR THE PURPOSE
-         * OF DEVELOPMENT ENVIRONMENT.
-         */
-        SslUtil.trustAllHttpsCertificates();
-
         // configure lookup service
         serviceInstanceRef = new ManagedObjectReference();
         serviceInstanceRef.setType("LookupServiceInstance");
