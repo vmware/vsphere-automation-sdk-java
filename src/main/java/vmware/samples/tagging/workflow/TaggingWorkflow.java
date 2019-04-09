@@ -63,7 +63,7 @@ public class TaggingWorkflow extends SamplesAbstractBase {
 
     private String assetCategoryId;
     private String serverTagId;
-    private boolean tagAttached = false;
+    private boolean tagAttached;
     private ManagedObjectReference clusterMoRef;
     private DynamicID clusterDynamicId;
 

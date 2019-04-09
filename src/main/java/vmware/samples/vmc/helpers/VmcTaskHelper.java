@@ -44,15 +44,18 @@ public class VmcTaskHelper {
             Task task = tasksStub.get(orgId, taskId);
             String taskStatus = new Date() + ": Task Status = " + task.getStatus();
             String taskPhaseInProgress =
-                task.getPhaseInProgress() != "" ? ", Task Phase = " + task.getPhaseInProgress() : "";
+                (task.getPhaseInProgress() != null && !task.getPhaseInProgress().isEmpty()) ?
+                		(", Task Phase = " + task.getPhaseInProgress()) : "";
             System.out.println(taskStatus + taskPhaseInProgress);
             switch(task.getStatus()) {
-                case Task.STATUS_CANCELED :
-                    return false;
-                case Task.STATUS_FAILED :
-                    return false;
                 case Task.STATUS_FINISHED :
                     return true;
+                case Task.STATUS_CANCELED :
+                	// Execute next case.
+                case Task.STATUS_FAILED :
+                	// Execute next case.
+                default:
+                	return false;
             }
         } while (true);
     }

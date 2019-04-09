@@ -15,14 +15,14 @@ package vmware.samples.vcenter.vcha;
 import java.util.Arrays;
 import java.util.List;
 
-import com.vmware.vcenter.vcha.*;
+import com.vmware.vcenter.vcha.CredentialsSpec;
+import com.vmware.vcenter.vcha.Cluster;
 import com.vmware.vcenter.vcha.cluster.Active;
 import com.vmware.vcenter.vcha.cluster.Mode;
 import org.apache.commons.cli.Option;
 import vmware.samples.common.SamplesAbstractBase;
 import vmware.samples.vcenter.vcha.helpers.SpecHelper;
-
-import static vmware.samples.vcenter.vcha.helpers.ArgumentsHelper.*;
+import vmware.samples.vcenter.vcha.helpers.ArgumentsHelper;
 
 /**
  * Description: Demonstrates listing active node information, vCenter HA cluster information and vCenter HA cluster mode
@@ -54,28 +54,28 @@ public class VchaClient extends SamplesAbstractBase {
      */
     protected void parseArgs(String[] args) {
         Option mgmtHostnameOption = Option.builder()
-                .longOpt(VC_SPEC_ACTIVE_LOCATION_HOSTNAME)
+                .longOpt(ArgumentsHelper.VC_SPEC_ACTIVE_LOCATION_HOSTNAME)
                 .desc("hostname of the Management vCenter Server. Leave blank if it's a self-managed VC")
                 .argName("MGMT VC HOST")
                 .required(false)
                 .hasArg()
                 .build();
         Option mgmtUsernameOption = Option.builder()
-                .longOpt(VC_SPEC_ACTIVE_LOCATION_USERNAME)
+                .longOpt(ArgumentsHelper.VC_SPEC_ACTIVE_LOCATION_USERNAME)
                 .desc("username to login to the Management vCenter Server. Leave blank if it's a self-managed VC")
                 .argName("MGMT VC USERNAME")
                 .required(false)
                 .hasArg()
                 .build();
         Option mgmtPasswordOption = Option.builder()
-                .longOpt(VC_SPEC_ACTIVE_LOCATION_PASSWORD)
+                .longOpt(ArgumentsHelper.VC_SPEC_ACTIVE_LOCATION_PASSWORD)
                 .desc("password to login to the Management vCenter Server. Leave blank if it's a self-managed VC")
                 .argName("MGMT VC PASSWORD")
                 .required(false)
                 .hasArg()
                 .build();
         Option mgmtVcSSLThumbprintOption = Option.builder()
-                .longOpt(VC_SPEC_ACTIVE_LOCATION_SSL_THUMBPRINT)
+                .longOpt(ArgumentsHelper.VC_SPEC_ACTIVE_LOCATION_SSL_THUMBPRINT)
                 .desc("SSL Thumbprint of Management vCenter Server.")
                 .argName("MGMT VC SSL THUMBPRINT")
                 .required(true)
@@ -86,16 +86,20 @@ public class VchaClient extends SamplesAbstractBase {
                                                 mgmtPasswordOption,
                                                 mgmtVcSSLThumbprintOption);
         super.parseArgs(optionList, args);
-        this.vcSpecActiveLocationHostname = getStringArg(parsedOptions, VC_SPEC_ACTIVE_LOCATION_HOSTNAME);
+        this.vcSpecActiveLocationHostname = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.VC_SPEC_ACTIVE_LOCATION_HOSTNAME);
         if(this.vcSpecActiveLocationHostname == null)
             this.vcSpecActiveLocationHostname = this.getServer();
-        this.vcSpecActiveLocationUsername = getStringArg(parsedOptions, VC_SPEC_ACTIVE_LOCATION_USERNAME);
+        this.vcSpecActiveLocationUsername = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.VC_SPEC_ACTIVE_LOCATION_USERNAME);
         if(this.vcSpecActiveLocationUsername == null)
             this.vcSpecActiveLocationUsername = this.getUsername();
-        this.vcSpecActiveLocationPassword = getStringArg(parsedOptions, VC_SPEC_ACTIVE_LOCATION_PASSWORD);
+        this.vcSpecActiveLocationPassword = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.VC_SPEC_ACTIVE_LOCATION_PASSWORD);
         if(this.vcSpecActiveLocationPassword == null)
             this.vcSpecActiveLocationPassword = this.getPassword();
-        this.vcSpecActiveLocationSSLThumbprint = getStringArg(parsedOptions, VC_SPEC_ACTIVE_LOCATION_SSL_THUMBPRINT);
+        this.vcSpecActiveLocationSSLThumbprint = ArgumentsHelper.getStringArg(parsedOptions,
+        		ArgumentsHelper.VC_SPEC_ACTIVE_LOCATION_SSL_THUMBPRINT);
     }
 
     protected void setup() throws Exception {
@@ -114,17 +118,18 @@ public class VchaClient extends SamplesAbstractBase {
     protected void run() throws Exception {
         // List active node info, vCenter HA cluster info and cluster mode
 
-        System.out.println("--------------------------------------------------------------------");
+    	final String LINE_SEPARATOR = "--------------------------------------------------------------------";
+        System.out.println(LINE_SEPARATOR);
         System.out.println("ACTIVE NODE INFO");
-        System.out.println("--------------------------------------------------------------------");
+        System.out.println(LINE_SEPARATOR);
         System.out.println(this.activeService.get(this.mgmtVcCredentialsSpec, false).toString());
-        System.out.println("--------------------------------------------------------------------");
+        System.out.println(LINE_SEPARATOR);
         System.out.println("CLUSTER INFO");
-        System.out.println("--------------------------------------------------------------------");
+        System.out.println(LINE_SEPARATOR);
         System.out.println(this.clusterService.get(this.mgmtVcCredentialsSpec, false).toString());
-        System.out.println("--------------------------------------------------------------------");
+        System.out.println(LINE_SEPARATOR);
         System.out.println("CLUSTER MODE");
-        System.out.println("--------------------------------------------------------------------");
+        System.out.println(LINE_SEPARATOR);
         System.out.println(this.modeService.get().toString());
     }
     protected void cleanup() throws Exception {

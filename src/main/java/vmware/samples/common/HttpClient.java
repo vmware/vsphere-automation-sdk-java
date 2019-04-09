@@ -23,6 +23,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -105,9 +107,11 @@ public class HttpClient {
 
             // build the HTTP client
             client = clientBuilder.build();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        } catch (NoSuchAlgorithmException e) {
+    		throw new RuntimeException(e);
+    	} catch (KeyManagementException e) {
+    		throw new RuntimeException(e);
+		}
     }
 
     public void upload(File file, String url) {
@@ -229,6 +233,7 @@ public class HttpClient {
         int retries = 3;
         boolean shouldBreak = true;
         HttpResponse response = null;
+        final String LOGIN_FAILED_MSG = "Failed to login";
         while (retries-- >= 0) {
             try {
                 response = client.execute(httpRequest);
@@ -236,25 +241,25 @@ public class HttpClient {
                 System.out.println(ex.getMessage());
                 if (retries <= 0) {
                     shouldBreak = true;
-                    throw new RuntimeException("Failed to login", ex);
+                    throw new RuntimeException(LOGIN_FAILED_MSG, ex);
                 }
                 shouldBreak = false;
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException("Failed to login", e);
+                    throw new RuntimeException(LOGIN_FAILED_MSG, e);
                 }
             } catch (java.io.EOFException ex) {
                 System.out.println(ex.getMessage());
                 if (retries <= 0) {
                     shouldBreak = true;
-                    throw new RuntimeException("Failed to login", ex);
+                    throw new RuntimeException(LOGIN_FAILED_MSG, ex);
                 }
                 shouldBreak = false;
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
-                    throw new RuntimeException("Failed to login", e);
+                    throw new RuntimeException(LOGIN_FAILED_MSG, e);
                 }
             } catch (FileNotFoundException e) {
                 throw e;

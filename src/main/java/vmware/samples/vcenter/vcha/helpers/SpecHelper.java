@@ -13,7 +13,16 @@
 
 package vmware.samples.vcenter.vcha.helpers;
 
-import com.vmware.vcenter.vcha.*;
+import com.vmware.vcenter.vcha.ConnectionSpec;
+import com.vmware.vcenter.vcha.ClusterTypes;
+import com.vmware.vcenter.vcha.CredentialsSpec;
+import com.vmware.vcenter.vcha.DiskSpec;
+import com.vmware.vcenter.vcha.IpFamily;
+import com.vmware.vcenter.vcha.IpSpec;
+import com.vmware.vcenter.vcha.Ipv4Spec;
+import com.vmware.vcenter.vcha.Ipv6Spec;
+import com.vmware.vcenter.vcha.NetworkType;
+import com.vmware.vcenter.vcha.PlacementSpec;
 
 import java.util.List;
 
