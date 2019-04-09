@@ -16,9 +16,6 @@ import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.TimeZone;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSession;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -36,7 +33,6 @@ import com.vmware.vapi.saml.DefaultTokenFactory;
 import com.vmware.vapi.saml.SamlToken;
 import com.vmware.vapi.saml.exception.InvalidTokenException;
 
-import vmware.samples.common.SslUtil;
 import vmware.samples.sso.soaphandlers.HeaderHandlerResolver;
 import vmware.samples.sso.soaphandlers.SamlTokenExtractionHandler;
 import vmware.samples.sso.soaphandlers.TimeStampHandler;
@@ -61,22 +57,6 @@ public class SsoHelper {
     public static SamlToken getSamlBearerToken(String ssoUrl, String username,
         String password)
         throws DatatypeConfigurationException, InvalidTokenException {
-
-        HostnameVerifier hv = new HostnameVerifier() {
-            @Override
-            public boolean verify(String urlHostName, SSLSession session) {
-                return true;
-            }
-        };
-
-        /*
-         * Note: This method uses https for communication but doesn't verify
-         * the certificate from the server. Circumventing SSL is unsafe and
-         * should not be used with production code. This is ONLY FOR THE PURPOSE
-         * OF DEVELOPMENT ENVIRONMENT.
-         */
-        HttpsURLConnection.setDefaultHostnameVerifier(hv);
-        SslUtil.trustAllHttpsCertificates();
 
         /* Instantiating the STSService */
         STSService stsService = new STSService();

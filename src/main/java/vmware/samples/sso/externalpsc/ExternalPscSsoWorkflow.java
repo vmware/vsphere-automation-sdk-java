@@ -37,7 +37,6 @@ import vmware.samples.sso.SsoHelper;
 public class ExternalPscSsoWorkflow extends SamplesAbstractBase {
     private String lookupServiceUrl;
     private Tag taggingService;
-    public static final String SSO_PATH = "/sts/STSService";
 
     /**
      * Define the options specific to this sample and configure the sample using
@@ -69,10 +68,10 @@ public class ExternalPscSsoWorkflow extends SamplesAbstractBase {
     public void run() throws Exception {
         System.out.println("\n\n#### Example: Login to vCenter server with "
                            + "external Platform Services Controller.");
-
+        
+        HttpConfiguration httpConfig = this.buildHttpConfiguration();
+        
         this.vapiAuthHelper = new VapiAuthenticationHelper();
-
-        HttpConfiguration httpConfig = buildHttpConfiguration();
 
         System.out.println("\nStep 1: Connect to the lookup service on the "
                            + "Platform Services Controller node.");
