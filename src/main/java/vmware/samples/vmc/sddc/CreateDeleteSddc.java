@@ -81,9 +81,15 @@ public class CreateDeleteSddc extends VmcSamplesAbstractBase {
         
         // Set the provider (for testing only)
         String provider = System.getProperty("VMC_PROVIDER", SDDC_PROVIDER);
-        AwsSddcConfig sddcConfig =
-                new AwsSddcConfig.Builder(SDDC_REGION, this.sddcName, NUM_HOSTS, provider)
-                .build();
+
+        AwsSddcConfig sddcConfig = new AwsSddcConfig();
+        sddcConfig.setName(this.sddcName);
+        sddcConfig.setRegion(SDDC_REGION);
+        sddcConfig.setNumHosts(NUM_HOSTS);
+        //TODO: Check What value has to be set 
+        // setSddcType
+        sddcConfig.setSddcType(provider);
+        
         Task createSddcTask = this.sddcsStub.create(this.orgId, sddcConfig);
         String taskId = createSddcTask.getId();
         System.out.printf("\nPoll the CREATE SDDC task (taskId = %s) :", taskId);
