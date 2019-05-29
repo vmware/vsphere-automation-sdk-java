@@ -4,7 +4,7 @@
 
   <groupId>com.vmware</groupId>
   <artifactId>vsphere-samples-nodeps</artifactId>
-  <version>6.7.1</version>
+  <version>6.8.7</version>
   <packaging>jar</packaging>
 
   <name>samples</name>
@@ -12,7 +12,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <vapi.version>2.10.1</vapi.version>
+    <vapi.version>2.12.0</vapi.version>
     <slf4j.version>1.7.12</slf4j.version>
     <httpclient.version>4.5.1</httpclient.version>
     <httpasyncclient.version>4.1</httpasyncclient.version>
@@ -23,9 +23,9 @@
     <commons-cli.version>1.3.1</commons-cli.version>
     <commons-beanutils.version>1.9.3</commons-beanutils.version>
     <lookupservice.version>1.0.0</lookupservice.version>
-    <vspherewssdk.version>6.7.1</vspherewssdk.version>
-    <vmc.version>1.3.0</vmc.version>  
-    <vsphereautomationsdk.version>1.5.0</vsphereautomationsdk.version>
+    <vspherewssdk.version>6.7.2</vspherewssdk.version>
+    <vmc.version>1.3.1</vmc.version>  
+    <vsphereautomationsdk.version>3.0.0</vsphereautomationsdk.version>
     <nsxpolicysdk.version>2.3.0.0.2.11053635</nsxpolicysdk.version>
     <vmcappsdk.version>2.3.0.0.2.11053635</vmcappsdk.version>
   </properties>
@@ -162,17 +162,17 @@
             </configuration>
           </execution>
           <execution>
-            <id>install-vmc-sdk-common</id>
+            <id>install-vapi-vmc-sdk</id>
             <phase>initialize</phase>
             <goals>
               <goal>install-file</goal>
             </goals>
             <configuration>
               <packaging>jar</packaging>
-              <groupId>com.vmware.vmc</groupId>
-              <artifactId>vmc-sdk-common</artifactId>
-              <version>${vmc.version}</version>
-              <file>./lib/vmc-sdk-common-${vmc.version}.jar</file>
+              <groupId>com.vmware.vapi</groupId>
+              <artifactId>vapi-vmc-sdk</artifactId>
+              <version>${vapi.version}</version>
+              <file>./lib/vapi-vmc-sdk-${vapi.version}.jar</file>
             </configuration>
           </execution>
           <execution>
@@ -278,9 +278,9 @@
     <version>${vmc.version}</version>
   </dependency>
   <dependency>
-    <groupId>com.vmware.vmc</groupId>
-    <artifactId>vmc-sdk-common</artifactId>
-    <version>${vmc.version}</version>
+    <groupId>com.vmware.vapi</groupId>
+    <artifactId>vapi-vmc-sdk</artifactId>
+    <version>${vapi.version}</version>
   </dependency>
   <dependency>
    <groupId>com.vmware.nsx</groupId>
