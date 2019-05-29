@@ -153,11 +153,15 @@ The API documentation can be accessed from here:
 
 [VMware Cloud on AWS APIs](https://vmware.github.io/vsphere-automation-sdk-java/vmc/index.html).
 
-[VMware NSX-T APIs](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx/index.html).
+[VMware NSX-T Manager APIs (for on-prem customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx/index.html).
 
-[VMware NSX-T Policy APIs](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx-policy/index.html).
+[VMware NSX-T Policy APIs (for on-prem customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx-policy/index.html).
 
-[VMware NSX-T VMC app APIs](https://vmware.github.io/vsphere-automation-sdk-java/nsx/vmc-app/index.html).
+[VMware NSX-T Policy APIs (for VMC customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx-vmc-policy/index.html).
+
+[VMware NSX-T VMC AWS Integration APIs (for VMC customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx-vmc-aws-integration/index.html).
+
+[VMware NSX-T VMC Common APIs (for VMC customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx-vmc-sdk-common/index.html).
 
 ## Submitting samples
 
