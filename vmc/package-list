@@ -26,6 +26,7 @@ com.vmware.vmc.orgs
 com.vmware.vmc.orgs.account_link
 com.vmware.vmc.orgs.reservations
 com.vmware.vmc.orgs.sddcs
+com.vmware.vmc.orgs.sddcs.addons
 com.vmware.vmc.orgs.sddcs.dns
 com.vmware.vmc.orgs.sddcs.networking
 com.vmware.vmc.orgs.sddcs.networks
@@ -42,5 +43,7 @@ com.vmware.vmc.orgs.sddcs.networks.edges.nat.config
 com.vmware.vmc.orgs.sddcs.networks.edges.statistics
 com.vmware.vmc.orgs.sddcs.networks.edges.statistics.dashboard
 com.vmware.vmc.orgs.sddcs.networks.edges.statistics.interfaces
+com.vmware.vmc.orgs.storage
+com.vmware.vmc.orgs.subscriptions
 com.vmware.vmc.orgs.tbrs
 com.vmware.vmc.util
