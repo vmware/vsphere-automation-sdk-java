@@ -26,8 +26,9 @@
     <vspherewssdk.version>6.7.2</vspherewssdk.version>
     <vmc.version>1.4.0</vmc.version>  
     <vsphereautomationsdk.version>3.0.0</vsphereautomationsdk.version>
-    <nsxpolicysdk.version>2.3.0.0.2.11053635</nsxpolicysdk.version>
-    <vmcappsdk.version>2.3.0.0.2.11053635</vmcappsdk.version>
+    <nsxpolicysdk.version>2.3.0.0.3.13851140</nsxpolicysdk.version>
+    <nsxvmcawsint.version>2.3.0.0.3.13851140</nsxvmcawsint.version>
+    <nsxvmcsdkcommon.version>2.3.0.0.3.13851140</nsxvmcsdkcommon.version>
   </properties>
   <build>
     <plugins>
@@ -190,7 +191,7 @@
             </configuration>
           </execution>
           <execution>
-            <id>install-vmc-app-sdk</id>
+            <id>install-nsx-vmc-policy-sdk</id>
             <phase>initialize</phase>
             <goals>
               <goal>install-file</goal>
@@ -198,9 +199,37 @@
             <configuration>
               <packaging>jar</packaging>
               <groupId>com.vmware.nsx</groupId>
-              <artifactId>vmc-app-java-sdk</artifactId>
-              <version>${vmcappsdk.version}</version>
-              <file>./lib/vmc-app-java-sdk-${vmcappsdk.version}.jar</file>
+              <artifactId>nsx-vmc-policy-java-sdk</artifactId>
+              <version>${nsxpolicysdk.version}</version>
+              <file>./lib/nsx-vmc-policy-java-sdk-${nsxpolicysdk.version}.jar</file>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-nsx-vmc-aws-integration-sdk</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.nsx</groupId>
+              <artifactId>nsx-vmc-aws-integration-sdk</artifactId>
+              <version>${nsxvmcawsint.version}</version>
+              <file>./lib/nsx-vmc-aws-integration-java-sdk-${nsxvmcawsint.version}.jar</file>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-nsx-vmc-sdk-common</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.nsx</groupId>
+              <artifactId>nsx-vmc-sdk-common</artifactId>
+              <version>${nsxvmcsdkcommon.version}</version>
+              <file>./lib/nsx-vmc-sdk-common-${nsxvmcsdkcommon.version}.jar</file>
             </configuration>
           </execution>
         </executions>
@@ -284,13 +313,18 @@
   </dependency>
   <dependency>
    <groupId>com.vmware.nsx</groupId>
-   <artifactId>nsx-policy-java-sdk</artifactId>
+   <artifactId>nsx-vmc-policy-java-sdk</artifactId>
    <version>${nsxpolicysdk.version}</version>
  </dependency>
  <dependency>
    <groupId>com.vmware.nsx</groupId>
-   <artifactId>vmc-app-java-sdk</artifactId>
-   <version>${vmcappsdk.version}</version>
+   <artifactId>nsx-vmc-aws-integration-sdk</artifactId>
+   <version>${nsxvmcawsint.version}</version>
+ </dependency>
+ <dependency>
+   <groupId>com.vmware.nsx</groupId>
+   <artifactId>nsx-vmc-sdk-common</artifactId>
+   <version>${nsxvmcsdkcommon.version}</version>
  </dependency>
   <dependency>
     <groupId>com.vmware.vim25</groupId>
