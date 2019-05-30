@@ -6,7 +6,6 @@ com.vmware.nsx_policy.cluster.backups
 com.vmware.nsx_policy.cluster.nodes
 com.vmware.nsx_policy.cluster.restore
 com.vmware.nsx_policy.configs
-com.vmware.nsx_policy.enforcement_points
 com.vmware.nsx_policy.eula
 com.vmware.nsx_policy.infra
 com.vmware.nsx_policy.infra.deployment_zones
@@ -16,8 +15,6 @@ com.vmware.nsx_policy.infra.domains.gateway_policies
 com.vmware.nsx_policy.infra.domains.groups
 com.vmware.nsx_policy.infra.domains.groups.members
 com.vmware.nsx_policy.infra.domains.groups.statistics
-com.vmware.nsx_policy.infra.domains.redirection_policies
-com.vmware.nsx_policy.infra.partner_services
 com.vmware.nsx_policy.infra.realized_state
 com.vmware.nsx_policy.infra.realized_state.enforcement_points
 com.vmware.nsx_policy.infra.realized_state.enforcement_points.firewalls
@@ -30,8 +27,7 @@ com.vmware.nsx_policy.infra.services
 com.vmware.nsx_policy.infra.tier_0s
 com.vmware.nsx_policy.infra.tier_0s.locale_services
 com.vmware.nsx_policy.infra.tier_0s.locale_services.bgp
-com.vmware.nsx_policy.infra.tier_0s.locale_services.byod_service_instances
-com.vmware.nsx_policy.infra.tier_0s.locale_services.endpoints
+com.vmware.nsx_policy.infra.tier_0s.locale_services.bgp.neighbors
 com.vmware.nsx_policy.infra.tier_0s.locale_services.l2vpn_context
 com.vmware.nsx_policy.infra.tier_0s.locale_services.l2vpn_context.l2vpns
 com.vmware.nsx_policy.infra.tier_0s.locale_services.l3vpns
