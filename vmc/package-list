@@ -28,6 +28,7 @@ com.vmware.vmc.orgs.reservations
 com.vmware.vmc.orgs.sddcs
 com.vmware.vmc.orgs.sddcs.addons
 com.vmware.vmc.orgs.sddcs.dns
+com.vmware.vmc.orgs.sddcs.management_vms
 com.vmware.vmc.orgs.sddcs.networking
 com.vmware.vmc.orgs.sddcs.networks
 com.vmware.vmc.orgs.sddcs.networks.cgws.l2vpn
