@@ -32,7 +32,7 @@ vSphere Automation and vSphere Web Service APIs. The samples have been developed
 JDK 1.8.
 
 ## Supported OnPrem vCenter Releases:
-vCenter 6.0, 6.5, 6.7, 6.7U1
+vCenter 6.0, 6.5, 6.7, 6.7U1, 6.7U2
 
 Please refer to the notes in each sample for detailed compatibility information. 
 
@@ -87,9 +87,9 @@ When running the samples, parameters can be provided either on the command line,
 
 Use a command like the following to display usage information for a particular sample.
 ```` bash
-$java -ea -cp target/vsphere-samples-6.7.1.jar vmware.samples.vcenter.vm.list.ListVMs
+$java -ea -cp target/vsphere-samples-6.8.7.jar vmware.samples.vcenter.vm.list.ListVMs
 
-java -cp target/vsphere-samples-6.7.1.jar vmware.samples.vcenter.vm.list.ListVMs [--config-file <CONFIGURATION FILE>]
+java -cp target/vsphere-samples-6.8.7.jar vmware.samples.vcenter.vm.list.ListVMs [--config-file <CONFIGURATION FILE>]
        --server <SERVER> --username <USERNAME> --password <PASSWORD> --cluster <CLUSTER> [--truststorepath <ABSOLUTE PATH OF JAVA TRUSTSTORE FILE>]
        [--truststorepassword <JAVA TRUSTSTORE PASSWORD>] [--cleardata] [--skip-server-verification]
 
@@ -113,17 +113,17 @@ Sample Options:
 
 Use a command like the following to run a sample using only command line parameters:
 ```` bash
-$java -ea -cp target/vsphere-samples-6.7.1.jar vmware.samples.vcenter.vm.list.ListVMs --server servername --username administrator@vsphere.local --password password --skip-server-verification
+$java -ea -cp target/vsphere-samples-6.8.7.jar vmware.samples.vcenter.vm.list.ListVMs --server servername --username administrator@vsphere.local --password password --skip-server-verification
 ````
 
 Use a command like the following to run a sample using only a configuration file:
 ```` bash
-$java -ea -cp target/vsphere-samples-6.7.1.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties
+$java -ea -cp target/vsphere-samples-6.8.7.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties
 ````
 
 Use the following command to run the sample using a combination of configuration file and command line parameters:
 ```` bash
-$java -ea -cp target/vsphere-samples-6.7.1.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties --server servername
+$java -ea -cp target/vsphere-samples-6.8.7.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties --server servername
 ````
 
 ### Importing the samples to eclipse
@@ -147,21 +147,30 @@ Once the eclipse project is imported, follow below steps to add a new sample usi
 This will import a basic sample class to your package, which you can then customize according to your needs.
 
 ## API Documentation
-The API documentation can be accessed from here: 
 
-[vSphere APIs](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/6.7.1/vsphereautomation-client-sdk/index.html).
+### vSphere API Documentation
 
-[VMware Cloud on AWS APIs](https://vmware.github.io/vsphere-automation-sdk-java/vmc/index.html).
+* [VMware Cloud on AWS vSphere (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/cloud/vsphereautomation-client-sdk/index.html).
 
-[VMware NSX-T Manager APIs (for on-prem customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx/index.html).
+* [VMware vSphere APIs 6.7.1 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/6.7.1/vsphereautomation-client-sdk/index.html).
 
-[VMware NSX-T Policy APIs (for on-prem customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx-policy/index.html).
+* Previous releases: [6.5](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/6.5.0/vsphereautomation-client-sdk/index.html)
 
-[VMware NSX-T Policy APIs (for VMC customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx-vmc-policy/index.html).
+### VMware Cloud on AWS Console API Documentation
 
-[VMware NSX-T VMC AWS Integration APIs (for VMC customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx-vmc-aws-integration/index.html).
+* [VMware Cloud on AWS APIs](https://vmware.github.io/vsphere-automation-sdk-java/vmc/index.html).
 
-[VMware NSX-T VMC Common APIs (for VMC customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx-vmc-sdk-common/index.html).
+### NSX API Documentation
+
+* [VMware NSX-T Manager APIs (for on-prem customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx/index.html).
+
+* [VMware NSX-T Policy APIs (for on-prem customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx-policy/index.html).
+
+* [VMware NSX-T Policy APIs (for VMC customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx-vmc-policy/index.html).
+
+* [VMware NSX-T VMC AWS Integration APIs (for VMC customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx-vmc-aws-integration/index.html).
+
+* [VMware NSX-T VMC Common APIs (for VMC customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx-vmc-sdk-common/index.html).
 
 ## Submitting samples
 
@@ -217,8 +226,8 @@ Sample Exchange can be allowed to access your GitHub resources, by way of a link
 Board members are volunteers from the SDK community and VMware staff members, board members are not held responsible for any issues which may occur from running of samples from this repository.
 
 Members:
-* Vinod Pai (VMware)
-* Steve Trefethen (VMware)
+* Kunal Singh (VMware)
+* Jobin Jeorge (VMware)
 
 ### Approval of Additions
 Items added to the repository, including items from the Board members, require 2 votes from the board members before being added to the repository. The approving members will have ideally downloaded and tested the item. When two “Approved for Merge” comments are added from board members, the pull can then be committed to the repository.
@@ -228,5 +237,5 @@ Items added to the repository, including items from the Board members, require 2
 * [vSphere Automation SDK Overview](http://pubs.vmware.com/vsphere-65/index.jsp#com.vmware.vapi.progguide.doc/GUID-AF73991C-FC1C-47DF-8362-184B6544CFDE.html)
 * [VMware Code](https://code.vmware.com/home)
 * [VMware Developer Community](https://communities.vmware.com/community/vmtn/developer)
-* VMware vSphere [Java API Reference documentation](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/6.7.1/vsphereautomation-client-sdk/index.html).
+* [VMware vSphere Java API Reference documentation](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/6.7.1/vsphereautomation-client-sdk/index.html).
 * [VMware Java forum](https://code.vmware.com/forums/7508/vsphere-automation-sdk-for-java)
