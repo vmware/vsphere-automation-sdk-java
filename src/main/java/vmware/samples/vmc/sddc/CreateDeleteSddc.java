@@ -99,7 +99,7 @@ public class CreateDeleteSddc extends VmcSamplesAbstractBase {
             System.exit(1);
         }
         
-        List<Sddc> sddcList = this.sddcsStub.list(this.orgId);
+        List<Sddc> sddcList = this.sddcsStub.list(this.orgId, false);
         for (Sddc sddc : sddcList) {
             if(sddc.getName().equals(this.sddcName)) {
                 this.sddcId = sddc.getId();
