@@ -90,7 +90,7 @@ public class CreateDeleteSddc extends VmcSamplesAbstractBase {
         // setSddcType
         sddcConfig.setSddcType(provider);
         
-        this.sddcsStub.create(this.orgId, sddcConfig);
+        this.sddcsStub.create(this.orgId, sddcConfig, false);
         
         List<Sddc> sddcList = this.sddcsStub.list(this.orgId, false);
         for (Sddc sddc : sddcList) {
