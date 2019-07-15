@@ -90,14 +90,7 @@ public class CreateDeleteSddc extends VmcSamplesAbstractBase {
         // setSddcType
         sddcConfig.setSddcType(provider);
         
-        Task createSddcTask = this.sddcsStub.create(this.orgId, sddcConfig);
-        String taskId = createSddcTask.getId();
-        System.out.printf("\nPoll the CREATE SDDC task (taskId = %s) :", taskId);
-        boolean taskCompleted = VmcTaskHelper.pollTask(apiClient, orgId, taskId, TASK_POLLING_DELAY_IN_MILLISECONDS);
-        if(!taskCompleted) {
-            System.out.println("CREATE SDDC task was either canceled or it failed. Exiting.");
-            System.exit(1);
-        }
+        this.sddcsStub.create(this.orgId, sddcConfig, false);
         
         List<Sddc> sddcList = this.sddcsStub.list(this.orgId, false);
         for (Sddc sddc : sddcList) {
