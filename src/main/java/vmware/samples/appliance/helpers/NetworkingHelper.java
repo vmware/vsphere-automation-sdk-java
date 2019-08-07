@@ -87,11 +87,15 @@ public class NetworkingHelper {
      */
     public static void printIPv4Info(
         com.vmware.appliance.networking.interfaces.Ipv4Types.Info ipv4Info) {
+    	if (ipv4Info == null) {
+            System.out.println("IPv4 information is not available ");
+        } else {
         System.out.println("Is Configurable : " + ipv4Info.getConfigurable());
         System.out.println("IPv4 mode : " + ipv4Info.getMode());
         System.out.println("IPv4 address : " + ipv4Info.getAddress());
         System.out.println("IPv4 Prefix : " + ipv4Info.getPrefix());
         System.out.println("Default Gateway : " + ipv4Info.getDefaultGateway());
+      }
     }
 
     /**
@@ -101,16 +105,20 @@ public class NetworkingHelper {
      */
     public static void printIPv6Info(
         com.vmware.appliance.networking.interfaces.Ipv6Types.Info ipv6Info) {
-        System.out.println("Is Configurable : " + ipv6Info.getConfigurable());
-        System.out.println("Is DHCP : " + ipv6Info.getDhcp());
-        System.out.println("Is AutoConf : " + ipv6Info.getAutoconf());
-        System.out.println("Default Gateway : " + ipv6Info.getDefaultGateway());
-        List<AddressInfo> addressInformation = ipv6Info.getAddresses();
-        for (AddressInfo addressInfo : addressInformation) {
-            System.out.println("Origin : " + addressInfo.getOrigin());
-            System.out.println("Status : " + addressInfo.getStatus());
-            System.out.println("Address : " + addressInfo.getAddress());
-            System.out.println("Prefix : " + addressInfo.getPrefix());
+    	if (ipv6Info == null) {
+            System.out.println("IPv6 information is not available ");
+        } else {
+        	System.out.println("Is Configurable : " + ipv6Info.getConfigurable());
+            System.out.println("Is DHCP : " + ipv6Info.getDhcp());
+            System.out.println("Is AutoConf : " + ipv6Info.getAutoconf());
+            System.out.println("Default Gateway : " + ipv6Info.getDefaultGateway());
+            List<AddressInfo> addressInformation = ipv6Info.getAddresses();
+            for (AddressInfo addressInfo : addressInformation) {
+                System.out.println("Origin : " + addressInfo.getOrigin());
+                System.out.println("Status : " + addressInfo.getStatus());
+                System.out.println("Address : " + addressInfo.getAddress());
+                System.out.println("Prefix : " + addressInfo.getPrefix());
+            }
         }
     }
 
