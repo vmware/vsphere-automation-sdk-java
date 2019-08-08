@@ -88,7 +88,7 @@ public class NetworkingHelper {
     public static void printIPv4Info(
         com.vmware.appliance.networking.interfaces.Ipv4Types.Info ipv4Info) {
     	if (ipv4Info == null) {
-            System.out.println("IPv4 information is not available ");
+            System.out.println("IPv4 information is not available");
         } else {
         System.out.println("Is Configurable : " + ipv4Info.getConfigurable());
         System.out.println("IPv4 mode : " + ipv4Info.getMode());
@@ -106,7 +106,7 @@ public class NetworkingHelper {
     public static void printIPv6Info(
         com.vmware.appliance.networking.interfaces.Ipv6Types.Info ipv6Info) {
     	if (ipv6Info == null) {
-            System.out.println("IPv6 information is not available ");
+            System.out.println("IPv6 information is not available");
         } else {
         	System.out.println("Is Configurable : " + ipv6Info.getConfigurable());
             System.out.println("Is DHCP : " + ipv6Info.getDhcp());
