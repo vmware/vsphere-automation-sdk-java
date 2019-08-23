@@ -16,8 +16,7 @@ vmware.samples.vcenter.vcha.VchaClient.java                           | Demonstr
 ### vCenter HA Cluster Deploy/Undeploy Operations
 Sample                                                                | Description
 ----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------
-vmware.samples.vcenter.vcha.VchaClusterOps.java                       | Demonstrates vCenter HA Cluster Deploy, Undeploy Operations for a given vCenter server with automatic cluster configuration and IPv4 network configuration.
-                                                                      | The sample requires IPv4 network configuration for cluster networking
+vmware.samples.vcenter.vcha.VchaClusterOps.java                       | Demonstrates vCenter HA Cluster Deploy, Undeploy Operations for a given vCenter server with automatic cluster configuration and IPv4 network configuration. The sample requires IPv4 network configuration for cluster networking
 
 ### Testbed Requirement:
     - 3 ESXi hosts on version 6.0x or later is recommended
