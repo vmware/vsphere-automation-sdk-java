@@ -55,7 +55,8 @@ public abstract class VmcSamplesAbstractBase {
                                         .hasArg()
                                         .argName("VMC SERVER")
                                         .longOpt("vmcserver")
-                                        .desc("OPTIONAL: hostname of VMC Server")
+                                        .desc("OPTIONAL: hostname of VMC Server,"
+                                        		+ " 'vmc.vmware.com' used if none provided")
                                         .build();
 
             Option cspServerOption = Option.builder()
@@ -63,7 +64,8 @@ public abstract class VmcSamplesAbstractBase {
                                         .hasArg()
                                         .argName("CSP SERVER")
                                         .longOpt("cspserver")
-                                        .desc("OPTIONAL: hostname of CSP Server")
+                                        .desc("OPTIONAL: hostname of CSP Server,"
+                                        		+ " 'console.cloud.vmware.com' used if none provided")
                                         .build();
             
             Option refreshTokenOption = Option.builder()
@@ -146,9 +148,6 @@ public abstract class VmcSamplesAbstractBase {
             System.exit(0);
         } catch (ConfigurationException cex) {
             System.out.println(cex.getMessage());
-            System.exit(0);
-        } catch (Exception e) {
-            e.printStackTrace();
             System.exit(0);
         }
     }
