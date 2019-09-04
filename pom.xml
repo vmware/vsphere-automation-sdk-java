@@ -24,7 +24,7 @@
     <commons-beanutils.version>1.9.3</commons-beanutils.version>
     <lookupservice.version>1.0.0</lookupservice.version>
     <vspherewssdk.version>6.7.2</vspherewssdk.version>
-    <vmc.version>1.9.0</vmc.version>  
+    <vmc.version>1.10.0</vmc.version>  
     <vsphereautomationsdk.version>3.0.0</vsphereautomationsdk.version>
     <nsxpolicysdk.version>2.3.0.0.3.13851140</nsxpolicysdk.version>
     <nsxvmcawsint.version>2.3.0.0.3.13851140</nsxvmcawsint.version>
