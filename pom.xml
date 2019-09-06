@@ -4,7 +4,7 @@
 
   <groupId>com.vmware</groupId>
   <artifactId>vsphere-samples-nodeps</artifactId>
-  <version>6.8.7</version>
+  <version>6.9.1</version>
   <packaging>jar</packaging>
 
   <name>samples</name>
@@ -23,12 +23,13 @@
     <commons-cli.version>1.3.1</commons-cli.version>
     <commons-beanutils.version>1.9.3</commons-beanutils.version>
     <lookupservice.version>1.0.0</lookupservice.version>
-    <vspherewssdk.version>6.7.2</vspherewssdk.version>
+    <vspherewssdk.version>6.7.2</vspherewssdk.version> 
+    <vsphereautomationsdk.version>3.1.0</vsphereautomationsdk.version>
     <vmc.version>1.10.0</vmc.version>  
-    <vsphereautomationsdk.version>3.0.0</vsphereautomationsdk.version>
     <nsxpolicysdk.version>2.3.0.0.3.13851140</nsxpolicysdk.version>
     <nsxvmcawsint.version>2.3.0.0.3.13851140</nsxvmcawsint.version>
     <nsxvmcsdkcommon.version>2.3.0.0.3.13851140</nsxvmcsdkcommon.version>
+    <vmc.draas.version>1.0.0</vmc.draas.version>
   </properties>
   <build>
     <plugins>
@@ -50,6 +51,20 @@
         <artifactId>maven-install-plugin</artifactId>
         <version>2.3.1</version>
         <executions>
+         <execution>
+           <id>install-draas-bindings</id>
+           <phase>initialize</phase>
+           <goals>
+             <goal>install-file</goal>
+           </goals>
+           <configuration>
+             <packaging>jar</packaging>
+             <groupId>com.vmware.vmc</groupId>
+             <artifactId>vmc-draas-bindings</artifactId>
+             <version>${vmc.draas.version}</version>
+             <file>./lib/vmc.draas.bindings-${vmc.draas.version}.jar</file>
+           </configuration>
+          </execution>
           <execution>
             <id>install-vapi-runtime</id>
             <phase>initialize</phase>
@@ -281,6 +296,11 @@
    </plugins>
  </build>
 <dependencies>
+  <dependency>
+   <groupId>com.vmware.vmc</groupId>
+   <artifactId>vmc-draas-bindings</artifactId>
+   <version>${vmc.draas.version}</version>
+  </dependency>
   <dependency>
     <groupId>com.vmware.vapi</groupId>
     <artifactId>vapi-runtime</artifactId>

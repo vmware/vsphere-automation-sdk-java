@@ -25,10 +25,10 @@ public class VmcAuthenticationHelper {
     /**
      * Instantiates an ApiClient using a refresh token which can be used
      * for creating stubs.
-     * 
+     *
      * @param vmcServer hostname/ip address of the vmc server
      * @param cspServer hostname/ipaddress of the csp server
-     * @param refreshToken refresh token of the user 
+     * @param refreshToken refresh token of the user
      * @return
      */
     public ApiClient newVmcClient(String vmcServer, String cspServer,
