@@ -62,7 +62,7 @@
              <groupId>com.vmware.vmc</groupId>
              <artifactId>vmc-draas-bindings</artifactId>
              <version>${vmc.draas.version}</version>
-             <file>./lib/vmc.draas.bindings-${vmc.draas.version}.jar</file>
+             <file>./lib/vmc-draas-bindings-${vmc.draas.version}.jar</file>
            </configuration>
           </execution>
           <execution>
