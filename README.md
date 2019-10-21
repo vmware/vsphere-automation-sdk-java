@@ -153,7 +153,7 @@ This will import a basic sample class to your package, which you can then custom
 
 * [VMware Cloud on AWS vSphere (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/cloud/vsphereautomation-client-sdk/index.html).
 
-* [VMware vSphere APIs 6.7.1 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/6.7.1/vsphereautomation-client-sdk/index.html).
+* [VMware vSphere APIs 6.7.3 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/6.7.3/vsphereautomation-client-sdk/index.html).
 
 * Previous releases: [6.5](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/6.5.0/vsphereautomation-client-sdk/index.html)
 
