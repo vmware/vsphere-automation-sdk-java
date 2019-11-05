@@ -14,18 +14,18 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <vapi.version>2.12.0</vapi.version>
     <slf4j.version>1.7.12</slf4j.version>
-    <httpclient.version>4.5.1</httpclient.version>
-    <httpasyncclient.version>4.1</httpasyncclient.version>
-    <jackson2.version>2.9.5</jackson2.version>
+    <httpclient.version>4.5.10</httpclient.version>
+    <httpasyncclient.version>4.1.4</httpasyncclient.version>
+    <jackson2.version>2.10.0</jackson2.version>
     <log4j.version>1.2.17</log4j.version>
-    <commons-lang.version>2.6</commons-lang.version>
+    <commons-lang3.version>3.9</commons-lang3.version>
     <commons-configuration.version>1.10</commons-configuration.version>
-    <commons-cli.version>1.3.1</commons-cli.version>
-    <commons-beanutils.version>1.9.3</commons-beanutils.version>
+    <commons-cli.version>1.4</commons-cli.version>
+    <commons-beanutils.version>1.9.4</commons-beanutils.version>
     <lookupservice.version>1.0.0</lookupservice.version>
-    <vspherewssdk.version>6.7.2</vspherewssdk.version> 
+    <vspherewssdk.version>6.7.2</vspherewssdk.version>
     <vsphereautomationsdk.version>3.1.0</vsphereautomationsdk.version>
-    <vmc.version>1.16.0</vmc.version>  
+    <vmc.version>1.16.0</vmc.version>
     <nsxpolicysdk.version>2.3.0.0.3.13851140</nsxpolicysdk.version>
     <nsxvmcawsint.version>2.3.0.0.3.13851140</nsxvmcawsint.version>
     <nsxvmcsdkcommon.version>2.3.0.0.3.13851140</nsxvmcsdkcommon.version>
@@ -397,9 +397,9 @@
     <version>${slf4j.version}</version>
   </dependency>
   <dependency>
-    <groupId>commons-lang</groupId>
-    <artifactId>commons-lang</artifactId>
-    <version>${commons-lang.version}</version>
+    <groupId>org.apache.commons</groupId>
+    <artifactId>commons-lang3</artifactId>
+    <version>${commons-lang3.version}</version>
   </dependency>
   <dependency>
     <groupId>commons-configuration</groupId>
