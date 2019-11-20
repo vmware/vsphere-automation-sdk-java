@@ -27,6 +27,8 @@ com.vmware.vmc.orgs.account_link
 com.vmware.vmc.orgs.reservations
 com.vmware.vmc.orgs.sddcs
 com.vmware.vmc.orgs.sddcs.addons
+com.vmware.vmc.orgs.sddcs.clusters
+com.vmware.vmc.orgs.sddcs.clusters.config
 com.vmware.vmc.orgs.sddcs.dns
 com.vmware.vmc.orgs.sddcs.management_vms
 com.vmware.vmc.orgs.sddcs.networking
