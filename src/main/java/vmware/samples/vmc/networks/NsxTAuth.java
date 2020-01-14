@@ -95,7 +95,7 @@ public class NsxTAuth extends VmcSamplesAbstractBase {
         com.vmware.nsx_policy.model.Infra infra = this.infraService.get(null);
         System.out.println(infra);
 
-        DomainListResult domainsList = this.domainsService.list(null,  null, 1000L,  false, null);
+        DomainListResult domainsList = this.domainsService.list(null,  null, null, 1000L,  false, null);
         System.out.println(domainsList);
 
         LinkedVpcsListResult results = this.lvpcService.list();
