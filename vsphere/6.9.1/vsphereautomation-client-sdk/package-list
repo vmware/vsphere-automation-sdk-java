@@ -66,6 +66,7 @@ com.vmware.vapi.protocol.common.json
 com.vmware.vapi.security
 com.vmware.vapi.std
 com.vmware.vapi.std.errors
+com.vmware.vapi.std.interposition
 com.vmware.vapi.util
 com.vmware.vapi.util.async
 com.vmware.vcenter
@@ -96,9 +97,6 @@ com.vmware.vcenter.inventory
 com.vmware.vcenter.inventory.util
 com.vmware.vcenter.iso
 com.vmware.vcenter.iso.util
-com.vmware.vcenter.lcm
-com.vmware.vcenter.lcm.util
-com.vmware.vcenter.namespaces.util
 com.vmware.vcenter.ovf
 com.vmware.vcenter.ovf.util
 com.vmware.vcenter.services
@@ -123,6 +121,7 @@ com.vmware.vcenter.vm.hardware.boot
 com.vmware.vcenter.vm.storage
 com.vmware.vcenter.vm.storage.policy
 com.vmware.vcenter.vm_template
+com.vmware.vcenter.vm_template.library_items
 com.vmware.vcenter.vm_template.util
 com.vmware.vsphereautomation.lookup
 tbd.util
