@@ -88,9 +88,9 @@ When running the samples, parameters can be provided either on the command line,
 
 Use a command like the following to display usage information for a particular sample.
 ```` bash
-$java -ea -cp target/vsphere-samples-6.9.1.jar vmware.samples.vcenter.vm.list.ListVMs
+$java -ea -cp target/vsphere-samples-7.0.0.jar vmware.samples.vcenter.vm.list.ListVMs
 
-java -cp target/vsphere-samples-6.9.1.jar vmware.samples.vcenter.vm.list.ListVMs [--config-file <CONFIGURATION FILE>]
+java -cp target/vsphere-samples-7.0.0.jar vmware.samples.vcenter.vm.list.ListVMs [--config-file <CONFIGURATION FILE>]
        --server <SERVER> --username <USERNAME> --password <PASSWORD> --cluster <CLUSTER> [--truststorepath <ABSOLUTE PATH OF JAVA TRUSTSTORE FILE>]
        [--truststorepassword <JAVA TRUSTSTORE PASSWORD>] [--cleardata] [--skip-server-verification]
 
@@ -114,17 +114,17 @@ Sample Options:
 
 Use a command like the following to run a sample using only command line parameters:
 ```` bash
-$java -ea -cp target/vsphere-samples-6.9.1.jar vmware.samples.vcenter.vm.list.ListVMs --server servername --username administrator@vsphere.local --password password --skip-server-verification
+$java -ea -cp target/vsphere-samples-7.0.0.jar vmware.samples.vcenter.vm.list.ListVMs --server servername --username administrator@vsphere.local --password password --skip-server-verification
 ````
 
 Use a command like the following to run a sample using only a configuration file:
 ```` bash
-$java -ea -cp target/vsphere-samples-6.9.1.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties
+$java -ea -cp target/vsphere-samples-7.0.0.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties
 ````
 
 Use the following command to run the sample using a combination of configuration file and command line parameters:
 ```` bash
-$java -ea -cp target/vsphere-samples-6.9.1.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties --server servername
+$java -ea -cp target/vsphere-samples-7.0.0.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties --server servername
 ````
 
 ### Importing the samples to eclipse
@@ -155,7 +155,7 @@ This will import a basic sample class to your package, which you can then custom
 
 * [VMware vSphere APIs 6.7.3 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/6.7.3/vsphereautomation-client-sdk/index.html).
 
-* Previous releases: [6.5](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/6.5.0/vsphereautomation-client-sdk/index.html)
+* Previous releases: [6.5](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/6.5.0/vsphereautomation-client-sdk/index.html), [6.7.1](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/6.7.1/vsphereautomation-client-sdk/index.html)
 
 ### VMware Cloud on AWS API Documentation
 
@@ -240,5 +240,5 @@ Items added to the repository, including items from the Board members, require 2
 * [vSphere Automation SDK Overview](http://pubs.vmware.com/vsphere-65/index.jsp#com.vmware.vapi.progguide.doc/GUID-AF73991C-FC1C-47DF-8362-184B6544CFDE.html)
 * [VMware Code](https://code.vmware.com/home)
 * [VMware Developer Community](https://communities.vmware.com/community/vmtn/developer)
-* VMware vSphere [Java API Reference documentation](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/6.7.1/vsphereautomation-client-sdk/index.html).
+* VMware vSphere [Java API Reference documentation](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/6.7.3/vsphereautomation-client-sdk/index.html).
 * [VMware Java forum](https://code.vmware.com/forums/7508/vsphere-automation-sdk-for-java)

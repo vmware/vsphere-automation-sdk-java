@@ -1,6 +1,6 @@
 /*
  * *******************************************************
- * Copyright VMware, Inc. 2016.  All Rights Reserved.
+ * Copyright VMware, Inc. 2016, 2020.  All Rights Reserved.
  * SPDX-License-Identifier: MIT
  * *******************************************************
  *
@@ -39,8 +39,8 @@ import vmware.samples.vcenter.helpers.PlacementHelper;
  * Sample Prerequisites:
  * The sample needs a datacenter and the following resources:
  * - vm folder
- * - datastore
- * - cluster
+ * - datastore (atleast one host)
+ * - cluster (Optional)
  * - A standard switch network
  */
 public class CreateBasicVM extends SamplesAbstractBase {
@@ -48,7 +48,7 @@ public class CreateBasicVM extends SamplesAbstractBase {
     private String vmName;
     private String datastoreName;
     private String datacenterName;
-    private String clusterName;
+    private String clusterName, hostName;
     private String standardPortgroupName;
     private static final String BASIC_VM_NAME = "Sample-Basic-VM";
     private GuestOS vmGuestOS = GuestOS.WINDOWS_9_64;
@@ -92,11 +92,20 @@ public class CreateBasicVM extends SamplesAbstractBase {
             .build();
         Option clusterOption = Option.builder()
             .longOpt("cluster")
-            .desc("The name of the cluster in which to create the vm.")
+            .desc("OPTIONAL: The name of the cluster in which to create the vm."
+                + "If not provided, VM is placed under the host provided as input.")
             .argName("CLUSTER")
-            .required(true)
+            .required(false)
             .hasArg()
             .build();
+        Option hostOption = Option.builder()
+             .longOpt("host")
+             .desc("OPTIONAL: The name of the host in which to create the vm."
+                    + "If not provided, VM is placed under first host in the datecenter")
+             .argName("HOST")
+             .required(false)
+             .hasArg()
+             .build();
         Option stdPortgroupOption = Option.builder()
             .longOpt("standardportgroup")
             .desc("The name of the standard portgroup")
@@ -110,7 +119,8 @@ public class CreateBasicVM extends SamplesAbstractBase {
             datastoreOption,
             datacenterOption,
             clusterOption,
-            stdPortgroupOption);
+            stdPortgroupOption,
+            hostOption);
 
         super.parseArgs(optionList, args);
         this.vmFolderName = (String) parsedOptions.get("vmfolder");
@@ -118,6 +128,7 @@ public class CreateBasicVM extends SamplesAbstractBase {
         this.datastoreName = (String) parsedOptions.get("datastore");
         this.datacenterName = (String) parsedOptions.get("datacenter");
         this.clusterName = (String) parsedOptions.get("cluster");
+        this.hostName = (String) parsedOptions.get("host");;
         this.standardPortgroupName = (String) parsedOptions.get(
             "standardportgroup");
     }
@@ -128,14 +139,16 @@ public class CreateBasicVM extends SamplesAbstractBase {
     }
 
     protected void run() throws Exception {
+        VMTypes.PlacementSpec vmPlacementSpec = null;
         // Get a placement spec
-        VMTypes.PlacementSpec vmPlacementSpec = PlacementHelper
-            .getPlacementSpecForCluster(this.vapiAuthHelper.getStubFactory(),
-                this.sessionStubConfig,
-                this.datacenterName,
-                this.clusterName,
-                this.vmFolderName,
-                this.datastoreName);
+         vmPlacementSpec = PlacementHelper
+           .getVMPlacementSpec(this.vapiAuthHelper.getStubFactory(),
+              this.sessionStubConfig,
+              this.hostName,
+              this.clusterName,
+              this.datacenterName,
+              this.vmFolderName,
+              this.datastoreName);
 
         // Get a standard network backing
         String standardNetworkBacking = NetworkHelper.getStandardNetworkBacking(
