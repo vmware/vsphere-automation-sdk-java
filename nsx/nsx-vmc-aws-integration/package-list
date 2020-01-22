@@ -2,6 +2,8 @@ com.vmware.nsx_vmc_app
 com.vmware.nsx_vmc_app.infra
 com.vmware.nsx_vmc_app.infra.direct_connect
 com.vmware.nsx_vmc_app.infra.direct_connect.routes
+com.vmware.nsx_vmc_app.infra.external
+com.vmware.nsx_vmc_app.infra.external.routes
 com.vmware.nsx_vmc_app.infra.linked_vpcs
 com.vmware.nsx_vmc_app.infra.realized_state
 com.vmware.nsx_vmc_app.model
