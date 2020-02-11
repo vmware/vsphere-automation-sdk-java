@@ -1,5 +1,5 @@
-FROM maven:latest
-MAINTAINER renoufa@vmware.com
+FROM maven:3.6.3-jdk-8
+MAINTAINER dx-sdk-iac@groups.vmware.com
 
 # Set the working directory to /work
 WORKDIR /work
