@@ -29,7 +29,7 @@
     <nsxpolicysdk.version>2.5.1.0.1.15419398</nsxpolicysdk.version>
     <nsxvmcawsint.version>2.5.1.0.1.15419398</nsxvmcawsint.version>
     <nsxvmcsdkcommon.version>2.5.1.0.1.15419398</nsxvmcsdkcommon.version>
-    <vmc.draas.version>1.4.0</vmc.draas.version>
+    <vmc.draas.version>1.5.0</vmc.draas.version>
   </properties>
   <build>
     <plugins>
