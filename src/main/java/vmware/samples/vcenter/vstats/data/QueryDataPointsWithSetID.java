@@ -107,8 +107,7 @@ public class QueryDataPointsWithSetID extends SamplesAbstractBase {
 		CounterSpec counterSpec = new CounterSpec();
 		List<RsrcId> resourceSpec = new ArrayList<RsrcId>();
 
-		// Get Counter-set ID of VM counters which is provided as Acquisition
-                // Specification setId.
+		// Get Counter-set ID of VM counters which is provided as setId.
 		List<CounterSetsTypes.Info> counterSets = counterSetsService.list();
 		String[] parts;
 		String setId = null;
