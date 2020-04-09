@@ -21,6 +21,7 @@ import com.vmware.vapi.core.ApiProvider;
 import com.vmware.vapi.core.ExecutionContext.SecurityContext;
 import com.vmware.vapi.protocol.HttpConfiguration;
 import com.vmware.vapi.protocol.ProtocolConnection;
+import com.vmware.vapi.protocol.HttpConfiguration.SslConfiguration;
 import com.vmware.vapi.saml.SamlToken;
 import com.vmware.vapi.security.SessionSecurityContext;
 
@@ -161,7 +162,7 @@ public class VapiAuthenticationHelper {
      *
      * @return factory for the client side stubs
      */
-    private StubFactory createApiStubFactory(String server,
+    public StubFactory createApiStubFactory(String server,
         HttpConfiguration httpConfig)
             throws Exception {
         // Create a https connection with the vapi url
@@ -179,6 +180,27 @@ public class VapiAuthenticationHelper {
     }
 
     /**
+     * 
+     * @param server
+     * @param httpConfig
+     * @throws Exception
+     */
+    public void createStubFactory(String server, HttpConfiguration httpConfig) throws Exception {
+        this.stubFactory = createApiStubFactory(server, httpConfig);
+
+    }
+    
+    /**
+     * 
+     * @param server
+     * @param skipServerVerification
+     * @throws Exception
+     */
+    public void createStubFactory(String server, boolean skipServerVerification) throws Exception {
+        this.stubFactory = createApiStubFactory(server, buildHttpConfiguration(skipServerVerification));
+
+    }
+    /**
      * Returns the stub factory for the api endpoint
      *
      * @return
@@ -186,4 +208,53 @@ public class VapiAuthenticationHelper {
     public StubFactory getStubFactory() {
         return this.stubFactory;
     }
+    
+	/**
+	 * Builds the http configuration.
+	 * 
+	 * @return the http configuration
+	 * @throws Exception the exception
+	 */
+	public HttpConfiguration buildHttpConfiguration(boolean skipServerVerification) throws Exception {
+      HttpConfiguration httpConfig =
+          new HttpConfiguration.Builder()
+          .setSslConfiguration(buildSslConfiguration(skipServerVerification))
+          .getConfig();        
+      return httpConfig;
+  }
+
+  /**
+   * Builds the ssl configuration.
+   *
+   * @return the ssl configuration
+   * @throws Exception the exception
+   */
+  private SslConfiguration buildSslConfiguration(boolean skipServerVerification) throws Exception {
+	  SslConfiguration sslConfig;
+	  //if(skipServerVerification) {
+          SslUtil.trustAllHttpsCertificates();
+          sslConfig = new SslConfiguration.Builder()
+      		.disableCertificateValidation()
+      		.disableHostnameVerification()
+      		.getConfig();
+	  //}else {
+            /*
+             * Set the system property "javax.net.ssl.trustStore" to
+             * the truststorePath
+             
+            System.setProperty("javax.net.ssl.trustStore", this.truststorePath);
+            KeyStore trustStore =
+                SslUtil.loadTrustStore(this.truststorePath,
+                		this.truststorePassword);
+            KeyStoreConfig keyStoreConfig =
+            		new KeyStoreConfig("", this.truststorePassword);
+            sslConfig =
+            		new SslConfiguration.Builder()
+            		.setKeyStore(trustStore)
+            		.setKeyStoreConfig(keyStoreConfig)
+            		.getConfig();*/
+        //}
+
+      return sslConfig;
+  }
 }

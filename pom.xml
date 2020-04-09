@@ -4,7 +4,7 @@
 
   <groupId>com.vmware</groupId>
   <artifactId>vsphere-samples-nodeps</artifactId>
-  <version>7.0.0</version>
+  <version>7.0.0.1</version>
   <packaging>jar</packaging>
 
   <name>samples</name>
@@ -12,7 +12,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <vapi.version>2.14.0</vapi.version>
+    <vapi.version>2.15.0</vapi.version>
     <slf4j.version>1.7.12</slf4j.version>
     <httpclient.version>4.5.10</httpclient.version>
     <httpasyncclient.version>4.1.4</httpasyncclient.version>
@@ -24,12 +24,13 @@
     <commons-beanutils.version>1.9.4</commons-beanutils.version>
     <lookupservice.version>1.0.0</lookupservice.version>
     <vspherewssdk.version>6.7.3</vspherewssdk.version>
-    <vsphereautomationsdk.version>3.2.0</vsphereautomationsdk.version>
+    <vsphereautomationsdk.version>3.3.0</vsphereautomationsdk.version>
     <vmc.version>1.24.0</vmc.version>
     <nsxpolicysdk.version>2.5.1.0.1.15419398</nsxpolicysdk.version>
     <nsxvmcawsint.version>2.5.1.0.1.15419398</nsxvmcawsint.version>
     <nsxvmcsdkcommon.version>2.5.1.0.1.15419398</nsxvmcsdkcommon.version>
     <vmc.draas.version>1.9.0</vmc.draas.version>
+    <oidc-oauth2.version>0.0.1</oidc-oauth2.version>
   </properties>
   <build>
     <plugins>
@@ -51,6 +52,20 @@
         <artifactId>maven-install-plugin</artifactId>
         <version>2.3.1</version>
         <executions>
+          <execution>
+            <id>install-oidc-oauth2-sdk</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.vapi</groupId>
+              <artifactId>oidc-oauth2-sdk</artifactId>
+              <version>${oidc-oauth2.version}</version>
+              <file>./lib/oidc-oauth2-sdk-${oidc-oauth2.version}.jar</file>
+            </configuration>
+          </execution>
          <execution>
            <id>install-draas-bindings</id>
            <phase>initialize</phase>
@@ -296,6 +311,11 @@
    </plugins>
  </build>
 <dependencies>
+  <dependency>
+    <groupId>com.vmware.vapi</groupId>
+    <artifactId>oidc-oauth2-sdk</artifactId>
+    <version>${oidc-oauth2.version}</version>
+  </dependency>
   <dependency>
    <groupId>com.vmware.vmc</groupId>
    <artifactId>vmc-draas-bindings</artifactId>
