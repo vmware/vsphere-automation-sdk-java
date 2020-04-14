@@ -1,6 +1,6 @@
 /*
  * *******************************************************
- * Copyright VMware, Inc. 2016.  All Rights Reserved.
+ * Copyright VMware, Inc. 2019.  All Rights Reserved.
  * SPDX-License-Identifier: MIT
  * *******************************************************
  *
@@ -12,6 +12,8 @@
  */
 package vmware.samples.common;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -32,13 +34,19 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.ConversionException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+
 /**
  * Helper class for parsing command line options or reading the options from a
  * config file
  */
 public class ParametersHelper {
     private Map<Option, Boolean> optionMap;
+    private  Map<String, Object> parsedOptions;
     private static final String CONFIG_FILE = "config-file";
+    private static final String OAUTH_APP_JSON = "oauth_app_json";
 
     /**
      * Adds the common and sample-specific options to the list of options to
@@ -72,7 +80,7 @@ public class ParametersHelper {
      */
     public Map<String, Object> parse(String[] args, String sampleName)
             throws ParseException, ConfigurationException {
-        Map<String, Object> parsedOptions = new HashMap<String, Object>();
+        parsedOptions = new HashMap<String, Object>();
         if (args.length == 0) {
             printUsage(sampleName);
         }
@@ -97,7 +105,7 @@ public class ParametersHelper {
         Iterator<Option> optionsIter = optionsToParseFromConfig.iterator();
         if (cmd.hasOption(CONFIG_FILE)) {
             // Read from configuration file first
-        	Configuration config = new PropertiesConfiguration(cmd.getOptionValue(CONFIG_FILE));
+            Configuration config = new PropertiesConfiguration(cmd.getOptionValue(CONFIG_FILE));
             while (optionsIter.hasNext()) {
                 Option option = optionsIter.next();
                 Object optionValue =
@@ -113,7 +121,8 @@ public class ParametersHelper {
                     parsedOptions.put(option.getLongOpt(), optionValue);
                 }
             }
-        } else {
+        }
+        else {
             optionsToParseFromCmdLine =
                     new ArrayList<Option>(this.optionMap.keySet());
         }
@@ -141,7 +150,6 @@ public class ParametersHelper {
         }
         return options;
     }
-
     private Object getOptionValueFromConfig(
         Option option, Configuration config) {
         Object optionValue = null;
@@ -188,11 +196,47 @@ public class ParametersHelper {
 
         });
         formatter.printHelp(150,
-            "\njava -cp target/vsphere-samples-7.0.0.0.jar " + sampleName,
+            "\njava -cp target/vsphere-samples-7.0.0.1.jar " + sampleName,
             "\nSample Options:",
             getOptions(new ArrayList<Option>(this.optionMap.keySet())),
             "",
             true);
         System.exit(0);
+    }
+
+    public Map<String, Object> parseJsonConfig(String[] args) {
+        List<Option> optionsToParseFromConfig = new ArrayList<Option>();
+        Iterator<Option> optionIter = this.optionMap.keySet().iterator();
+        while(optionIter.hasNext()) {
+            Option option = (Option)optionIter.next().clone();
+            option.setRequired(false);
+            optionsToParseFromConfig.add(option);
+        }
+        CommandLineParser parser = new DefaultParser();
+        try {
+            CommandLine cmd = parser.parse(
+                getOptions(optionsToParseFromConfig), args);
+           if (cmd.hasOption(OAUTH_APP_JSON) && !(parsedOptions.
+                   containsKey(AuthorizationConstants.CLIENT_SECRET))
+                   && !(parsedOptions.containsKey(AuthorizationConstants.CLIENT_ID))) {
+                JsonNode argsJsonMapper=new ObjectMapper().readTree(new File(cmd.getOptionValue(OAUTH_APP_JSON)));
+                parsedOptions.put(AuthorizationConstants.CLIENT_ID,
+                        argsJsonMapper.get(AuthorizationConstants.CLIENT_ID).asText());
+                parsedOptions.put(AuthorizationConstants.CLIENT_SECRET,
+                        argsJsonMapper.get(AuthorizationConstants.CLIENT_SECRET).asText());
+                if(argsJsonMapper.has(AuthorizationConstants.REDIRECT_URIS)) {
+                    ArrayNode arrayNode=(ArrayNode)argsJsonMapper.get(AuthorizationConstants.REDIRECT_URIS);
+                    parsedOptions.put(AuthorizationConstants.REDIRECT_URI, arrayNode.get(0).asText());
+                }
+           }
+        }catch (IOException e) {
+            System.out.println(e.getMessage());
+            System.exit(0);
+        }
+        catch (ParseException e) {
+            System.out.println(e.getMessage());
+            System.exit(0);
+        }
+        return parsedOptions;
     }
 }

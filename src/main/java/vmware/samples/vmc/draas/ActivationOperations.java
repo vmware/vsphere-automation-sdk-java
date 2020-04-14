@@ -78,7 +78,7 @@ public class ActivationOperations extends VmcSamplesAbstractBase {
 				siteRecoveryStub.post(orgId, sddcId, null);
 		System.out.printf("Site Recovery Addon Task Activation ID  %s", siteRecoveryActivationTask.getId(),
 				"\t", siteRecoveryActivationTask.getStatus());
-        boolean taskCompleted = DraasTaskHelper.pollTask(apiClient, orgId, siteRecoveryActivationTask.getId(), 
+        boolean taskCompleted = DraasTaskHelper.pollTask(apiClient, orgId, siteRecoveryActivationTask.getId(),
                 TASK_POLLING_DELAY_IN_MILLISECONDS);
         if(!taskCompleted) {
             System.out.println(" Deploy DraaS task was either canceled or it failed. Exiting.");

@@ -16,7 +16,10 @@ import java.util.Map;
 
 import javax.xml.ws.BindingProvider;
 
+import com.vmware.vim25.InvalidLocaleFaultMsg;
+import com.vmware.vim25.InvalidLoginFaultMsg;
 import com.vmware.vim25.ManagedObjectReference;
+import com.vmware.vim25.RuntimeFaultFaultMsg;
 import com.vmware.vim25.ServiceContent;
 import com.vmware.vim25.VimPortType;
 import com.vmware.vim25.VimService;
@@ -89,7 +92,7 @@ public class VimAuthenticationHelper {
             this.vimPort.login(
                 serviceContent.getSessionManager(), username, password, null);
 
-        } catch (Exception e) {
+        } catch (InvalidLocaleFaultMsg | InvalidLoginFaultMsg | RuntimeFaultFaultMsg e) {
             e.printStackTrace();
         }
     }

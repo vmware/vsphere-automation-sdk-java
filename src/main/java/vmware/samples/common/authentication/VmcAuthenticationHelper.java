@@ -41,4 +41,26 @@ public class VmcAuthenticationHelper {
                 .setRefreshToken(refreshToken.toCharArray())
                 .build();
     }
+
+    /**
+     * Instantiates an NSX ApiClient using a refresh token which can be used
+     * for creating stubs.
+     *
+     * @param vmcServer hostname/ip address of the vmc server
+     * @param cspServer hostname/ipaddress of the csp server
+     * @param refreshToken refresh token of the user
+     * @param orgId organization ID
+     * @param sddcId SDDC ID
+     * @return An ApiClient that can be used to submit API requests
+     */
+    public ApiClient newNsxClient(String vmcServer, String cspServer,
+            String refreshToken, String orgId, String sddcId) {
+        String cspUrl = "https://" + cspServer + CSP_AUTHORIZATION_URL;
+        String vmcUrl = "https://" + vmcServer + "/vmc/api/orgs/" + orgId + "/sddcs/" + sddcId + "/networks";
+        return VmcClients.custom()
+                .setBaseUrl(vmcUrl)
+                .setAuthorizationUrl(cspUrl)
+                .setRefreshToken(refreshToken.toCharArray())
+                .build();
+    }
 }

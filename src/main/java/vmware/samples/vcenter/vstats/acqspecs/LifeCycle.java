@@ -112,7 +112,7 @@ public class LifeCycle extends SamplesAbstractBase {
 		List<Summary> providersList = providerService.list();
 		Random rand = new Random();
 		String hostIdValue = providersList
-				.get(rand.nextInt(providersList.size())).getIdValue();
+				.get(rand.nextInt(providersList.size())).getId();
 		RsrcId hostRsrcId = new RsrcId();
 		hostRsrcId.setIdValue(hostIdValue);
 		hostRsrcId.setType(hostType);

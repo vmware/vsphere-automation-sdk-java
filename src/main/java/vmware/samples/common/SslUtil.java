@@ -112,14 +112,14 @@ public class SslUtil {
     public static void trustAllHttpsCertificates() {
         try {
             // Create the trust manager.
-            javax.net.ssl.TrustManager[] trustAllCerts =
-                    new javax.net.ssl.TrustManager[1];
-            javax.net.ssl.TrustManager tm = new TrustAllTrustManager();
+            TrustManager[] trustAllCerts =
+                    new TrustManager[1];
+            TrustManager tm = new TrustAllTrustManager();
             trustAllCerts[0] = tm;
 
             // Create the SSL context
-            javax.net.ssl.SSLContext sc =
-                    javax.net.ssl.SSLContext.getInstance("SSL");
+            SSLContext sc =
+                    SSLContext.getInstance("SSL");
 
             // Create the session context
             javax.net.ssl.SSLSessionContext sslsc =
