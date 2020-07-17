@@ -26,9 +26,9 @@
     <vspherewssdk.version>6.7.3</vspherewssdk.version>
     <vsphereautomationsdk.version>3.3.0</vsphereautomationsdk.version>
     <vmc.version>1.29.0</vmc.version>
-    <nsxpolicysdk.version>2.5.1.0.1.15419398</nsxpolicysdk.version>
-    <nsxvmcawsint.version>2.5.1.0.1.15419398</nsxvmcawsint.version>
-    <nsxvmcsdkcommon.version>2.5.1.0.1.15419398</nsxvmcsdkcommon.version>
+    <nsxpolicysdk.version>2.5.1.0.5.16221899</nsxpolicysdk.version>
+    <nsxvmcawsint.version>2.5.1.0.5.16221899</nsxvmcawsint.version>
+    <nsxvmcsdkcommon.version>2.5.1.0.5.16221899</nsxvmcsdkcommon.version>
     <vmc.draas.version>1.15.0</vmc.draas.version>
     <oidc-oauth2.version>0.0.1</oidc-oauth2.version>
   </properties>
