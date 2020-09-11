@@ -29,7 +29,7 @@
     <nsxpolicysdk.version>2.5.1.0.5.16221899</nsxpolicysdk.version>
     <nsxvmcawsint.version>2.5.1.0.5.16221899</nsxvmcawsint.version>
     <nsxvmcsdkcommon.version>2.5.1.0.5.16221899</nsxvmcsdkcommon.version>
-    <vmc.draas.version>1.18.0</vmc.draas.version>
+    <vmc.draas.version>1.19.0</vmc.draas.version>
     <oidc-oauth2.version>0.0.1</oidc-oauth2.version>
   </properties>
   <build>
