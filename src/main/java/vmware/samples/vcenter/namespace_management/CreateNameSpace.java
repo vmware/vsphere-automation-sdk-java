@@ -34,7 +34,7 @@ import vmware.samples.vcenter.helpers.ClusterHelper;
  * Sample Prerequisites: The sample needs an existing Supervisor cluster enabled cluster name. It can be either NSX-T based or vSphere networking
  * API doc: https://developer.vmware.com/docs/vsphere-automation/latest/vcenter/api/vcenter/namespaces/instances/post/
  */
-public class createNamespace extends SamplesAbstractBase{
+public class CreateNamespace extends SamplesAbstractBase{
 
     private String clusterName;
     private String clusterId;
@@ -224,7 +224,7 @@ public class createNamespace extends SamplesAbstractBase{
          * 5. Cleanup any data created by the sample run, if cleanup=true
          * 6. Logout of the server
          */
-        new createNamespace().execute(args);
+        new CreateNamespace().execute(args);
     }
 
 }
