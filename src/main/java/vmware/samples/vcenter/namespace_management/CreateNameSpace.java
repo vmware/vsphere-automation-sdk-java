@@ -34,7 +34,7 @@ import vmware.samples.vcenter.helpers.ClusterHelper;
  * Sample Prerequisites: The sample needs an existing Supervisor cluster enabled cluster name. It can be either NSX-T based or vSphere networking
  * API doc: https://developer.vmware.com/docs/vsphere-automation/latest/vcenter/api/vcenter/namespaces/instances/post/
  */
-public class CreateNamespace extends SamplesAbstractBase{
+public class CreateNameSpace extends SamplesAbstractBase{
 
     private String clusterName;
     private String clusterId;
@@ -110,7 +110,7 @@ public class CreateNamespace extends SamplesAbstractBase{
                 .required(true)
                 .hasArg()
                 .build();
-        
+
         List<Option> optionList = Arrays.asList(clusterNameOption,
         		policyNameOption,
         		namespaceNameOption,
@@ -119,9 +119,9 @@ public class CreateNamespace extends SamplesAbstractBase{
         		storageLimitOption,
         		roleNameOption,
         		subjectTypeOption);
-        
+
         //TODO: Resource quota aspects are not covered, user needs to add those aspects
-        
+
         super.parseArgs(optionList, args);
         this.clusterName =  (String) parsedOptions.get("clustername");
         this.storagePolicy =  (String) parsedOptions.get("storagepolicy");
@@ -131,50 +131,50 @@ public class CreateNamespace extends SamplesAbstractBase{
         this.storageLimit =  (String) parsedOptions.get("storagelimit");
         this.roleName =  (String) parsedOptions.get("rolename");
         this.subjectType =  (String) parsedOptions.get("subjecttype");
-        
-        
+
+
     }
 
     @Override
     protected void setup() throws Exception {
 		this.clusterId=ClusterHelper.getCluster(vapiAuthHelper.getStubFactory(), sessionStubConfig, this.clusterName);
-		
+
 		this.ppClusterService = this.vapiAuthHelper.getStubFactory().createStub(
-                Clusters.class, this.sessionStubConfig); 
-		
+                Clusters.class, this.sessionStubConfig);
+
 		com.vmware.vcenter.namespace_management.ClustersTypes.Info info= this.ppClusterService.get(this.clusterId);
-		
+
 		boolean k8sStatus=!(info.getKubernetesStatus().toString().equals("READY"));
 		boolean clusterStatus=!(info.getConfigStatus().toString().equals("RUNNING"));
-		
+
 		if (k8sStatus && clusterStatus) {
 			System.out.println("Cluster is NOT in good condition, exiting from creating namespace");
-			System.exit(0); 
+			System.exit(0);
 		}
-		
+
 		//Getting Storage policy ID
 		this.policyService = this.vapiAuthHelper.getStubFactory().createStub(
                 Policies.class, this.sessionStubConfig);
-		
+
 		this.namespaceService = this.vapiAuthHelper.getStubFactory().createStub(
 				Instances.class, this.sessionStubConfig);
-		
+
 		List<PoliciesTypes.Summary> summaries=this.policyService.list(null);
-		
+
 		for (Summary summary:summaries) {
 			//TODO: Add NULL check conditions.
-			if(summary!=null && summary.getName().equals(this.storagePolicy)) {	
+			if(summary!=null && summary.getName().equals(this.storagePolicy)) {
 				this.storagePolicyId=summary.getPolicy();
 			System.out.println("Storage policy UUID::"+summary.getPolicy());
 			break;
 			}
 		}
-        
+
     }
 
     @Override
     protected void run() throws Exception {
-    	
+
     	InstancesTypes.CreateSpec spec =new InstancesTypes.CreateSpec();
     	spec.setCluster(this.clusterId);
     	spec.setDescription("My first namespace, WOW");
@@ -186,7 +186,7 @@ public class CreateNamespace extends SamplesAbstractBase{
     	storageSpecs.add(storageSpec);
     	spec.setStorageSpecs(storageSpecs);
     	InstancesTypes.Access accessList= new InstancesTypes.Access();
-    	accessList.setDomain(this.domainName); 
+    	accessList.setDomain(this.domainName);
     	if(this.roleName.equalsIgnoreCase("EDIT")) {
     	accessList.setRole(AccessTypes.Role.EDIT);
     	} else{
@@ -198,19 +198,19 @@ public class CreateNamespace extends SamplesAbstractBase{
     	} else{
     		accessList.setSubjectType( AccessTypes.SubjectType.GROUP);
     	}
-    	
+
     	List<InstancesTypes.Access> accessLists = new ArrayList<InstancesTypes.Access>();
     	accessLists.add(accessList);
     	spec.setAccessList(accessLists);
     	this.namespaceService.create(spec);
     	System.out.println("Invocation is successful for creating supervisor namespace, check H5C or call GET API to get status");
-    	
-       
+
+
     }
 
     @Override
     protected void cleanup() throws Exception {
-       
+
     }
 
     public static void main(String[] args) throws Exception {
@@ -224,7 +224,7 @@ public class CreateNamespace extends SamplesAbstractBase{
          * 5. Cleanup any data created by the sample run, if cleanup=true
          * 6. Logout of the server
          */
-        new CreateNamespace().execute(args);
+        new CreateNameSpace().execute(args);
     }
 
 }
