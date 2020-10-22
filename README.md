@@ -150,6 +150,8 @@ This will import a basic sample class to your package, which you can then custom
 ## API Documentation
 
 ### vSphere API Documentation
+* [VMware vSphere REST API Reference documentation](https://developer.vmware.com/docs/vsphere-automation/latest/).
+
 * [VMware vSphere APIs 7.0.1.0 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.1.0/vsphereautomation-client-sdk/index.html).
 
 * [VMware Cloud on AWS vSphere (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/cloud/vsphereautomation-client-sdk/index.html).
