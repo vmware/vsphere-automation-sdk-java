@@ -21,6 +21,7 @@ com.vmware.vapi.util.async
 com.vmware.vapi.vmc.client
 com.vmware.vapi.vmc.client.authz
 com.vmware.vmc
+com.vmware.vmc.customer_support
 com.vmware.vmc.model
 com.vmware.vmc.orgs
 com.vmware.vmc.orgs.account_link
