@@ -19,6 +19,9 @@ import com.vmware.vapi.bindings.StubConfiguration;
 import com.vmware.vapi.bindings.StubFactory;
 import com.vmware.vcenter.VM;
 import com.vmware.vcenter.VMTypes;
+import com.vmware.vcenter.vm.guest.Identity;
+import com.vmware.vcenter.vm.guest.IdentityTypes;
+import com.vmware.vapi.std.errors.ServiceUnavailable;
 
 public class VmHelper {
     /**
@@ -45,5 +48,42 @@ public class VmHelper {
             vmName) : "VM with name " + vmName + " not found";
 
         return vmList.get(0).getVm();
+    }
+
+   /**
+     * it will wait till guest vm become powered on and information about the same is available.
+     * @param identityService : guest vm identity service object
+     * @param vmId : id of the virtual machine
+     * @param timeout:  waiting time period to guest info
+     * @throws Exception
+     */
+    public static void waitForGuestInfoReady(Identity identityService, String vmId, int timeout) throws Exception {
+        System.out.println("Waiting for guest info to be ready.");
+        int start=(int) System.currentTimeMillis()/1000;
+        timeout = start + timeout;
+        IdentityTypes.Info result;
+        while(timeout > (int) System.currentTimeMillis()/1000) {
+            System.out.println("Waiting for guest info to be ready");
+            Thread.sleep(1000);
+             try{
+                 result=identityService.get(vmId);
+                 break;
+             }
+            catch(ServiceUnavailable e) {
+                System.out.println("Got ServiceUnavailable waiting for guest info");
+                continue;
+            }
+             catch(Exception e) {
+                 System.out.println("Unexpected exception %s waiting for guest info");
+                 throw new Exception(e.getMessage());
+             }
+        }
+        if((int) System.currentTimeMillis()/1000 >= timeout) {
+            throw new Exception("Timed out waiting for guest info to be available.Be sure the VM has VMware Tools");
+        }
+        else {
+            int duration=((int) System.currentTimeMillis()/1000)-start;
+            System.out.println("Took "+duration+" seconds for guest info to be available");
+        }
     }
 }
