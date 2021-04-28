@@ -33,7 +33,7 @@ JDK 1.8.
 
 ## Supported OnPrem vCenter Releases:
 
-vCenter 6.0, 6.5, 6.7, 6.7U1, 6.7U2, 6.7U3, 7.0, 7.0U1, 7.0U2
+vCenter 6.0, 6.5, 6.7, 6.7U1, 6.7U2, 6.7U3, 7.0, 7.0U1, 7.0U2, 7.0U2mp1
 
 Please refer to the notes in each sample for detailed compatibility information. 
 
