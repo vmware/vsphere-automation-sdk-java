@@ -33,7 +33,7 @@ JDK 1.8.
 
 ## Supported OnPrem vCenter Releases:
 
-vCenter 6.0, 6.5, 6.7, 6.7U1, 6.7U2, 6.7U3, 7.0, 7.0U1, 7.0U2
+vCenter 6.0, 6.5, 6.7, 6.7U1, 6.7U2, 6.7U3, 7.0, 7.0U1, 7.0U2, 7.0U2mp1
 
 Please refer to the notes in each sample for detailed compatibility information. 
 
@@ -152,7 +152,7 @@ This will import a basic sample class to your package, which you can then custom
 ### vSphere API Documentation
 * [VMware vSphere REST API Reference documentation](https://developer.vmware.com/docs/vsphere-automation/latest/).
 
-* [VMware vSphere JAVA APIs 7.0.2.0 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.2.0/vsphereautomation-client-sdk/index.html).
+* [VMware vSphere JAVA APIs 7.0.2.00100 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.2.0/vsphereautomation-client-sdk/index.html).
 
 * Previous releases: [7.0.1.0](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.1.0/vsphereautomation-client-sdk/index.html),
 [7.0.0.1](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.0.1/vsphereautomation-client-sdk/index.html)
