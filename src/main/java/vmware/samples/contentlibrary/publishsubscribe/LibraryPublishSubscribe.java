@@ -193,7 +193,7 @@ public class LibraryPublishSubscribe extends SamplesAbstractBase {
 
         // Force synchronize the subscribed library item to fetch and cache the
         // content
-        this.client.subscribedItemService().sync(subItemId, true);
+        this.client.subscribedItemService().sync(subItemId, true, false);
         syncSuccess = this.clsHelper.waitForItemSync(subItemId,
             SYNC_TIMEOUT_SEC,
             TimeUnit.SECONDS);
