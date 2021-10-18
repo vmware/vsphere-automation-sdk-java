@@ -43,6 +43,7 @@ com.vmware.nsx_policy.infra.settings.firewall.security.intrusion_services
 com.vmware.nsx_policy.infra.settings.firewall.security.intrusion_services.signature_versions
 com.vmware.nsx_policy.infra.settings.firewall.security.intrusion_services.signatures
 com.vmware.nsx_policy.infra.settings.service_insertion.security
+com.vmware.nsx_policy.infra.site
 com.vmware.nsx_policy.infra.tags
 com.vmware.nsx_policy.infra.tags.tag_operations
 com.vmware.nsx_policy.infra.tier_0s
