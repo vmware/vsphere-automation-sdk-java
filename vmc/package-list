@@ -6,6 +6,7 @@ com.vmware.vapi.bindings.convert
 com.vmware.vapi.bindings.exception
 com.vmware.vapi.client
 com.vmware.vapi.client.exception
+com.vmware.vapi.client.util
 com.vmware.vapi.core
 com.vmware.vapi.data
 com.vmware.vapi.dsig.json
