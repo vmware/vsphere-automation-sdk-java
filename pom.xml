@@ -25,7 +25,7 @@
     <lookupservice.version>1.0.0</lookupservice.version>
     <vspherewssdk.version>6.7.3</vspherewssdk.version>
     <vsphereautomationsdk.version>3.7.0</vsphereautomationsdk.version>
-    <vmc.version>1.59.0</vmc.version>
+    <vmc.version>1.60.0</vmc.version>
     <nsxpolicysdk.version>3.1.3.2.0</nsxpolicysdk.version>
     <nsxvmcawsint.version>3.1.3.2.0</nsxvmcawsint.version>
     <nsxvmcsdkcommon.version>3.1.3.2.0</nsxvmcsdkcommon.version>
