@@ -28,7 +28,6 @@ com.vmware.nsx_policy.infra.realized_state.enforcement_points
 com.vmware.nsx_policy.infra.segments
 com.vmware.nsx_policy.infra.segments.dhcp_static_bindings
 com.vmware.nsx_policy.infra.segments.gateway_interface_statistics
-com.vmware.nsx_policy.infra.segments.inter_site_forwarder
 com.vmware.nsx_policy.infra.segments.ports
 com.vmware.nsx_policy.infra.segments.ports.port_monitoring_profile_binding_maps
 com.vmware.nsx_policy.infra.segments.segment_monitoring_profile_binding_maps
@@ -43,7 +42,6 @@ com.vmware.nsx_policy.infra.settings.firewall.security.intrusion_services
 com.vmware.nsx_policy.infra.settings.firewall.security.intrusion_services.signature_versions
 com.vmware.nsx_policy.infra.settings.firewall.security.intrusion_services.signatures
 com.vmware.nsx_policy.infra.settings.service_insertion.security
-com.vmware.nsx_policy.infra.site
 com.vmware.nsx_policy.infra.tags
 com.vmware.nsx_policy.infra.tags.tag_operations
 com.vmware.nsx_policy.infra.tier_0s
@@ -62,7 +60,6 @@ com.vmware.nsx_policy.infra.tier_0s.locale_services.l2vpn_context.l2vpns
 com.vmware.nsx_policy.infra.tier_0s.locale_services.l2vpn_services
 com.vmware.nsx_policy.infra.tier_0s.locale_services.l2vpn_services.sessions
 com.vmware.nsx_policy.infra.tier_0s.locale_services.l3vpns
-com.vmware.nsx_policy.infra.tier_0s.locale_services.ospf
 com.vmware.nsx_policy.infra.tier_0s.locale_services.service_instances
 com.vmware.nsx_policy.infra.tier_0s.static_routes
 com.vmware.nsx_policy.infra.tier_1s
@@ -75,14 +72,12 @@ com.vmware.nsx_policy.infra.tier_1s.locale_services.ipsec_vpn_services
 com.vmware.nsx_policy.infra.tier_1s.locale_services.ipsec_vpn_services.sessions
 com.vmware.nsx_policy.infra.tier_1s.locale_services.l2vpn_services
 com.vmware.nsx_policy.infra.tier_1s.locale_services.l2vpn_services.sessions
-com.vmware.nsx_policy.infra.tier_1s.locale_services.multicast
 com.vmware.nsx_policy.infra.tier_1s.locale_services.service_instances
 com.vmware.nsx_policy.infra.tier_1s.nat
 com.vmware.nsx_policy.infra.tier_1s.nat.nat_rules
 com.vmware.nsx_policy.infra.tier_1s.segments
 com.vmware.nsx_policy.infra.tier_1s.segments.dhcp_static_bindings
 com.vmware.nsx_policy.infra.tier_1s.segments.gateway_interface_statistics
-com.vmware.nsx_policy.infra.tier_1s.segments.inter_site_forwarder
 com.vmware.nsx_policy.infra.tier_1s.segments.ports
 com.vmware.nsx_policy.infra.tier_1s.segments.ports.port_monitoring_profile_binding_maps
 com.vmware.nsx_policy.infra.tier_1s.segments.segment_monitoring_profile_binding_maps
