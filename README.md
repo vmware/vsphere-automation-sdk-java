@@ -33,12 +33,15 @@ JDK 1.8.
 
 ## Supported OnPrem vCenter Releases:
 
-vCenter 6.0, 6.5, 6.7, 6.7U1, 6.7U2, 6.7U3, 7.0, 7.0U1, 7.0U2, 7.0U2mp1
+vCenter 6.5, 6.7, 6.7U1, 6.7U2, 6.7U3, 7.0, 7.0U1, 7.0U2, 7.0U2mp1, 7.0U3
 
 Please refer to the notes in each sample for detailed compatibility information. 
 
-## VMware Cloud on AWS Support:
-The VMware Cloud on AWS API and samples are currently available as a preview and are subject to change in the future.
+## Supported NSX-T Releases
+NSX-T 2.2, 2.3, 3.0
+
+## Latest VMware Cloud on AWS Release:
+VMC M17
 
 ## Quick Start Guide
 This document will walk you through getting up and running with the Java SDK Samples. Prior to running the samples you will need to setup a vCenter test environment and install maven, the following steps will take you through this process.
@@ -152,9 +155,11 @@ This will import a basic sample class to your package, which you can then custom
 ### vSphere API Documentation
 * [VMware vSphere REST API Reference documentation](https://developer.vmware.com/docs/vsphere-automation/latest/).
 
-* [VMware vSphere JAVA APIs 7.0.2.00100 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.2.0/vsphereautomation-client-sdk/index.html).
+* [VMware vSphere JAVA APIs 7.0.3.2 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.3.2/vsphereautomation-client-sdk/index.html).
 
-* Previous releases: [7.0.1.0](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.1.0/vsphereautomation-client-sdk/index.html),
+* Previous releases: VMware vSphere JAVA APIs [7.0.3.0](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.3.0/vsphereautomation-client-sdk/index.html).
+[7.0.2.00100](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.2.0/vsphereautomation-client-sdk/index.html),
+[7.0.1.0](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.1.0/vsphereautomation-client-sdk/index.html,
 [7.0.0.1](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.0.1/vsphereautomation-client-sdk/index.html)
 
 ### VMware Cloud on AWS API Documentation
@@ -232,8 +237,10 @@ Sample Exchange can be allowed to access your GitHub resources, by way of a link
 Board members are volunteers from the SDK community and VMware staff members, board members are not held responsible for any issues which may occur from running of samples from this repository.
 
 Members:
-* Sumit Agrawal (VMware)
-* Shyla Srinivas (VMware)
+* Ankit Agrawal (VMware)
+* Martin Tsvetanov (VMware)
+* Shweta Purohit (VMware)
+* Vandit Mehta (VMware)
 
 ### Approval of Additions
 Items added to the repository, including items from the Board members, require 2 votes from the board members before being added to the repository. The approving members will have ideally downloaded and tested the item. When two “Approved for Merge” comments are added from board members, the pull can then be committed to the repository.
