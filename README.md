@@ -37,8 +37,11 @@ vCenter 6.5, 6.7, 6.7U1, 6.7U2, 6.7U3, 7.0, 7.0U1, 7.0U2, 7.0U2mp1, 7.0U3
 
 Please refer to the notes in each sample for detailed compatibility information. 
 
-## VMware Cloud on AWS Support:
-The VMware Cloud on AWS API and samples are currently available as a preview and are subject to change in the future.
+## Supported NSX-T Releases
+NSX-T 2.2, 2.3, 3.0
+
+## Latest VMware Cloud on AWS Release:
+VMC M17
 
 ## Quick Start Guide
 This document will walk you through getting up and running with the Java SDK Samples. Prior to running the samples you will need to setup a vCenter test environment and install maven, the following steps will take you through this process.
