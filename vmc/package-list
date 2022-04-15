@@ -16,6 +16,8 @@ com.vmware.vapi.protocol.client.http
 com.vmware.vapi.protocol.common
 com.vmware.vapi.protocol.common.json
 com.vmware.vapi.security
+com.vmware.vapi.server.cert
+com.vmware.vapi.server.cert.impl
 com.vmware.vapi.std
 com.vmware.vapi.std.errors
 com.vmware.vapi.util.async
