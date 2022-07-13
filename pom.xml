@@ -4,7 +4,7 @@
 
   <groupId>com.vmware</groupId>
   <artifactId>vsphere-samples-nodeps</artifactId>
-  <version>7.0.3.0</version>
+  <version>8.0.0.0</version>
   <packaging>jar</packaging>
   <name>samples</name>
   <url>http://maven.apache.org</url>
@@ -25,7 +25,7 @@
     <commons-beanutils.version>1.9.4</commons-beanutils.version>
     <lookupservice.version>1.0.0</lookupservice.version>
     <vspherewssdk.version>6.7.3</vspherewssdk.version>
-    <vsphereautomationsdk.version>3.8.0</vsphereautomationsdk.version>
+    <vsphereautomationsdk.version>3.9.0</vsphereautomationsdk.version>
     <vmc.version>1.66.0</vmc.version>
     <nsxpolicysdk.version>3.1.5.0.0</nsxpolicysdk.version>
     <nsxvmcawsint.version>3.1.5.0.0</nsxvmcawsint.version>
