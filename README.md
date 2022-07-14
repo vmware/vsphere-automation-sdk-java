@@ -33,12 +33,12 @@ JDK 1.8.
 
 ## Supported OnPrem vCenter Releases:
 
-vCenter 6.5, 6.7, 6.7U1, 6.7U2, 6.7U3, 7.0, 7.0U1, 7.0U2, 7.0U2mp1, 7.0U3, 8.0
+vCenter 6.5, 6.7, 6.7U1, 6.7U2, 6.7U3, 7.0, 7.0U1, 7.0U2, 7.0U2mp1, 7.0U3, 8.0.0.0
 
 Please refer to the notes in each sample for detailed compatibility information. 
 
 ## Supported NSX-T Releases
-NSX-T 2.2, 2.3, 3.0
+NSX-T 2.2, 2.3, 3.0, 3.2.1
 
 ## Latest VMware Cloud on AWS Release:
 VMC M19 (1.19) ([Release Notes](https://docs.vmware.com/en/VMware-Cloud-on-AWS/0/rn/vmc-on-aws-relnotes.html))
@@ -172,7 +172,7 @@ This will import a basic sample class to your package, which you can then custom
 * [VMware Cloud on AWS Disaster Recovery as a Service (DRaaS) JAVA APIs](https://vmware.github.io/vsphere-automation-sdk-java/vmc-draas/index.html).
 
 ### NSX API Documentation
-* [VMware NSX-T Data Center REST API](https://code.vmware.com/apis/976)
+* [VMware NSX-T Data Center REST API](https://developer.vmware.com/apis/1248)
 
 * [VMware NSX-T Manager APIs (for on-prem customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx/index.html).
 
@@ -239,9 +239,9 @@ Board members are volunteers from the SDK community and VMware staff members, bo
 
 Members:
 * Ankit Agrawal (VMware)
-* Martin Tsvetanov (VMware)
+* Martin Cvetanov (VMware)
 * Shweta Purohit (VMware)
-* Vandit Mehta (VMware)
+* Jobin George (VMware)
 
 ### Approval of Additions
 Items added to the repository, including items from the Board members, require 2 votes from the board members before being added to the repository. The approving members will have ideally downloaded and tested the item. When two “Approved for Merge” comments are added from board members, the pull can then be committed to the repository.
