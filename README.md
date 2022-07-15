@@ -38,10 +38,10 @@ vCenter 6.5, 6.7, 6.7U1, 6.7U2, 6.7U3, 7.0, 7.0U1, 7.0U2, 7.0U2mp1, 7.0U3
 Please refer to the notes in each sample for detailed compatibility information. 
 
 ## Supported NSX-T Releases
-NSX-T 2.2, 2.3, 3.0
+NSX-T 2.2, 2.3, 3.0, 4.0.0.0
 
 ## Latest VMware Cloud on AWS Release:
-VMC M18 (1.18) ([Release Notes](https://docs.vmware.com/en/VMware-Cloud-on-AWS/0/rn/vmc-on-aws-relnotes.html))
+VMC M19 (1.19) ([Release Notes](https://docs.vmware.com/en/VMware-Cloud-on-AWS/0/rn/vmc-on-aws-relnotes.html))
 
 ## Quick Start Guide
 This document will walk you through getting up and running with the Java SDK Samples. Prior to running the samples you will need to setup a vCenter test environment and install maven, the following steps will take you through this process.
@@ -155,9 +155,10 @@ This will import a basic sample class to your package, which you can then custom
 ### vSphere API Documentation
 * [VMware vSphere REST API Reference documentation](https://developer.vmware.com/docs/vsphere-automation/latest/).
 
-* [VMware vSphere JAVA APIs 7.0.3.2 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.3.2/vsphereautomation-client-sdk/index.html).
+* [VMware vSphere JAVA APIs 8.0.0.0 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.0.0/vsphereautomation-client-sdk/index.html).
 
-* Previous releases: VMware vSphere JAVA APIs [7.0.3.0](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.3.0/vsphereautomation-client-sdk/index.html).
+* Previous releases: VMware vSphere JAVA APIs [7.0.3.2](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.3.2/vsphereautomation-client-sdk/index.html)
+[7.0.3.0](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.3.0/vsphereautomation-client-sdk/index.html).
 [7.0.2.00100](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.2.0/vsphereautomation-client-sdk/index.html),
 [7.0.1.0](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.1.0/vsphereautomation-client-sdk/index.html,
 [7.0.0.1](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.0.1/vsphereautomation-client-sdk/index.html)
@@ -171,7 +172,7 @@ This will import a basic sample class to your package, which you can then custom
 * [VMware Cloud on AWS Disaster Recovery as a Service (DRaaS) JAVA APIs](https://vmware.github.io/vsphere-automation-sdk-java/vmc-draas/index.html).
 
 ### NSX API Documentation
-* [VMware NSX-T Data Center REST API](https://code.vmware.com/apis/976)
+* [VMware NSX-T Data Center REST API](https://developer.vmware.com/apis/1248)
 
 * [VMware NSX-T Manager APIs (for on-prem customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx/index.html).
 
@@ -238,9 +239,9 @@ Board members are volunteers from the SDK community and VMware staff members, bo
 
 Members:
 * Ankit Agrawal (VMware)
-* Martin Tsvetanov (VMware)
+* Martin Cvetanov (VMware)
 * Shweta Purohit (VMware)
-* Vandit Mehta (VMware)
+* Jobin George (VMware)
 
 ### Approval of Additions
 Items added to the repository, including items from the Board members, require 2 votes from the board members before being added to the repository. The approving members will have ideally downloaded and tested the item. When two “Approved for Merge” comments are added from board members, the pull can then be committed to the repository.
