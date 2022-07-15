@@ -33,12 +33,12 @@ JDK 1.8.
 
 ## Supported OnPrem vCenter Releases:
 
-vCenter 6.5, 6.7, 6.7U1, 6.7U2, 6.7U3, 7.0, 7.0U1, 7.0U2, 7.0U2mp1, 7.0U3, 8.0.0.0
+vCenter 6.5, 6.7, 6.7U1, 6.7U2, 6.7U3, 7.0, 7.0U1, 7.0U2, 7.0U2mp1, 7.0U3
 
 Please refer to the notes in each sample for detailed compatibility information. 
 
 ## Supported NSX-T Releases
-NSX-T 2.2, 2.3, 3.0, 3.2.1
+NSX-T 2.2, 2.3, 3.0, 4.0.0.0
 
 ## Latest VMware Cloud on AWS Release:
 VMC M19 (1.19) ([Release Notes](https://docs.vmware.com/en/VMware-Cloud-on-AWS/0/rn/vmc-on-aws-relnotes.html))
