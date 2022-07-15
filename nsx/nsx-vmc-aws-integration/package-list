@@ -6,9 +6,9 @@ com.vmware.nsx_vmc_app.infra.external
 com.vmware.nsx_vmc_app.infra.external.route
 com.vmware.nsx_vmc_app.infra.external.routes
 com.vmware.nsx_vmc_app.infra.linked_vpcs
-com.vmware.nsx_vmc_app.infra.realized_state
 com.vmware.nsx_vmc_app.infra.sddc
 com.vmware.nsx_vmc_app.infra.sddc_network_config
 com.vmware.nsx_vmc_app.infra.traffic_groups
+com.vmware.nsx_vmc_app.infra.vmc.realized_state
 com.vmware.nsx_vmc_app.model
 com.vmware.nsx_vmc_app.util
