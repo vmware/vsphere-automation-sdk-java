@@ -83,6 +83,7 @@ com.vmware.nsx.migration.migration_units
 com.vmware.nsx.migration.mp_policy_promotion
 com.vmware.nsx.migration.mp_to_policy
 com.vmware.nsx.migration.plan
+com.vmware.nsx.migration.vmgroup.action
 com.vmware.nsx.mirror_sessions
 com.vmware.nsx.model
 com.vmware.nsx.mppolicy.migration
