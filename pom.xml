@@ -105,6 +105,8 @@
               <artifactId>vmc-draas-bindings</artifactId>
               <version>${vmc.draas.version}</version>
               <file>./lib/vmc-draas-bindings-${vmc.draas.version}.jar</file>
+              <javadoc>./lib/vmc-draas-bindings-${vmc.draas.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vmc-draas-bindings-sources-${vmc.draas.version}.jar</sources>
             </configuration>
           </execution>
           <execution>
@@ -217,6 +219,8 @@
               <artifactId>vmc-bindings</artifactId>
               <version>${vmc.version}</version>
               <file>./lib/vmc-bindings-${vmc.version}.jar</file>
+              <javadoc>./lib/vmc-bindings-${vmc.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vmc-bindings-sources-${vmc.version}.jar</sources>
             </configuration>
           </execution>
           <execution>
