@@ -11,7 +11,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <vapi.version>2.34.0</vapi.version>
+    <vapi.version>2.37.0</vapi.version>
     <slf4j.version>1.7.12</slf4j.version>
     <httpclient.version>4.5.13</httpclient.version>
     <httpasyncclient.version>4.1.4</httpasyncclient.version>
@@ -27,9 +27,9 @@
     <vspherewssdk.version>6.7.3</vspherewssdk.version>
     <vsphereautomationsdk.version>3.9.0</vsphereautomationsdk.version>
     <vmc.version>1.66.0</vmc.version>
-    <nsxpolicysdk.version>4.0.0.0.0</nsxpolicysdk.version>
-    <nsxvmcawsint.version>4.0.0.0.0</nsxvmcawsint.version>
-    <nsxvmcsdkcommon.version>4.0.0.0.0</nsxvmcsdkcommon.version>
+    <nsxpolicysdk.version>4.0.1.0.0</nsxpolicysdk.version>
+    <nsxvmcawsint.version>4.0.1.0.0</nsxvmcawsint.version>
+    <nsxvmcsdkcommon.version>4.0.1.0.0</nsxvmcsdkcommon.version>
     <vmc.draas.version>1.25.0</vmc.draas.version>
     <oidc-oauth2.version>0.0.1</oidc-oauth2.version>
     <jaxws-ri.version>2.3.5</jaxws-ri.version>
