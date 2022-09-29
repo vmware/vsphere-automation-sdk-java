@@ -26,11 +26,11 @@
     <lookupservice.version>1.0.0</lookupservice.version>
     <vspherewssdk.version>6.7.3</vspherewssdk.version>
     <vsphereautomationsdk.version>3.9.0</vsphereautomationsdk.version>
-    <vmc.version>1.66.0</vmc.version>
+    <vmc.version>1.67.0</vmc.version>
     <nsxpolicysdk.version>4.0.1.0.0</nsxpolicysdk.version>
     <nsxvmcawsint.version>4.0.1.0.0</nsxvmcawsint.version>
     <nsxvmcsdkcommon.version>4.0.1.0.0</nsxvmcsdkcommon.version>
-    <vmc.draas.version>1.25.0</vmc.draas.version>
+    <vmc.draas.version>1.26.0</vmc.draas.version>
     <oidc-oauth2.version>0.0.1</oidc-oauth2.version>
     <jaxws-ri.version>2.3.5</jaxws-ri.version>
     <jaxb-ri.version>2.3.3</jaxb-ri.version>
@@ -105,6 +105,8 @@
               <artifactId>vmc-draas-bindings</artifactId>
               <version>${vmc.draas.version}</version>
               <file>./lib/vmc-draas-bindings-${vmc.draas.version}.jar</file>
+              <javadoc>./lib/vmc-draas-bindings-${vmc.draas.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vmc-draas-bindings-sources-${vmc.draas.version}.jar</sources>
             </configuration>
           </execution>
           <execution>
@@ -217,6 +219,8 @@
               <artifactId>vmc-bindings</artifactId>
               <version>${vmc.version}</version>
               <file>./lib/vmc-bindings-${vmc.version}.jar</file>
+              <javadoc>./lib/vmc-bindings-${vmc.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vmc-bindings-sources-${vmc.version}.jar</sources>
             </configuration>
           </execution>
           <execution>
