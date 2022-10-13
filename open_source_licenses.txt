@@ -4,28 +4,20 @@ vSphere Automation SDK for Java 8.0 GA
 
 ======================================================================
 
-Copyright (c) 2016-2022 VMware, Inc. All rights reserved. 
- 
-This product is licensed to you under the MIT License (the License). You may not use this product except in compliance with the License. 
+The following copyright statements and licenses apply to various open
+source software packages (or portions thereof) that are distributed with
+this VMware Product.
 
-MIT License
+The VMware Product may also include other VMware components, which may
+contain additional open source software packages. One or more such
+open_source_licenses.txt files may therefore accompany this VMware
+Product.
 
-Copyright (c) <year> <copyright holders>
+The VMware Product that includes this file does not necessarily use all
+the open source software packages referred to below and may also only
+use portions of a given package.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-====================================================================== 
-
-vSphere Automation SDK for Java version 8.0 GA includes a number of components with 
-separate copyright notices and license terms. This product does not 
-necessarily use all the open source components referred to below. 
-Your use of the source code for these components is subject to the 
-terms and conditions of the following licenses.
- 
 ==================== TABLE OF CONTENTS ====================
 
 The following is a listing of the open source components detailed in
@@ -33,10 +25,11 @@ this document. This list is provided for your convenience; please read
 further if you wish to review the copyright notice(s) and the full text
 of the license associated with each component.
 
+
+
 SECTION 1: Apache License, V2.0
 
    >>> commons-configuration:commons-configuration-1.10
-   >>> log4j:log4j-1.2.17
    >>> commons-logging:commons-logging-1.2
    >>> commons-cli:commons-cli-1.4
    >>> commons-collections:commons-collections-3.2.2
@@ -50,17 +43,19 @@ SECTION 1: Apache License, V2.0
    >>> org.apache.httpcomponents:httpclient-4.5.13
    >>> com.fasterxml.jackson.core:jackson-core-2.13.2
    >>> com.fasterxml.jackson.core:jackson-annotations-2.13.2
-   >>> com.fasterxml.jackson.core:jackson-databind-2.13.2.1
+   >>> Jackson-databind-2.13.2.2
 
 SECTION 2: BSD-STYLE, MIT-STYLE, OR SIMILAR STYLE LICENSES
 
-   >>> org.slf4j:slf4j-api-1.7.12
    >>> org.slf4j:slf4j-log4j12-1.7.12
+   >>> org.slf4j : slf4j-api-1.7.29
 
 
 APPENDIX. Standard License Files
 
    >>> Apache License, V2.0
+
+
 
 -------------------- SECTION 1: Apache License, V2.0 --------------------
 
@@ -69,49 +64,6 @@ APPENDIX. Standard License Files
        Apache Commons Configuration
 
        Copyright 2001-2013 The Apache Software Foundation
-
-       
-
-       This product includes software developed at
-
-       The Apache Software Foundation (http://www.apache.org/).
-
-       
-
-       Licensed to the Apache Software Foundation (ASF) under one or more
-
-       contributor license agreements.  See the NOTICE file distributed with
-
-       this work for additional information regarding copyright ownership.
-
-       The ASF licenses this file to You under the Apache License, Version 2.0
-
-       (the "License"); you may not use this file except in compliance with
-
-       the License.  You may obtain a copy of the License at
-
-       
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-       
-
-       Unless required by applicable law or agreed to in writing, software
-
-       distributed under the License is distributed on an "AS IS" BASIS,
-
-       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-
-       See the License for the specific language governing permissions and
-
-       limitations under the License.
-
-
-   >>> log4j:log4j-1.2.17
-
-       Apache log4j
-
-       Copyright 2007 The Apache Software Foundation
 
        
 
@@ -481,56 +433,40 @@ APPENDIX. Standard License Files
           limitations under the License.
 
 
-   >>> com.fasterxml.jackson.core:jackson-databind-2.13.2.1
+   >>> Jackson-databind-2.13.2.2
 
+       # Jackson JSON processor
+
+       Jackson is a high-performance, Free/Open Source JSON processing library.
+       It was originally written by Tatu Saloranta (tatu.saloranta@iki.fi), and has
+       been in development since 2007.
+       It is currently developed by a community of developers.
+
+       ## Licensing
+
+       Jackson 2.x core and extension components are licensed under Apache License 2.0
+       To find the details that apply to this artifact see the accompanying LICENSE file.
+
+       ## Credits
+
+       A list of contributors may be found from CREDITS(-2.x) file, which is included
+       in some artifacts (usually source distributions); but is always available
+       from the source code management (SCM) system project uses.
+
+       Licensed under the Apache License, Version 2.0 (the "License");
+          you may not use this file except in compliance with the License.
+          You may obtain a copy of the License at
+
+              http://www.apache.org/licenses/LICENSE-2.0
+
+          Unless required by applicable law or agreed to in writing, software
+          distributed under the License is distributed on an "AS IS" BASIS,
+          WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+          See the License for the specific language governing permissions and
+          limitations under the License.
 
 
 -------------------- SECTION 2: BSD-STYLE, MIT-STYLE, OR SIMILAR STYLE LICENSES --------------------
-
-   >>> org.slf4j:slf4j-api-1.7.12
-
-       Copyright (c) 2004-2011 QOS.ch
-
-       All rights reserved.
-
-       
-
-       Permission is hereby granted, free  of charge, to any person obtaining
-
-       a  copy  of this  software  and  associated  documentation files  (the
-
-       "Software"), to  deal in  the Software without  restriction, including
-
-       without limitation  the rights to  use, copy, modify,  merge, publish,
-
-       distribute,  sublicense, and/or sell  copies of  the Software,  and to
-
-       permit persons to whom the Software  is furnished to do so, subject to
-
-       the following conditions:
-
-       
-
-       The  above  copyright  notice  and  this permission  notice  shall  be
-
-       included in all copies or substantial portions of the Software.
-
-       
-
-       THE  SOFTWARE IS  PROVIDED  "AS  IS", WITHOUT  WARRANTY  OF ANY  KIND,
-
-       EXPRESS OR  IMPLIED, INCLUDING  BUT NOT LIMITED  TO THE  WARRANTIES OF
-
-       MERCHANTABILITY,    FITNESS    FOR    A   PARTICULAR    PURPOSE    AND
-
-       NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-
-       LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-
-       OF CONTRACT, TORT OR OTHERWISE,  ARISING FROM, OUT OF OR IN CONNECTION
-
-       WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
 
    >>> org.slf4j:slf4j-log4j12-1.7.12
 
@@ -575,6 +511,198 @@ APPENDIX. Standard License Files
        OF CONTRACT, TORT OR OTHERWISE,  ARISING FROM, OUT OF OR IN CONNECTION
 
        WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+   >>> org.slf4j : slf4j-api-1.7.29
+
+       /**
+        * Copyright (c) 2004-2011 QOS.ch
+        * All rights reserved.
+        *
+        * Permission is hereby granted, free  of charge, to any person obtaining
+        * a  copy  of this  software  and  associated  documentation files  (the
+        * "Software"), to  deal in  the Software without  restriction, including
+        * without limitation  the rights to  use, copy, modify,  merge, publish,
+        * distribute,  sublicense, and/or sell  copies of  the Software,  and to
+        * permit persons to whom the Software  is furnished to do so, subject to
+        * the following conditions:
+        *
+        * The  above  copyright  notice  and  this permission  notice  shall  be
+        * included in all copies or substantial portions of the Software.
+        *
+        * THE  SOFTWARE IS  PROVIDED  "AS  IS", WITHOUT  WARRANTY  OF ANY  KIND,
+        * EXPRESS OR  IMPLIED, INCLUDING  BUT NOT LIMITED  TO THE  WARRANTIES OF
+        * MERCHANTABILITY,    FITNESS    FOR    A   PARTICULAR    PURPOSE    AND
+        * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+        * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+        * OF CONTRACT, TORT OR OTHERWISE,  ARISING FROM, OUT OF OR IN CONNECTION
+        * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+       ADDITIONAL LICENSE INFORMATION
+
+       > MIT
+
+       org/slf4j/helpers/AbstractLogger.java
+
+       Copyright (c) 2004-2019 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/helpers/BasicMarkerFactory.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/helpers/BasicMarker.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/helpers/FormattingTuple.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/helpers/MarkerIgnoringBase.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/helpers/MessageFormatter.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/helpers/NamedLoggerBase.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/helpers/NOPLoggerFactory.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/helpers/NOPLogger.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/helpers/NOPMDCAdapter.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/helpers/SubstituteLoggerFactory.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/helpers/SubstituteLogger.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/helpers/Util.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/ILoggerFactory.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/IMarkerFactory.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/LoggerFactoryFriend.java
+
+       Copyright (c) 2004-2021 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/LoggerFactory.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/Logger.java
+
+       Copyright (c) 2004-2022 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/MarkerFactory.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/Marker.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/MDC.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/spi/DefaultLoggingEventBuilder.java
+
+       Copyright (c) 2004-2022 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/spi/LocationAwareLogger.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/spi/LoggerFactoryBinder.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/spi/LoggingEventBuilder.java
+
+       Copyright (c) 2004-2021 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/spi/MarkerFactoryBinder.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
+
+       org/slf4j/spi/MDCAdapter.java
+
+       Copyright (c) 2004-2011 QOS.ch
+
+       See SECTION 1 in 'LICENSE TEXT REFERENCE TABLE'
 
 
 ==================== APPENDIX. Standard License Files ====================
@@ -780,10 +908,29 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+==================== LICENSE TEXT REFERENCE TABLE ====================
 
-
-
-======================================================================
+-------------------- SECTION 1 --------------------
+ * Permission is hereby granted, free  of charge, to any person obtaining
+ * a  copy  of this  software  and  associated  documentation files  (the
+ * "Software"), to  deal in  the Software without  restriction, including
+ * without limitation  the rights to  use, copy, modify,  merge, publish,
+ * distribute,  sublicense, and/or sell  copies of  the Software,  and to
+ * permit persons to whom the Software  is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The  above  copyright  notice  and  this permission  notice  shall  be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE  SOFTWARE IS  PROVIDED  "AS  IS", WITHOUT  WARRANTY  OF ANY  KIND,
+ * EXPRESS OR  IMPLIED, INCLUDING  BUT NOT LIMITED  TO THE  WARRANTIES OF
+ * MERCHANTABILITY,    FITNESS    FOR    A   PARTICULAR    PURPOSE    AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE,  ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ 
+ ======================================================================
 
 To the extent any open source components are licensed under the GPL
 and/or LGPL, or other similar licenses that require the source code
@@ -801,4 +948,4 @@ Source Files is valid for three years from the date you acquired this
 Software product. Alternatively, the Source Files may accompany the
 VMware product.
 
-[VSPHEREAUTOMATIONSDKJAVA80GASV081122]
+[VSPHEREAUTOMATIONSDKJAVA80GARS101222]

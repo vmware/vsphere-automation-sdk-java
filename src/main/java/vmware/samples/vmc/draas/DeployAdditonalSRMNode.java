@@ -4,13 +4,12 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import com.vmware.vmc.draas.model.SrmNode;
 import org.apache.commons.cli.Option;
 import com.vmware.vapi.client.ApiClient;
 import com.vmware.vmc.draas.SiteRecovery;
 import com.vmware.vmc.draas.SiteRecoverySrmNodes;
 import com.vmware.vmc.draas.model.ProvisionSrmConfig;
-import com.vmware.vmc.draas.model.SiteRecoveryNode;
+import com.vmware.vmc.draas.model.SrmNode;
 import com.vmware.vmc.draas.model.Task;
 
 import vmware.samples.common.authentication.VmcAuthenticationHelper;
@@ -19,6 +18,7 @@ import vmware.samples.common.VmcSamplesAbstractBase;
  * Sample code to deploy and remove additional SRM Node
  * @author VMware Inc.
  *
+* Sample Prerequisites: VMC DRAAS v1.25.0
  **/
 
 public class DeployAdditonalSRMNode extends VmcSamplesAbstractBase {

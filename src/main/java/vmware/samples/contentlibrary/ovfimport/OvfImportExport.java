@@ -86,6 +86,11 @@ public class OvfImportExport extends SamplesAbstractBase {
      */
     protected void run() throws IOException {
         // Get the template's OVF and VMDK files
+        /*
+        Editting files located in src/main/resources requries rebuilding the JAR before running the sample.
+        Alternatively one can change the code below to read directly from the file system.
+        - File ovfFile = new File("path-to-file.ovf");
+        */
         File tempDir = ItemUploadHelper.createTempDir(libFolderName);
         String ovfFile = ItemUploadHelper.copyResourceToFile(
                 libFolderName+"/"+libItemName, tempDir, libItemName);
