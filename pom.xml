@@ -4,7 +4,7 @@
 
   <groupId>com.vmware</groupId>
   <artifactId>vsphere-samples-nodeps</artifactId>
-  <version>8.0.0.0</version>
+  <version>8.0.0.1</version>
   <packaging>jar</packaging>
   <name>samples</name>
   <url>http://maven.apache.org</url>
@@ -12,20 +12,19 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <vapi.version>2.37.0</vapi.version>
-    <slf4j.version>1.7.12</slf4j.version>
+    <slf4j.version>1.7.29</slf4j.version>
     <httpclient.version>4.5.13</httpclient.version>
     <httpasyncclient.version>4.1.4</httpasyncclient.version>
     <jackson2.version>2.13.2</jackson2.version>
     <jackson2.annotation.version>2.13.2</jackson2.annotation.version>
-    <jackson2.databind.version>2.13.2.1</jackson2.databind.version>
-    <log4j.version>1.2.17</log4j.version>
+    <jackson2.databind.version>2.13.2.2</jackson2.databind.version>
     <commons-lang3.version>3.9</commons-lang3.version>
     <commons-configuration.version>1.10</commons-configuration.version>
     <commons-cli.version>1.4</commons-cli.version>
     <commons-beanutils.version>1.9.4</commons-beanutils.version>
     <lookupservice.version>1.0.0</lookupservice.version>
     <vspherewssdk.version>6.7.3</vspherewssdk.version>
-    <vsphereautomationsdk.version>3.9.0</vsphereautomationsdk.version>
+    <vsphereautomationsdk.version>4.0.0</vsphereautomationsdk.version>
     <vmc.version>1.67.0</vmc.version>
     <nsxpolicysdk.version>4.0.1.0.0</nsxpolicysdk.version>
     <nsxvmcawsint.version>4.0.1.0.0</nsxvmcawsint.version>
@@ -121,6 +120,8 @@
               <artifactId>vapi-runtime</artifactId>
               <version>${vapi.version}</version>
               <file>./lib/vapi-runtime-${vapi.version}.jar</file>
+              <javadoc>./lib/vapi-runtime-${vapi.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vapi-runtime-${vapi.version}-sources.jar</sources>
             </configuration>
           </execution>
           <execution>
@@ -135,6 +136,8 @@
               <artifactId>vapi-authentication</artifactId>
               <version>${vapi.version}</version>
               <file>./lib/vapi-authentication-${vapi.version}.jar</file>
+              <javadoc>./lib/vapi-authentication-${vapi.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vapi-authentication-${vapi.version}-sources.jar</sources>
             </configuration>
           </execution>
           <execution>
@@ -149,6 +152,8 @@
               <artifactId>vapi-samltoken</artifactId>
               <version>${vapi.version}</version>
               <file>./lib/vapi-samltoken-${vapi.version}.jar</file>
+              <javadoc>./lib/vapi-samltoken-${vapi.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vapi-samltoken-${vapi.version}-sources.jar</sources>
             </configuration>
           </execution>
           <execution>
@@ -191,6 +196,8 @@
               <artifactId>vsphereautomation-lookupservice</artifactId>
               <version>${lookupservice.version}</version>
               <file>./lib/vsphereautomation-lookupservice-${lookupservice.version}.jar</file>
+              <javadoc>./lib/vsphereautomation-lookupservice-${lookupservice.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vsphereautomation-lookupservice-${lookupservice.version}-sources.jar</sources>
             </configuration>
           </execution>
           <execution>
@@ -205,6 +212,8 @@
               <artifactId>vsphereautomation-client-sdk</artifactId>
               <version>${vsphereautomationsdk.version}</version>
               <file>./lib/vsphereautomation-client-sdk-${vsphereautomationsdk.version}.jar</file>
+              <javadoc>./lib/vsphereautomation-client-sdk-${vsphereautomationsdk.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vsphereautomation-client-sdk-${vsphereautomationsdk.version}-sources.jar</sources>
             </configuration>
           </execution>
           <execution>
@@ -235,6 +244,8 @@
               <artifactId>vapi-vmc-sdk</artifactId>
               <version>${vapi.version}</version>
               <file>./lib/vapi-vmc-sdk-${vapi.version}.jar</file>
+              <javadoc>./lib/vapi-vmc-sdk-${vapi.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vapi-vmc-sdk-${vapi.version}-sources.jar</sources>
             </configuration>
           </execution>
           <execution>
@@ -441,11 +452,6 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>${slf4j.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
       <version>${slf4j.version}</version>
     </dependency>
     <dependency>
