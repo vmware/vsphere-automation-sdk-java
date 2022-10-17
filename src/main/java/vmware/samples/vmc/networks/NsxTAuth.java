@@ -34,6 +34,8 @@ import vmware.samples.common.authentication.VmcNsxAuthenticationHelper;
  * can then be used to authenticate to the NSX-T instance in a Software
  * Defined Data Center (SDDC). It also shows how to list several types
  * of entities.
+ * 
+ * Sample Prerequisites: NSX-Policy v3.1.5.0.0
  */
 public class NsxTAuth extends VmcSamplesAbstractBase {
 
