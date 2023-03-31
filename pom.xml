@@ -17,7 +17,7 @@
     <httpasyncclient.version>4.1.4</httpasyncclient.version>
     <jackson2.version>2.13.2</jackson2.version>
     <jackson2.annotation.version>2.13.2</jackson2.annotation.version>
-    <jackson2.databind.version>2.13.2.2</jackson2.databind.version>
+    <jackson2.databind.version>2.13.4.2</jackson2.databind.version>
     <commons-lang3.version>3.9</commons-lang3.version>
     <commons-configuration.version>1.10</commons-configuration.version>
     <commons-cli.version>1.4</commons-cli.version>
