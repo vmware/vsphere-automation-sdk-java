@@ -13,27 +13,27 @@
 
 package vmware.samples.sso;
 
+import com.vmware.vcenter.lookup.LookupServiceContent;
+import com.vmware.vcenter.lookup.LookupServiceRegistrationAttribute;
+import com.vmware.vcenter.lookup.LookupServiceRegistrationEndpoint;
+import com.vmware.vcenter.lookup.LookupServiceRegistrationEndpointType;
+import com.vmware.vcenter.lookup.LookupServiceRegistrationFilter;
+import com.vmware.vcenter.lookup.LookupServiceRegistrationInfo;
+import com.vmware.vcenter.lookup.LookupServiceRegistrationServiceType;
+import com.vmware.vcenter.lookup.LsPortType;
+import com.vmware.vcenter.lookup.LsService;
+import com.vmware.vcenter.lookup.ManagedObjectReference;
+import com.vmware.vcenter.lookup.RuntimeFaultFaultMsg;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.xml.ws.BindingProvider;
-
 import org.w3c.dom.Element;
 
-import com.vmware.vsphereautomation.lookup.LookupServiceContent;
-import com.vmware.vsphereautomation.lookup.LookupServiceRegistrationAttribute;
-import com.vmware.vsphereautomation.lookup.LookupServiceRegistrationEndpoint;
-import com.vmware.vsphereautomation.lookup.LookupServiceRegistrationEndpointType;
-import com.vmware.vsphereautomation.lookup.LookupServiceRegistrationFilter;
-import com.vmware.vsphereautomation.lookup.LookupServiceRegistrationInfo;
-import com.vmware.vsphereautomation.lookup.LookupServiceRegistrationServiceType;
-import com.vmware.vsphereautomation.lookup.LsPortType;
-import com.vmware.vsphereautomation.lookup.LsService;
-import com.vmware.vsphereautomation.lookup.ManagedObjectReference;
-import com.vmware.vsphereautomation.lookup.RuntimeFaultFaultMsg;
+
+
 
 /**
  * Lookup service helper class. Finds nodes and service end point URLs based on
