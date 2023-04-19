@@ -4,14 +4,14 @@
 
   <groupId>com.vmware</groupId>
   <artifactId>vsphere-samples-nodeps</artifactId>
-  <version>8.0.0.1</version>
+  <version>8.0.1.0</version>
   <packaging>jar</packaging>
   <name>samples</name>
   <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <vapi.version>2.37.0</vapi.version>
+    <vapi.version>2.40.0</vapi.version>
     <slf4j.version>1.7.29</slf4j.version>
     <httpclient.version>4.5.13</httpclient.version>
     <httpasyncclient.version>4.1.4</httpasyncclient.version>
@@ -24,15 +24,15 @@
     <commons-beanutils.version>1.9.4</commons-beanutils.version>
     <lookupservice.version>1.0.0</lookupservice.version>
     <vspherewssdk.version>6.7.3</vspherewssdk.version>
-    <vsphereautomationsdk.version>4.0.0</vsphereautomationsdk.version>
+    <vcenterbindings.version>4.1.0</vcenterbindings.version>
     <vmc.version>1.67.0</vmc.version>
     <nsxpolicysdk.version>4.0.1.0.0</nsxpolicysdk.version>
     <nsxvmcawsint.version>4.0.1.0.0</nsxvmcawsint.version>
     <nsxvmcsdkcommon.version>4.0.1.0.0</nsxvmcsdkcommon.version>
     <vmc.draas.version>1.26.0</vmc.draas.version>
     <oidc-oauth2.version>0.0.1</oidc-oauth2.version>
-    <jaxws-ri.version>2.3.5</jaxws-ri.version>
-    <jaxb-ri.version>2.3.3</jaxb-ri.version>
+    <jaxws-ri.version>4.0.1</jaxws-ri.version>
+    <jaxb-ri.version>4.0.1</jaxb-ri.version>
   </properties>
 
   <profiles>
@@ -192,16 +192,16 @@
             </goals>
             <configuration>
               <packaging>jar</packaging>
-              <groupId>com.vmware.vsphereautomation.lookup</groupId>
-              <artifactId>vsphereautomation-lookupservice</artifactId>
+              <groupId>com.vmware.vcenter.lookup</groupId>
+              <artifactId>vcenter-lookupservice</artifactId>
               <version>${lookupservice.version}</version>
-              <file>./lib/vsphereautomation-lookupservice-${lookupservice.version}.jar</file>
-              <javadoc>./lib/vsphereautomation-lookupservice-${lookupservice.version}-javadoc.jar</javadoc>
-              <sources>./lib/src/vsphereautomation-lookupservice-${lookupservice.version}-sources.jar</sources>
+              <file>./lib/vcenter-lookupservice-${lookupservice.version}.jar</file>
+              <javadoc>./lib/vcenter-lookupservice-${lookupservice.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vcenter-lookupservice-${lookupservice.version}-sources.jar</sources>
             </configuration>
           </execution>
           <execution>
-            <id>install-vsphere-bindings</id>
+            <id>install-vcenter-bindings</id>
             <phase>initialize</phase>
             <goals>
               <goal>install-file</goal>
@@ -209,11 +209,11 @@
             <configuration>
               <packaging>jar</packaging>
               <groupId>com.vmware</groupId>
-              <artifactId>vsphereautomation-client-sdk</artifactId>
-              <version>${vsphereautomationsdk.version}</version>
-              <file>./lib/vsphereautomation-client-sdk-${vsphereautomationsdk.version}.jar</file>
-              <javadoc>./lib/vsphereautomation-client-sdk-${vsphereautomationsdk.version}-javadoc.jar</javadoc>
-              <sources>./lib/src/vsphereautomation-client-sdk-${vsphereautomationsdk.version}-sources.jar</sources>
+              <artifactId>vcenter-bindings</artifactId>
+              <version>${vcenterbindings.version}</version>
+              <file>./lib/vcenter-bindings-${vcenterbindings.version}.jar</file>
+              <javadoc>./lib/vcenter-bindings-${vcenterbindings.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vcenter-bindings-${vcenterbindings.version}-sources.jar</sources>
             </configuration>
           </execution>
           <execution>
@@ -381,8 +381,8 @@
     </dependency>
     <dependency>
       <groupId>com.vmware</groupId>
-      <artifactId>vsphereautomation-client-sdk</artifactId>
-      <version>${vsphereautomationsdk.version}</version>
+      <artifactId>vcenter-bindings</artifactId>
+      <version>${vcenterbindings.version}</version>
     </dependency>
     <dependency>
       <groupId>com.vmware.vmc</groupId>
@@ -420,8 +420,8 @@
       <version>${vspherewssdk.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.vmware.vsphereautomation.lookup</groupId>
-      <artifactId>vsphereautomation-lookupservice</artifactId>
+      <groupId>com.vmware.vcenter.lookup</groupId>
+      <artifactId>vcenter-lookupservice</artifactId>
       <version>${lookupservice.version}</version>
     </dependency>
     <dependency>

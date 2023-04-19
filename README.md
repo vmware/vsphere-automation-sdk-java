@@ -155,7 +155,7 @@ This will import a basic sample class to your package, which you can then custom
 ### vSphere API Documentation
 * [VMware vSphere REST API Reference documentation](https://developer.vmware.com/docs/vsphere-automation/latest/).
 
-* [VMware vSphere JAVA APIs 8.0.1.0 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.1.0/vsphereautomation-client-sdk/index.html).
+* [VMware vSphere JAVA APIs 8.0.1.0 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.1.0/vcenter-bindings/index.html).
 
 * Previous releases: VMware vSphere JAVA APIs [8.0.0.1](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.0.1/vsphereautomation-client-sdk/index.html),
 [8.0.0.0](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.0.0/vsphereautomation-client-sdk/index.html),
