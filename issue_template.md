@@ -11,7 +11,7 @@
 
 ## Environment
 - sdk binding version: 
-<!-- Required. Get file name from ./lib/vsphereautomation-client-sdk.X.Y.Z.jar and paste its result here. -->
+<!-- Required. Get file name from ./lib/vcenter-bindings.X.Y.Z.jar and paste its result here. -->
 
 - Java version:
 <!-- Required. Run `java --version` in your environment and paste its result here. -->
