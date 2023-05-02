@@ -89,7 +89,7 @@ public class ActivationOperations extends VmcSamplesAbstractBase {
 	@Override
 	protected void cleanup() throws Exception {
 	    Task siteRecoveryDeActivationTask =
-				siteRecoveryStub.delete(orgId, sddcId, true);
+				siteRecoveryStub.delete(orgId, sddcId, null);
 		String taskId =
 				siteRecoveryDeActivationTask.getId();
 		System.out.printf("Site Recovery Add-On Task De-Activation ID  %s", taskId);
