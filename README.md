@@ -38,10 +38,10 @@ vCenter 7.0, 7.0U1, 7.0U2, 7.0U3, 8.0 and 8.0U1
 Please refer to the notes in each sample for detailed compatibility information. 
 
 ## Supported NSX-T Releases
-NSX-T 2.2, 2.3, 3.0, 4.0.0.0
+NSX-T 2.2, 2.3, 3.0, 4.0.0.0, 4.0.1
 
 ## Latest VMware Cloud on AWS Release:
-VMC M20 (1.20) ([Release Notes](https://docs.vmware.com/en/VMware-Cloud-on-AWS/0/rn/vmc-on-aws-relnotes.html))
+VMC M22 (1.22) ([Release Notes](https://docs.vmware.com/en/VMware-Cloud-on-AWS/0/rn/vmc-on-aws-relnotes.html))
 
 ## Quick Start Guide
 This document will walk you through getting up and running with the Java SDK Samples. Prior to running the samples you will need to setup a vCenter test environment and install maven, the following steps will take you through this process.
@@ -253,6 +253,6 @@ Items added to the repository, including items from the Board members, require 2
 * [vSphere Automation SDK Overview](https://code.vmware.com/web/sdk/7.0/vsphere-automation-java)
 * [VMware Code](https://code.vmware.com/home)
 * [VMware Developer Community](https://communities.vmware.com/community/vmtn/developer)
-* VMware vSphere [Java API Reference documentation](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.2.0/vsphereautomation-client-sdk/index.html).
+* VMware vSphere [Java API Reference documentation](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.1.0/vcenter-bindings/index.html).
 
 * [VMware Java forum](https://code.vmware.com/forums/7508/vsphere-automation-sdk-for-java)
