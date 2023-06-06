@@ -346,6 +346,13 @@
         <configuration>
           <appendAssemblyId>false</appendAssemblyId>
           <finalName>vsphere-samples-${project.version}</finalName>
+           <archive>
+              <manifestEntries>
+                  <!-- This fixed the CatalogManager exception problem -->
+                  <!-- https://stackoverflow.com/questions/58319199/java-lang-classnotfoundexception-com-sun-org-apache-xml-internal-resolver-catal -->
+                  <Multi-Release>true</Multi-Release>
+              </manifestEntries>
+          </archive>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
