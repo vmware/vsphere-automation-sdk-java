@@ -207,7 +207,7 @@ vSphere Automation Java SDK - X.Y.Z.U.P
 
 vCenter-related: X.Y - (Major release), Z - (Update release), U - (Patch)
 
-vSphere Automation Java SDK - related: P - (vSphere Automation Java SDK patches)
+vSphere Automation Java SDK - related: P - (vSphere Automation Java SDK Maintenance patches)
 
 ### Suggested Information
 The following information should be included when possible. Inclusion of information provides valuable information to consumers of the resource.
