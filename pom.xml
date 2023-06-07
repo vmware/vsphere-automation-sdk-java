@@ -31,8 +31,8 @@
     <nsxvmcsdkcommon.version>4.1.0.1.0</nsxvmcsdkcommon.version>
     <vmc.draas.version>1.27.0</vmc.draas.version>
     <oidc-oauth2.version>0.0.1</oidc-oauth2.version>
-    <jaxws-ri.version>4.0.1</jaxws-ri.version>
-    <jaxb-ri.version>4.0.1</jaxb-ri.version>
+    <jaxws-ri.version>2.3.6</jaxws-ri.version>
+    <jaxb-ri.version>2.3.8</jaxb-ri.version>
   </properties>
 
   <profiles>
@@ -346,6 +346,11 @@
         <configuration>
           <appendAssemblyId>false</appendAssemblyId>
           <finalName>vsphere-samples-${project.version}</finalName>
+           <archive>
+              <manifestEntries>
+                  <Multi-Release>true</Multi-Release>
+              </manifestEntries>
+          </archive>
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
