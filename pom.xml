@@ -25,11 +25,11 @@
     <lookupservice.version>1.0.0</lookupservice.version>
     <vspherewssdk.version>8.0.0.1</vspherewssdk.version>
     <vcenterbindings.version>4.1.0</vcenterbindings.version>
-    <vmc.version>1.68.0</vmc.version>
+    <vmwarecloud.aws.version>1.68.0</vmwarecloud.aws.version>
     <nsxpolicysdk.version>4.1.0.1.0</nsxpolicysdk.version>
     <nsxvmcawsint.version>4.1.0.1.0</nsxvmcawsint.version>
     <nsxvmcsdkcommon.version>4.1.0.1.0</nsxvmcsdkcommon.version>
-    <vmc.draas.version>1.27.0</vmc.draas.version>
+    <vmwarecloud.draas.version>1.27.0</vmwarecloud.draas.version>
     <oidc-oauth2.version>0.0.1</oidc-oauth2.version>
     <jaxws-ri.version>2.3.6</jaxws-ri.version>
     <jaxb-ri.version>2.3.8</jaxb-ri.version>
@@ -93,7 +93,7 @@
             </configuration>
           </execution>
           <execution>
-            <id>install-draas-bindings</id>
+            <id>install-draas</id>
             <phase>initialize</phase>
             <goals>
               <goal>install-file</goal>
@@ -101,11 +101,11 @@
             <configuration>
               <packaging>jar</packaging>
               <groupId>com.vmware.vmc</groupId>
-              <artifactId>vmc-draas-bindings</artifactId>
-              <version>${vmc.draas.version}</version>
-              <file>./lib/vmc-draas-bindings-${vmc.draas.version}.jar</file>
-              <javadoc>./lib/vmc-draas-bindings-${vmc.draas.version}-javadoc.jar</javadoc>
-              <sources>./lib/src/vmc-draas-bindings-sources-${vmc.draas.version}.jar</sources>
+              <artifactId>vmwarecloud-draas</artifactId>
+              <version>${vmwarecloud.draas.version}</version>
+              <file>./lib/vmwarecloud-draas-${vmwarecloud.draas.version}.jar</file>
+              <javadoc>./lib/vmwarecloud-draas-${vmwarecloud.draas.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vmwarecloud-draas-sources-${vmwarecloud.draas.version}.jar</sources>
             </configuration>
           </execution>
           <execution>
@@ -217,7 +217,7 @@
             </configuration>
           </execution>
           <execution>
-            <id>install-vmc-bindings</id>
+            <id>install-vmwarecloud-aws</id>
             <phase>initialize</phase>
             <goals>
               <goal>install-file</goal>
@@ -225,11 +225,11 @@
             <configuration>
               <packaging>jar</packaging>
               <groupId>com.vmware.vmc</groupId>
-              <artifactId>vmc-bindings</artifactId>
-              <version>${vmc.version}</version>
-              <file>./lib/vmc-bindings-${vmc.version}.jar</file>
-              <javadoc>./lib/vmc-bindings-${vmc.version}-javadoc.jar</javadoc>
-              <sources>./lib/src/vmc-bindings-sources-${vmc.version}.jar</sources>
+              <artifactId>vmwarecloud-aws</artifactId>
+              <version>${vmwarecloud.aws.version}</version>
+              <file>./lib/vmwarecloud-aws-${vmwarecloud.aws.version}.jar</file>
+              <javadoc>./lib/vmwarecloud-aws-${vmwarecloud.aws.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vmwarecloud-aws-sources-${vmwarecloud.aws.version}.jar</sources>
             </configuration>
           </execution>
           <execution>
@@ -366,8 +366,8 @@
     </dependency>
     <dependency>
       <groupId>com.vmware.vmc</groupId>
-      <artifactId>vmc-draas-bindings</artifactId>
-      <version>${vmc.draas.version}</version>
+      <artifactId>vmwarecloud-draas</artifactId>
+      <version>${vmwarecloud.draas.version}</version>
     </dependency>
     <dependency>
       <groupId>com.vmware.vapi</groupId>
@@ -391,8 +391,8 @@
     </dependency>
     <dependency>
       <groupId>com.vmware.vmc</groupId>
-      <artifactId>vmc-bindings</artifactId>
-      <version>${vmc.version}</version>
+      <artifactId>vmwarecloud-aws</artifactId>
+      <version>${vmwarecloud.aws.version}</version>
     </dependency>
     <dependency>
       <groupId>com.vmware.vapi</groupId>
