@@ -29,7 +29,7 @@
     <nsxpolicysdk.version>4.1.0.1.0</nsxpolicysdk.version>
     <nsxvmcawsint.version>4.1.0.1.0</nsxvmcawsint.version>
     <nsxvmcsdkcommon.version>4.1.0.1.0</nsxvmcsdkcommon.version>
-    <vmwarecloud.draas.version>1.27.0</vmwarecloud.draas.version>
+    <vmwarecloud.draas.version>1.28.0</vmwarecloud.draas.version>
     <oidc-oauth2.version>0.0.1</oidc-oauth2.version>
     <jaxws-ri.version>2.3.6</jaxws-ri.version>
     <jaxb-ri.version>2.3.8</jaxb-ri.version>
