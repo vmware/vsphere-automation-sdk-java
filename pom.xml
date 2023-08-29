@@ -25,7 +25,7 @@
     <lookupservice.version>1.0.0</lookupservice.version>
     <vspherewssdk.version>8.0.0.1</vspherewssdk.version>
     <vcenterbindings.version>4.1.0</vcenterbindings.version>
-    <vmwarecloud.aws.version>1.69.0</vmwarecloud.aws.version>
+    <vmwarecloud.aws.version>1.70.0</vmwarecloud.aws.version>
     <nsxpolicysdk.version>4.1.0.1.0</nsxpolicysdk.version>
     <nsxvmcawsint.version>4.1.0.1.0</nsxvmcawsint.version>
     <nsxvmcsdkcommon.version>4.1.0.1.0</nsxvmcsdkcommon.version>
