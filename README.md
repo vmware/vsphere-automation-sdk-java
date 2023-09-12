@@ -29,11 +29,11 @@
 This document describes the vSphere Automation Java SDK samples that use the vSphere Automation
 java client library. Additionally, some of the samples demonstrate the combined use of the
 vSphere Automation and vSphere Web Service APIs. The samples have been developed to work with
-JDK 1.8.
+JDK 1.8+
 
 ## Supported OnPrem vCenter Releases:
 
-vCenter 7.0, 7.0U1, 7.0U2, 7.0U3, 8.0 and 8.0U1
+vCenter 7.0, 7.0U1, 7.0U2, 7.0U3, 8.0, 8.0U1 and 8.0U2
 
 Please refer to the notes in each sample for detailed compatibility information. 
 
@@ -41,7 +41,7 @@ Please refer to the notes in each sample for detailed compatibility information.
 NSX-T 2.2, 2.3, 3.0, 4.0.0.0, 4.0.1
 
 ## Latest VMware Cloud on AWS Release:
-VMC M22 (1.22) ([Release Notes](https://docs.vmware.com/en/VMware-Cloud-on-AWS/0/rn/vmc-on-aws-relnotes.html))
+VMC M24 (1.24) ([Release Notes](https://docs.vmware.com/en/VMware-Cloud-on-AWS/0/rn/vmc-on-aws-relnotes.html))
 
 ## Quick Start Guide
 This document will walk you through getting up and running with the Java SDK Samples. Prior to running the samples you will need to setup a vCenter test environment and install maven, the following steps will take you through this process.
@@ -91,9 +91,9 @@ When running the samples, parameters can be provided either on the command line,
 
 Use a command like the following to display usage information for a particular sample.
 ```` bash
-$java -ea -cp target/vsphere-samples-8.0.0.1.jar vmware.samples.vcenter.vm.list.ListVMs
+$java -ea -cp target/vsphere-samples-8.0.2.0.jar vmware.samples.vcenter.vm.list.ListVMs
 
-java -cp target/vsphere-samples-8.0.0.1.jar vmware.samples.vcenter.vm.list.ListVMs [--config-file <CONFIGURATION FILE>]
+java -cp target/vsphere-samples-8.0.2.0.jar vmware.samples.vcenter.vm.list.ListVMs [--config-file <CONFIGURATION FILE>]
        --server <SERVER> --username <USERNAME> --password <PASSWORD> --cluster <CLUSTER> [--truststorepath <ABSOLUTE PATH OF JAVA TRUSTSTORE FILE>]
        [--truststorepassword <JAVA TRUSTSTORE PASSWORD>] [--cleardata] [--skip-server-verification]
 
@@ -117,17 +117,17 @@ Sample Options:
 
 Use a command like the following to run a sample using only command line parameters:
 ```` bash
-$java -ea -cp target/vsphere-samples-8.0.0.1.jar vmware.samples.vcenter.vm.list.ListVMs --server servername --username administrator@vsphere.local --password password --skip-server-verification
+$java -ea -cp target/vsphere-samples-8.0.2.0.jar vmware.samples.vcenter.vm.list.ListVMs --server servername --username administrator@vsphere.local --password password --skip-server-verification
 ````
 
 Use a command like the following to run a sample using only a configuration file:
 ```` bash
-$java -ea -cp target/vsphere-samples-8.0.0.1.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties
+$java -ea -cp target/vsphere-samples-8.0.2.0.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties
 ````
 
 Use the following command to run the sample using a combination of configuration file and command line parameters:
 ```` bash
-$java -ea -cp target/vsphere-samples-8.0.0.1.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties --server servername
+$java -ea -cp target/vsphere-samples-8.0.2.0.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties --server servername
 ````
 
 ### Importing the samples to eclipse
@@ -155,14 +155,15 @@ This will import a basic sample class to your package, which you can then custom
 ### vSphere API Documentation
 * [VMware vSphere REST API Reference documentation](https://developer.vmware.com/docs/vsphere-automation/latest/).
 
-* [VMware vSphere JAVA APIs 8.0.1.0 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.1.0/vcenter-bindings/index.html).
+* [VMware vSphere JAVA APIs 8.0 U2 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.2.0/vcenter-bindings/index.html).
 
-* Previous releases: VMware vSphere JAVA APIs [8.0.0.1](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.0.1/vsphereautomation-client-sdk/index.html),
+* Previous releases: VMware vSphere JAVA APIs [8.0 U1](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.1.0/vcenter-bindings/index.html),
+[8.0 GA](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.0.1/vsphereautomation-client-sdk/index.html),
 [8.0.0.0](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.0.0/vsphereautomation-client-sdk/index.html),
-[7.0.3.0](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.3.0/vsphereautomation-client-sdk/index.html),
-[7.0.2.00100](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.2.0/vsphereautomation-client-sdk/index.html),
-[7.0.1.0](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.1.0/vsphereautomation-client-sdk/index.html),
-[7.0.0.1](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.0.1/vsphereautomation-client-sdk/index.html)
+[7.0 U3](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.3.0/vsphereautomation-client-sdk/index.html),
+[7.0 U2](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.2.0/vsphereautomation-client-sdk/index.html),
+[7.0 U1](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.1.0/vsphereautomation-client-sdk/index.html),
+[7.0 GA](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.0.1/vsphereautomation-client-sdk/index.html)
 
 ### VMware Cloud on AWS API Documentation
 
