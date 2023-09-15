@@ -10,6 +10,7 @@
   - [Running the Samples](#running-the-samples)
   - [Importing the samples to eclipse](#importing-the-samples-to-eclipse)
 - [API Documentation](#api-documentation)
+- [Support](#support)
 - [Submitting samples](#submitting-samples)
   - [Required Information](#required-information)
   - [Suggested Information](#suggested-information)
@@ -185,6 +186,11 @@ This will import a basic sample class to your package, which you can then custom
 * [VMware NSX-T VMC AWS Integration APIs (for VMC customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx-vmc-aws-integration/index.html).
 
 * [VMware NSX-T VMC Common APIs (for VMC customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx-vmc-sdk-common/index.html).
+
+## Support
+
+For official support, users with Premium SDK Support, Standard SDK Support and Premier/Success360 customers can reach out to VMware Global Support for any issues.
+For community support, please open a [Github issue](https://github.com/vmware/vsphere-automation-sdk-java/issues) or start a [Discussion](https://github.com/vmware/vsphere-automation-sdk-java/discussions)
 
 ## Submitting samples
 
