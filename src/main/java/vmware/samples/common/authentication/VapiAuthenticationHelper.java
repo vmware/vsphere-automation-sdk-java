@@ -24,6 +24,7 @@ import com.vmware.vapi.protocol.ProtocolConnection;
 import com.vmware.vapi.protocol.HttpConfiguration.SslConfiguration;
 import com.vmware.vapi.saml.SamlToken;
 import com.vmware.vapi.security.SessionSecurityContext;
+import vmware.samples.common.SslUtil;
 
 /**
  * Helper class which provides methods for
