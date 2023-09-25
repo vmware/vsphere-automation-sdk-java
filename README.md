@@ -42,7 +42,7 @@ Please refer to the notes in each sample for detailed compatibility information.
 NSX-T 2.2, 2.3, 3.0, 4.0.0.0, 4.0.1
 
 ## Latest VMware Cloud on AWS Release:
-VMC M24 (1.24) ([Release Notes](https://docs.vmware.com/en/VMware-Cloud-on-AWS/0/rn/vmc-on-aws-relnotes.html))
+VMC M22 (1.22) ([Release Notes](https://docs.vmware.com/en/VMware-Cloud-on-AWS/0/rn/vmc-on-aws-relnotes.html))
 
 ## Quick Start Guide
 This document will walk you through getting up and running with the Java SDK Samples. Prior to running the samples you will need to setup a vCenter test environment and install maven, the following steps will take you through this process.
