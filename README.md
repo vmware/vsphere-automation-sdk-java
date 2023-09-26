@@ -189,7 +189,7 @@ This will import a basic sample class to your package, which you can then custom
 
 ## Support
 
-For official support, users with Premium SDK Support, Standard SDK Support and Premier/Success360 customers can reach out to VMware Global Support for any issues.
+For official support, users with Premium SDK Support, Standard SDK Support and Premier/Success360 customers can reach out to [VMware Global Support](https://kb.vmware.com/s/article/87265?lang=en_US) for any issues.
 For community support, please open a [Github issue](https://github.com/vmware/vsphere-automation-sdk-java/issues) or start a [Discussion](https://github.com/vmware/vsphere-automation-sdk-java/discussions)
 
 ## Submitting samples
