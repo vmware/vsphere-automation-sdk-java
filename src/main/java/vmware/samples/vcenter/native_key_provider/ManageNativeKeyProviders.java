@@ -132,7 +132,8 @@ public class ManageNativeKeyProviders extends SamplesAbstractBase {
             }
             HttpEntity body = resp.getEntity();
 
-            byte[] backup = body.getContent().readAllBytes();
+            byte[] backup = new byte[body.getContent().available()];
+            body.getContent().read(backup);
             log("Backup received {0} bytes. Backup completed.", backup.length);
             return backup;
         } catch (IOException e) {
