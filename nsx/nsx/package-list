@@ -16,6 +16,7 @@ com.vmware.nsx.cluster.nodes.network
 com.vmware.nsx.cluster.nodes.network.interfaces
 com.vmware.nsx.cluster.nodes.repo_sync
 com.vmware.nsx.cluster.restore
+com.vmware.nsx.cluster.restore.action
 com.vmware.nsx.configs
 com.vmware.nsx.configs.central_config
 com.vmware.nsx.configs.node
@@ -46,7 +47,6 @@ com.vmware.nsx.idfw
 com.vmware.nsx.idfw.compute_collections
 com.vmware.nsx.idfw.compute_collections.transport_nodes
 com.vmware.nsx.idfw.transport_nodes.vms
-com.vmware.nsx.intelligence
 com.vmware.nsx.intrusion_services
 com.vmware.nsx.ip_sets
 com.vmware.nsx.ipfix
@@ -97,6 +97,7 @@ com.vmware.nsx.node.hardening_policy
 com.vmware.nsx.node.intelligence
 com.vmware.nsx.node.network
 com.vmware.nsx.node.network.interfaces
+com.vmware.nsx.node.nsxplus_onboarding.node
 com.vmware.nsx.node.services
 com.vmware.nsx.node.services.applianceproxy
 com.vmware.nsx.node.services.async_replicator
@@ -179,13 +180,16 @@ com.vmware.nsx.trust_management
 com.vmware.nsx.trust_management.certificates.action
 com.vmware.nsx.trust_management.crl_distribution_points
 com.vmware.nsx.trust_management.oidc_uris
+com.vmware.nsx.trust_management.oidc_uris.action
 com.vmware.nsx.trust_management.principal_identities
 com.vmware.nsx.ui_views
 com.vmware.nsx.upgrade
 com.vmware.nsx.upgrade.bundles
 com.vmware.nsx.upgrade.eula
+com.vmware.nsx.upgrade.filter
 com.vmware.nsx.upgrade.plan
 com.vmware.nsx.upgrade.pre_upgrade_checks
+com.vmware.nsx.upgrade.ui
 com.vmware.nsx.upgrade.upgrade_unit_groups
 com.vmware.nsx.upgrade.upgrade_units
 com.vmware.nsx.util
