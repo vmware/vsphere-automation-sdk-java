@@ -27,9 +27,9 @@
     <vspherewssdk.version>8.0.0.1</vspherewssdk.version>
     <vcenterbindings.version>4.2.0</vcenterbindings.version>
     <vmwarecloud.aws.version>1.70.0</vmwarecloud.aws.version>
-    <nsxpolicysdk.version>4.1.0.1.0</nsxpolicysdk.version>
-    <nsxvmcawsint.version>4.1.0.1.0</nsxvmcawsint.version>
-    <nsxvmcsdkcommon.version>4.1.0.1.0</nsxvmcsdkcommon.version>
+    <nsxpolicysdk.version>4.1.2.0.0</nsxpolicysdk.version>
+    <nsxvmcawsint.version>4.1.2.0.0</nsxvmcawsint.version>
+    <nsxvmcsdkcommon.version>4.1.2.0.0</nsxvmcsdkcommon.version>
     <vmwarecloud.draas.version>1.29.0</vmwarecloud.draas.version>
     <oidc-oauth2.version>0.0.1</oidc-oauth2.version>
     <jaxws-ri.version>2.3.6</jaxws-ri.version>
