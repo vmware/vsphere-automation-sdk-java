@@ -4,7 +4,7 @@
 
   <groupId>com.vmware</groupId>
   <artifactId>vsphere-samples-nodeps</artifactId>
-  <version>8.0.2.0</version>
+  <version>8.0.2.1</version>
   <packaging>jar</packaging>
   <name>samples</name>
   <url>http://maven.apache.org</url>
