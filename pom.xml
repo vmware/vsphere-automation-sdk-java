@@ -12,6 +12,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <vapi.version>2.44.0</vapi.version>
+    <vapi.vmc.version>2.51.0</vapi.vmc.version>
     <slf4j.version>1.7.29</slf4j.version>
     <httpclient.version>4.5.13</httpclient.version>
     <commons.codec.version>1.16.0</commons.codec.version>
@@ -243,10 +244,10 @@
               <packaging>jar</packaging>
               <groupId>com.vmware.vapi</groupId>
               <artifactId>vapi-vmc-sdk</artifactId>
-              <version>${vapi.version}</version>
-              <file>./lib/vapi-vmc-sdk-${vapi.version}.jar</file>
-              <javadoc>./lib/vapi-vmc-sdk-${vapi.version}-javadoc.jar</javadoc>
-              <sources>./lib/src/vapi-vmc-sdk-${vapi.version}-sources.jar</sources>
+              <version>${vapi.vmc.version}</version>
+              <file>./lib/vapi-vmc-sdk-${vapi.vmc.version}.jar</file>
+              <javadoc>./lib/vapi-vmc-sdk-${vapi.vmc.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vapi-vmc-sdk-${vapi.vmc.version}-sources.jar</sources>
             </configuration>
           </execution>
           <execution>
@@ -398,7 +399,7 @@
     <dependency>
       <groupId>com.vmware.vapi</groupId>
       <artifactId>vapi-vmc-sdk</artifactId>
-      <version>${vapi.version}</version>
+      <version>${vapi.vmc.version}</version>
     </dependency>
     <dependency>
       <groupId>com.vmware.nsx</groupId>

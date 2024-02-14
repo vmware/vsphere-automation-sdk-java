@@ -33,6 +33,9 @@ public abstract class VmcSamplesAbstractBase {
     protected String vmcServer;
     protected String cspServer;
     protected String refreshToken;
+    protected String clientId;
+    protected String clientSecret;
+    protected String orgId;
     protected boolean clearData;
     protected String configFile;
     protected VmcAuthenticationHelper vmcAuthHelper;
@@ -69,11 +72,36 @@ public abstract class VmcSamplesAbstractBase {
                                         .build();
             
             Option refreshTokenOption = Option.builder()
-                                        .required(true)
+                                        .required(false)
                                         .hasArg()
                                         .argName("REFRESH TOKEN")
                                         .longOpt("refreshtoken")
                                         .desc("refresh token for getting an access token")
+                                        .build();
+
+                                        Option clientIdOptions = Option.builder()
+                                        .required(false)
+                                        .hasArg()
+                                        .argName("CLIENT ID")
+                                        .longOpt("clientid")
+                                        .desc("Client ID for getting an access token")
+                                        .build();
+
+            Option clientSecretOption = Option.builder()
+                                        .required(false)
+                                        .hasArg()
+                                        .argName("CLIENT SECRET")
+                                        .longOpt("clientsecret")
+                                        .desc("Client Secret for getting an access token")
+                                        .build();
+
+            Option orgIdOption = Option.builder()
+                                        .required(false)
+                                        .hasArg()
+                                        .argName("ORG ID")
+                                        .longOpt("orgid")
+                                        .desc("Org ID against which access token needs to be generated."
+                                                   + " If absent, default will be used." )
                                         .build();
 
             Option cleardataOption = Option.builder()
@@ -107,7 +135,14 @@ public abstract class VmcSamplesAbstractBase {
                                             .build();
 
             List<Option> optionList = new ArrayList<>(Arrays.asList(
-                configFileOption, refreshTokenOption, vmcServerOption, cspServerOption));
+                configFileOption,
+                refreshTokenOption,
+                clientIdOptions,
+                clientSecretOption,
+                orgIdOption,
+                vmcServerOption,
+                cspServerOption
+            ));
             optionList.addAll(sampleOptions);
             optionList.addAll(Arrays.asList(cleardataOption));
 
@@ -116,6 +151,9 @@ public abstract class VmcSamplesAbstractBase {
                     this.getClass().getName());
 
             this.refreshToken = (String) parsedOptions.get("refreshtoken");
+            this.clientId = (String) parsedOptions.get("clientid");
+            this.clientSecret = (String) parsedOptions.get("clientsecret");
+            this.orgId = (String) parsedOptions.get("orgid");
 
             Object clearDataObj = parsedOptions.get("cleardata");
             if (clearDataObj != null) {
@@ -162,6 +200,18 @@ public abstract class VmcSamplesAbstractBase {
 
     public String getRefreshToken() {
         return this.refreshToken;
+    }
+
+    public String getClientId() {
+        return this.clientId;
+    }
+
+    public String getClientSecret() {
+        return this.clientSecret;
+    }
+
+    public String getOrgId() {
+        return this.orgId;
     }
 
     public boolean isClearData() {
