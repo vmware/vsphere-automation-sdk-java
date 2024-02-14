@@ -21,6 +21,7 @@ import com.vmware.vapi.vmc.client.VmcClients;
  */
 public class VmcAuthenticationHelper {
     public static final String CSP_AUTHORIZATION_URL = "/csp/gateway/am/api/auth/api-tokens/authorize";
+    public static final String CSP_CLIENT_CREDS_AUTH_URL = "/csp/gateway/am/api/auth/authorize";
 
     /**
      * Instantiates an ApiClient using a refresh token which can be used
@@ -39,6 +40,52 @@ public class VmcAuthenticationHelper {
                 .setBaseUrl(vmcUrl)
                 .setAuthorizationUrl(cspUrl)
                 .setRefreshToken(refreshToken.toCharArray())
+                .build();
+    }
+
+    /**
+ *      * Instantiates an ApiClient using a client id and client secret which can be used
+ *           * for creating stubs.
+ *                *
+ *                     * @param vmcServer hostname/ip address of the vmc server
+ *                          * @param cspServer hostname/ipaddress of the csp server
+ *                               * @param clientId client id of the app
+ *                                    * @param clientSecret client secret of the app
+ *                                         * @return
+ *                                              */
+    public ApiClient newVmcClient(String vmcServer, String cspServer,
+            String clientId, char[] clientSecret) {
+        String cspUrl = "https://" + cspServer + CSP_CLIENT_CREDS_AUTH_URL;
+        String vmcUrl = "https://" + vmcServer;
+        return VmcClients.custom()
+                .setBaseUrl(vmcUrl)
+                .setAuthorizationUrl(cspUrl)
+                .setClientId(clientId)
+                .setClientSecret(clientSecret)
+                .build();
+    }
+
+    /**
+ *      * Instantiates an ApiClient using a client id and client secret which can be used
+ *           * for creating stubs.
+ *                *
+ *                     * @param vmcServer hostname/ip address of the vmc server
+ *                          * @param cspServer hostname/ipaddress of the csp server
+ *                               * @param clientId client id of the app
+ *                                    * @param clientSecret client secret of the app
+ *                                         * @param orgId orgId for which access token needs to be generated. Uses default org if missing.
+ *                                              * @return
+ *                                                   */
+    public ApiClient newVmcClient(String vmcServer, String cspServer,
+            String clientId, char[] clientSecret, String orgId) {
+        String cspUrl = "https://" + cspServer + CSP_CLIENT_CREDS_AUTH_URL;
+        String vmcUrl = "https://" + vmcServer;
+        return VmcClients.custom()
+                .setBaseUrl(vmcUrl)
+                .setAuthorizationUrl(cspUrl)
+                .setClientId(clientId)
+                .setClientSecret(clientSecret)
+                .setOrgId(orgId)
                 .build();
     }
 
