@@ -92,9 +92,9 @@ When running the samples, parameters can be provided either on the command line,
 
 Use a command like the following to display usage information for a particular sample.
 ```` bash
-$java -ea -cp target/vsphere-samples-8.0.2.0.jar vmware.samples.vcenter.vm.list.ListVMs
+$java -ea -cp target/vsphere-samples-8.0.2.1.jar vmware.samples.vcenter.vm.list.ListVMs
 
-java -cp target/vsphere-samples-8.0.2.0.jar vmware.samples.vcenter.vm.list.ListVMs [--config-file <CONFIGURATION FILE>]
+java -cp target/vsphere-samples-8.0.2.1.jar vmware.samples.vcenter.vm.list.ListVMs [--config-file <CONFIGURATION FILE>]
        --server <SERVER> --username <USERNAME> --password <PASSWORD> --cluster <CLUSTER> [--truststorepath <ABSOLUTE PATH OF JAVA TRUSTSTORE FILE>]
        [--truststorepassword <JAVA TRUSTSTORE PASSWORD>] [--cleardata] [--skip-server-verification]
 
@@ -118,18 +118,94 @@ Sample Options:
 
 Use a command like the following to run a sample using only command line parameters:
 ```` bash
-$java -ea -cp target/vsphere-samples-8.0.2.0.jar vmware.samples.vcenter.vm.list.ListVMs --server servername --username administrator@vsphere.local --password password --skip-server-verification
+$java -ea -cp target/vsphere-samples-8.0.2.1.jar vmware.samples.vcenter.vm.list.ListVMs --server servername --username administrator@vsphere.local --password password --skip-server-verification
 ````
 
 Use a command like the following to run a sample using only a configuration file:
 ```` bash
-$java -ea -cp target/vsphere-samples-8.0.2.0.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties
+$java -ea -cp target/vsphere-samples-8.0.2.1.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties
 ````
 
 Use the following command to run the sample using a combination of configuration file and command line parameters:
 ```` bash
-$java -ea -cp target/vsphere-samples-8.0.2.0.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties --server servername
+$java -ea -cp target/vsphere-samples-8.0.2.1.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties --server servername
 ````
+
+### Connect to VMware Cloud on AWS
+
+#### using csp api_token (also called refresh_token)
+```java
+import com.vmware.vmc.Orgs;
+import com.vmware.vmc.model.Organization;
+import com.vmware.vapi.vmc.client.VmcClients;
+
+ApiClient apiClient = VmcClients.createDefault("<refresh_token>");
+Orgs orgsStub = apiClient.createStub(Orgs.class);
+Organization orgDetails = orgsStub.get("<org_id>");
+System.out.println(orgDetails);
+```
+
+Output in console:
+
+```shell
+Organization (com.vmware.vmc.model.organization) => {
+    updated = 8/18/22 20:41:34 +0000,
+    userId = xxxx-xxxx-xxxx,
+    updatedByUserId = xxxx-xxxx-xxxx,
+    created = 10/3/17 22:19:31 +0000,
+    version = 4,
+    updatedByUserName = xxxx-xxxx-xxxx,
+    userName = xxxx-xxxx-xxxx,
+    id = xxxx-xxxx-xxxx,
+    orgType = INTERNAL_NON_CORE,
+    displayName = xxxx/xxxx/xxxx,
+    name = xxxx,
+    projectState = CREATED,
+    properties = OrgProperties (com.vmware.vmc.model.org_properties) => {
+        values = {...}
+    }
+    [dynamic fields]: {
+        org_seller_info = <unset>
+    }
+}
+```
+
+#### using client_credentials (Server to Server OAuth app's id and secret)
+```java
+import com.vmware.vmc.Orgs;
+import com.vmware.vmc.model.Organization;
+import com.vmware.vapi.vmc.client.VmcClients;
+
+ApiClient apiClient = VmcClients.createDefault("<client_id>", "<client_secret>", "<org_id>");
+orgsStub = apiClient.createStub(Orgs.class);
+Organization orgDetails = orgsStub.get("<org_id>");
+System.out.println(orgDetails);
+```
+
+Output in console:
+
+```shell
+Organization (com.vmware.vmc.model.organization) => {
+    updated = 8/18/22 20:41:34 +0000,
+    userId = xxxx-xxxx-xxxx,
+    updatedByUserId = xxxx-xxxx-xxxx,
+    created = 10/3/17 22:19:31 +0000,
+    version = 4,
+    updatedByUserName = xxxx-xxxx-xxxx,
+    userName = xxxx-xxxx-xxxx,
+    id = xxxx-xxxx-xxxx,
+    orgType = INTERNAL_NON_CORE,
+    displayName = xxxx/xxxx/xxxx,
+    name = xxxx,
+    projectState = CREATED,
+    properties = OrgProperties (com.vmware.vmc.model.org_properties) => {
+        values = {...}
+    }
+    [dynamic fields]: {
+        org_seller_info = <unset>
+    }
+}
+```
 
 ### Importing the samples to eclipse
 To generate the eclipse project files for the samples run the below command
