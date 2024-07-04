@@ -1,6 +1,8 @@
 /*
  * *******************************************************
- * Copyright VMware, Inc. 2016.  All Rights Reserved.
+ * Copyright (c)  2016, 2024 Broadcom.  All Rights Reserved.
+ * The term "Broadcom" refers to Broadcom Inc.
+ * and/or its subsidiaries.
  * SPDX-License-Identifier: MIT
  * *******************************************************
  *
@@ -38,8 +40,12 @@ import org.w3c.dom.Element;
 /**
  * Lookup service helper class. Finds nodes and service end point URLs based on
  * certain filters.
+ * 
+ * @deprecated This class is deprecated in 8.0U3 SDK release. Use well-known endpoint URLs instead of looking them up.
  *
+ * Author: Broadcom, Inc.
  */
+@Deprecated
 public class LookupServiceHelper {
     private final String lookupServiceUrl;
     private final LsPortType lsPort;

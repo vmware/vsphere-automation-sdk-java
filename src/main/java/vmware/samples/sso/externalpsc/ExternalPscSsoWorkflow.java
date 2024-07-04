@@ -1,6 +1,8 @@
 /*
  * *******************************************************
- * Copyright VMware, Inc. 2016.  All Rights Reserved.
+ * Copyright (c) 2016, 2024 Broadcom, Inc.  All Rights Reserved.
+ * The term "Broadcom" refers to Broadcom Inc.
+ * and/or its subsidiaries.
  * SPDX-License-Identifier: MIT
  * *******************************************************
  *
@@ -32,8 +34,11 @@ import vmware.samples.sso.SsoHelper;
  * token when we have a vcenter server and external Platform Services 
  * Controller.
  * 
- * Author: VMware, Inc.
+ * @deprecated This sample is deprecated in 8.0U3 SDK release. External PSC is no longer supported since vCenter 7.0.
+ * 
+ * Author: Broadcom, Inc.
  */
+@Deprecated
 public class ExternalPscSsoWorkflow extends SamplesAbstractBase {
     private String lookupServiceUrl;
     private Tag taggingService;
