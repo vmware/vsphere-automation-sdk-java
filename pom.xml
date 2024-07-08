@@ -4,15 +4,14 @@
 
   <groupId>com.vmware</groupId>
   <artifactId>vsphere-samples-nodeps</artifactId>
-  <version>8.0.2.1</version>
+  <version>8.0.3.0</version>
   <packaging>jar</packaging>
   <name>samples</name>
   <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <vapi.version>2.44.0</vapi.version>
-    <vapi.vmc.version>2.51.0</vapi.vmc.version>
+    <vapi.version>2.52.0</vapi.version>
     <slf4j.version>1.7.29</slf4j.version>
     <httpclient.version>4.5.13</httpclient.version>
     <commons.codec.version>1.16.0</commons.codec.version>
@@ -26,7 +25,7 @@
     <commons-beanutils.version>1.9.4</commons-beanutils.version>
     <lookupservice.version>1.0.0</lookupservice.version>
     <vspherewssdk.version>8.0.0.1</vspherewssdk.version>
-    <vcenterbindings.version>4.2.0</vcenterbindings.version>
+    <vcenterbindings.version>4.3.0</vcenterbindings.version>
     <vmwarecloud.aws.version>1.70.0</vmwarecloud.aws.version>
     <nsxpolicysdk.version>4.1.2.0.0</nsxpolicysdk.version>
     <nsxvmcawsint.version>4.1.2.0.0</nsxvmcawsint.version>
@@ -187,6 +186,20 @@
             </configuration>
           </execution>
           <execution>
+            <id>install-vsan-data-protection-sdk</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.snapservice</groupId>
+              <artifactId>vsan-data-protection</artifactId>
+              <version>${vcenterbindings.version}</version>
+              <file>./lib/vsan-data-protection-${vcenterbindings.version}.jar</file>
+            </configuration>
+          </execution>
+          <execution>
             <id>install-lookupservice</id>
             <phase>initialize</phase>
             <goals>
@@ -244,10 +257,10 @@
               <packaging>jar</packaging>
               <groupId>com.vmware.vapi</groupId>
               <artifactId>vapi-vmc-sdk</artifactId>
-              <version>${vapi.vmc.version}</version>
-              <file>./lib/vapi-vmc-sdk-${vapi.vmc.version}.jar</file>
-              <javadoc>./lib/vapi-vmc-sdk-${vapi.vmc.version}-javadoc.jar</javadoc>
-              <sources>./lib/src/vapi-vmc-sdk-${vapi.vmc.version}-sources.jar</sources>
+              <version>${vapi.version}</version>
+              <file>./lib/vapi-vmc-sdk-${vapi.version}.jar</file>
+              <javadoc>./lib/vapi-vmc-sdk-${vapi.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vapi-vmc-sdk-${vapi.version}-sources.jar</sources>
             </configuration>
           </execution>
           <execution>
@@ -392,6 +405,11 @@
       <version>${vcenterbindings.version}</version>
     </dependency>
     <dependency>
+      <groupId>com.vmware.snapservice</groupId>
+      <artifactId>vsan-data-protection</artifactId>
+      <version>${vcenterbindings.version}</version>
+    </dependency>
+    <dependency>
       <groupId>com.vmware.vmc</groupId>
       <artifactId>vmwarecloud-aws</artifactId>
       <version>${vmwarecloud.aws.version}</version>
@@ -399,7 +417,7 @@
     <dependency>
       <groupId>com.vmware.vapi</groupId>
       <artifactId>vapi-vmc-sdk</artifactId>
-      <version>${vapi.vmc.version}</version>
+      <version>${vapi.version}</version>
     </dependency>
     <dependency>
       <groupId>com.vmware.nsx</groupId>

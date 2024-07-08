@@ -1,13 +1,14 @@
 # VMware vSphere Automation SDK for Java
 ## Table of Contents
 - [Abstract](#abstract)
-- [Supported vCenter Releases](#supported-vcenter-releases)
+- [Supported vCenter Releases](#supported-onprem-vcenter-releases)
 - [Table of Contents](#table-of-contents)
 - [Quick Start Guide](#quick-start-guide)
   - [Setting up maven](#setting-up-maven)
   - [Setting up a vSphere Test Environment](#setting-up-a-vsphere-test-environment)
   - [Building the Samples](#building-the-samples)
   - [Running the Samples](#running-the-samples)
+  - [Connect to VMware Cloud on AWS](#connect-to-vmware-cloud-on-aws)
   - [Importing the samples to eclipse](#importing-the-samples-to-eclipse)
 - [API Documentation](#api-documentation)
 - [Support](#support)
@@ -24,6 +25,9 @@
 - [Repository Administrator Resources](#repository-administrator-resources)
   - [Board Members](#board-members)
   - [Approval of Additions](#approval-of-additions)
+- [Announcements](#announcements)
+  - [Compatibility](#compatibility)
+  - [Dependency updates](#dependency-updates)
 - [VMware Resources](#vmware-resources)
 
 ## Abstract
@@ -34,7 +38,7 @@ JDK 1.8+
 
 ## Supported OnPrem vCenter Releases:
 
-vCenter 7.0, 7.0U1, 7.0U2, 7.0U3, 8.0, 8.0U1 and 8.0U2
+vCenter 7.0, 7.0U1, 7.0U2, 7.0U3, 8.0, 8.0U1, 8.0U2 and 8.0U3
 
 Please refer to the notes in each sample for detailed compatibility information. 
 
@@ -92,9 +96,9 @@ When running the samples, parameters can be provided either on the command line,
 
 Use a command like the following to display usage information for a particular sample.
 ```` bash
-$java -ea -cp target/vsphere-samples-8.0.2.1.jar vmware.samples.vcenter.vm.list.ListVMs
+$java -ea -cp target/vsphere-samples-8.0.3.0.jar vmware.samples.vcenter.vm.list.ListVMs
 
-java -cp target/vsphere-samples-8.0.2.1.jar vmware.samples.vcenter.vm.list.ListVMs [--config-file <CONFIGURATION FILE>]
+java -cp target/vsphere-samples-8.0.3.0.jar vmware.samples.vcenter.vm.list.ListVMs [--config-file <CONFIGURATION FILE>]
        --server <SERVER> --username <USERNAME> --password <PASSWORD> --cluster <CLUSTER> [--truststorepath <ABSOLUTE PATH OF JAVA TRUSTSTORE FILE>]
        [--truststorepassword <JAVA TRUSTSTORE PASSWORD>] [--cleardata] [--skip-server-verification]
 
@@ -118,17 +122,17 @@ Sample Options:
 
 Use a command like the following to run a sample using only command line parameters:
 ```` bash
-$java -ea -cp target/vsphere-samples-8.0.2.1.jar vmware.samples.vcenter.vm.list.ListVMs --server servername --username administrator@vsphere.local --password password --skip-server-verification
+$java -ea -cp target/vsphere-samples-8.0.3.0.jar vmware.samples.vcenter.vm.list.ListVMs --server servername --username administrator@vsphere.local --password password --skip-server-verification
 ````
 
 Use a command like the following to run a sample using only a configuration file:
 ```` bash
-$java -ea -cp target/vsphere-samples-8.0.2.1.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties
+$java -ea -cp target/vsphere-samples-8.0.3.0.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties
 ````
 
 Use the following command to run the sample using a combination of configuration file and command line parameters:
 ```` bash
-$java -ea -cp target/vsphere-samples-8.0.2.1.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties --server servername
+$java -ea -cp target/vsphere-samples-8.0.3.0.jar vmware.samples.vcenter.vm.list.ListVMs --config-file sample.properties --server servername
 ````
 
 ### Connect to VMware Cloud on AWS
@@ -230,11 +234,12 @@ This will import a basic sample class to your package, which you can then custom
 ## API Documentation
 
 ### vSphere API Documentation
-* [VMware vSphere REST API Reference documentation](https://developer.vmware.com/docs/vsphere-automation/latest/).
+* [VMware vSphere REST API Reference documentation](https://developer.broadcom.com/xapis/vsphere-automation-api/latest/).
 
-* [VMware vSphere JAVA APIs 8.0 U2 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.2.0/vcenter-bindings/index.html).
+* [VMware vSphere JAVA APIs 8.0 U3 (latest version)](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.3.0/vcenter-bindings/index.html).
 
-* Previous releases: VMware vSphere JAVA APIs [8.0 U1](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.1.0/vcenter-bindings/index.html),
+* Previous releases: VMware vSphere JAVA APIs [8.0 U2](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.2.0/vcenter-bindings/index.html),
+[8.0 U1](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.1.0/vcenter-bindings/index.html),
 [8.0 GA](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.0.1/vsphereautomation-client-sdk/index.html),
 [8.0.0.0](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.0.0/vsphereautomation-client-sdk/index.html),
 [7.0 U3](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/7.0.3.0/vsphereautomation-client-sdk/index.html),
@@ -244,7 +249,7 @@ This will import a basic sample class to your package, which you can then custom
 
 ### VMware Cloud on AWS API Documentation
 
-* [VMware Cloud on AWS REST APIs](http://developers.eng.vmware.com/docs/vmc/latest/).
+* [VMware Cloud on AWS REST APIs](https://developer.broadcom.com/xapis/vmware-cloud-on-aws-api-reference/latest/).
 
 * [VMware Cloud on AWS JAVA APIs](https://vmware.github.io/vsphere-automation-sdk-java/vmc/index.html).
 
@@ -338,11 +343,20 @@ Members:
 ### Approval of Additions
 Items added to the repository, including items from the Board members, require 2 votes from the board members before being added to the repository. The approving members will have ideally downloaded and tested the item. When two “Approved for Merge” comments are added from board members, the pull can then be committed to the repository.
 
+## Announcements
+### Compatibility
+vSphere Management SDK 8.0U1+ libraries can not be used in vSphere Automation SDK. This is due to difference in jaxws library version used to build these SDKs.
+vSphere Management SDK 8.0U1+ uses jaxws 3.x while vSphere Automation SDK still uses jaxws 2.x version. Currently we are shipping vim25.jar and ssoclient.jar from Management SDK 8.0 in Automation SDK to maintain compatibility.
+In next major release, 9.0, the compatibility issue will be addressed by using same version of jaxws libraries to build both the SDKs
+
+### Dependency updates
+To align the dependencies on jaxws libraries and address above mentioned compatibility issue, SDK 9.x release of vSphere Automation SDK will use jaxws 3.x version.
+This change requires us to switch to jakarta imports instead of javax. This is a breaking change and users may need a similar change in their environment to use our vSphere Automation SDK 9.x
+
 ## VMware Resources
-* [VMware Developers Site](http://developers.eng.vmware.com/)
+* [VMware Developers Site](https://developer.broadcom.com/)
 * [vSphere Automation SDK Overview](https://code.vmware.com/web/sdk/7.0/vsphere-automation-java)
 * [VMware Code](https://code.vmware.com/home)
-* [VMware Developer Community](https://communities.vmware.com/community/vmtn/developer)
-* VMware vSphere [Java API Reference documentation](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.1.0/vcenter-bindings/index.html).
-
+* [VMware Developer Community](https://community.broadcom.com/home)
+* VMware vSphere [Java API Reference documentation](https://vmware.github.io/vsphere-automation-sdk-java/vsphere/8.0.3.0/vcenter-bindings/index.html).
 * [VMware Java forum](https://code.vmware.com/forums/7508/vsphere-automation-sdk-for-java)
