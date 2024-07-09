@@ -27,7 +27,8 @@
     <vspherewssdk.version>8.0.0.1</vspherewssdk.version>
     <vcenterbindings.version>4.3.0</vcenterbindings.version>
     <vmwarecloud.aws.version>1.70.0</vmwarecloud.aws.version>
-    <nsxpolicysdk.version>4.1.2.0.0</nsxpolicysdk.version>
+    <nsxpolicysdk.version>4.2.0</nsxpolicysdk.version>
+    <nsxvmcpolicysdk.version>4.1.2.0.0</nsxvmcpolicysdk.version>
     <nsxvmcawsint.version>4.1.2.0.0</nsxvmcawsint.version>
     <nsxvmcsdkcommon.version>4.1.2.1.0</nsxvmcsdkcommon.version>
     <vmwarecloud.draas.version>1.29.0</vmwarecloud.draas.version>
@@ -287,8 +288,8 @@
               <packaging>jar</packaging>
               <groupId>com.vmware.nsx</groupId>
               <artifactId>nsx-vmc-policy-java-sdk</artifactId>
-              <version>${nsxpolicysdk.version}</version>
-              <file>./lib/nsx-vmc-policy-java-sdk-${nsxpolicysdk.version}.jar</file>
+              <version>${nsxvmcpolicysdk.version}</version>
+              <file>./lib/nsx-vmc-policy-java-sdk-${nsxvmcpolicysdk.version}.jar</file>
             </configuration>
           </execution>
           <execution>
@@ -422,7 +423,7 @@
     <dependency>
       <groupId>com.vmware.nsx</groupId>
       <artifactId>nsx-vmc-policy-java-sdk</artifactId>
-      <version>${nsxpolicysdk.version}</version>
+      <version>${nsxvmcpolicysdk.version}</version>
     </dependency>
     <dependency>
       <groupId>com.vmware.nsx</groupId>
