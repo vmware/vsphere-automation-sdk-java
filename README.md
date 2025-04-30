@@ -8,7 +8,7 @@ Please use VCF SDK for Java for other VCF components including vSphere.
 NSX-T 2.2, 2.3, 3.0, 4.0.0.0, 4.0.1,<?>
 
 ### NSX API Documentation
-* [VMware NSX-T Data Center REST API](https://developer.vmware.com/apis/1248)
+* [VMware NSX-T Data Center REST API](https://developer.broadcom.com/xapis/nsx-t-data-center-rest-api/latest/)
 
 * [VMware NSX-T Manager APIs (for on-prem customers)](https://vmware.github.io/vsphere-automation-sdk-java/nsx/nsx/index.html).
 
