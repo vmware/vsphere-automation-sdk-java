@@ -5,7 +5,7 @@ Starting with vSphere 9.0.0.0 release version, the vSphere Automation Java SDK r
 Please use [VCF SDK Java](https://github.com/orgs/vmware/vcf-sdk-java) for VCF components vSphere, VCF-installer, SDDC-manager and vSan
 
 ## Supported NSX-T Releases
-NSX-T 2.2, 2.3, 3.0, 4.0.0.0, 4.0.1,<?>
+NSX-T 2.2, 2.3, 3.0, 4.0.0.0, 4.0.1
 
 ### NSX API Documentation
 * [VMware NSX-T Data Center REST API](https://developer.broadcom.com/xapis/nsx-t-data-center-rest-api/latest/)

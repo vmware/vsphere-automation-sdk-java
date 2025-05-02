@@ -16,6 +16,7 @@
     <vapi.version>2.52.0</vapi.version>
     <slf4j.version>1.7.29</slf4j.version>
     <nsxpolicysdk.version>4.2.0</nsxpolicysdk.version>
+    <nsxjavasdk.version>4.2.0</nsxjavasdk.version>
   </properties>
 
   <build>
@@ -80,34 +81,26 @@
               <file>./lib/nsx-policy-java-sdk-${nsxpolicysdk.version}.jar</file>
             </configuration>
           </execution>
+          <execution>
+            <id>install-nsx-java-sdk</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.nsx</groupId>
+              <artifactId>nsx-java-sdk</artifactId>
+              <version>${nsxjavasdk.version}</version>
+              <file>./lib/nsx-java-sdk-${nsxjavasdk.version}.jar</file>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
         <version>3.7.1</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.0.0</version>
-        <executions>
-          <execution>
-            <id>verify</id>
-            <phase>verify</phase>
-            <configuration>
-              <configLocation>checkstyle.xml</configLocation>
-              <encoding>UTF-8</encoding>
-              <consoleOutput>true</consoleOutput>
-              <failsOnError>true</failsOnError>
-              <linkXRef>false</linkXRef>
-              <skip>true</skip>
-            </configuration>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -153,28 +146,14 @@
       <version>${nsxpolicysdk.version}</version>
     </dependency>
     <dependency>
+      <groupId>com.vmware.nsx</groupId>
+      <artifactId>nsx-java-sdk</artifactId>
+      <version>${nsxjavasdk.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>${slf4j.version}</version>
     </dependency>
   </dependencies>
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.0.0</version>
-        <configuration>
-          <configLocation>checkstyle.xml</configLocation>
-        </configuration>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>checkstyle</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-    </plugins>
-  </reporting>
 </project>
