@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><Envelope xmlns="http://schemas.dmtf.org/ovf/envelope/1" xmlns:vmw="http://www.vmware.com/schema/ovf" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1">
+  <References/>
+  <vmw:IpAssignmentSection>
+    <Info>Supported IP assignment schemes</Info>
+  </vmw:IpAssignmentSection>
+  <VirtualSystemCollection ovf:id="VApp-p4ujY">
+    <Info>A virtual system collection</Info>
+    <Name>VApp-p4ujY</Name>
+    <AnnotationSection>
+      <Info>A human-readable annotation</Info>
+      <Annotation>Sample vApp</Annotation>
+    </AnnotationSection>
+    <ProductSection>
+      <Info>Information about the installed software</Info>
+    </ProductSection>
+  </VirtualSystemCollection>
+</Envelope>

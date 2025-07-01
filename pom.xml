@@ -4,20 +4,62 @@
 
   <groupId>com.vmware</groupId>
   <artifactId>vsphere-samples-nodeps</artifactId>
-  <version>9.0.0.0</version>
+  <version>8.0.3.0</version>
   <packaging>jar</packaging>
   <name>samples</name>
   <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <vapi.version>2.61.2</vapi.version>
+    <vapi.version>2.52.0</vapi.version>
     <slf4j.version>1.7.29</slf4j.version>
+    <httpclient.version>4.5.13</httpclient.version>
+    <commons.codec.version>1.16.0</commons.codec.version>
+    <httpasyncclient.version>4.1.4</httpasyncclient.version>
+    <jackson2.version>2.13.2</jackson2.version>
+    <jackson2.annotation.version>2.13.2</jackson2.annotation.version>
+    <jackson2.databind.version>2.14.2</jackson2.databind.version>
+    <commons-lang3.version>3.9</commons-lang3.version>
+    <commons-configuration.version>1.10</commons-configuration.version>
+    <commons-cli.version>1.4</commons-cli.version>
+    <commons-beanutils.version>1.9.4</commons-beanutils.version>
+    <lookupservice.version>1.0.0</lookupservice.version>
+    <vspherewssdk.version>8.0.0.1</vspherewssdk.version>
+    <vcenterbindings.version>4.3.0</vcenterbindings.version>
+    <vmwarecloud.aws.version>1.70.0</vmwarecloud.aws.version>
     <nsxpolicysdk.version>4.2.0</nsxpolicysdk.version>
-    <nsxjavasdk.version>4.2.0</nsxjavasdk.version>
+    <nsxvmcpolicysdk.version>4.1.2.0.0</nsxvmcpolicysdk.version>
+    <nsxvmcawsint.version>4.1.2.0.0</nsxvmcawsint.version>
+    <nsxvmcsdkcommon.version>4.1.2.1.0</nsxvmcsdkcommon.version>
+    <vmwarecloud.draas.version>1.29.0</vmwarecloud.draas.version>
+    <oidc-oauth2.version>0.0.1</oidc-oauth2.version>
+    <jaxws-ri.version>2.3.6</jaxws-ri.version>
+    <jaxb-ri.version>2.3.8</jaxb-ri.version>
   </properties>
+
+  <profiles>
+    <profile>
+      <id>jdk11</id>
+      <activation>
+        <jdk>[11,)</jdk>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>com.sun.xml.ws</groupId>
+          <artifactId>jaxws-ri</artifactId>
+          <version>${jaxws-ri.version}</version>
+          <type>pom</type>
+        </dependency>
+        <dependency>
+          <groupId>com.sun.xml.bind</groupId>
+          <artifactId>jaxb-ri</artifactId>
+          <version>${jaxb-ri.version}</version>
+          <type>pom</type>
+        </dependency>
+      </dependencies>
+    </profile>
+  </profiles>
+
   <build>
     <plugins>
       <plugin>
@@ -28,7 +70,7 @@
           <encoding>UTF-8</encoding>
           <source>1.8</source>
           <target>1.8</target>
-          <fork>false</fork>
+          <fork>true</fork>
           <meminitial>1024m</meminitial>
           <maxmem>2048m</maxmem>
         </configuration>
@@ -38,6 +80,190 @@
         <artifactId>maven-install-plugin</artifactId>
         <version>2.3.1</version>
         <executions>
+          <execution>
+            <id>install-oidc-oauth2-sdk</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.vapi</groupId>
+              <artifactId>oidc-oauth2-sdk</artifactId>
+              <version>${oidc-oauth2.version}</version>
+              <file>./lib/oidc-oauth2-sdk-${oidc-oauth2.version}.jar</file>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-draas</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.vmc</groupId>
+              <artifactId>vmwarecloud-draas</artifactId>
+              <version>${vmwarecloud.draas.version}</version>
+              <file>./lib/vmwarecloud-draas-${vmwarecloud.draas.version}.jar</file>
+              <javadoc>./lib/vmwarecloud-draas-${vmwarecloud.draas.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vmwarecloud-draas-sources-${vmwarecloud.draas.version}.jar</sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-vapi-runtime</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.vapi</groupId>
+              <artifactId>vapi-runtime</artifactId>
+              <version>${vapi.version}</version>
+              <file>./lib/vapi-runtime-${vapi.version}.jar</file>
+              <javadoc>./lib/vapi-runtime-${vapi.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vapi-runtime-${vapi.version}-sources.jar</sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-vapi-authentication</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.vapi</groupId>
+              <artifactId>vapi-authentication</artifactId>
+              <version>${vapi.version}</version>
+              <file>./lib/vapi-authentication-${vapi.version}.jar</file>
+              <javadoc>./lib/vapi-authentication-${vapi.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vapi-authentication-${vapi.version}-sources.jar</sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-vapi-samltoken</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.vapi</groupId>
+              <artifactId>vapi-samltoken</artifactId>
+              <version>${vapi.version}</version>
+              <file>./lib/vapi-samltoken-${vapi.version}.jar</file>
+              <javadoc>./lib/vapi-samltoken-${vapi.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vapi-samltoken-${vapi.version}-sources.jar</sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-vim25</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.vim25</groupId>
+              <artifactId>vim25</artifactId>
+              <version>${vspherewssdk.version}</version>
+              <file>./lib/vim25.jar</file>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-ssoclient</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.sso</groupId>
+              <artifactId>ssoclient</artifactId>
+              <version>${vspherewssdk.version}</version>
+              <file>./lib/ssoclient.jar</file>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-vsan-data-protection-sdk</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.snapservice</groupId>
+              <artifactId>vsan-data-protection</artifactId>
+              <version>${vcenterbindings.version}</version>
+              <file>./lib/vsan-data-protection-${vcenterbindings.version}.jar</file>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-lookupservice</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.vcenter.lookup</groupId>
+              <artifactId>vcenter-lookupservice</artifactId>
+              <version>${lookupservice.version}</version>
+              <file>./lib/vcenter-lookupservice-${lookupservice.version}.jar</file>
+              <javadoc>./lib/vcenter-lookupservice-${lookupservice.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vcenter-lookupservice-${lookupservice.version}-sources.jar</sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-vcenter-bindings</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware</groupId>
+              <artifactId>vcenter-bindings</artifactId>
+              <version>${vcenterbindings.version}</version>
+              <file>./lib/vcenter-bindings-${vcenterbindings.version}.jar</file>
+              <javadoc>./lib/vcenter-bindings-${vcenterbindings.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vcenter-bindings-${vcenterbindings.version}-sources.jar</sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-vmwarecloud-aws</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.vmc</groupId>
+              <artifactId>vmwarecloud-aws</artifactId>
+              <version>${vmwarecloud.aws.version}</version>
+              <file>./lib/vmwarecloud-aws-${vmwarecloud.aws.version}.jar</file>
+              <javadoc>./lib/vmwarecloud-aws-${vmwarecloud.aws.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vmwarecloud-aws-sources-${vmwarecloud.aws.version}.jar</sources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-vapi-vmc-sdk</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.vapi</groupId>
+              <artifactId>vapi-vmc-sdk</artifactId>
+              <version>${vapi.version}</version>
+              <file>./lib/vapi-vmc-sdk-${vapi.version}.jar</file>
+              <javadoc>./lib/vapi-vmc-sdk-${vapi.version}-javadoc.jar</javadoc>
+              <sources>./lib/src/vapi-vmc-sdk-${vapi.version}-sources.jar</sources>
+            </configuration>
+          </execution>
           <execution>
             <id>install-nsx-policy-sdk</id>
             <phase>initialize</phase>
@@ -53,7 +279,7 @@
             </configuration>
           </execution>
           <execution>
-            <id>install-nsx-java-sdk</id>
+            <id>install-nsx-vmc-policy-sdk</id>
             <phase>initialize</phase>
             <goals>
               <goal>install-file</goal>
@@ -61,9 +287,37 @@
             <configuration>
               <packaging>jar</packaging>
               <groupId>com.vmware.nsx</groupId>
-              <artifactId>nsx-java-sdk</artifactId>
-              <version>${nsxjavasdk.version}</version>
-              <file>./lib/nsx-java-sdk-${nsxjavasdk.version}.jar</file>
+              <artifactId>nsx-vmc-policy-java-sdk</artifactId>
+              <version>${nsxvmcpolicysdk.version}</version>
+              <file>./lib/nsx-vmc-policy-java-sdk-${nsxvmcpolicysdk.version}.jar</file>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-nsx-vmc-aws-integration-sdk</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.nsx</groupId>
+              <artifactId>nsx-vmc-aws-integration-sdk</artifactId>
+              <version>${nsxvmcawsint.version}</version>
+              <file>./lib/nsx-vmc-aws-integration-java-sdk-${nsxvmcawsint.version}.jar</file>
+            </configuration>
+          </execution>
+          <execution>
+            <id>install-nsx-vmc-sdk-common</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-file</goal>
+            </goals>
+            <configuration>
+              <packaging>jar</packaging>
+              <groupId>com.vmware.nsx</groupId>
+              <artifactId>nsx-vmc-sdk-common</artifactId>
+              <version>${nsxvmcsdkcommon.version}</version>
+              <file>./lib/nsx-vmc-sdk-common-${nsxvmcsdkcommon.version}.jar</file>
             </configuration>
           </execution>
         </executions>
@@ -72,6 +326,28 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
         <version>3.7.1</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <id>verify</id>
+            <phase>verify</phase>
+            <configuration>
+              <configLocation>checkstyle.xml</configLocation>
+              <encoding>UTF-8</encoding>
+              <consoleOutput>true</consoleOutput>
+              <failsOnError>true</failsOnError>
+              <linkXRef>false</linkXRef>
+              <skip>true</skip>
+            </configuration>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
@@ -88,8 +364,6 @@
           <finalName>vsphere-samples-${project.version}</finalName>
            <archive>
               <manifestEntries>
-<!-- This fixed the CatalogManager exception problem -->
-                  <!-- https://stackoverflow.com/questions/58319199/java-lang-classnotfoundexception-com-sun-org-apache-xml-internal-resolver-catal -->
                   <Multi-Release>true</Multi-Release>
               </manifestEntries>
           </archive>
@@ -103,6 +377,16 @@
   <dependencies>
     <dependency>
       <groupId>com.vmware.vapi</groupId>
+      <artifactId>oidc-oauth2-sdk</artifactId>
+      <version>${oidc-oauth2.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.vmware.vmc</groupId>
+      <artifactId>vmwarecloud-draas</artifactId>
+      <version>${vmwarecloud.draas.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.vmware.vapi</groupId>
       <artifactId>vapi-runtime</artifactId>
       <version>${vapi.version}</version>
     </dependency>
@@ -112,19 +396,133 @@
       <version>${vapi.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.vmware.nsx</groupId>
-      <artifactId>nsx-policy-java-sdk</artifactId>
-      <version>${nsxpolicysdk.version}</version>
+      <groupId>com.vmware.vapi</groupId>
+      <artifactId>vapi-samltoken</artifactId>
+      <version>${vapi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.vmware</groupId>
+      <artifactId>vcenter-bindings</artifactId>
+      <version>${vcenterbindings.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.vmware.snapservice</groupId>
+      <artifactId>vsan-data-protection</artifactId>
+      <version>${vcenterbindings.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.vmware.vmc</groupId>
+      <artifactId>vmwarecloud-aws</artifactId>
+      <version>${vmwarecloud.aws.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.vmware.vapi</groupId>
+      <artifactId>vapi-vmc-sdk</artifactId>
+      <version>${vapi.version}</version>
     </dependency>
     <dependency>
       <groupId>com.vmware.nsx</groupId>
-      <artifactId>nsx-java-sdk</artifactId>
-      <version>${nsxjavasdk.version}</version>
+      <artifactId>nsx-vmc-policy-java-sdk</artifactId>
+      <version>${nsxvmcpolicysdk.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.vmware.nsx</groupId>
+      <artifactId>nsx-vmc-aws-integration-sdk</artifactId>
+      <version>${nsxvmcawsint.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.vmware.nsx</groupId>
+      <artifactId>nsx-vmc-sdk-common</artifactId>
+      <version>${nsxvmcsdkcommon.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.vmware.vim25</groupId>
+      <artifactId>vim25</artifactId>
+      <version>${vspherewssdk.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.vmware.sso</groupId>
+      <artifactId>ssoclient</artifactId>
+      <version>${vspherewssdk.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.vmware.vcenter.lookup</groupId>
+      <artifactId>vcenter-lookupservice</artifactId>
+      <version>${lookupservice.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${jackson2.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>${jackson2.annotation.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson2.databind.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>${httpclient.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+      <version>${commons.codec.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpasyncclient</artifactId>
+      <version>${httpasyncclient.version}</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>${slf4j.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons-lang3.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-configuration</groupId>
+      <artifactId>commons-configuration</artifactId>
+      <version>${commons-configuration.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-cli</groupId>
+      <artifactId>commons-cli</artifactId>
+      <version>${commons-cli.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-beanutils</groupId>
+      <artifactId>commons-beanutils</artifactId>
+      <version>${commons-beanutils.version}</version>
+    </dependency>
   </dependencies>
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <configLocation>checkstyle.xml</configLocation>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>checkstyle</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
 </project>
