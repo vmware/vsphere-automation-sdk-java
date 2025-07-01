@@ -1,4 +1,10 @@
 # VMware vSphere Automation SDK for Java
+
+## $\color{Red}{\textsf{IMPORTANT NOTICE}}$
+For VCF releases 9.0.0.0 and above, please refer to the new [VCF SDK JAVA](https://github.com/vmware/vcf-sdk-java) repository for vSphere libraries.
+
+For NSX libraries, refer to the [VMware NSX for Java](https://developer.broadcom.com/sdks/vmware-nsx-for-java/9.0.0) in Broadcom developer portal.
+
 ## Table of Contents
 - [Abstract](#abstract)
 - [Supported vCenter Releases](#supported-onprem-vcenter-releases)
@@ -29,6 +35,7 @@
   - [Compatibility](#compatibility)
   - [Dependency updates](#dependency-updates)
 - [VMware Resources](#vmware-resources)
+
 
 ## Abstract
 This document describes the vSphere Automation Java SDK samples that use the vSphere Automation
